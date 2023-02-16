@@ -1,0 +1,34 @@
+.visually-hidden,
+.sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.skip-content {
+    background-color: var(--c-sea);
+    border-radius: 0.75rem;
+    color: var(--c-white);
+    display: block;
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    padding: 0.75rem 1.5rem;
+    position: absolute;
+    top: auto;
+    width: 1px;
+    z-index: 9999;
+}
+
+.skip-content:focus {
+    left: 30px;
+    top: 30px;
+    height: auto;
+    overflow: visible;
+    width: auto;
+}

@@ -1,0 +1,17 @@
+@use "@/assets/scss/abstracts/mixins/bp" as *;
+
+@mixin section-padding() {
+    --section-padding-y: 2.5rem;
+
+    @include breakpoint( lg ) {
+        --section-padding-y: 4rem;
+    }
+}
+
+@mixin section-padding-lg() {
+    --section-padding-y: 3.5rem;
+
+    @include breakpoint( lg ) {
+        --section-padding-y: 5.625rem;
+    }
+}

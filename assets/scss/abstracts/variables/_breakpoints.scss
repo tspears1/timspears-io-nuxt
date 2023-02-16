@@ -1,0 +1,19 @@
+// $breakpoints: (
+//     xs:  (width:      0, gap: 16px),
+//     sm:  (width:  375px, gap: 16px),
+//     md:  (width:  625px, gap: 32px),
+//     lg:  (width: 1121px, gap: 48px),
+//     xl:  (width: 1393px, gap: 48px),
+//     xxl: (width: 1776px, gap: 48px),
+// ) !default;
+
+$breakpoints: (
+    xxs:  (width:      0, gap: 16px),
+    xs:   (width:  375px, gap: 16px),
+    sm:   (width:  600px, gap: 32px),
+    md:   (width:  768px, gap: 48px),
+    lg:   (width:  992px, gap: 48px),
+    xl:   (width: 1200px, gap: 48px),
+    xxl:  (width: 1600px, gap: 48px),
+    xxxl: (width: 1840px, gap: 48px),
+) !default;

@@ -1,0 +1,40 @@
+@mixin skeleton-text( $height: 'p-md', $width: 60%, $color: var(--skeleton-color-bg, var(--c-charcoal-10)), $animate: true ) {
+    @if $animate {
+        animation: pulse 4s linear infinite;
+    }
+
+    @if $color != 'n' and $color != 'x' and $color != 'null' {
+        background: $color;
+    }
+
+    color: $color;
+
+    @if $height != 'n' and $height != 'x' and $height != 'null' {
+        height: calc(var(--line-height-#{$height})*var(--font-size-#{$height}));
+    }
+
+    overflow: hidden;
+
+    @if $width != 'n' and $width != 'x' and $width != 'null' {
+        width: $width;
+    }
+}
+
+@mixin skeleton-media( $color: var(--skeleton-color-bg, var(--c-charcoal-10)), $width: 100%, $height: 100%, $animate: true ) {
+    @if $animate {
+        animation: pulse 4s linear infinite;
+    }
+
+    @if $color != 'n' and $color != 'x' and $color != 'null' {
+        background: $color;
+    }
+    @if $height != 'n' and $height != 'x' and $height != 'null' {
+        height: $height;
+    }
+
+    overflow: hidden;
+
+    @if $width != 'n' and $width != 'x' and $width != 'null' {
+        width: $width;
+    }
+}

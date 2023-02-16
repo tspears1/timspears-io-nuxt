@@ -1,0 +1,25 @@
+@use "sass:list";
+
+@mixin focus-style( $offset: 3px, $color: currentColor ) {
+    outline: 3px solid $color;
+    outline-offset: $offset;
+
+    [data-whatintent='mouse'] &,
+    [data-whatintent='touch'] & {
+        outline: none;
+    }
+}
+
+@mixin hover-style( $sources...) {
+    $input-list: '';
+    @each $input in $sources {
+        $intent: "[data-whatintent="#{$input}"] &,";
+        $input-list: list.append($input-list, $intent);
+    }
+
+    &:hover {
+        #{$input-list} {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,140 @@
+
+// Image Fit
+@mixin image-fit( $fit: 'cover', $position: null) {
+    height: 100%;
+    object-fit: #{ $fit };
+    @if $position {
+        object-position: #{ $position };
+    }
+    width: 100%;
+}
+
+// SVG Contain
+@mixin svg-contain( $width, $height: auto ) {
+    height: #{ $height };
+    width: #{ $width };
+
+    svg {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+@mixin media-logo() {
+    background: var(--c-white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    img {
+        @include image-fit('contain');
+    }
+}
+
+@mixin media-square($border-radius: 1.5rem) {
+    aspect-ratio: 1 / 1;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-square-offset($border-radius: 1.5rem) {
+    aspect-ratio: 1.1 / 1;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-square-offset-v($border-radius: 1.5rem) {
+    aspect-ratio: 1 / 1.1;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-3x2($border-radius: 1.5rem) {
+    aspect-ratio: 3 / 2;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-2x3($border-radius: 1.5rem) {
+    aspect-ratio: 2 / 3;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-4x3($border-radius: 1.5rem) {
+    aspect-ratio: 4 / 3;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-3x4($border-radius: 1.5rem) {
+    aspect-ratio: 3 / 4;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-16x9($border-radius: 1.5rem) {
+    aspect-ratio: 16 / 9;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}
+
+@mixin media-9x16($border-radius: 1.5rem) {
+    aspect-ratio: 9 / 16;
+    border-radius: $border-radius;
+    overflow: hidden;
+    overflow: clip;
+
+    img {
+        @include image-fit();
+        border-radius: $border-radius;
+    }
+}

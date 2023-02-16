@@ -1,0 +1,8 @@
+
+@function col($percent) {
+    @return calc(var(--grid-column-width) * $percent );
+}
+
+@function wide-col($percent) {
+    @return calc(var(--grid-column-wide-width) * $percent);
+}

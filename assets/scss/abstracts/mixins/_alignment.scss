@@ -1,0 +1,52 @@
+@mixin flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@mixin grid-spacing($property, $value) {
+    $axis-y: 'align';
+    $axis-x: 'justify';
+    $axis-joint: 'place-';
+
+    @if $property == 'gap' {
+        $axis-y: 'row';
+        $axis-x: 'column';
+        $axis-joint: '';
+    }
+
+    @if length($value) == 1 and $value != 'n' and $value != 'x' and $value != 'null' {
+        #{$axis-joint}#{$property}: $value;
+    }
+
+    @if length($value) == 2 {
+        $value-y: nth($value, 1);
+        $value-x: nth($value, 2);
+        @if $value-y != 'n' and $value-y != 'x' and $value-y != 'null' {
+            #{$axis-y}-#{$property}: $value-y;
+        }
+        @if $value-x != 'n' and $value-x != 'x' and $value-x != 'null' {
+            #{$axis-x}-#{$property}: $value-x;
+        }
+    }
+}
+
+// (align-items, justify-items)
+@mixin grid-items($value) {
+    @include grid-spacing('items', $value);
+}
+
+// (align-content, justify-content)
+@mixin grid-content($value) {
+    @include grid-spacing('content', $value);
+}
+
+// (align-self, justify-self)
+@mixin grid-self($value) {
+    @include grid-spacing('self', $value);
+}
+
+// (row-gap, column-gap)
+@mixin gap($value) {
+    @include grid-spacing('gap', $value);
+}

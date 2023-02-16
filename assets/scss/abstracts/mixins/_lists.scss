@@ -1,0 +1,147 @@
+// ---------------------------------------------------------------------------
+// Lists
+// ---------------------------------------------------------------------------
+@use '@/assets/scss/abstracts/mixins/shorthander' as *;
+@use '@/assets/scss/abstracts/mixins/size' as *;
+@use '@/assets/scss/abstracts/mixins/typography' as *;
+
+@mixin no-bullets {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+
+    li::before {
+        display: none;
+    }
+}
+
+@mixin ul-base($level: top) {
+    @if $level == top {
+        @include margin(1.25rem 0);
+        list-style: none;
+        padding-left: 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        li {
+            @include margin(0.625rem x x x);
+            @include padding(x x x 1.3em);
+            position: relative;
+
+            &::before {
+                @include absolute(0.75em x x 0);
+                @include size(0.25em);
+                background-color: var(--section-color-text);
+                border-radius: 50%;
+                content: '';
+            }
+        }
+    } @else if $level == one {
+        li::before {
+            background-color: var(--section-color-text);
+        }
+    } @else if $level == two {
+        li::before {
+            background: transparent;
+            border: 1px solid var(--section-color-text);
+            border-radius: 50%;
+        }
+    }
+}
+
+@mixin ol-base($level: top) {
+    @if $level == top {
+        @include margin(1.25rem x);
+        counter-reset: counter;
+        list-style: none;
+        padding-left: 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        > li {
+            @include margin(0.625rem x x x);
+            @include padding(x x x 1.3em);
+            position: relative;
+
+            &::before {
+                @include absolute(0 x x 0);
+                @include paragraph-base();
+                content: counter(counter) '.';
+                counter-increment: counter;
+                font-weight: 700;
+            }
+        }
+    } @else if $level == one {
+        li::before {
+            content: counter(counter) '.';
+        }
+    } @else if $level == two {
+        li::before {
+            content: counter(counter, lower-alpha) '.';
+        }
+    } @else if $level == three {
+        li::before {
+            content: counter(counter, upper-roman) '.';
+        }
+    }
+}
+
+@mixin ol {
+    @include ol-base;
+
+    ol {
+        @include ol-base($level: two);
+
+        ol {
+            @include ol-base($level: three);
+
+            ol {
+                @include ol-base($level: one);
+
+                ol {
+                    @include ol-base($level: two);
+
+                    ol {
+                        @include ol-base($level: three);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin ul {
+    @include ul-base;
+
+    ul {
+        @include ul-base(two);
+
+        ul {
+            @include ul-base(one);
+
+            ul {
+                @include ul-base(two);
+
+                ul {
+                    @include ul-base(one);
+
+                    ul {
+                        @include ul-base(two);
+                    }
+                }
+            }
+        }
+    }
+}

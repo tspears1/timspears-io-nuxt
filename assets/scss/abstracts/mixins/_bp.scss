@@ -1,0 +1,23 @@
+@use "sass:map";
+
+@use "@/assets/scss/abstracts/variables/" as *;
+
+
+///
+/// Media query mixin. Includes content when matching the breakpoint $bp as
+/// defined in $breakpoints. You can also just pass in a length to create a
+/// one-off breakpoint. It's discouraged, but you can also override the rule
+/// if you're prefer to use max-width instead of min-width.
+///
+@mixin breakpoint($bp, $rule: min-width) {
+    @if map.has-key($breakpoints, $bp, width) {
+        $bp: map.get($breakpoints, $bp, width);
+    }
+    @if $rule == max-width {
+        $bp: $bp - 1;
+    }
+
+    @media screen and (#{$rule}: $bp) {
+        @content;
+    }
+}

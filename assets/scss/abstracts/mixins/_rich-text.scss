@@ -1,0 +1,55 @@
+@use '@/assets/scss/abstracts/mixins/inline-links' as *;
+@use '@/assets/scss/abstracts/mixins/lists' as *;
+@use '@/assets/scss/abstracts/mixins/shorthander' as *;
+@use '@/assets/scss/abstracts/mixins/typography' as *;
+
+@mixin rich-text($use-base: true) {
+    @if $use-base {
+        @include paragraph-base();
+    }
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    > p {
+        @include margin( x x 1.25rem 0);
+
+        a {
+            @include inline-links();
+            position: relative;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    > hr {
+        @include margin( 3.75rem x );
+        background-color: var(--section-color-text-fade, var(--section-color-text));
+        border: 0;
+        height: 1px;
+        padding: 0;
+    }
+
+    pre {
+        @include padding(1.125rem 1.25rem);
+        @include margin(1.875rem x);
+        background-color: var(--section-color-tint);
+    }
+
+    ol {
+        @include ol();
+    }
+
+    ul {
+        @include ul();
+    }
+
+    > *:first-child {
+        margin-top: 0;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}

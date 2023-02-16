@@ -1,0 +1,44 @@
+@use 'sass:math';
+@use "sass:map";
+@use "@/assets/scss/abstracts/variables/breakpoints" as config;
+@use "@/assets/scss/abstracts/functions/strip-units" as *;
+
+
+@function rnd($number, $places: 0) {
+    $n: 1;
+    @if $places > 0 {
+        @for $i from 1 through $places {
+            $n: $n * 10;
+        }
+    }
+    @return math.div(math.round($number * $n), $n);
+}
+
+@function to-rems($px) {
+    $rems: math.div($px, 16px) * 1rem;
+    @return $rems;
+}
+
+@function to-pxs($rem) {
+    $pxs: $rem * 16px;
+    @return $pxs;
+}
+
+// add support for min, max, clamp or full-fluid
+@function fluid($min, $max, $default-min-bp: sm, $default-max-bp: xxl) {
+    $min-bp: map.get(config.$breakpoints, $default-min-bp, width);
+    $max-bp: map.get(config.$breakpoints, $default-max-bp, width);
+
+    $min-rem: strip-units($min);
+    $max-rem: strip-units($max);
+
+    $min-px: to-pxs($min-rem);
+    $max-px: to-pxs($max-rem);
+
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+    $slope-vw: rnd($slope * 100, 2);
+
+    $intercept-rems: rnd(to-rems($min-px - $slope * $min-bp), 2);
+
+    @return clamp(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rem}rem);
+}
