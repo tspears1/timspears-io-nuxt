@@ -1,0 +1,99 @@
+
+@mixin modern-text($weight: 400) {
+    font-family: strawford, Helvetica, Arial, sans-serif;
+    font-weight: $weight;
+}
+
+@mixin poster-text($style: normal) {
+    font-family: novelaposter, 'Times New Roman', Times, serif;
+    font-style: $style;
+    font-weight: normal;
+}
+
+@mixin display-text($style: normal) {
+    font-family: noveladisplay, 'Times New Roman', Times, serif;
+    font-style: $style;
+    font-weight: normal;
+}
+
+@mixin classic-text($weight: 400, $style: normal) {
+    font-family: novela, 'Times New Roman', Times, serif;
+    font-style: $style;
+    font-weight: $weight;
+}
+
+.modern-thin {
+    @include modern-text(100);
+}
+
+.modern-extralight {
+    @include modern-text(200);
+}
+
+.modern-light {
+    @include modern-text(300);
+}
+
+.modern-regular {
+    @include modern-text(400);
+}
+
+.modern-medium {
+    @include modern-text(500);
+}
+
+.modern-bold {
+    @include modern-text(700);
+}
+
+.modern-black {
+    @include modern-text(900);
+}
+
+.poster {
+    @include poster-text();
+}
+
+.poster-italic {
+    @include poster-text(italic);
+}
+
+.display {
+    @include display-text();
+}
+
+.display-italic {
+    @include display-text(italic);
+}
+
+.classic-regular {
+    @include classic-text();
+}
+
+.classic-regular-italic {
+    @include classic-text($style: italic);
+}
+
+.classic-semibold {
+    @include classic-text(600);
+}
+
+.classic-semibold-italic {
+    @include classic-text(600, italic);
+}
+
+.classic-bold {
+    @include classic-text(700);
+}
+
+.classic-bold-italic {
+    @include classic-text(700, italic);
+}
+
+.classic-black {
+    @include classic-text(900);
+}
+
+.classic-black-italic {
+    @include classic-text(900, italic);
+}

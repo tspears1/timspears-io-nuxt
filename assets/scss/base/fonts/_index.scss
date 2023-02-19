@@ -1,0 +1,132 @@
+@mixin font-face($family-name, $file-name, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        $font-path: '@/assets/scss/base/fonts/#{$file-name}';
+        font-display: swap;
+        font-family: '#{$family-name}';
+        font-style: $font-style;
+        font-weight: $font-weight;
+        src: url($font-path + '-webfont.woff2') format('woff2'), url($font-path + '-webfont.woff') format('woff');
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Strawford
+// ---------------------------------------------------------------------------
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-thin,
+    $font-weight: 100
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-extralight,
+    $font-weight: 200
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-light,
+    $font-weight: 300
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-regular,
+    $font-weight: 400
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-medium,
+    $font-weight: 500
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-bold,
+    $font-weight: 700
+);
+
+@include font-face(
+    $family-name: strawford,
+    $file-name: strawford/strawford-black,
+    $font-weight: 900
+);
+
+// ---------------------------------------------------------------------------
+// Novela Poster
+// ---------------------------------------------------------------------------
+@include font-face(
+    $family-name: novelaposter,
+    $file-name: novela-poster/novela-poster,
+);
+
+@include font-face(
+    $family-name: novelaposter,
+    $file-name: novela-poster/novela-posteritalic,
+    $font-style: italic
+);
+
+// ---------------------------------------------------------------------------
+// Novela Display
+// ---------------------------------------------------------------------------
+@include font-face(
+    $family-name: noveladisplay,
+    $file-name: novela/novela-displayregular,
+);
+@include font-face(
+    $family-name: noveladisplay,
+    $file-name: novela/novela-displayitalic,
+    $font-style: italic
+);
+
+// ---------------------------------------------------------------------------
+// Novela
+// ---------------------------------------------------------------------------
+
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-regular,
+    $font-weight: 400
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-semibold,
+    $font-weight: 600
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-bold,
+    $font-weight: 700
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-black,
+    $font-weight: 900,
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-regularitalic,
+    $font-weight: 400,
+    $font-style: italic,
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-semibolditalic,
+    $font-weight: 600,
+    $font-style: italic,
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-bolditalic,
+    $font-weight: 700,
+    $font-style: italic,
+);
+@include font-face(
+    $family-name: novela,
+    $file-name: novela/novela-blackitalic,
+    $font-weight: 900,
+    $font-style: italic,
+);

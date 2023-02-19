@@ -3,6 +3,7 @@
     <Body>
       <SiteWrapper>
         <SiteHeader />
+        <DebugStylesheet />
         <SiteMenu />
       </SiteWrapper>
     </Body>
@@ -12,3 +13,9 @@
 <script setup>
 
 </script>
+
+<style scoped>
+body {
+  color: white;
+}
+</style>

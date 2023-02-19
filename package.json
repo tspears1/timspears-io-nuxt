@@ -8,11 +8,18 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
+    "@vueuse/core": "^9.13.0",
+    "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.0"
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.6.0",
+    "@pinia/nuxt": "^0.4.6",
     "@sanity/client": "^4.0.1",
+    "@vueuse/gesture": "^2.0.0-beta.1",
+    "@vueuse/motion": "^2.0.0-beta.12",
+    "pinia": "^2.0.30",
     "sass": "^1.58.1"
   }
 }
