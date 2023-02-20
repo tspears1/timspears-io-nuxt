@@ -1,18 +1,30 @@
 <template>
-  <Html class="root" :data-theme="theme">
-    <Body>
-      <SiteSvgStore />
-      <SiteWrapper>
+    <SiteSvgStore />
+    <SiteWrapper>
         <SiteHeader />
-        <!-- <DebugStylesheet /> -->
+        <DebugStylesheet />
         <!-- <SiteMenu /> -->
-      </SiteWrapper>
-    </Body>
-  </Html>
+    </SiteWrapper>
 </template>
 
-<script setup lang="ts">
-const { theme } = useTheme()
+<script setup>
+import { useGlobalData } from '@data/global'
+const { theme: siteTheme } = useTheme()
+const { data } = useGlobalData()
+
+useHead({
+    htmlAttrs: {
+        class: 'root',
+        'data-theme': siteTheme,
+    },
+    title: '',
+    titleTemplate: (title) => !title ? data.value.siteTitle : `${title} | ${data.value.siteTitle}`
+})
+
+
+onMounted(() => {
+    useLenis()
+})
 
 </script>
 

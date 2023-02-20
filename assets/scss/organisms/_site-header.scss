@@ -1,10 +1,17 @@
 @use '@/assets/scss/abstracts/' as *;
 
+:root {
+    --logo-fill: var(--c-theme-text);
+    --logo-stroke: var(--c-theme-text);
+}
+
 .site-header {
     @include sticky(var(--frame-border) auto auto);
+    @include theme-switch(background, border);
     align-items: stretch;
-    background: var(--c-theme-fff);
-    border-bottom: 2px solid var(--c-theme-000);
+    background: rgba(var(--c-theme-bg-rgb), 0.5);
+    backdrop-filter: blur(1.25rem);
+    border-bottom: 2px solid var(--c-theme-text);
     display: grid;
     grid-template-columns: max-content 1fr max-content;
     justify-content: space-between;
@@ -13,15 +20,28 @@
 
 .site-logo {
     @include padding(1.5625rem 2.5rem);
-    border-right: 2px solid var(--c-theme-000);
+    background: rgba(var(--c-theme-text-rgb), 0);
+    border-right: 2px solid var(--c-theme-text);
     position: relative;
+    transition: background var(--duration-slow) var(--ease-out-expo);
 
-    // add hover state
+    &:hover {
+        background: rgba(var(--c-theme-text-rgb), 0.05);
+    }
+
+    &__svg {
+        overflow: visible;
+
+        > * {
+            @include theme-switch(fill, stroke);
+        }
+    }
 }
 
 .site-eyebrow {
     @include padding(1.5625rem 2.5rem);
-    color: var(--c-theme-000);
+    @include theme-switch(color);
+    color: var(--c-theme-text);
     display: grid;
     font-size: 0.8125rem;
     font-weight: 600;
@@ -32,10 +52,43 @@
     text-transform: uppercase;
 }
 
-.site-menu-trigger {
+.site-menu__trigger {
+    $b: &;
     @include padding(1.5625rem 2.5rem);
-    border-left: 2px solid var(--c-theme-000);
+    @include theme-switch(border);
+    border-left: 2px solid var(--c-theme-text);
     display: grid;
     place-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &-grid {
+        --menu-icon-dots-color: var(--c-theme-text);
+        --menu-icon-closed-bars-color: var(--c-theme-text);
+        --menu-icon-opened-bars-color: var(--c-theme-text);
+        @include button-reset();
+        @include size(1.875rem);
+        position: relative;
+        z-index: 1;
+    }
+
+    &-dot,
+    &-bar {
+        @include theme-switch( opacity, stroke, fill );
+    }
+
+    &-bar {
+        opacity: 0;
+
+        &.-origin-right {
+            transform-origin: right;
+        }
+
+        &.-origin-top-right {
+            transform-origin: top right;
+        }
+    }
 }
 

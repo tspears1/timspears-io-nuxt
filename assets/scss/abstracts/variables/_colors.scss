@@ -2,6 +2,18 @@
 
 @use "@/assets/scss/abstracts/colors/" as *;
 
+@mixin updateThemePrimary($theme, $bg, $text) {
+    &[data-theme="#{$theme}"] {
+        --c-theme-bg: var(--c-theme-#{$bg});
+        --c-theme-bg-rgb: var(--c-theme-#{$bg}-rgb);
+        --c-theme-bg-hsl: var(--c-theme-#{$bg}-hsl);
+
+        --c-theme-text: var(--c-theme-#{$text});
+        --c-theme-text-rgb: var(--c-theme-#{$text}-rgb);
+        --c-theme-text-hsl: var(--c-theme-#{$text}-hsl);
+    }
+}
+
 :root {
     @each $name, $value in $colors {
         --c-#{$name}: #{$value};
@@ -20,4 +32,6 @@
             --c-theme-fff-hsl: var(--c-theme-#{$theme}-fff-hsl);
         }
     }
+
+    @include updateThemePrimary('neptune', 'fff', '000');
 }

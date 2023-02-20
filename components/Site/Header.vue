@@ -1,25 +1,14 @@
 <template>
     <header class="site-header">
-        <NuxtLink to="/" class="site-logo">
-            <span class="sr-only">
-                {{  data.siteTitle }}
-            </span>
-            <IconLogo />
-        </NuxtLink>
+        <IconLogo :title="data.siteTitle" />
         <div class="site-eyebrow">
             {{  data.siteEyebrow }}
         </div>
-        <div class="site-menu-trigger">
-            <IconMenu />
-        </div>
+        <IconMenu />
     </header>
 </template>
 
 <script setup>
-const { data } = useSanityQuery(groq`
-    *[_type == "settings"]{
-        siteTitle,
-        siteEyebrow,
-    }[0]
-`)
+import { useGlobalData } from '../../data/global'
+const { data } = useGlobalData()
 </script>

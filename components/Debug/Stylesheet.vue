@@ -63,7 +63,7 @@ const classes = computed(() => {
 
 <style lang="scss">
 .style-wrapper {
-    color: white;
+    color: var(--c-theme-000);
     display: grid;
     font-size: 4vw;
     gap: 28px;

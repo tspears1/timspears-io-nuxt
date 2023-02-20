@@ -1,0 +1,5 @@
+@mixin theme-switch( $properties... ) {
+    transition-property: $properties;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-out-expo);
+}

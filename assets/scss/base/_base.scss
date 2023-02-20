@@ -4,6 +4,16 @@
     --frame-border: 1.25rem;
 }
 
+html {
+    scroll-behavior: initial;
+}
+
+html,
+body {
+    min-height: 100%;
+    height: auto;
+}
+
 body {
     @include modern-text();
     background: transparent;
