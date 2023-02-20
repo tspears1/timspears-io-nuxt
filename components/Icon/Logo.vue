@@ -5,6 +5,7 @@
             fill="var(--logo-fill, currentColor)"
             stroke="var(--logo-stroke, currentColor)"
             stroke-width="2"
+            style="--delay-index: 3;"
         />
         <rect
             x="44.6406"
@@ -14,13 +15,23 @@
             fill="var(--logo-fill, currentColor)"
             stroke="var(--logo-stroke, currentColor)"
             stroke-width="2"
+            style="--delay-index: 2;"
         />
         <path
             d="M4.37704 36.4438L19.7425 9.83008L35.1079 36.4438H4.37704Z"
             fill="var(--logo-fill, currentColor)"
             stroke="var(--logo-stroke, currentColor)"
             stroke-width="2"
+            style="--delay-index: 1;"
         />
     </svg>
 </template>
+
+<style lang="scss">
+:root {
+    --logo-fill: var(--c-theme-000);
+    --logo-stroke: var(--c-theme-000);
+}
+
+</style>
 

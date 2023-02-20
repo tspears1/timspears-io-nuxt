@@ -5,5 +5,19 @@
 :root {
     @each $name, $value in $colors {
         --c-#{$name}: #{$value};
+        --c-#{$name}-rgb: #{red($value)}, #{green($value)}, #{blue($value)};
+        --c-#{$name}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
+    }
+
+    @each $theme in $themes {
+        &[data-theme="#{$theme}"] {
+            --c-theme-000: var(--c-theme-#{$theme}-000);
+            --c-theme-000-rgb: var(--c-theme-#{$theme}-000-rgb);
+            --c-theme-000-hsl: var(--c-theme-#{$theme}-000-hsl);
+
+            --c-theme-fff: var(--c-theme-#{$theme}-fff);
+            --c-theme-fff-rgb: var(--c-theme-#{$theme}-fff-rgb);
+            --c-theme-fff-hsl: var(--c-theme-#{$theme}-fff-hsl);
+        }
     }
 }

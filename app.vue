@@ -1,21 +1,18 @@
 <template>
-  <Html class="root">
+  <Html class="root" :data-theme="theme">
     <Body>
+      <SiteSvgStore />
       <SiteWrapper>
         <SiteHeader />
-        <DebugStylesheet />
-        <SiteMenu />
+        <!-- <DebugStylesheet /> -->
+        <!-- <SiteMenu /> -->
       </SiteWrapper>
     </Body>
   </Html>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const { theme } = useTheme()
 
 </script>
 
-<style scoped>
-body {
-  color: white;
-}
-</style>

@@ -1,0 +1,41 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.site-header {
+    @include sticky(var(--frame-border) auto auto);
+    align-items: stretch;
+    background: var(--c-theme-fff);
+    border-bottom: 2px solid var(--c-theme-000);
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    justify-content: space-between;
+    width: frame(100vw);
+}
+
+.site-logo {
+    @include padding(1.5625rem 2.5rem);
+    border-right: 2px solid var(--c-theme-000);
+    position: relative;
+
+    // add hover state
+}
+
+.site-eyebrow {
+    @include padding(1.5625rem 2.5rem);
+    color: var(--c-theme-000);
+    display: grid;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    place-items: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.site-menu-trigger {
+    @include padding(1.5625rem 2.5rem);
+    border-left: 2px solid var(--c-theme-000);
+    display: grid;
+    place-items: center;
+}
+
