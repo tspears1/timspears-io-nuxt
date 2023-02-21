@@ -12,12 +12,12 @@ const gridRef = reactive({
 
 const isOpenedMotion = () => {
     isHovering.value = false
-    animate(gridRef.dotsClosed, { opacity: 0 }, { delay: stagger(0.05, { from: 'center' })})
+    animate(gridRef.dotsClosed, { opacity: 0 }, { duration: 0.75, delay: stagger(0.1, { from: 'center' })})
 }
 
 const isClosedMotion = () => {
     isHovering.value = false
-    animate(gridRef.dotsClosed, { opacity: 1 }, { delay: stagger(0.05, { from: 'center' })})
+    animate(gridRef.dotsClosed, { opacity: 1 }, { duration: 0.75, delay: stagger(0.1, { from: 'center' })})
 }
 
 const isHoveredOpenedMotion = () => {

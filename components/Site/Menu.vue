@@ -1,17 +1,58 @@
 <script setup>
+import { random } from 'radash'
 import { useGlobalData } from '@data/global'
 const { data } = useGlobalData()
+
+const { menuOpen } = useMenu()
 
 const { width: windowWidth, height: windowHeight } = useWindowSize()
 const { getFrameBorder } = useFrame()
 const headerHeight = useHeaderHeight()
 
+const gridRef = ref()
+const loadGrid = ref(false)
+
 const menuWidth   = computed(() => windowWidth.value - getFrameBorder(2))
 const menuHeight  = computed(() => windowHeight.value - headerHeight.value - getFrameBorder(2))
-const rowCount    = computed(() => data.value.navigation.length)
+const rowCount    = computed(() => data.value.navigation.length * 2)
 const tileSize    = computed(() => menuHeight.value / rowCount.value)
 const columnCount = computed(() => Math.ceil( menuWidth.value / tileSize.value ))
-const tileCount   = computed(() => columnCount.value * rowCount.value || 0)
+const tileCount   = computed(() => columnCount.value * rowCount.value)
+const tileArray   = computed(() => Array.from({ length: tileCount.value }))
+
+onMounted(() =>{
+
+    nextTick(() => {
+        // solving a hydration issue with the grid.
+        loadGrid.value = true
+    })
+})
+
+const TileGrid = (props, context) => {
+    const tiles = tileArray.value.map((n, index) => {
+        return h(
+            'div',
+            {
+                class: 'site-menu__tile',
+                key: `tile-${n}`,
+                style: { '--tile-delay-index' : random(1, tileArray.value.length * 0.66) }
+            },
+            [
+                h('span', { class: 'site-menu__tile-front' }),
+                h('span', { class: 'site-menu__tile-back' })
+            ]
+        )
+    })
+    return h(
+        'div',
+        {
+            class: 'site-menu__grid',
+            ref: gridRef,
+        },
+        tiles
+    )
+}
+
 </script>
 
 <template>
@@ -24,13 +65,7 @@ const tileCount   = computed(() => columnCount.value * rowCount.value || 0)
             --menu-col-count: ${columnCount};
         `"
     >
-        <div class="site-menu__grid">
-            <div
-                v-for="n in tileCount"
-                :key="`tile-${n}`"
-                class="site-menu__tile"
-            />
-        </div>
+        <TileGrid v-if="loadGrid" />
         <ul class="site-menu__list">
             <li
                 v-for="(item, index) in data.navigation"

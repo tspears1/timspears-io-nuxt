@@ -16,19 +16,34 @@
     grid-template-columns: max-content 1fr max-content;
     justify-content: space-between;
     width: frame(100vw);
+
+    [data-menu-open="true"] & {
+        background: rgba(var(--c-theme-text-rgb), 1);
+        border-color: var(--c-theme-bg);
+        transition: background var(--duration-gentle) var(--ease-out-quad);
+    }
 }
 
 .site-logo {
+    --logo-bg-alpha: 0;
+    --logo-bg-rgb: var(--c-theme-text-rgb);
+
     @include padding(1.5625rem 2.5rem);
     @include theme-switch(background, border);
-    background: rgba(var(--c-theme-text-rgb), 0);
+    background: rgba(var(--logo-bg-rgb), var(--logo-bg-alpha));
     border-right: 2px solid var(--c-theme-text);
     display: grid;
     position: relative;
     place-items: center;
 
     &:hover {
-        background: rgba(var(--c-theme-text-rgb), 0.05);
+        --logo-bg-alpha: 0.05;
+    }
+
+    [data-menu-open="true"] & {
+        --logo-bg-rgb: var(--c-theme-bg-rgb);
+        border-color: var(--c-theme-bg);
+        transition: border var(--duration-gentle) var(--ease-out-quad);
     }
 
     &__svg {
@@ -36,6 +51,12 @@
 
         > * {
             @include theme-switch(fill, stroke);
+
+            [data-menu-open="true"] & {
+                //fill: transparent;
+                stroke: var(--c-theme-bg);
+                transition: stroke var(--duration-gentle) var(--ease-out-quad);
+            }
         }
     }
 }
@@ -52,20 +73,33 @@
     place-items: center;
     text-align: center;
     text-transform: uppercase;
+
+    [data-menu-open="true"] & {
+        color: var(--c-theme-bg);
+        transition: color var(--duration-gentle) var(--ease-out-quint);
+    }
 }
 
 .site-menu__trigger {
+    --trigger-bg-alpha: 0;
+    --trigger-bg-rgb: var(--c-theme-text-rgb);
     $b: &;
     @include padding(1.5625rem 2.5rem);
     @include theme-switch(background, border);
-    background: rgba(var(--c-theme-text-rgb), 0);
+    background: rgba(var(--trigger-bg-rgb), var(--trigger-bg-alpha));
     border-left: 2px solid var(--c-theme-text);
     display: grid;
     place-items: center;
 
     &:hover {
-        background: rgba(var(--c-theme-text-rgb), 0.05);
+        --trigger-bg-alpha: 0.05;
         cursor: pointer;
+    }
+
+    [data-menu-open="true"] & {
+        --trigger-bg-rgb: var(--c-theme-bg-rgb);
+        border-color: var(--c-theme-bg);
+        transition: border var(--duration-gentle) var(--ease-out-quint);
     }
 
     &-grid {
@@ -76,6 +110,12 @@
         @include size(1.875rem);
         position: relative;
         z-index: 1;
+
+        [data-menu-open="true"] & {
+            --menu-icon-dots-color: var(--c-theme-bg);
+            --menu-icon-closed-bars-color: var(--c-theme-bg);
+            --menu-icon-opened-bars-color: var(--c-theme-bg);
+        }
     }
 
     &-dot,

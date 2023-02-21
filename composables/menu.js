@@ -9,7 +9,7 @@ const useMenu = () => {
     const toggleMenu = () => menuOpen.value = !menuOpen.value
 
     watch(menuOpen, (value) => {
-        document.querySelector('body').dataset.menuOpen = value
+        document.documentElement.dataset.menuOpen = value
     })
 
 

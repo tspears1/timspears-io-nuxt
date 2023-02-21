@@ -1,0 +1,83 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.site-menu {
+    @include fixed(var(--content-top) var(--frame-border) var(--frame-border));
+    pointer-events: none;
+
+    [data-menu-open="true"] & {
+        pointer-events: auto;
+    }
+
+    &__grid {
+        @include absolute(0);
+        @include grid-content( center );
+        display: grid;
+        grid-template-columns: repeat(var(--menu-col-count), var(--menu-tile-size));
+        grid-template-rows: repeat(var(--menu-row-count), var(--menu-tile-size));
+        perspective: 1000px;
+    }
+
+    &__tile {
+        transform-style: preserve-3d;
+        transition: transform var(--duration-fast) var(--ease-in-quint) calc(10ms * var(--tile-delay-index, 1));
+
+        [data-menu-open="true"] & {
+            transform: rotateY(180deg);
+            transform-origin: center;
+            transition: transform var(--duration-fast) var(--ease-out-quint) calc(15ms * var(--tile-delay-index, 1) + var(--duration-fast));
+        }
+    }
+
+    &__tile-front,
+    &__tile-back {
+        @include absolute(0);
+        backface-visibility: hidden;
+    }
+
+    &__tile-front {
+        background: rgba(var(--c-theme-bg), 0.8);
+        box-shadow: 4px 4px 16px rgb( 0 0 0 / 0.15 );
+        opacity: 0;
+
+        [data-menu-open="true"] & {
+            opacity: 1;
+            transition:
+                opacity var(--duration-quick) var(--ease-out-quint) calc(15ms * var(--tile-delay-index, 1));
+        }
+    }
+
+    &__tile-back {
+        background: var(--c-theme-text);
+        transform: rotateY(180deg);
+        transition: opacity var(--duration-quick) var(--ease-in-quint) calc(15ms * var(--tile-delay-index, 1) );
+        opacity: 0;
+
+        [data-menu-open="true"] & {
+            opacity: 1;
+            transition: opacity var(--duration-quick) var(--ease-in-quint) calc(15ms * var(--tile-delay-index, 1) + var(--duration-fast));
+        }
+
+    }
+
+    &__list {
+        @include no-bullets();
+        display: grid;
+        grid-template-rows: repeat(calc(var(--menu-row-count) / 2), 1fr);
+        height: var(--content-y);
+    }
+
+    &__item {
+        display: grid;
+
+        // TEMP
+        opacity: 0;
+    }
+
+    &__count {
+
+    }
+
+    &__link {
+
+    }
+}
