@@ -14,49 +14,26 @@
         display: grid;
         grid-template-columns: repeat(var(--menu-col-count), var(--menu-tile-size));
         grid-template-rows: repeat(var(--menu-row-count), var(--menu-tile-size));
-        perspective: 1000px;
     }
 
     &__tile {
-        transform-style: preserve-3d;
-        transition: transform var(--duration-fast) var(--ease-in-quint) calc(10ms * var(--tile-delay-index, 1));
-
-        [data-menu-open="true"] & {
-            transform: rotateY(180deg);
-            transform-origin: center;
-            transition: transform var(--duration-fast) var(--ease-out-quint) calc(15ms * var(--tile-delay-index, 1) + var(--duration-fast));
-        }
-    }
-
-    &__tile-front,
-    &__tile-back {
-        @include absolute(0);
-        backface-visibility: hidden;
-    }
-
-    &__tile-front {
-        background: rgba(var(--c-theme-bg), 0.8);
-        box-shadow: 4px 4px 16px rgb( 0 0 0 / 0.15 );
+        background: var(--c-theme-bg);
         opacity: 0;
+        transform: scale(0.6);
+        transition:
+            background var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1)),
+            opacity var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1)),
+            transform var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1));
 
         [data-menu-open="true"] & {
+            background: var(--c-theme-text);
             opacity: 1;
+            transform: scale(1);
             transition:
-                opacity var(--duration-quick) var(--ease-out-quint) calc(15ms * var(--tile-delay-index, 1));
+                background var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1)),
+                opacity var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1)),
+                transform var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1));
         }
-    }
-
-    &__tile-back {
-        background: var(--c-theme-text);
-        transform: rotateY(180deg);
-        transition: opacity var(--duration-quick) var(--ease-in-quint) calc(15ms * var(--tile-delay-index, 1) );
-        opacity: 0;
-
-        [data-menu-open="true"] & {
-            opacity: 1;
-            transition: opacity var(--duration-quick) var(--ease-in-quint) calc(15ms * var(--tile-delay-index, 1) + var(--duration-fast));
-        }
-
     }
 
     &__list {

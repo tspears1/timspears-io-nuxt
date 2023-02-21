@@ -1,8 +1,8 @@
 :root {
     // component overlay
-    // modal
-    // menu
-    // sticky
+    --z-menu: 7000;
+    --z-header: 8000;
+    --z-modal: 9000;
     --z-frame: 9080;
     --z-max: 9999;
 }

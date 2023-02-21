@@ -13,6 +13,7 @@ const { theme: siteTheme } = useTheme()
 const { data } = useGlobalData()
 useFrame()
 
+
 useHead({
     htmlAttrs: {
         class: 'root',

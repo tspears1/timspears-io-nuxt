@@ -5,23 +5,12 @@ const { data } = useGlobalData()
 
 const { menuOpen } = useMenu()
 
-const { width: windowWidth, height: windowHeight } = useWindowSize()
-const { getFrameBorder } = useFrame()
-const headerHeight = useHeaderHeight()
+const { tileArray, tileCount, tileSize, rowCount, columnCount } = useMenuGrid()
 
 const gridRef = ref()
 const loadGrid = ref(false)
 
-const menuWidth   = computed(() => windowWidth.value - getFrameBorder(2))
-const menuHeight  = computed(() => windowHeight.value - headerHeight.value - getFrameBorder(2))
-const rowCount    = computed(() => data.value.navigation.length * 2)
-const tileSize    = computed(() => menuHeight.value / rowCount.value)
-const columnCount = computed(() => Math.ceil( menuWidth.value / tileSize.value ))
-const tileCount   = computed(() => columnCount.value * rowCount.value)
-const tileArray   = computed(() => Array.from({ length: tileCount.value }))
-
 onMounted(() =>{
-
     nextTick(() => {
         // solving a hydration issue with the grid.
         loadGrid.value = true
