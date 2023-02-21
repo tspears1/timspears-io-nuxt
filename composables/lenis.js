@@ -18,8 +18,8 @@ const useLenis = () => {
     // init
     const lenis = new Lenis({
         lerp: 0.2,
-        //duration: 2.5,
-        //easing: easings.easeOutCirc,
+        duration: 2.5,
+        easing: easings.easeOutCubic,
         smooth: true
     })
 
@@ -31,7 +31,7 @@ const useLenis = () => {
     requestAnimationFrame(raf)
 
 
-    // callbacks
+    // callbacks ({ scroll, limit, velocity, direction, progress })
     const onScroll = (callback) => lenis.on('scroll', callback)
 
     const { scrollTo, stop, start } = lenis

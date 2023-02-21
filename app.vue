@@ -2,8 +2,8 @@
     <SiteSvgStore />
     <SiteWrapper>
         <SiteHeader />
+        <SiteMenu />
         <DebugStylesheet />
-        <!-- <SiteMenu /> -->
     </SiteWrapper>
 </template>
 
@@ -11,6 +11,7 @@
 import { useGlobalData } from '@data/global'
 const { theme: siteTheme } = useTheme()
 const { data } = useGlobalData()
+useFrame()
 
 useHead({
     htmlAttrs: {
