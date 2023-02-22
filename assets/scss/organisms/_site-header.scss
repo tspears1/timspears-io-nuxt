@@ -87,6 +87,7 @@
                 stroke var(--duration-gentle) var(--ease-out-quad);
 
             [data-menu-open="true"] & {
+                fill: transparent;
                 stroke: var(--c-theme-bg);
             }
         }

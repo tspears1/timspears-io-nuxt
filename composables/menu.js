@@ -1,4 +1,5 @@
 import { useGlobalData } from "~~/data/global"
+import { cluster, list } from 'radash'
 
 const useMenu = () => {
 
@@ -37,6 +38,17 @@ const useMenuGrid = () => {
     const columnCount = computed(() => Math.ceil( menuWidth.value / tileSize.value ))
     const tileCount   = computed(() => columnCount.value * rowCount.value)
     const tileArray   = computed(() => Array.from({ length: tileCount.value }))
+    const rowList     = computed(() => cluster(list(1, tileCount.value, (i) => i), columnCount.value * 2))
+
+    const getListRow = (count) => {
+        let row = 0
+        rowList.value.forEach((group, index) => {
+            if (!!group.find(i => i === count)) {
+                return row = index
+            }
+        })
+        return row
+    }
 
     return {
         menuWidth,
@@ -46,6 +58,8 @@ const useMenuGrid = () => {
         columnCount,
         tileCount,
         tileArray,
+        rowList,
+        getListRow,
     }
 }
 

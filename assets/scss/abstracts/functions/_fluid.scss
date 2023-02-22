@@ -25,7 +25,7 @@
 }
 
 // add support for min, max, clamp or full-fluid
-@function fluid($min, $max, $default-min-bp: sm, $default-max-bp: xxl) {
+@function fluid($min, $max, $clamp: true, $default-min-bp: sm, $default-max-bp: xxl) {
     $min-bp: map.get(config.$breakpoints, $default-min-bp, width);
     $max-bp: map.get(config.$breakpoints, $default-max-bp, width);
 
@@ -40,5 +40,9 @@
 
     $intercept-rems: rnd(to-rems($min-px - $slope * $min-bp), 2);
 
-    @return clamp(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rem}rem);
+    @if $clamp {
+        @return clamp(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rem}rem);
+    } @else {
+        @return max(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems});
+    }
 }

@@ -1,6 +1,23 @@
 @use '@/assets/scss/abstracts/' as *;
 
+@mixin build-active-rows($list) {
+    @each $i in $list {
+        &[data-active-item="#{$i}"] {
+            [data-row="#{$i}"] {
+                &::before {
+                    opacity: 0.1;
+                    transform: scale(1);
+                    transition:
+                        background var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
+                        opacity var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
+                        transform var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1));
+                }
+            }
+        }
+    }
+}
 .site-menu {
+    @include build-active-rows((1, 2, 3, 4));
     @include fixed(var(--content-top) var(--frame-border) var(--frame-border));
     pointer-events: none;
 
@@ -25,6 +42,18 @@
             opacity var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1)),
             transform var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1));
 
+        &::before {
+            @include absolute(0);
+            background: var(--c-pure-black);
+            content: '';
+            opacity: 0;
+            transform: scale(0.6);
+            transition:
+                background var(--duration-quick) var(--ease-in-expo) calc(5ms * var(--tile-delay-index, 1)),
+                opacity var(--duration-quick) var(--ease-in-expo) calc(5ms * var(--tile-delay-index, 1)),
+                transform var(--duration-quick) var(--ease-in-expo) calc(5ms * var(--tile-delay-index, 1));
+        }
+
         [data-menu-open="true"] & {
             background: var(--c-theme-text);
             opacity: 1;
@@ -41,20 +70,57 @@
         display: grid;
         grid-template-rows: repeat(calc(var(--menu-row-count) / 2), 1fr);
         height: var(--content-y);
+        position: relative;
     }
 
     &__item {
+        @include gap( x fluid(1.125rem, 6rem, false));
+        @include grid-items(center start);
+        @include padding( 1.5rem max(8vw, 5.625rem));
         display: grid;
-
-        // TEMP
-        opacity: 0;
+        grid-template-columns: max-content auto;
+        position: relative;
     }
 
     &__count {
-
+        @include poster-text(italic);
+        color: var(--c-theme-bg);
+        font-size: fluid(0.875rem, 1.5rem, false);
+        line-height: 1;
     }
 
     &__link {
+        @include pseudo-link();
+        @include poster-text();
+        -webkit-text-stroke: 1px var(--c-theme-bg);
+        color: transparent;
+        display: grid;
+        font-size: fluid( 2rem, 5.25rem, false);
+        line-height: 1;
 
+        &:hover {
+            &::before {
+                --t-delay: 300ms;
+                opacity: 1;
+                transform: translateX( 0.045em ) translateY( 0.045em );
+            }
+        }
+
+        span {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+        }
+
+        &::before {
+            --t-delay: 20ms;
+            color: var(--c-theme-bg);
+            content: attr(data-title);
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+            opacity: 0;
+            transition:
+                opacity var(--duration-slow) var(--ease-out-expo) var(--t-delay),
+                transform var(--duration-gentle) var(--ease-out-expo) var(--t-delay);
+        }
     }
 }

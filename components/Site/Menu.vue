@@ -5,10 +5,19 @@ const { data } = useGlobalData()
 
 const { menuOpen } = useMenu()
 
-const { tileArray, tileCount, tileSize, rowCount, columnCount } = useMenuGrid()
+const {
+        tileArray,
+        tileCount,
+        tileSize,
+        rowCount,
+        columnCount,
+        rowList,
+        getListRow,
+} = useMenuGrid()
 
 const gridRef = ref()
 const loadGrid = ref(false)
+const activeItem = ref(0)
 
 onMounted(() =>{
     nextTick(() => {
@@ -24,7 +33,8 @@ const TileGrid = (props, context) => {
             {
                 class: 'site-menu__tile',
                 key: `tile-${n}`,
-                style: { '--tile-delay-index' : random(1, tileArray.value.length * 0.66) }
+                style: { '--tile-delay-index' : random(1, tileArray.value.length * 0.66) },
+                'data-row': getListRow(index + 1) + 1,
             },
             [
                 h('span', { class: 'site-menu__tile-front' }),
@@ -42,6 +52,8 @@ const TileGrid = (props, context) => {
     )
 }
 
+const updateActiveItem = (id) => activeItem.value = id
+
 </script>
 
 <template>
@@ -53,6 +65,7 @@ const TileGrid = (props, context) => {
             --menu-row-count: ${rowCount};
             --menu-col-count: ${columnCount};
         `"
+        :data-active-item="activeItem"
     >
         <TileGrid v-if="loadGrid" />
         <ul class="site-menu__list">
@@ -62,8 +75,14 @@ const TileGrid = (props, context) => {
                 class="site-menu__item"
             >
                 <div class="site-menu__count">{{ `0${index + 1}.` }}</div>
-                <NuxtLink :to="`/${item.slug}`" class="site-menu__link">
-                    {{  item.title }}
+                <NuxtLink
+                    :to="`/${item.slug}`"
+                    class="site-menu__link"
+                    :data-title="item.title"
+                    @mouseover="updateActiveItem(index + 1)"
+                    @mouseleave="updateActiveItem(0)"
+                >
+                    <span>{{  item.title }}</span>
                 </NuxtLink>
             </li>
         </ul>
