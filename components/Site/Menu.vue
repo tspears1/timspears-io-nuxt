@@ -19,6 +19,8 @@ const gridRef = ref()
 const loadGrid = ref(false)
 const activeItem = ref(0)
 
+const splitRef = ref()
+
 onMounted(() =>{
     nextTick(() => {
         // solving a hydration issue with the grid.
@@ -82,7 +84,9 @@ const updateActiveItem = (id) => activeItem.value = id
                     @mouseover="updateActiveItem(index + 1)"
                     @mouseleave="updateActiveItem(0)"
                 >
-                    <span>{{  item.title }}</span>
+                <ClientOnly>
+                    <TextSplitting ref="splitRef" :content="item.title" />
+                </ClientOnly>
                 </NuxtLink>
             </li>
         </ul>

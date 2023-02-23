@@ -1,0 +1,16 @@
+@mixin splitting() {
+    &__wrapper {
+        column-gap: 0.18em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__word {
+        display: inline-block;
+        flex: none;
+    }
+
+    &__letter {
+        display: inline-block;
+    }
+}
