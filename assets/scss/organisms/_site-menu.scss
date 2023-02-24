@@ -106,15 +106,6 @@
             }
         }
 
-        .splitting__wrapper {
-            grid-column: 1 / span 1;
-            grid-row: 1 / span 1;
-        }
-
-        .splitting {
-            @include splitting();
-        }
-
         &::before {
             --t-delay: 20ms;
             color: var(--c-theme-bg);

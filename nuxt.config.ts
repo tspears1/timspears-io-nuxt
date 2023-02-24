@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import { appDescription } from './constants/index'
+import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
     modules: [
@@ -20,6 +21,14 @@ export default defineNuxtConfig({
         //'images': fileURLToPath(new URL('./assets/images', import.meta.url)),
         '@scss': "assets/scss",
         '@data': "data"
+    },
+
+    vite: {
+        plugins: [
+            svgLoader({
+                svgo: false
+            }),
+        ]
     },
 
     app: {

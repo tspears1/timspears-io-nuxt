@@ -54,6 +54,7 @@ const setDashoffset = (el) => {
         })
         return offsets
     }
+
     const pathLength = getTotalLength(el)
     // el.setAttribute('stroke-dasharray', pathLength)
     el.style.strokeDasharray = pathLength

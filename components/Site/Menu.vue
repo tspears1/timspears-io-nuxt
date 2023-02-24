@@ -84,9 +84,7 @@ const updateActiveItem = (id) => activeItem.value = id
                     @mouseover="updateActiveItem(index + 1)"
                     @mouseleave="updateActiveItem(0)"
                 >
-                <ClientOnly>
-                    <TextSplitting ref="splitRef" :content="item.title" />
-                </ClientOnly>
+                    <SiteMenuTitle :title="item.slug" :active="menuOpen"/>
                 </NuxtLink>
             </li>
         </ul>
