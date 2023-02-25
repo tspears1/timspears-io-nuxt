@@ -1,8 +1,3 @@
-<template>
-    <SplitRender v-if="isSplit" />
-    <component v-else :is="tag" :class="generateClass('wrapper')">{{ content }}</component>
-</template>
-
 <script setup>
 import { isString, isArray } from 'radash'
 
@@ -12,6 +7,11 @@ const props = defineProps({
     content: {
         type: String,
         required: true,
+    },
+    placeholder: {
+        type: Boolean,
+        default: true,
+        required: false,
     },
     block: {
         type: String,
@@ -70,10 +70,10 @@ const renderBlock = (block, index) => {
     }
 }
 
-const SplitRender = h(
+const SplitRender = () => h(
     props.tag,
     {
-        class: generateClass('wrapper'),
+        class: generateClass('splitting'),
         style: `--word-count: ${splitContent.value.length};`
     },
     splitContent.value.map((word, index) => renderBlock(word, index))
@@ -89,3 +89,9 @@ defineExpose({
     revert,
 })
 </script>
+
+<template>
+    <div v-if="isSplit && placeholder" :class="generateClass('placeholder')">{{ content }}</div>
+    <SplitRender v-if="isSplit" />
+    <component v-else :is="tag" :class="generateClass('splitting')">{{ content }}</component>
+</template>

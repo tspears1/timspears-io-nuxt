@@ -6,6 +6,7 @@
 }
 
 .site-header {
+    --grid-columns: max-content 0fr max-content;
     --header-bg-alpha: 0.5;
     --header-border-color: var(--c-theme-text);
     @include sticky(var(--frame-border) auto auto);
@@ -14,13 +15,18 @@
     backdrop-filter: blur(1.25rem);
     border-bottom: 2px solid var(--header-border-color);
     display: grid;
-    grid-template-columns: max-content 1fr max-content;
+    grid-template-columns: var(--grid-columns);
     justify-content: space-between;
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
-        border var(--duration-gentle) var(--ease-out-quad);
+        border var(--duration-gentle) var(--ease-out-quad),
+        grid-template-columns var(--duration-moderate) var(--ease-out-quad);
     width: frame(100vw);
     z-index: var(--z-header);
+
+    @include breakpoint( md ) {
+        --grid-columns: max-content 1fr max-content;
+    }
 
     [data-menu-open="true"] & {
         --header-bg-alpha: 0;
@@ -60,15 +66,21 @@
     --logo-bg-alpha: 0;
     --logo-bg-rgb: var(--c-theme-text-rgb);
 
-    @include padding(1.5625rem 2.5rem);
+    //@include padding(x min(2.78vw, 2.5rem));
+    @include padding( x fluid(2rem, 2.5rem));
+    aspect-ratio: 16 / 9;
     background: rgba(var(--logo-bg-rgb), var(--logo-bg-alpha));
-    border-right: 2px solid var(--header-border-color);
+    border-right: 2px solid transparent;
     display: grid;
     position: relative;
     place-items: center;
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
         border var(--duration-gentle) var(--ease-out-quad);
+
+    @include breakpoint( md ) {
+        border-right-color: var(--header-border-color);
+    }
 
     &:hover {
         --logo-bg-alpha: 0.05;
@@ -79,7 +91,9 @@
     }
 
     &__svg {
+        height: auto;
         overflow: visible;
+        width: fluid(5.625rem, 7.5rem);
 
         > * {
             transition:
@@ -95,49 +109,63 @@
 }
 
 .site-eyebrow {
-    @include padding(1.5625rem 2.5rem);
+    $b: &;
+    @include grid-content( center );
+    @include padding( x fluid(2rem, 2.5rem));
+    @include splitting($gap: 0.45em);
     color: var(--c-theme-text);
     display: grid;
     font-size: 0.8125rem;
     font-weight: 600;
+    grid-template-columns: max-content;
     letter-spacing: 0.2em;
     line-height: 1;
+    opacity: 0;
+    overflow: hidden;
     perspective: 1000px;
     place-items: center;
     position: relative;
     text-align: center;
     text-transform: uppercase;
-    transition: color var(--duration-gentle) var(--ease-out-quad);
+    transition:
+        color var(--duration-gentle) var(--ease-out-quad),
+        opacity var(--duration-moderate) var(--ease-out-quad);
+
+    @include breakpoint( md ) {
+        opacity: 1;
+    }
 
     [data-menu-open="true"] & {
         color: var(--c-theme-bg);
     }
 
     &__inner {
+        @include grid-items( center );
+        clip-path: inset(0);
         display: grid;
-        place-items: center;
+        overflow: hidden;
         position: relative;
-        //transform: rotate3d(1, 0, 0, 0deg);
-        transform: rotateX(0deg);
-        transform-origin: center;
-        transform-style: preserve-3d;
-        transition: transform 300ms ease-in-out;
-        width: 100%;
 
-        [data-menu-open="true"] & {
-            //transform: rotate3d(1, 0, 0, 90deg);
-            transform: rotateX(90deg) translateY(1em);
+        > * {
+            @include grid-items(center);
+            display: grid;
+            grid-area: 1 / 1 / 1 / 1;
         }
     }
 
+    &__splitting,
+    &__placeholder {
+        grid-area: 1 / 1 / 1 / 1;
+    }
+
     &__closed {
-        @include absolute(0);
+
     }
 
     &__open {
-        @include absolute(0);
-        transform: translateZ(0.5em) rotateX(90deg) scaleY(-1);
-        transform-origin: top;
+        #{$b}__letter {
+            transform: translateY(100%);
+        }
     }
 }
 
@@ -145,11 +173,13 @@
     --trigger-bg-alpha: 0;
     --trigger-bg-rgb: var(--c-theme-text-rgb);
     $b: &;
-    @include padding(1.5625rem 2.5rem);
+    aspect-ratio: 1/1;
+    @include grid-items(center);
+    @include grid-self( x end );
+    @include padding( x fluid(2rem, 2.5rem));
     background: rgba(var(--trigger-bg-rgb), var(--trigger-bg-alpha));
     border-left: 2px solid var(--header-border-color);
     display: grid;
-    place-items: center;
     position: relative;
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
@@ -169,7 +199,7 @@
         --menu-icon-closed-bars-color: var(--c-theme-text);
         --menu-icon-opened-bars-color: var(--c-theme-text);
         @include button-reset();
-        @include size(1.875rem);
+        @include size(min(100%, 1.875rem));
         position: relative;
         z-index: 1;
 

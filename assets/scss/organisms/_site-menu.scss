@@ -80,7 +80,7 @@
     &__item {
         @include gap( x fluid(1.125rem, 6rem, false));
         @include grid-items(center start);
-        @include padding( 1.5rem max(8vw, 5.625rem));
+        @include padding( 1.5rem max(7.5vw, 2rem));
         display: grid;
         grid-template-columns: max-content auto;
         position: relative;
@@ -107,8 +107,9 @@
     }
 
     &__link {
+        --menu-font-size: #{fluid( 2.5rem, 4.25rem, false)};
         --menu-link-delay: 20ms;
-        --menu-link-height: #{fluid( 2rem, 4.25rem, false)};
+        --menu-link-height: var(--menu-font-size);
         --text-fill: var(--c-theme-bg);
         --text-stroke: var(--c-theme-bg);
         @include pseudo-link();
@@ -128,7 +129,7 @@
         }
 
         &[data-title="Thoughts"] {
-            --menu-link-height: calc(#{fluid( 2rem, 4.25rem, false)} + 32.74%); // make-up for overhang from "g".
+            --menu-link-height: calc(var(--menu-font-size) + 32.74%); // make-up for overhang from "g".
         }
     }
 
@@ -155,6 +156,17 @@
     &__outline-svg,
     &__fill-svg {
         @include svg-contain($width: auto, $height: var(--menu-link-height));
+    }
+
+    &__outline-svg {
+
+        path {
+            stroke-width: 2px;
+
+            @include breakpoint( md ) {
+                stroke-width: 1px;
+            }
+        }
     }
 
 }

@@ -1,6 +1,10 @@
-@mixin splitting() {
-    &__wrapper {
-        column-gap: 0.18em;
+@mixin splitting($gap: 0.18em) {
+    &__placeholder {
+        opacity: 0;
+    }
+
+    &__splitting{
+        column-gap: $gap;
         display: flex;
         flex-wrap: wrap;
     }

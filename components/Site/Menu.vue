@@ -48,7 +48,7 @@ const TileGrid = (props, context) => {
                 style: { '--tile-delay-index' : random(1, tileArray.value.length * 0.66) },
                 'data-row': getListRow(index + 1) + 1,
             },
-            [
+            () => [
                 h('span', { class: 'site-menu__tile-front' }),
                 h('span', { class: 'site-menu__tile-back' })
             ]
