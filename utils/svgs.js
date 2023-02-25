@@ -71,4 +71,13 @@ const draw = (offset, reverse = false) => ({
     visibility: 'visible',
 })
 
-export { getAttribute, setAttribute, setDashoffset, draw }
+const setAspectRatio = (svg) => {
+    // Convert to array: [x1, y1, x2, y2]
+    const viewbox = svg.getAttribute('viewBox').split(/\s+|,/) ?? null
+    // Add aspect ratio as an inline style: x2 - x1 / y2 - y1
+    if (viewbox) {
+        svg.style.aspectRatio = `${viewbox[2] - viewbox[0]} / ${viewbox[3] - viewbox[1]}`
+    }
+}
+
+export { getAttribute, setAttribute, setDashoffset, draw, setAspectRatio }

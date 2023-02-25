@@ -9,10 +9,11 @@ import workFill from '@/assets/svgs/menu/work-fill.svg'
 import workOutline from '@/assets/svgs/menu/work-outline.svg'
 
 import { title } from 'radash'
-import { animate, inView } from 'motion'
-import { draw, setDashoffset } from '@/utils/svgs'
+import { animate } from 'motion'
+import { draw, setDashoffset, setAspectRatio } from '@/utils/svgs'
 
 const { menuOpen } = useMenu()
+const { transitionTime } = useMenuGrid()
 
 const collection = {
     about: {
@@ -46,15 +47,6 @@ const props = defineProps({
     },
 })
 
-const setAspectRatio = (svg) => {
-    // Convert to array: [x1, y1, x2, y2]
-    const viewbox = svg.getAttribute('viewBox').split(/\s+|,/) ?? null
-    // Add aspect ratio as an inline style: x2 - x1 / y2 - y1
-    if (viewbox) {
-        svg.style.aspectRatio = `${viewbox[2] - viewbox[0]} / ${viewbox[3] - viewbox[1]}`
-    }
-}
-
 onMounted(() => {
     setAspectRatio(outlineRef.value.$el)
     setAspectRatio(fillRef.value.$el)
@@ -68,16 +60,22 @@ onMounted(() => {
     })
 })
 
+const runEnter = () => {
+    setTimeout(() => {
+        paths.forEach((path, index) => {
+            animate(path.el, draw(path.offset, false), { duration: 1.5, delay: 0.15 * index, easing: cubicBezier.easeOutCubic })
+        })
+    }, transitionTime.value * 0.45)
+}
+
+const runExit = () => {
+    paths.forEach((path) => {
+        animate(path.el, { strokeDashoffset: [null, path.offset], opacity: [1, 0] }, { duration: 1.5 })
+    })
+}
+
 watch(menuOpen, (value) =>{
-    if (value == true) {
-        paths.forEach((path) => {
-                animate(path.el, draw(path.offset, false), { duration: 1.5 })
-        })
-    } else {
-        paths.forEach((path) => {
-            animate(path.el, { strokeDashoffset: [null, path.offset], opacity: [1, 0] }, { duration: 1.5 })
-        })
-    }
+    value == true ? runEnter() : runExit()
 })
 
 </script>

@@ -23,6 +23,10 @@
 
     [data-menu-open="true"] & {
         pointer-events: auto;
+
+        &.-is-animating {
+            pointer-events: none;
+        }
     }
 
     &__grid {
@@ -84,38 +88,73 @@
 
     &__count {
         @include poster-text(italic);
+        clip-path: inset(0);
         color: var(--c-theme-bg);
         font-size: fluid(0.875rem, 1.5rem, false);
         line-height: 1;
+        overflow: hidden;
+
+        span {
+            display: block;
+            transform: translateY(100%);
+            transition: transform var(--duration-slow) var(--ease-out-circ);
+
+            [data-menu-open="true"] & {
+                transform: translateY(0);
+                transition: transform var(--duration-moderate) var(--ease-out-circ) calc(var(--menu-item-index) * 250ms + var(--menu-enter-time) * 0.8ms);
+            }
+        }
     }
 
     &__link {
+        --menu-link-delay: 20ms;
+        --menu-link-height: #{fluid( 2rem, 4.25rem, false)};
+        --text-fill: var(--c-theme-bg);
+        --text-stroke: var(--c-theme-bg);
         @include pseudo-link();
         @include poster-text();
-        -webkit-text-stroke: 1px var(--c-theme-bg);
         color: transparent;
         display: grid;
-        font-size: fluid( 2rem, 5.25rem, false);
+        font-size: var(--menu-link-height);
         line-height: 1;
 
         &:hover {
-            &::before {
-                --t-delay: 300ms;
+            --menu-link-delay: 300ms;
+
+            .site-menu__fill-wrapper {
                 opacity: 1;
                 transform: translateX( 0.045em ) translateY( 0.045em );
             }
         }
 
-        &::before {
-            --t-delay: 20ms;
-            color: var(--c-theme-bg);
-            content: attr(data-title);
-            grid-column: 1 / span 1;
-            grid-row: 1 / span 1;
-            opacity: 0;
-            transition:
-                opacity var(--duration-slow) var(--ease-out-expo) var(--t-delay),
-                transform var(--duration-gentle) var(--ease-out-expo) var(--t-delay);
+        &[data-title="Thoughts"] {
+            --menu-link-height: calc(#{fluid( 2rem, 4.25rem, false)} + 32.74%); // make-up for overhang from "g".
         }
     }
+
+    &__title {
+        display: grid;
+        grid-template-columns: max-content;
+        grid-template-rows: var(--menu-link-height);
+    }
+
+    &__outline-wrapper {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+
+    &__fill-wrapper {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+        opacity: 0;
+        transition:
+            opacity var(--duration-slow) var(--ease-out-expo) var(--menu-link-delay),
+            transform var(--duration-gentle) var(--ease-out-expo) var(--menu-link-delay);
+    }
+
+    &__outline-svg,
+    &__fill-svg {
+        @include svg-contain($width: auto, $height: var(--menu-link-height));
+    }
+
 }
