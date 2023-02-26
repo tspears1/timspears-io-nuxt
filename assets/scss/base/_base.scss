@@ -1,7 +1,12 @@
 @use '@/assets/scss/abstracts/' as *;
 
 :root {
-    --frame-border: 1.25rem;
+    --frame-border: 0.625rem;
+    --frame-color: var(--c-pure-white);
+
+    @include breakpoint( sm ) {
+        --frame-border: 1.25rem;
+    }
 }
 
 html {
@@ -9,6 +14,26 @@ html {
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: initial;
     scrollbar-gutter: stable;
+
+    &::before,
+    &::after {
+        @include fixed(0 x x);
+        background: var(--frame-color);
+        backface-visibility: hidden;
+        content: '';
+        height: 100%;
+        pointer-events: none;
+        width: var(--frame-border);
+        z-index: var(--z-frame);
+    }
+
+    &::before {
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
 }
 
 html,
@@ -31,18 +56,24 @@ body {
     background: transparent;
     position: relative;
 
+    &::before,
     &::after {
-        @include fixed(0);
-        border: var(--frame-border) solid var(--c-pure-white);
+        @include fixed(x x x 0);
+        background: var(--frame-color);
+        backface-visibility: hidden;
         content: '';
-        height: 100vh;
+        height: var(--frame-border);
         pointer-events: none;
-        width: 100vw;
+        width: 100%;
         z-index: var(--z-frame);
+    }
 
-        @include dvh-fallback() {
-            height: 100dvh;
-        }
+    &::before {
+        top: 0;
+    }
+
+    &::after {
+        bottom: 0;
     }
 }
 

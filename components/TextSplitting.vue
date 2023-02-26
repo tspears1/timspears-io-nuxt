@@ -3,12 +3,18 @@ import { isString, isArray } from 'radash'
 
 const isSplit = ref(true)
 const words = ref()
+const wordWraps = ref()
 const letters = ref()
 
 const props = defineProps({
     content: {
         type: String,
         required: true,
+    },
+    wordWrapper: {
+        type: Boolean,
+        default: false,
+        required: false,
     },
     placeholder: {
         type: Boolean,
@@ -56,9 +62,16 @@ const renderBlock = (block, index) => {
                 ref: words,
                 ref_for: true
             },
-            props.letterBreak
-                ? block.map((letter, index) => renderBlock(letter, index))
-                : block.join('')
+            props.wordWrapper
+                ? h(
+                    props.tag, { class: generateClass('word-wrapper'), ref: wordWraps, ref_for: true },
+                    props.letterBreak
+                        ? block.map((letter, index) => renderBlock(letter, index))
+                        : block.join('')
+                )
+                : props.letterBreak
+                    ? block.map((letter, index) => renderBlock(letter, index))
+                    : block.join('')
         )
     }
 
@@ -95,7 +108,8 @@ defineExpose({
     revert,
     isSplit,
     letters,
-    words
+    words,
+    wordWraps
 })
 </script>
 

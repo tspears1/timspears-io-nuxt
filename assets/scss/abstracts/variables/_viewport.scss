@@ -1,11 +1,13 @@
+@use '../functions/fluid' as *;
 @use '../mixins/viewport' as *;
 
 :root {
-    --content-top: calc(var(--frame-border) + var(--header-height));
+    --header-height-initial: #{fluid(4.75, 7.1875, true, sm, lg)};
+    --content-top: calc(var(--frame-border) + var(--header-height, var(--header-height-initial)));
     --content-x: calc(100vw - ( var(--frame-border) * 2 ));
-    --content-y: calc(100vh - var(--header-height) - ( var(--frame-border) * 2 ));
+    --content-y: calc(100vh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
 
     @include dvh-fallback() {
-        --content-y: calc(100dvh - var(--header-height) - ( var(--frame-border) * 2 ));
+        --content-y: calc(100dvh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
     }
 }

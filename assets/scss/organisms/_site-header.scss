@@ -7,8 +7,10 @@
 
 .site-header {
     --grid-columns: max-content 0fr max-content;
-    --header-bg-alpha: 0.5;
+    --header-bg-alpha: 0.8;
     --header-border-color: var(--c-theme-text);
+    --header-padding-x: #{fluid(1.5, 2.5, true, sm, lg)};
+
     @include sticky(var(--frame-border) auto auto);
     align-items: stretch;
     background: rgba(var(--c-theme-bg-rgb), var(--header-bg-alpha));
@@ -16,12 +18,12 @@
     border-bottom: 2px solid var(--header-border-color);
     display: grid;
     grid-template-columns: var(--grid-columns);
+    grid-template-rows: fluid(4.75, 7.1875, true, sm, lg);
     justify-content: space-between;
     overflow-x: hidden;
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
-        border var(--duration-gentle) var(--ease-out-quad),
-        grid-template-columns var(--duration-moderate) var(--ease-out-quad);
+        border var(--duration-gentle) var(--ease-out-quad);
     width: frame(100vw);
     z-index: var(--z-header);
 
@@ -66,10 +68,7 @@
 .site-logo {
     --logo-bg-alpha: 0;
     --logo-bg-rgb: var(--c-theme-text-rgb);
-
-    //@include padding(x min(2.78vw, 2.5rem));
-    @include padding( x fluid(2rem, 2.5rem));
-    aspect-ratio: 16 / 9;
+    @include padding( x var(--header-padding-x));
     background: rgba(var(--logo-bg-rgb), var(--logo-bg-alpha));
     border-right: 2px solid transparent;
     display: grid;
@@ -94,7 +93,7 @@
     &__svg {
         height: auto;
         overflow: visible;
-        width: fluid(5.625rem, 7.5rem);
+        width: fluid(5.625rem, 7.5rem, true, sm, lg);
 
         > * {
             transition:
@@ -112,7 +111,7 @@
 .site-eyebrow {
     $b: &;
     @include grid-content( center );
-    @include padding( x fluid(2rem, 2.5rem));
+    @include padding( x var(--header-padding-x));
     @include splitting($gap: 0.45em);
     color: var(--c-theme-text);
     display: grid;
@@ -159,10 +158,6 @@
         grid-area: 1 / 1 / 1 / 1;
     }
 
-    &__closed {
-
-    }
-
     &__open {
         #{$b}__letter {
             transform: translateY(100%);
@@ -174,10 +169,9 @@
     --trigger-bg-alpha: 0;
     --trigger-bg-rgb: var(--c-theme-text-rgb);
     $b: &;
-    aspect-ratio: 1/1;
     @include grid-items(center);
     @include grid-self( x end );
-    @include padding( x fluid(2rem, 2.5rem));
+    @include padding( x var(--header-padding-x));
     background: rgba(var(--trigger-bg-rgb), var(--trigger-bg-alpha));
     border-left: 2px solid var(--header-border-color);
     display: grid;
@@ -200,7 +194,7 @@
         --menu-icon-closed-bars-color: var(--c-theme-text);
         --menu-icon-opened-bars-color: var(--c-theme-text);
         @include button-reset();
-        @include size(min(100%, 1.875rem));
+        @include size(fluid(1.5, 1.875, true, sm, lg));
         position: relative;
         z-index: 1;
 
@@ -213,7 +207,7 @@
 
     &-dot,
     &-bar {
-        @include theme-switch( opacity, stroke, fill );
+        //@include theme-switch( opacity, stroke, fill );
     }
 
     &-bar {

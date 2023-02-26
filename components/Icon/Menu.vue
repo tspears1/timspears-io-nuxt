@@ -21,11 +21,11 @@ const isClosedMotion = () => {
 }
 
 const isHoveredOpenedMotion = () => {
-    animate(gridRef.barsOpened, { scaleX: [0, 1], scaleY: [0, 1], opacity: 0.5 }, { delay: stagger(0.15), duration: .5 })
+    animate(gridRef.barsOpened, { scaleX: [0.0001, 1], scaleY: [0.0001, 1], opacity: 0.5 }, { delay: stagger(0.15), duration: .5 })
 }
 
 const isHoveredClosedMotion = () => {
-    animate(gridRef.barsClosed, { scaleX: [0, 1], opacity: 0.5 }, { delay: stagger(0.075), duration: .25 })
+    animate(gridRef.barsClosed, { scaleX: [0.0001, 1], opacity: 0.5 }, { delay: stagger(0.075), duration: .25 })
 }
 
 const isNotHovering = () => {

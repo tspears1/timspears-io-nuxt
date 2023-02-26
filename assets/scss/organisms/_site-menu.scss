@@ -81,10 +81,14 @@
     &__item {
         @include gap( x fluid(1.125rem, 6rem, false));
         @include grid-items(center start);
-        @include padding( 1.5rem max(7.5vw, 2rem));
+        @include padding( 1.5rem 1.5rem);
         display: grid;
         grid-template-columns: max-content auto;
         position: relative;
+
+        @include breakpoint( sm ) {
+            @include padding( x max(7.5vw, 1.5rem));
+        }
     }
 
     &__count {
@@ -117,7 +121,7 @@
         @include poster-text();
         color: transparent;
         display: grid;
-        font-size: var(--menu-link-height);
+        font-size: var(--menu-font-size);
         line-height: 1;
 
         &:hover {
@@ -130,7 +134,8 @@
         }
 
         &[data-title="Thoughts"] {
-            --menu-link-height: calc(var(--menu-font-size) + 32.74%); // make-up for overhang from "g".
+            //--menu-link-height: calc(var(--menu-font-size) + 32.74%); // make-up for overhang from "g".
+            --menu-link-height: calc(var(--menu-font-size) + 26.74%);
         }
     }
 
