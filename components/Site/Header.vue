@@ -1,6 +1,6 @@
 <script setup>
 import { shuffle, list } from 'radash'
-import { useGlobalData } from '@data/global'
+import { useGlobalData } from '@/data/global'
 import { timeline, stagger } from 'motion'
 
 const { data } = useGlobalData()

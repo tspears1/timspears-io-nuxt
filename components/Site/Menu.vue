@@ -1,6 +1,6 @@
 <script setup>
 import { random } from 'radash'
-import { useGlobalData } from '@data/global'
+import { useGlobalData } from '@/data/global'
 const { data } = useGlobalData()
 
 const { menuOpen } = useMenu()

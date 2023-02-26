@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { useGlobalData } from '@data/global'
+import { useGlobalData } from '@/data/global'
 const { theme: siteTheme } = useTheme()
 const { data } = useGlobalData()
 useFrame()
