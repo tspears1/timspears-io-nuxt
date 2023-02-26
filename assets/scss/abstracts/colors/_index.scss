@@ -3,10 +3,19 @@ $colors: (
     pure-black:             #000000,
     theme-neptune-000:      #0C4F75,
     theme-neptune-fff:      #F9FAFA,
+    theme-laconia-000:      #B2841C,
+    theme-laconia-fff:      #F8F4DD,
 );
 
 $themes: (
+    'laconia',
     'neptune',
     'mars',
     'titan',
+    'ceres',
+    'tycho',
+    'eros',
+    'phoebe',
+    'ganymede',
+    'luna'
 )

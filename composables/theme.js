@@ -1,11 +1,18 @@
 const useTheme = () => {
 
-    const theme = useState('theme', () => 'neptune')
+    const theme = useState('theme', () => 'laconia')
 
     const _themes = [
+        'laconia',
         'neptune',
         'mars',
-        'titan'
+        'titan',
+        'ceres',
+        'tycho',
+        'eros',
+        'phoebe',
+        'ganymede',
+        'luna'
     ]
 
     const _registeredTheme = (theme) => _themes.includes(theme)
