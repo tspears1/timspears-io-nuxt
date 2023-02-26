@@ -39,13 +39,32 @@
     }
 
     &__tile {
+        --tile-delay-time: 50ms;
         background: var(--c-theme-bg);
         opacity: 0;
         transform: scale(0.6);
         transition:
-            background var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1)),
-            opacity var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1)),
-            transform var(--duration-fast) var(--ease-in-expo) calc(10ms * var(--tile-delay-index, 1));
+            background var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
+            opacity var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
+            transform var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
+
+        @include breakpoint( sm ) {
+            --tile-delay-time: 40ms;
+        }
+
+        @include breakpoint( lg ) {
+            --tile-delay-time: 30ms;
+        }
+
+        @include breakpoint( xl ) {
+            --tile-delay-time: 20ms;
+        }
+
+        @include breakpoint( xxxl ) {
+            --tile-delay-time: 10ms;
+        }
+
+
 
         &::before {
             @include absolute(0);
@@ -64,9 +83,9 @@
             opacity: 1;
             transform: scale(1);
             transition:
-                background var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1)),
-                opacity var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1)),
-                transform var(--duration-fast) var(--ease-out-expo) calc(10ms * var(--tile-delay-index, 1));
+                background var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
+                opacity var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
+                transform var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
         }
     }
 
@@ -134,7 +153,6 @@
         }
 
         &[data-title="Thoughts"] {
-            //--menu-link-height: calc(var(--menu-font-size) + 32.74%); // make-up for overhang from "g".
             --menu-link-height: calc(var(--menu-font-size) + 26.74%);
         }
     }

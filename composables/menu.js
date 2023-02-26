@@ -42,7 +42,20 @@ const useMenuGrid = () => {
     const tileCount      = computed(() => columnCount.value * rowCount.value)
     const tileArray      = computed(() => Array.from({ length: tileCount.value }))
     const rowList        = computed(() => cluster(list(1, tileCount.value, (i) => i), columnCount.value * 2))
-    const transitionTime = computed(() => tileCount.value * 10)
+    const transitionTime = computed(() => tileCount.value * tileDelay.value) // update that to match breakpoints
+
+    const tileDelay = computed(() => {
+        const bp = windowWidth.value
+        return bp > 1840
+            ? 10
+            : bp > 1200
+            ? 20
+            : bp > 992
+            ? 30
+            : bp > 600
+            ? 40
+            : 50
+    })
 
     const getListRow = (count) => {
         let row = 0

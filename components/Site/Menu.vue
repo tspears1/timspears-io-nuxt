@@ -6,14 +6,14 @@ const { data } = useGlobalData()
 const { menuOpen } = useMenu()
 
 const {
-        tileArray,
-        tileCount,
-        tileSize,
-        rowCount,
-        columnCount,
-        rowList,
-        getListRow,
-        transitionTime
+    tileArray,
+    tileCount,
+    tileSize,
+    rowCount,
+    columnCount,
+    rowList,
+    getListRow,
+    transitionTime
 } = useMenuGrid()
 
 const gridRef = ref()
