@@ -2,6 +2,8 @@
 import { isString, isArray } from 'radash'
 
 const isSplit = ref(true)
+const words = ref()
+const letters = ref()
 
 const props = defineProps({
     content: {
@@ -50,7 +52,9 @@ const renderBlock = (block, index) => {
             props.tag,
             {
                 class: generateClass('word'),
-                style: `--letter-count: ${block.length}; --word-index: ${index};`
+                style: `--letter-count: ${block.length}; --word-index: ${index};`,
+                ref: words,
+                ref_for: true
             },
             props.letterBreak
                 ? block.map((letter, index) => renderBlock(letter, index))
@@ -63,7 +67,9 @@ const renderBlock = (block, index) => {
             props.tag,
             {
                 class: generateClass('letter') ,
-                style: `--letter-index: ${index};`
+                style: `--letter-index: ${index};`,
+                ref: letters,
+                ref_for: true
             },
             props.letterWrapper ? h('span', block) : block
         )
@@ -87,6 +93,9 @@ defineExpose({
     SplitRender,
     split,
     revert,
+    isSplit,
+    letters,
+    words
 })
 </script>
 

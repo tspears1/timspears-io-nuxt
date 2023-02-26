@@ -20,6 +20,7 @@
     @include build-active-rows((1, 2, 3, 4));
     @include fixed(var(--content-top) var(--frame-border) var(--frame-border));
     pointer-events: none;
+    z-index: var(--z-menu);
 
     [data-menu-open="true"] & {
         pointer-events: auto;

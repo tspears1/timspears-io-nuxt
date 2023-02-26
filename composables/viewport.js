@@ -31,4 +31,26 @@ const useFrame = () => {
 
 const useHeaderHeight = () => useState('headerHeight', () => 0)
 
-export { useFrame, useRoot, useHeaderHeight }
+const useScreenLock = () => {
+    const isLocked = useState('isLocked', () => false)
+
+    const lockScreen = () => isLocked.value = true
+
+    const unlockScreen = () => isLocked.value = false
+
+    const toggleScreenLock = () => isLocked.value = !isLocked.value
+
+    watch(isLocked, (value) => {
+        document.documentElement.dataset.isLocked = value
+    })
+
+
+    return {
+        isLocked,
+        lockScreen,
+        unlockScreen,
+        toggleScreenLock,
+    }
+}
+
+export { useFrame, useRoot, useHeaderHeight, useScreenLock }

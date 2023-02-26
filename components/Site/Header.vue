@@ -34,12 +34,12 @@ onMounted(() =>{
 
 const eyebrowClosedRef = ref()
 const eyebrowOpenedRef = ref()
-const eyebrowClosedLetters = computed(() => eyebrowClosedRef.value.querySelectorAll('.site-eyebrow__letter'))
-const eyebrowOpenedLetters = computed(() => eyebrowOpenedRef.value.querySelectorAll('.site-eyebrow__letter'))
+const eyebrowClosedLetters = computed(() => eyebrowClosedRef.value.letters)
+const eyebrowOpenedLetters = computed(() => eyebrowOpenedRef.value.letters)
 
 const enterSequence = computed(() => [
-    [Array.from(eyebrowClosedLetters.value), { y: [0, '-100%'] }, { delay: stagger(0.1, { from: 'center' }), at: 0 }],
-    [Array.from(eyebrowOpenedLetters.value), { y: ['100%', 0] }, { delay: stagger(0.1, { from: 'center' }), at: 0 }],
+    [eyebrowClosedLetters.value, { y: [0, '-100%'] }, { delay: stagger(0.1, { from: 'center' }), at: 0 }],
+    [eyebrowOpenedLetters.value, { y: ['100%', 0] }, { delay: stagger(0.1, { from: 'center' }), at: 0 }],
 ])
 
 const exitSequence = computed(() => [
@@ -74,11 +74,11 @@ watch(menuOpen, (value) => {
         <IconLogo :title="data.siteTitle" />
         <div class="site-eyebrow">
             <div class="site-eyebrow__inner">
-                <div class="site-eyebrow__closed" ref="eyebrowClosedRef">
-                    <TextSplitting block="site-eyebrow" :content="data.siteEyebrow" />
+                <div class="site-eyebrow__closed">
+                    <TextSplitting ref="eyebrowClosedRef" block="site-eyebrow" :content="data.siteEyebrow" />
                 </div>
-                <div class="site-eyebrow__open" ref="eyebrowOpenedRef">
-                    <TextSplitting block="site-eyebrow" content="Navigation" />
+                <div class="site-eyebrow__open">
+                    <TextSplitting ref="eyebrowOpenedRef" block="site-eyebrow" content="Navigation" />
                 </div>
             </div>
         </div>

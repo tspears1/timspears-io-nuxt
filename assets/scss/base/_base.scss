@@ -5,7 +5,10 @@
 }
 
 html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     scroll-behavior: initial;
+    scrollbar-gutter: stable;
 }
 
 html,
@@ -13,6 +16,15 @@ body {
     min-height: 100%;
     height: auto;
 }
+
+// TODO: Sort this shit out.
+// html[data-is-locked="true"],
+// html[data-is-locked="true"] body {
+//     position: relative;
+//     overflow: hidden;
+//     touch-action: none;
+//     -ms-touch-action: none;
+// }
 
 body {
     @include modern-text();
@@ -23,8 +35,14 @@ body {
         @include fixed(0);
         border: var(--frame-border) solid var(--c-pure-white);
         content: '';
+        height: 100vh;
         pointer-events: none;
+        width: 100vw;
         z-index: var(--z-frame);
+
+        @include dvh-fallback() {
+            height: 100dvh;
+        }
     }
 }
 
@@ -34,4 +52,8 @@ body {
     display: grid;
     min-height: 100vh;
     width: 100vw;
+
+    @include dvh-fallback() {
+        min-height: 100dvh;
+    }
 }

@@ -1,5 +1,11 @@
+@use '../mixins/viewport' as *;
+
 :root {
     --content-top: calc(var(--frame-border) + var(--header-height));
     --content-x: calc(100vw - ( var(--frame-border) * 2 ));
     --content-y: calc(100vh - var(--header-height) - ( var(--frame-border) * 2 ));
+
+    @include dvh-fallback() {
+        --content-y: calc(100dvh - var(--header-height) - ( var(--frame-border) * 2 ));
+    }
 }

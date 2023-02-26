@@ -1,4 +1,15 @@
-@mixin splitting($gap: 0.18em) {
+@mixin splitting($gap: 0.18em, $parent: false) {
+
+    @if $parent {
+        &__#{$parent} {
+            display: grid;
+
+            > * {
+                grid-area: 1 / 1 / 1 / 1;
+            }
+        }
+    }
+
     &__placeholder {
         opacity: 0;
     }

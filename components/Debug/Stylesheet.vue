@@ -67,6 +67,7 @@ const classes = computed(() => {
     display: grid;
     font-size: 4vw;
     gap: 28px;
+    padding: 25vh 0;
 
     small {
         font-size: 0.75rem;

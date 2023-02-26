@@ -2,7 +2,9 @@
     <SiteWrapper>
         <SiteHeader />
         <SiteMenu />
+        <NuxtPage />
         <DebugStylesheet />
+        <SiteFooter />
     </SiteWrapper>
 </template>
 

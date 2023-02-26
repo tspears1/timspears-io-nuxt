@@ -1,0 +1,41 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.hero {
+    --hero-bg-color: var(--c-theme-bg);
+    --hero-title-size: #{fluid(4.6875, 11.25, false)};
+    --hero-padding-bottom: #{fluid(1.875rem, 2.5rem)};
+    @include grid-items( end x );
+    @include padding( x var(--hero-padding-bottom) 2.5rem);
+    @include splitting($gap: 0.12em, $parent: 'title');
+    background: var(--hero-bg-color);
+    color: var(--c-theme-text);
+    display: grid;
+    height: frame(75vh);
+    position: relative;
+    transform: translateY(calc(frame(25vh) - var(--hero-padding-bottom)));
+    width: var(--content-x);
+
+    &.-large-text {
+        --hero-title-size: #{fluid(4.6875, 13.75, false)};
+    }
+
+    &__screen {
+        @include absolute( x x calc(100% - 0.1rem) 0 );
+        background: var(--hero-bg-color);
+        height: var(--content-y);
+        width: var(--content-x);
+    }
+
+    &__title {
+        @include modern-text(900);
+        font-size: var(--hero-title-size);
+        letter-spacing: -0.1em;
+        line-height: 0.78;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    &__word {
+        transform: translateY(calc(100% + 2.5rem + 25vh));
+    }
+}

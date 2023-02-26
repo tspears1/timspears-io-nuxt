@@ -1,0 +1,5 @@
+@mixin dvh-fallback() {
+    @supports(height: 100dvh) {
+        @content;
+    }
+}

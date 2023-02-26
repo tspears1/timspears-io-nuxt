@@ -17,6 +17,7 @@
     display: grid;
     grid-template-columns: var(--grid-columns);
     justify-content: space-between;
+    overflow-x: hidden;
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
         border var(--duration-gentle) var(--ease-out-quad),

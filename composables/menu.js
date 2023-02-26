@@ -3,6 +3,8 @@ import { cluster, list } from 'radash'
 
 const useMenu = () => {
 
+    const { isLocked } = useScreenLock()
+
     const menuOpen = useState('menuOpen', () => false)
 
     const openMenu = () => menuOpen.value = true
@@ -13,6 +15,7 @@ const useMenu = () => {
 
     watch(menuOpen, (value) => {
         document.documentElement.dataset.menuOpen = value
+        isLocked.value = value
     })
 
 
