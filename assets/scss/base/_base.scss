@@ -25,6 +25,10 @@ html {
         pointer-events: none;
         width: var(--frame-border);
         z-index: var(--z-frame);
+
+        @include dvh-fallback() {
+            height: 100lvh;
+        }
     }
 
     &::before {

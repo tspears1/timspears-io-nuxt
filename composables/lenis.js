@@ -32,8 +32,6 @@ const useLenis = () => {
             requestAnimationFrame(raf)
         }
         requestAnimationFrame(raf)
-
-        console.log(lenis.value)
     }
 
     return {
