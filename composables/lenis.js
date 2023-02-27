@@ -15,33 +15,30 @@ import { easings } from '../utils/easings'
 // })
 
 const useLenis = () => {
-    // init
-    const lenis = new Lenis({
-        lerp: 0.2,
-        duration: 2.5,
-        easing: easings.easeOutCubic,
-        smooth: true
-    })
 
-    // loop
-    const raf = (time) => {
-        lenis.raf(time)
+    const lenis = useState('lenis', () => {})
+
+    const initLenis = () => {
+        lenis.value = new Lenis({
+            lerp: 0.2,
+            duration: 2.5,
+            easing: easings.easeOutCubic,
+            smooth: true
+        })
+
+        // loop
+        const raf = (time) => {
+            lenis.value.raf(time)
+            requestAnimationFrame(raf)
+        }
         requestAnimationFrame(raf)
+
+        console.log(lenis.value)
     }
-    requestAnimationFrame(raf)
-
-
-    // callbacks ({ scroll, limit, velocity, direction, progress })
-    const onScroll = (callback) => lenis.on('scroll', callback)
-
-    const { scrollTo, stop, start } = lenis
 
     return {
+        initLenis,
         lenis,
-        onScroll,
-        scrollTo,
-        stop,
-        start,
     }
 }
 

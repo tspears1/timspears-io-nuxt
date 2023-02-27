@@ -36,6 +36,10 @@
         --header-border-color: var(--c-theme-bg);
     }
 
+    [data-is-locked="true"] & {
+        position: fixed;
+    }
+
     &__grid {
         @include absolute(0);
         @include grid-content( center );

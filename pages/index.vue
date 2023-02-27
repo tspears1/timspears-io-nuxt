@@ -13,7 +13,7 @@ const { data } = useSanityQuery(groq`
 `)
 
 useHead({
-    meta: [{ name: 'theme-color', content: '#0C4F75' }] // add to new useTheme state.
+    meta: [{ name: 'theme-color', content: '#B2841C' }] // add to new useTheme state.
 })
 
 

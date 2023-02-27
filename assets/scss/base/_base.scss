@@ -42,14 +42,17 @@ body {
     height: auto;
 }
 
-// TODO: Sort this shit out.
-// html[data-is-locked="true"],
-// html[data-is-locked="true"] body {
-//     position: relative;
-//     overflow: hidden;
-//     touch-action: none;
-//     -ms-touch-action: none;
-// }
+html[data-is-locked="true"],
+html[data-is-locked="true"] body {
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+    -ms-touch-action: none;
+}
+
+html[data-is-locked="true"] body {
+    margin-top: var(--header-height);
+}
 
 body {
     @include modern-text();

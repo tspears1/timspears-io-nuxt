@@ -32,6 +32,8 @@ const useFrame = () => {
 const useHeaderHeight = () => useState('headerHeight', () => 0)
 
 const useScreenLock = () => {
+    const { lenis } = useLenis()
+
     const isLocked = useState('isLocked', () => false)
 
     const lockScreen = () => isLocked.value = true
@@ -42,6 +44,7 @@ const useScreenLock = () => {
 
     watch(isLocked, (value) => {
         document.documentElement.dataset.isLocked = value
+        value == true ? lenis.value.stop() : lenis.value.start()
     })
 
 

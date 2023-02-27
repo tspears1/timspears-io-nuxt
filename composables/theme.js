@@ -24,6 +24,12 @@ const useTheme = () => {
             console.warn(`Theme: ${newTheme} is not registered.`)
     }
 
+    // watch(theme, (value) => {
+    //     useHead({
+    //         meta: [{ name: 'theme-color', content: '#0C4F75' }] // add to new useTheme state.
+    //     })
+    // })
+
     return {
         theme,
         setTheme,
