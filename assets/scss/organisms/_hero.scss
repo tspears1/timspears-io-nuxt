@@ -16,8 +16,8 @@
     width: var(--content-x);
 
     @include dvh-fallback() {
-        height: frame(75dvh);
-        transform: translateY(calc(frame(25dvh) - var(--hero-padding-bottom)));
+        height: frame(75svh);
+        transform: translateY(calc(frame(25svh) - var(--hero-padding-bottom)));
     }
 
     &.-large-text {

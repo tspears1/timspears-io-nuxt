@@ -46,15 +46,11 @@ const useMenuGrid = () => {
 
     const tileDelay = computed(() => {
         const bp = windowWidth.value
-        return bp > 1840
-            ? 10
-            : bp > 1200
-            ? 20
-            : bp > 992
-            ? 30
-            : bp > 600
-            ? 40
-            : 50
+        return bp > 1840 ? 8
+            : bp > 1200 ? 16
+            : bp > 992 ? 24
+            : bp > 600 ? 32
+            : 40
     })
 
     const getListRow = (count) => {

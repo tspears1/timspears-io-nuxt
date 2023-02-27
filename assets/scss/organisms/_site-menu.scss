@@ -39,7 +39,7 @@
     }
 
     &__tile {
-        --tile-delay-time: 50ms;
+        --tile-delay-time: 40ms;
         background: var(--c-theme-bg);
         opacity: 0;
         transform: scale(0.6);
@@ -49,19 +49,19 @@
             transform var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
 
         @include breakpoint( sm ) {
-            --tile-delay-time: 40ms;
+            --tile-delay-time: 32ms;
         }
 
         @include breakpoint( lg ) {
-            --tile-delay-time: 30ms;
+            --tile-delay-time: 24ms;
         }
 
         @include breakpoint( xl ) {
-            --tile-delay-time: 20ms;
+            --tile-delay-time: 16ms;
         }
 
         @include breakpoint( xxxl ) {
-            --tile-delay-time: 10ms;
+            --tile-delay-time: 8ms;
         }
 
 
