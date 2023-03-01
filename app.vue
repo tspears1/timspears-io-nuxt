@@ -12,8 +12,8 @@
 import { useGlobalData } from '@/data/global'
 const { theme: siteTheme } = useTheme()
 const { data } = useGlobalData()
-useFrame()
 const { initLenis } = useLenis()
+useFrame()
 
 
 useHead({

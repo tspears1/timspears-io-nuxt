@@ -1,0 +1,5 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.eyebrow {
+    @include eyebrow();
+}

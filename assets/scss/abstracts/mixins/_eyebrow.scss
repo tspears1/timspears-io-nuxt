@@ -1,0 +1,57 @@
+@use '@/assets/scss/abstracts/mixins/alignment' as *;
+@use '@/assets/scss/abstracts/mixins/fonts' as *;
+@use '@/assets/scss/abstracts/mixins/splitting' as *;
+@use '@/assets/scss/abstracts/functions/fluid' as *;
+
+@mixin eyebrow() {
+    @include splitting($gap: 0.45em, $parent: 'text');
+
+    @include grid-items( center start );
+    @include grid-content( x start );
+    color: var(--c-theme-text);
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-flow: column;
+
+    &__icon {
+
+    }
+
+    &__stem {
+        background: var(--c-theme-text);
+        height: 2px;
+        transform-origin: left;
+        width: 8.5vw;
+
+        .-is-splitting & {
+            transform: scaleX(0);
+        }
+    }
+
+    &__digit {
+
+    }
+
+    &__text {
+
+        .-is-splitting & {
+            clip-path: inset(0);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .-billboard & {
+            @include modern-text(900);
+            font-size: #{fluid(0.75, 1.125, false)};
+            line-height: 1;
+            letter-spacing: 0.75em;
+            text-transform: uppercase;
+        }
+    }
+
+    &__letter {
+        transform: translateY(100%);
+    }
+
+
+}

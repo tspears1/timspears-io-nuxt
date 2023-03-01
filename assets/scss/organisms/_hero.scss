@@ -4,24 +4,33 @@
     --hero-bg-color: var(--c-theme-bg);
     --hero-title-size: #{fluid(4.6875, 11.25, false)};
     --hero-padding-bottom: #{fluid(1.875rem, 2.5rem)};
+    --hero-height: #{frame(65vh)};
+    --hero-translate: #{calc(frame(35vh) - var(--hero-padding-bottom))};
     @include grid-items( end x );
     @include padding( x var(--hero-padding-bottom) 2.5rem);
     @include splitting($gap: 0.12em, $parent: 'title');
     background: var(--hero-bg-color);
     color: var(--c-theme-text);
     display: grid;
-    height: frame(75vh);
+    height: var(--hero-height);
     position: relative;
-    transform: translateY(calc(frame(25vh) - var(--hero-padding-bottom)));
+    transform: translateY(var(--hero-translate));
     width: var(--content-x);
 
     @include dvh-fallback() {
-        height: frame(75svh);
-        transform: translateY(calc(frame(25svh) - var(--hero-padding-bottom)));
+        --hero-height: #{frame(65svh)};
+        --hero-translate: #{calc(frame(35svh) - var(--hero-padding-bottom))};
     }
 
-    &.-large-text {
+    &.-billboard {
         --hero-title-size: #{fluid(4.6875, 13.75, false)};
+        --hero-height: #{frame(75vh)};
+        --hero-translate: #{calc(frame(25vh) - var(--hero-padding-bottom))};
+
+        @include dvh-fallback() {
+            --hero-height: #{frame(75svh)};
+            --hero-translate: #{calc(frame(25svh) - var(--hero-padding-bottom))};
+        }
     }
 
     &__screen {
@@ -29,6 +38,16 @@
         background: var(--hero-bg-color);
         height: var(--content-y);
         width: var(--content-x);
+    }
+
+    &__grid {
+        display: grid;
+        gap: fluid(2, 3.75);
+    }
+
+    &-eyebrow {
+        @include eyebrow();
+        margin-left: 1vw;
     }
 
     &__title {
@@ -41,7 +60,7 @@
     }
 
     &__word {
-        clip-path: inset(0 -50%);
+        clip-path: inset(-10% -50% 0);
     }
 
     &__word-wrapper {

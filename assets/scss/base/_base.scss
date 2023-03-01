@@ -13,7 +13,7 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: initial;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable; // TODO: add scrollbar support for 100vw. does dvw fix this?
 
     &::before,
     &::after {
