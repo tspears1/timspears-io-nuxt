@@ -40,13 +40,14 @@
 
     &__tile {
         --tile-delay-time: 40ms;
+        --tile-transition-delay: calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
         background: var(--c-theme-bg);
         opacity: 0;
         transform: scale(0.6);
         transition:
-            background var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
-            opacity var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
-            transform var(--duration-fast) var(--ease-in-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
+            background var(--tile-duration-override, var(--duration-fast)) var(--ease-in-expo) var(--tile-transition-delay),
+            opacity var(--tile-duration-override, var(--duration-fast)) var(--ease-in-expo) var(--tile-transition-delay),
+            transform var(--tile-duration-override, var(--duration-fast)) var(--ease-in-expo) var(--tile-transition-delay);
 
         @include breakpoint( sm ) {
             --tile-delay-time: 32ms;
@@ -64,8 +65,6 @@
             --tile-delay-time: 8ms;
         }
 
-
-
         &::before {
             @include absolute(0);
             background: var(--c-theme-bg);
@@ -78,14 +77,19 @@
                 transform var(--duration-quick) var(--ease-in-expo) calc(5ms * var(--tile-delay-index, 1));
         }
 
+        [data-portal-open="true"] & {
+            --tile-duration-override: 0ms;
+            --tile-transition-delay: 0ms;
+        }
+
         [data-menu-open="true"] & {
             background: var(--c-theme-text);
             opacity: 1;
             transform: scale(1);
             transition:
-                background var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
-                opacity var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1)),
-                transform var(--duration-fast) var(--ease-out-expo) calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
+                background var(--tile-duration-override, var(--duration-fast)) var(--ease-out-expo) var(--tile-transition-delay),
+                opacity var(--tile-duration-override, var(--duration-fast)) var(--ease-out-expo) var(--tile-transition-delay),
+                transform var(--tile-duration-override, var(--duration-fast)) var(--ease-out-expo) var(--tile-transition-delay);
         }
     }
 
@@ -122,6 +126,10 @@
             display: block;
             transform: translateY(100%);
             transition: transform var(--duration-slow) var(--ease-out-circ);
+
+            [data-portal-open="true"] & {
+                transition: none;
+            }
 
             [data-menu-open="true"] & {
                 transform: translateY(0);

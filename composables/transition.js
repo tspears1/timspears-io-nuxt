@@ -3,12 +3,32 @@ const useCallbacks = () =>  useState('transitionCallback', () => ({
     onBeforeEnter: undefined,
     onEnter: null,
 }))
+
+const usePortal = () => {
+    const { isLocked } = useScreenLock()
+
+    const portalOpen = useState('portalOpen', () => false)
+
+    const openPortal = () => portalOpen.value = true
+
+    const closePortal = () => portalOpen.value = false
+
+    const togglePortal = () => portalOpen.value = !portalOpen.value
+
+    watch(portalOpen, (value) => {
+        document.documentElement.dataset.portalOpen = value
+        isLocked.value = value
+    })
+
+    return {
+        portalOpen,
+        openPortal,
+        closePortal,
+        togglePortal,
+    }
+}
+
 const useTransition = () => {
-
-
-
-
-    // console.log(useTransitionCallback)
 
     const pageContext = useState('pageContext', () => ({
         next: {
@@ -76,4 +96,4 @@ const useTransition = () => {
     }
 }
 
-export { useTransition, useCallbacks }
+export { useTransition, useCallbacks, usePortal }

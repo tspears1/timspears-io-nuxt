@@ -25,6 +25,7 @@
     "pinia": "^2.0.30",
     "radash": "^10.7.0",
     "sass": "^1.58.1",
+    "values.js": "^2.1.1",
     "vite-svg-loader": "^4.0.0"
   }
 }

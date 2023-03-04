@@ -36,6 +36,10 @@
         --header-border-color: var(--c-theme-bg);
     }
 
+    [data-portal-open="true"] & {
+        transition: none;
+    }
+
     [data-is-locked="true"] & {
         position: fixed;
     }
@@ -66,6 +70,10 @@
                 opacity var(--duration-moderate) var(--ease-out-expo) calc(50ms * var(--tile-delay-index, 1)),
                 transform var(--duration-moderate) var(--ease-out-expo) calc(50ms * var(--tile-delay-index, 1));
         }
+
+        [data-portal-open="true"] & {
+            transition: none;
+        }
     }
 }
 
@@ -94,6 +102,10 @@
         --logo-bg-rgb: var(--c-theme-bg-rgb);
     }
 
+    [data-portal-open="true"] & {
+        transition: none;
+    }
+
     &__svg {
         height: auto;
         overflow: visible;
@@ -107,6 +119,10 @@
             [data-menu-open="true"] & {
                 fill: transparent;
                 stroke: var(--c-theme-bg);
+            }
+
+            [data-portal-open="true"] & {
+                transition: none;
             }
         }
     }
@@ -141,6 +157,10 @@
 
     [data-menu-open="true"] & {
         color: var(--c-theme-bg);
+    }
+
+    [data-portal-open="true"] & {
+        transition: none;
     }
 
     &__inner {
@@ -193,6 +213,10 @@
         --trigger-bg-rgb: var(--c-theme-bg-rgb);
     }
 
+    [data-portal-open="true"] & {
+        transition: none;
+    }
+
     &-grid {
         --menu-icon-dots-color: var(--c-theme-text);
         --menu-icon-closed-bars-color: var(--c-theme-text);
@@ -207,11 +231,6 @@
             --menu-icon-closed-bars-color: var(--c-theme-bg);
             --menu-icon-opened-bars-color: var(--c-theme-bg);
         }
-    }
-
-    &-dot,
-    &-bar {
-        //@include theme-switch( opacity, stroke, fill );
     }
 
     &-bar {

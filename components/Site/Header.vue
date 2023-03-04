@@ -47,12 +47,20 @@ const exitSequence = computed(() => [
     [eyebrowOpenedLetters.value, { y: [0, '100%'] }, { delay: stagger(0.1, { from: 'center' }), at: 0 }],
 ])
 
+const resetEyebrow = () => {
+    timeline(exitSequence.value, { duration: 0 })
+}
+
 watch(menuOpen, (value) => {
     if (value == true) {
         timeline(enterSequence.value, { duration: 1 })
     } else {
         timeline(exitSequence.value, { duration: 1 })
     }
+})
+
+defineExpose({
+    resetEyebrow
 })
 
 </script>

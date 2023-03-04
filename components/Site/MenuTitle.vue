@@ -74,8 +74,22 @@ const runExit = () => {
     })
 }
 
+const runReset = () => {
+    paths.forEach((path) => {
+        path.el.style.strokeDashoffset = path.offset
+        path.el.style.opacity = 0
+    })
+}
+
 watch(menuOpen, (value) =>{
     value == true ? runEnter() : runExit()
+})
+
+defineExpose({
+    paths,
+    runEnter,
+    runExit,
+    runReset,
 })
 
 </script>
