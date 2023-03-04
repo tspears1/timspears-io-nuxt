@@ -34,15 +34,15 @@ const useMenuGrid = () => {
     const { getFrameBorder } = useFrame()
     const headerHeight = useHeaderHeight()
 
-    const menuWidth      = computed(() => windowWidth.value - getFrameBorder(2))
-    const menuHeight     = computed(() => windowHeight.value - headerHeight.value - getFrameBorder(2))
-    const rowCount       = computed(() => data.value.navigation.length * 2)
-    const tileSize       = computed(() => menuHeight.value / rowCount.value)
-    const columnCount    = computed(() => Math.ceil( menuWidth.value / tileSize.value ))
-    const tileCount      = computed(() => columnCount.value * rowCount.value)
-    const tileArray      = computed(() => Array.from({ length: tileCount.value }))
-    const rowList        = computed(() => cluster(list(1, tileCount.value, (i) => i), columnCount.value * 2))
-    const transitionTime = computed(() => tileCount.value * tileDelay.value) // update that to match breakpoints
+    const menuWidth       = computed(() => windowWidth.value - getFrameBorder(2))
+    const menuHeight      = computed(() => windowHeight.value - headerHeight.value - getFrameBorder(2))
+    const rowCount        = computed(() => data.value.navigation.length * 2)
+    const tileSize        = computed(() => menuHeight.value / rowCount.value)
+    const columnCount     = computed(() => Math.ceil( menuWidth.value / tileSize.value ))
+    const tileCount       = computed(() => columnCount.value * rowCount.value)
+    const tileArray       = computed(() => Array.from({ length: tileCount.value }))
+    const rowList         = computed(() => cluster(list(1, tileCount.value, (i) => i), columnCount.value * 2))
+    const transitionTime  = computed(() => tileCount.value * tileDelay.value)
 
     const tileDelay = computed(() => {
         const bp = windowWidth.value

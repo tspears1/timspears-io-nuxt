@@ -1,0 +1,21 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.site-portal {
+    @include fixed(var(--frame-border) var(--frame-border));
+    pointer-events: none;
+    z-index: var(--z-portal);
+
+    &__grid {
+        @include absolute(0);
+        @include grid-content( center );
+        display: grid;
+        grid-template-columns: repeat(var(--portal-col-count), var(--portal-tile-size));
+        grid-template-rows: var(--header-height) repeat(var(--portal-row-count), var(--portal-tile-size));
+    }
+
+    &__tile {
+        background: var(--c-theme-neptune-000);
+        opacity: 0;
+        transform: scale(0);
+    }
+}

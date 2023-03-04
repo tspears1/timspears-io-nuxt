@@ -5,6 +5,7 @@
         <NuxtPage />
         <DebugStylesheet />
         <SiteFooter />
+        <SitePortal />
     </SiteWrapper>
 </template>
 
@@ -14,7 +15,6 @@ const { theme: siteTheme } = useTheme()
 const { data } = useGlobalData()
 const { initLenis } = useLenis()
 useFrame()
-
 
 useHead({
     htmlAttrs: {
