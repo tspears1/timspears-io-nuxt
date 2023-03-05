@@ -1,7 +1,12 @@
 export default defineNuxtRouteMiddleware((to, from) => {
     const { updateContext, onBeforeEnterCallback, onEnterCallback } = useTransition()
+    const { setActiveTheme } = useThemes()
 
-    console.log('updating context')
+    if ( to.name == from.path ) {
+        setActiveTheme(to.meta.theme)
+    }
+
+    console.log('updating context', {to, from})
     updateContext('next', to.name, to.meta.theme)
     to.meta.pageTransition = {
         name: 'grid-swap',

@@ -1,3 +1,3 @@
-const pad = (n) => ('0' + n).slice(-2)
+const pad = (n, before = '0') => (before + n).slice((before.length + 1) * -1)
 
 export { pad }

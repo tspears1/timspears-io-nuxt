@@ -6,11 +6,9 @@
     &[data-theme="#{$theme}"] {
         --c-theme-bg: var(--c-theme-#{$bg});
         --c-theme-bg-rgb: var(--c-theme-#{$bg}-rgb);
-        --c-theme-bg-hsl: var(--c-theme-#{$bg}-hsl);
 
         --c-theme-text: var(--c-theme-#{$text});
         --c-theme-text-rgb: var(--c-theme-#{$text}-rgb);
-        --c-theme-text-hsl: var(--c-theme-#{$text}-hsl);
     }
 }
 
@@ -18,20 +16,11 @@
     @each $name, $value in $colors {
         --c-#{$name}: #{$value};
         --c-#{$name}-rgb: #{red($value)}, #{green($value)}, #{blue($value)};
-        --c-#{$name}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
     }
 
-    @each $theme in $themes {
-        &[data-theme="#{$theme}"] {
-            --c-theme-000: var(--c-theme-#{$theme}-000);
-            --c-theme-000-rgb: var(--c-theme-#{$theme}-000-rgb);
-            --c-theme-000-hsl: var(--c-theme-#{$theme}-000-hsl);
+    --c-theme-bg: var(--c-theme-002);
+    --c-theme-bg-rgb: var(--c-theme-002-rgb);
 
-            --c-theme-fff: var(--c-theme-#{$theme}-fff);
-            --c-theme-fff-rgb: var(--c-theme-#{$theme}-fff-rgb);
-            --c-theme-fff-hsl: var(--c-theme-#{$theme}-fff-hsl);
-        }
-    }
-
-    @include updateThemePrimary('laconia', '000', 'fff');
+    --c-theme-text: var(--c-theme-011);
+    --c-theme-text-rgb: var(--c-theme-011-rgb);
 }
