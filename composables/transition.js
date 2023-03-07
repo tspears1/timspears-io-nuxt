@@ -45,7 +45,7 @@ const useTransition = () => {
         }
     }))
 
-    const updateContext = (key, name, theme) => pageContext.value[key] = { name, theme }
+    const updateContext = (key, entry) => pageContext.value[key] = entry
 
     // const transitionCallbacks =
 

@@ -32,6 +32,7 @@ const useLenis = () => {
             requestAnimationFrame(raf)
         }
         requestAnimationFrame(raf)
+        console.warn('Lenis Init')
     }
 
     return {

@@ -3,7 +3,7 @@ import Gradient from 'javascript-color-gradient'
 import { unique } from 'radash'
 
 const useThemes = () => {
-    const { data } = useSanityQuery(groq`
+    const { data: themeData } = useSanityQuery(groq`
         *[_type == 'theme']{
             title,
             'slug': slug.current,
@@ -12,18 +12,44 @@ const useThemes = () => {
         }
     `)
 
-    const activeTheme = useState('activeTheme', () => ({
+    const { data: entryData } = useSanityQuery(groq`
+        *[_type in ['home', 'page', 'work']]{
+            _type,
+            'slug': slug.current,
+            'theme': pageTheme->slug.current
+        }
+    `)
+
+    const baseTheme = {
         name: 'Base',
         slug: 'base',
         base: '#000',
-        palette: [],
-    }))
+        palette: [
+            '#000000',
+            '#010101',
+            '#121212',
+            '#343434',
+            '#565656',
+            '#787878',
+            '#9A9A9A',
+            '#ABABAB',
+            '#CDCDCD',
+            '#DEDEDE',
+            '#EFEFEF',
+            '#FFFFFF',
+        ],
+    }
+
+    const activeTheme = useState('activeTheme', () => ({...baseTheme}))
+    const themes      = useState('themes', () => [{...baseTheme}])
+    const themeIndex  = useState('themeIndex', () => [{}])
+
     const setActiveTheme = (theme) => activeTheme.value = themes.value.filter(t => t.slug == theme)[0]
-    const themes = useState('themes', () => [])
+    const getEntryThemeIndex = (entry) => themeIndex.value.filter(t => t.name == entry.name)[0]
 
     const buildThemes = () => {
-        if ( data.value ) {
-            data.value.forEach((_theme) => {
+        if ( themeData.value ) {
+            themeData.value.forEach((_theme) => {
                 const { palette }   = generateGradientPalette(_theme.color.hex, _theme.invert ? _theme.invert.hext : null )
                 const updatedThemes = [...themes.value, {
                     name: _theme.title,
@@ -33,6 +59,8 @@ const useThemes = () => {
                 }]
                 themes.value = unique(updatedThemes, t => t.slug)
             })
+            console.warn('Themes Built')
+            return themes
         }
     }
 
@@ -98,15 +126,38 @@ const useThemes = () => {
 
         styleEl.append(themeVariables)
         head.append(styleEl)
+        console.warn('Theme Stylesheet Loaded')
+        return
+    }
+
+    const getEntrySlug = (entry) => {
+        switch (entry._type) {
+            case 'home': return '/'
+                break
+            case 'work': return `/work/${entry.slug}`
+                break
+            default: return `/${entry.slug}`
+                break
+        }
+    }
+
+    const buildThemeIndex = () => {
+        themeIndex.value = entryData.value.map((entry) => ({
+                name: entry.slug ?? 'index',
+                slug: getEntrySlug(entry),
+                theme: entry.theme
+        }))
     }
 
     return {
         themes,
         buildThemes,
+        buildThemeIndex,
         buildStyleSheet,
         cssVars,
         activeTheme,
         setActiveTheme,
+        getEntryThemeIndex,
         generateInvert,
         generateGradientPalette,
     }

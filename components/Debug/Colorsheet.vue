@@ -1,12 +1,14 @@
 <script setup>
 
 const { themes } = useThemes()
+const isMounted = ref(false)
 
+onMounted(() => isMounted.value = true )
 
 </script>
 
 <template>
-    <section class="colorsheet">
+    <section class="colorsheet" v-if="isMounted">
         <article
             class="colorsheet-theme"
             v-for="theme in themes"
@@ -35,8 +37,9 @@ const { themes } = useThemes()
     background: var(--c-theme-text);
     display: grid;
     gap: 90px;
-    margin-top: 120px;
-    padding: 120px 10vw;
+    margin-top: calc(25vh - var(--header-height));
+    overflow: auto;
+    padding: 10vh 10vw;
     width: 100%;
 }
 
@@ -54,7 +57,7 @@ const { themes } = useThemes()
     &-grid {
         display: grid;
         gap: 1.25rem;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
 
     &-tile {
