@@ -13,12 +13,8 @@ const { data } = useSanityQuery(groq`
     }[0]
 `)
 
-onMounted(() => {
-    // console.log('onMounted', data.value.theme)
-    // setActiveTheme('laconia')
-})
-
 definePageMeta({
     title: 'Home',
 })
+
 </script>

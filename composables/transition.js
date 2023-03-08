@@ -45,9 +45,11 @@ const useTransition = () => {
         }
     }))
 
-    const updateContext = (key, entry) => pageContext.value[key] = entry
+    const updateContext = (key, entry) => {
+        pageContext.value[key] = entry
 
-    // const transitionCallbacks =
+        //update current and prev before updating ?
+    }
 
     const onBeforeEnterCallback = (el) => {
         console.log('beforEnter', {el})

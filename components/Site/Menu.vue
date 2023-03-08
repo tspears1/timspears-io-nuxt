@@ -79,6 +79,7 @@ const updateActiveItem = (id) => activeItem.value = id
             --menu-enter-time: ${transitionTime};
         `"
         :data-active-item="activeItem"
+        v-cloak
     >
         <TileGrid v-if="loadGrid" />
         <ul class="site-menu__list">
