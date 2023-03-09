@@ -1,31 +1,63 @@
+import { usePortalStore, usePageContextStore } from "~~/stores/portal"
+import { storeToRefs } from 'pinia'
+
 export default defineNuxtRouteMiddleware((to, from) => {
-    const { updateContext, onBeforeEnterCallback, onEnterCallback } = useTransition()
+    const { closeMenu, menuOpen } = useMenu()
+    const { lockScreen, unlockScreen } = useScreenLock()
+
+    const portal = usePortalStore()
+    const { portalActive, transitionCompleted } = storeToRefs(portal)
+
+    const context = usePageContextStore()
+    const { pageContext } = storeToRefs(context)
+
     const { setActiveTheme, getEntryThemeIndex } = useThemes()
 
-    console.log('updating context', {to, from})
-    //updateContext('next', to.name, to.meta.theme)
+    context.updateNextContext({ name: to.name, theme: to.meta.theme })
+
+
     to.meta.pageTransition = {
-        name: 'grid-swap',
+        name: 'cel-shading',
         mode: 'out-in',
-        onBeforeEnter: (el) => console.log('BEFORE ENTER', Date.now() / 1000),
-        onEnter: (el, done) => setTimeout(() => {
-            console.log('ENTERED', Date.now() / 1000)
-            done()
-        }, 5000),
-        onAfterEnter: (el) => console.log('AFTER ENTER', Date.now() / 1000),
-        onBeforeLeave: (el) => console.log('BEFORE LEAVE', Date.now() / 1000),
-        onLeave: (el, done) => setTimeout(() => {
-            console.log('LEAVEED', Date.now() / 1000)
-            done()
-        }, 5000),
+
+        onBeforeLeave: (el) => {
+            lockScreen()
+            portalActive.value = true
+            console.log('BEFORE LEAVE', Date.now() / 1000)
+        },
+
+        onLeave: (el, done) => {
+            setTimeout(() => {
+                console.log('LEAVED', Date.now() / 1000)
+                done()
+            }, 1500)
+        },
+
         onAfterLeave: (el) => {
-            const next = getEntryThemeIndex(to)
-            if ( next ) {
-                console.log({next})
-                setActiveTheme(next.theme)
+
+            setActiveTheme(pageContext.value.next.theme)
+
+            if ( menuOpen.value ) {
+                closeMenu()
             }
             console.log('AFTER LEAVE', Date.now() / 1000)
         },
+
+        onBeforeEnter: (el) => {
+            console.log('BEFORE ENTER', Date.now() / 1000)
+        },
+
+        onEnter: (el, done) => {
+            console.log('ENTERED', Date.now() / 1000)
+            done()
+        },
+
+        onAfterEnter: (el) => {
+            portal.transitionReset()
+            portalActive.value = false
+            console.log('AFTER ENTER', Date.now() / 1000)
+        },
+
     }
 
 })

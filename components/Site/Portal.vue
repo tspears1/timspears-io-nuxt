@@ -1,104 +1,67 @@
 <script setup>
-import { random, shuffle } from 'radash'
+import { list } from 'radash'
 import { animate, stagger } from 'motion'
-import { usePortalStore } from '@/stores/portal'
-import { storeToRefs } from 'pinia';
 
-const { menuOpen } = useMenu()
+import { usePortalStore, usePageContextStore } from '~/stores/portal'
+import { storeToRefs } from 'pinia'
 
-const {
-    tileCount,
-    tileDelay,
-    tileSize,
-    rowCount,
-    columnCount,
-    rowList,
-    getListRow,
-    transitionTime
-} = useMenuGrid()
+const portal = usePortalStore()
+const { portalActive, transitionCompleted } = storeToRefs(portal)
 
-const portalRef = ref()
-const portalGridRef = ref()
-const loadGrid = ref(false)
-const tilePortalCount = computed(() => tileCount.value + columnCount.value)
-const tilePortalArray = computed(() => Array.from({ length: tilePortalCount.value }))
+const context = usePageContextStore()
+const { pageContext } = storeToRefs(context)
 
-const portalStore = usePortalStore()
-const { portalTiles } = storeToRefs(portalStore)
-const tilesRef = ref()
+const panelsRef     = ref()
+const currentTheme  = computed(() => pageContext.value.current.theme ?? 'base' )
+const nextTheme     = computed(() => pageContext.value.next.theme ?? 'base')
+const currentPanels = computed(() => list(1, 12, i => `--c-theme-${currentTheme.value}-${pad(i, '00')}`) )
+const nextPanels    = computed(() => list(1, 12, i => `--c-theme-${nextTheme.value}-${pad(i, '00')}`).reverse() )
+const panels        = computed(() => [...currentPanels.value, ...nextPanels.value] )
 
-const portalOpen = (done) => {
-    const target = shuffle(tilesRef.value)
-    animate(target, { opacity: [ 0, 1 ], scale: [0.6, 1] }, { delay: stagger(0.005) }).finished.then(() => done)
-}
-
-const portalSwap = (done) => {
-    const target = shuffle(tilesRef.value)
-    animate(target, { background: [null, 'var(--tile-color-secondary)']}, { delay: stagger(0.005), duration: 2 }).finished.then(() => done)
-}
-
-const portalClose = (done) => {
-    const target = shuffle(tilesRef.value)
-    animate(target, { opacity: [ 1, 0 ], scale: [ 1, 0.6 ] }, { delay: stagger(0.005) }).finished.then(() => done)
-}
-
-//watch(portalActive, (value) => !!value ? portalOpen() : portalClose() )
-
-onMounted(() =>{
-    nextTick(() => {
-        // solving a hydration issue with the grid.
-        loadGrid.value = true
-
-        portalTiles.value = tilesRef.value
+const portalOpen = () => {
+    console.log('PORTAL OPEN MOTION STARTED')
+    animate(
+        panelsRef.value,
+        { x: ['100%', 0] },
+        { delay: stagger(0.08, { easing: cubicBezier.easeInCirc }), easing: cubicBezier.easeOutCirc }
+    ).finished.then(() => {
+        portalClose()
     })
-})
-
-const TileGrid = (props, context) => {
-    const tiles = tilePortalArray.value.map((n, index) => {
-        return h(
-            'div',
-            {
-                class: 'site-portal__tile',
-                key: `tile-${n}`,
-                ref: tilesRef,
-                ref_for: true,
-                style: {
-                    '--tile-delay-index' : random(1, tilePortalArray.value.length * 0.66),
-                    '--tile-color-primary' : `var(--c-theme-${pad(random(1, 6), '00')})`,
-                    '--tile-color-secondary' : `var(--c-theme-${pad(random(1, 6), '00')})`
-                },
-                'data-row': getListRow(index + 1) + 1,
-            },
-            () => [
-                h('span', { class: 'site-portal__tile-front' }),
-                h('span', { class: 'site-portal__tile-back' })
-            ]
-        )
-    })
-    return h(
-        'div',
-        {
-            class: 'site-portal__grid',
-            ref: portalGridRef,
-        },
-        tiles
-    )
 }
+
+const portalClose = () => {
+    animate(
+        panelsRef.value,
+        { x: [0, '-100%' ] },
+        { duration: 2, easing: cubicBezier.easeOutCirc }
+    ).finished.then(() => {
+        transitionCompleted.value = true
+    })
+}
+
+watch(portalActive, (value) => {
+    if (!!value ) {
+        portalOpen()
+    }
+}, { immediate: true })
 
 </script>
 
 <template>
     <div
         class="site-portal"
-        ref="portalRef"
-        :style="`
-            --portal-tile-count: ${tilePortalCount};
-            --portal-tile-size: ${tileSize}px;
-            --portal-row-count: ${rowCount};
-            --portal-col-count: ${columnCount};
-            --portal-enter-time: ${transitionTime};
-        `"
+        ref="portalBook"
     >
-        <TileGrid v-if="loadGrid"/>
+        <div class="site-portal_loading-screen"></div>
+        <div class="site-portal__panels">
+            <div
+                class="site-portal__panel"
+                ref="panelsRef"
+                ref_for="true"
+                v-for="(screen, index) in panels"
+                :key="`${screen}-${index}`"
+                :style="`background: var(${screen});`"
+            />
+        </div>
     </div>
 </template>

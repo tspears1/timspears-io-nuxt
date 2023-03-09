@@ -32,7 +32,7 @@ onBeforeMount(async () => {
     await buildThemes()
     await buildThemeIndex()
     await buildStyleSheet()
-    await setActiveTheme(getEntryThemeIndex({name: route.name }).theme)
+    await setActiveTheme(getEntryThemeIndex({name: route.name }).theme) // change once loading screen is working
 })
 
 onMounted(() => {

@@ -44,6 +44,10 @@ const onClick = () => {
     menuOpen.value ? isOpenedMotion() : isClosedMotion()
 }
 
+watch(menuOpen, (value) => {
+    !!value ? isOpenedMotion() : isClosedMotion()
+})
+
 watch(isHovering, (value) => {
     if (!value) {
         isNotHovering()

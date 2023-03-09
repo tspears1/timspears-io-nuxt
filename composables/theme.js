@@ -3,6 +3,8 @@ import Gradient from 'javascript-color-gradient'
 import { unique } from 'radash'
 
 const useThemes = () => {
+
+    // SETUP =============================================================
     const { data: themeData } = useSanityQuery(groq`
         *[_type == 'theme']{
             title,
@@ -40,18 +42,19 @@ const useThemes = () => {
         ],
     }
 
+    // ACTIVE THEME =======================================================
     const activeTheme = useState('activeTheme', () => ({...baseTheme}))
-    const themes      = useState('themes', () => [{...baseTheme}])
-    const themeIndex  = useState('themeIndex', () => [{}])
 
     const setActiveTheme = (theme) => {
         activeTheme.value = themes.value.filter(t => t.slug == theme)[0]
-        useHead({
-            meta: [{ name: 'theme-color', content: activeTheme.value.base }]
-        })
+        // useHead({
+        //     meta: [{ name: 'theme-color', content: activeTheme.value.base }]
+        // })
         console.log('new active theme', activeTheme.value)
     }
-    const getEntryThemeIndex = (entry) => themeIndex.value.filter(t => t.name == entry.name)[0]
+
+    // THEMES / STYLESHEET =======================================================
+    const themes      = useState('themes', () => [{...baseTheme}])
 
     const buildThemes = () => {
         if ( themeData.value ) {
@@ -136,6 +139,11 @@ const useThemes = () => {
         return
     }
 
+    // THEME INDEX =============================================================
+    const themeIndex  = useState('themeIndex', () => [{}])
+
+    const getEntryThemeIndex = (entry) => themeIndex.value.filter(t => t.name == entry.name)[0]
+
     const getEntrySlug = (entry) => {
         switch (entry._type) {
             case 'home': return '/'
@@ -154,17 +162,6 @@ const useThemes = () => {
                 theme: entry.theme
         }))
     }
-
-    // watch(activeTheme, (newTheme) => {
-    //     console.log('watching new theme: ', newTheme)
-    //     if (newTheme) {
-    //         useHead({
-    //             meta: [{ name: 'theme-color', content: newTheme.base }]
-    //         })
-
-    //         console.warn(`[Head - Meta]: Theme color changed: ${newTheme.base}`)
-    //     }
-    // })
 
     return {
         themes,
