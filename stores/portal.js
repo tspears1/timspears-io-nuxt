@@ -45,6 +45,8 @@ const usePageContextStore = defineStore('pageContext', () => {
         pageContext.prev    = pageContext.current
         pageContext.current = pageContext.next
         pageContext.next    = entry
+        console.warn('context updated: ', { pageContext })
+        return pageContext
     }
 
     return {

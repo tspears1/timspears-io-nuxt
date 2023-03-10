@@ -13,8 +13,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     const { setActiveTheme, getEntryThemeIndex } = useThemes()
 
-    context.updateNextContext({ name: to.name, theme: to.meta.theme })
-
+    const entry = getEntryThemeIndex(to)
+    if (entry) {
+        context.updateNextContext(entry)
+    }
 
     to.meta.pageTransition = {
         name: 'cel-shading',

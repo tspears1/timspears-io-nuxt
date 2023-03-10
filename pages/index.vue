@@ -13,7 +13,7 @@ const { data } = useSanityQuery(groq`
     }[0]
 `)
 
-definePageMeta({
+useHead({
     title: 'Home',
 })
 

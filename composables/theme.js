@@ -142,8 +142,6 @@ const useThemes = () => {
     // THEME INDEX =============================================================
     const themeIndex  = useState('themeIndex', () => [{}])
 
-    const getEntryThemeIndex = (entry) => themeIndex.value.filter(t => t.name == entry.name)[0]
-
     const getEntrySlug = (entry) => {
         switch (entry._type) {
             case 'home': return '/'
@@ -161,6 +159,10 @@ const useThemes = () => {
                 slug: getEntrySlug(entry),
                 theme: entry.theme
         }))
+    }
+
+    const getEntryThemeIndex = (entry) => {
+        return themeIndex.value.filter(t => t.name == entry.name)[0]
     }
 
     return {

@@ -12,6 +12,9 @@
 
 <script setup>
 import { useGlobalData } from '@/data/global'
+import { usePageContextStore } from "~~/stores/portal"
+
+const context = usePageContextStore()
 const { activeTheme, setActiveTheme, buildStyleSheet, buildThemes, buildThemeIndex, getEntryThemeIndex } = useThemes()
 const { data } = useGlobalData()
 const { initLenis } = useLenis()
@@ -32,7 +35,9 @@ onBeforeMount(async () => {
     await buildThemes()
     await buildThemeIndex()
     await buildStyleSheet()
-    await setActiveTheme(getEntryThemeIndex({name: route.name }).theme) // change once loading screen is working
+    const entry = getEntryThemeIndex({name: route.name })
+    await context.updateNextContext(entry)
+    await setActiveTheme(entry.theme) // change once loading screen is working
 })
 
 onMounted(() => {
