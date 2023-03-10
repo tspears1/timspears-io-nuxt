@@ -2,18 +2,26 @@ import { defineStore } from "pinia"
 
 const usePortalStore = defineStore('portal', () => {
 
+    const loadingScreenActive = ref(true)
+    const siteLoaded = ref(false)
     const portalActive = ref(false)
     const transitionCompleted = ref(false)
 
     const transitionDone = () => transitionCompleted.value = true
     const transitionReset = () => transitionCompleted.value = false
 
-    watch(portalActive, (value) => {
-        document.documentElement.dataset.portalOpen = value
-    })
+    const isLoaded = () => siteLoaded.value = true
+
+    watch(siteLoaded, (value) => document.documentElement.dataset.loaded = value )
+
+    watch(portalActive, (value) => document.documentElement.dataset.portalOpen = value )
+
+    watch(transitionCompleted, (value) => document.documentElement.dataset.transitionComplete = value )
 
     return {
+        loadingScreenActive,
         portalActive,
+        isLoaded,
         transitionCompleted,
         transitionDone,
         transitionReset,
@@ -58,16 +66,3 @@ const usePageContextStore = defineStore('pageContext', () => {
 })
 
 export { usePortalStore, usePageContextStore }
-
-
-
-//TODO:
-//  get page context for next page
-//  lock screen if not already locked
-//  transition grid enter
-//  If menu open, reset menu (no animation)
-//  update theme
-//  swap pages
-//  transition grid exit
-//  trigger hero animations
-//  update page context (next="null", current="next", prev="current")

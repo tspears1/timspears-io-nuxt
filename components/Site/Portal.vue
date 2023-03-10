@@ -6,10 +6,12 @@ import { usePortalStore, usePageContextStore } from '~/stores/portal'
 import { storeToRefs } from 'pinia'
 
 const portal = usePortalStore()
-const { portalActive, transitionCompleted } = storeToRefs(portal)
+const { portalActive, loadingScreenActive } = storeToRefs(portal)
 
 const context = usePageContextStore()
 const { pageContext } = storeToRefs(context)
+
+const loadingScreen = ref()
 
 const currentRef    = ref()
 const nextRef       = ref()
@@ -22,11 +24,13 @@ const nextPanels    = computed(() => list(1, 12, i => pad(i, '00')).reverse() )
 const portalOpen = () => {
     console.log('PORTAL OPEN MOTION STARTED', pageContext.value.current.theme, pageContext.value.next.theme)
     const sequence = [
-        [currentRef.value, { x: ['100%', 0] }, { delay: stagger(0.08, { easing: cubicBezier.easeOutQuint }) }],
-        [nextRef.value, { x: ['100%', 0] }, { delay: stagger(0.08, { easing: cubicBezier.easeInQuint }) }],
-        [[...currentRef.value, ...nextRef.value], { x: [0, '-100%' ] }, { duration: 2, easing: cubicBezier.easeOutQuint }] // move whole panel group?
+        [[...currentRef.value, ...nextRef.value], { x: ['100%', 0] }, { delay: stagger(0.08), easing: cubicBezier.easeInOutCubic, duration: 0.5 }],
+        [[loadingScreen.value, ...currentRef.value, ...nextRef.value], { x: [null, '-100%' ] }, { duration: 1, easing: cubicBezier.easeOutExpo }]
     ]
-    timeline(sequence)
+    timeline(sequence).finished.then(() => {
+        portal.transitionDone()
+        console.log('FINISHED')
+    })
 }
 
 watch(portalActive, (value) => {
@@ -35,11 +39,6 @@ watch(portalActive, (value) => {
     }
 }, { immediate: true })
 
-// .finished.then(() => {
-//         console.log('FINISHED')
-//         transitionCompleted.value = true
-//     })
-
 </script>
 
 <template>
@@ -47,7 +46,9 @@ watch(portalActive, (value) => {
         class="site-portal"
         ref="portalBook"
     >
-        <div class="site-portal_loading-screen"></div>
+        <div class="site-portal_loading-screen" ref="loadingScreen">
+            <SiteLoadingScreen v-if="loadingScreenActive" />
+        </div>
         <div class="site-portal__panels">
             <div
                 class="site-portal__panel site-portal__panel--current"

@@ -42,6 +42,11 @@ const useScreenLock = () => {
 
     const toggleScreenLock = () => isLocked.value = !isLocked.value
 
+    const resetScroll = () => {
+        window.scrollTo(0, 0)
+        console.log('SCROLL RESET?')
+    }
+
     watch(isLocked, (value) => {
         document.documentElement.dataset.isLocked = value
         value == true ? lenis.value.stop() : lenis.value.start()
@@ -52,6 +57,7 @@ const useScreenLock = () => {
         isLocked,
         lockScreen,
         unlockScreen,
+        resetScroll,
         toggleScreenLock,
     }
 }

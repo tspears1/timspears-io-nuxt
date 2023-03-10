@@ -3,10 +3,10 @@ import { storeToRefs } from 'pinia'
 
 export default defineNuxtRouteMiddleware((to, from) => {
     const { closeMenu, menuOpen } = useMenu()
-    const { lockScreen, unlockScreen } = useScreenLock()
+    const { lockScreen, unlockScreen, resetScroll } = useScreenLock()
 
     const portal = usePortalStore()
-    const { portalActive, transitionCompleted } = storeToRefs(portal)
+    const { portalActive } = storeToRefs(portal)
 
     const context = usePageContextStore()
     const { pageContext } = storeToRefs(context)
@@ -24,6 +24,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
         onBeforeLeave: (el) => {
             lockScreen()
+            portal.transitionReset()
             portalActive.value = true
             console.log('BEFORE LEAVE', Date.now() / 1000)
         },
@@ -39,9 +40,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
             setActiveTheme(pageContext.value.next.theme)
 
-            if ( menuOpen.value ) {
-                closeMenu()
-            }
+            if ( menuOpen.value ) { closeMenu() }
+
+
             console.log('AFTER LEAVE', Date.now() / 1000)
         },
 
@@ -51,11 +52,13 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
         onEnter: (el, done) => {
             console.log('ENTERED', Date.now() / 1000)
+            resetScroll()
             done()
         },
 
         onAfterEnter: (el) => {
-            portal.transitionReset()
+            unlockScreen() // should these move to a watch for transition completed?
+
             portalActive.value = false
             console.log('AFTER ENTER', Date.now() / 1000)
         },

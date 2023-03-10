@@ -144,6 +144,7 @@ const useThemes = () => {
 
     const getEntrySlug = (entry) => {
         switch (entry._type) {
+            case 'index': return '/'
             case 'home': return '/'
                 break
             case 'work': return `/work/${entry.slug}`

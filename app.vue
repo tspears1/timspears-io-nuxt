@@ -3,6 +3,7 @@
         <SiteHeader />
         <SiteMenu />
         <NuxtPage />
+        <DebugQuickLinks />
         <DebugColorsheet />
         <DebugStylesheet />
         <SiteFooter />
@@ -27,7 +28,7 @@ useHead({
         'data-theme': () => activeTheme.value?.slug ?? 'base',
     },
     title: '',
-    titleTemplate: (title) => !title ? data.value.siteTitle : `${title} | ${data.value.siteTitle}`,
+    titleTemplate: (pageTitle) => !pageTitle ? data.value.siteTitle : `${pageTitle} | ${data.value.siteTitle}`,
     meta: [{ name: 'theme-color', content: () => activeTheme.value?.base ?? '#000' }]
 })
 
@@ -37,7 +38,6 @@ onBeforeMount(async () => {
     await buildStyleSheet()
     const entry = getEntryThemeIndex({name: route.name })
     await context.updateNextContext(entry)
-    await setActiveTheme(entry.theme) // change once loading screen is working
 })
 
 onMounted(() => {
