@@ -39,7 +39,6 @@ const onEnter = () => {
 }
 
 onMounted(() => {
-    lockScreen()
     onEnter()
 })
 

@@ -1,6 +1,6 @@
 <template>
     <main class="page-wrapper">
-        <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
+        <Hero v-if="data" :title="data.pageTitle" :eyebrow="data.eyebrow" :compressed="true" />
     </main>
 </template>
 

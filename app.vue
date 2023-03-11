@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+import 'what-input'
 import { useGlobalData } from '@/data/global'
 import { usePageContextStore } from "~~/stores/portal"
 

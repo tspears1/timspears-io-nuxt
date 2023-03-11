@@ -33,6 +33,9 @@
     }
 
     &__text {
+        @include classic-text(700);
+        font-size: #{fluid(0.75, 1.125, false)};
+        line-height: 1;
 
         .-is-splitting & {
             clip-path: inset(0);
@@ -42,8 +45,6 @@
 
         .-billboard & {
             @include modern-text(900);
-            font-size: #{fluid(0.75, 1.125, false)};
-            line-height: 1;
             letter-spacing: 0.75em;
             text-transform: uppercase;
         }

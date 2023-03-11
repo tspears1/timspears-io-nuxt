@@ -159,7 +159,7 @@
         font-size: var(--menu-font-size);
         line-height: 1;
 
-        &:hover {
+        @include hover-style(mouse) {
             --menu-link-delay: 300ms;
 
             .site-menu__fill-wrapper {

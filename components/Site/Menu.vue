@@ -36,7 +36,9 @@ onMounted(() =>{
     })
 })
 
-watch(menuOpen, (value) => value == true ? isAnimating.value = true : isAnimating.value = false )
+watch(menuOpen, (value) => {
+    value == true ? isAnimating.value = true : isAnimating.value = false
+})
 
 const TileGrid = (props, context) => {
     const tiles = tileArray.value.map((n, index) => {
