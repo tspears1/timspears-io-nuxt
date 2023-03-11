@@ -31,17 +31,25 @@
     }
 
     &__grid {
+        --menu-grid-alpha: 0;
         @include absolute(0);
         @include grid-content( center );
+        background: rgba(var(--c-theme-001-rgb), var(--menu-grid-alpha));
         display: grid;
         grid-template-columns: repeat(var(--menu-col-count), var(--menu-tile-size));
         grid-template-rows: repeat(var(--menu-row-count), var(--menu-tile-size));
+        transition: background var(--duration-slow) var(--ease-out-cubic);
+
+        [data-menu-open="true"] & {
+            --menu-grid-alpha: 0.4;
+            transition: background var(--duration-fast) var(--ease-out-cubic);
+        }
     }
 
     &__tile {
         --tile-delay-time: 40ms;
         --tile-transition-delay: calc(var(--tile-delay-time) * var(--tile-delay-index, 1));
-        background: var(--c-theme-bg);
+        background: var(--c-theme-011);
         opacity: 0;
         transform: scale(0.6);
         transition:
@@ -67,7 +75,7 @@
 
         &::before {
             @include absolute(0);
-            background: var(--c-theme-bg);
+            background: var(--c-theme-002);
             content: '';
             opacity: 0;
             transform: scale(0.6);
@@ -83,7 +91,7 @@
         }
 
         [data-menu-open="true"] & {
-            background: var(--c-theme-text);
+            background: var(--c-theme-011);
             opacity: 1;
             transform: scale(1);
             transition:
@@ -117,7 +125,7 @@
     &__count {
         @include poster-text(italic);
         clip-path: inset(0);
-        color: var(--c-theme-bg);
+        color: var(--c-theme-002);
         font-size: fluid(0.875rem, 1.5rem, false);
         line-height: 1;
         overflow: hidden;
@@ -142,8 +150,8 @@
         --menu-font-size: #{fluid( 2.5rem, 4.25rem, false)};
         --menu-link-delay: 20ms;
         --menu-link-height: var(--menu-font-size);
-        --text-fill: var(--c-theme-bg);
-        --text-stroke: var(--c-theme-bg);
+        --text-fill: var(--c-theme-002);
+        --text-stroke: var(--c-theme-002);
         @include pseudo-link();
         @include poster-text();
         color: transparent;

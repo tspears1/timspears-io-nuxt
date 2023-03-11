@@ -1,15 +1,14 @@
 <template>
     <main class="page-wrapper">
-        <Hero :title="data.title" :billboard="true" eyebrow="Tim Spears"/>
+        <Hero v-if="data" :title="data.pageTitle ?? null" :billboard="true" :eyebrow="data.eyebrow"/>
     </main>
 </template>
 
 <script setup>
-const { setActiveTheme } = useThemes()
 const { data } = useSanityQuery(groq`
     *[_type == "home"]{
-        title,
-        "theme": pageTheme->slug.current
+        "pageTitle": title,
+        eyebrow
     }[0]
 `)
 

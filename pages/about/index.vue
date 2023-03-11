@@ -1,5 +1,15 @@
 <template>
     <main class="page-wrapper">
-        <h1>About</h1>
+        <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
     </main>
 </template>
+
+<script setup>
+const { data } = useSanityQuery(groq`
+    *[_type == "page" && slug.current == 'about']{
+        "pageTitle": title,
+        eyebrow
+    }[0]
+`)
+
+</script>

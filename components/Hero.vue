@@ -1,6 +1,6 @@
 <script setup>
-    import { inView, timeline, stagger } from 'motion'
-    import { usePortalStore, usePageContextStore } from '~/stores/portal'
+    import { timeline, stagger } from 'motion'
+    import { usePortalStore } from '~/stores/portal'
     import { storeToRefs } from 'pinia'
 
     const portal = usePortalStore()
@@ -36,11 +36,6 @@
         }
     })
 
-    // onMounted(() => {
-    //     inView(heroRef.value, (info) => {
-    //     })
-    // })
-
 
 </script>
 
@@ -55,7 +50,7 @@
                 ref="eyebrowRef"
                 offset="-1.5"
             />
-            <h1 class="hero__title">
+            <h1 class="hero__title" v-if="title">
                 <TextSplitting
                     :content="title"
                     :word-wrapper="true"

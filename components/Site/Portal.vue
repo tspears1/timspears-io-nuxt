@@ -37,7 +37,7 @@ const portalOpen = () => {
     timeline(sequence).finished.then(() => {
         portal.transitionDone()
         portalActive.value = false
-        unlockScreen()
+        // unlockScreen()
 
         if ( !!loadingScreenActive.value ) {
             loadingScreenActive.value = false

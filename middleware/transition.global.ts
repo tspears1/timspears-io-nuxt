@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
         mode: 'out-in',
 
         onBeforeLeave: (el) => {
-            lockScreen()
+            //lockScreen()
             portal.transitionReset()
             portalActive.value = true
         },
@@ -44,7 +44,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
         onBeforeEnter: (el) => {},
 
         onEnter: (el, done) => {
-            resetScroll()
+            //resetScroll()
             done()
         },
 

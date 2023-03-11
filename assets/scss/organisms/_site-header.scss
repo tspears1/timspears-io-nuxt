@@ -37,6 +37,7 @@
     }
 
     [data-portal-open="true"] & {
+        --header-bg-alpha: 1;
         transition: none;
     }
 
