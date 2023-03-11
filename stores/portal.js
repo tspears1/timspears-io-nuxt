@@ -12,7 +12,11 @@ const usePortalStore = defineStore('portal', () => {
 
     const isLoaded = () => siteLoaded.value = true
 
-    watch(siteLoaded, (value) => document.documentElement.dataset.loaded = value )
+    watch(siteLoaded, (value) => {
+        if (value == true) {
+            document.documentElement.dataset.loaded = true
+        }
+    })
 
     watch(portalActive, (value) => document.documentElement.dataset.portalOpen = value )
 
@@ -32,8 +36,8 @@ const usePageContextStore = defineStore('pageContext', () => {
 
     const pageContext = reactive({
         next: {
-            name: '',
-            theme: '',
+            name: 'base',
+            theme: 'base',
         },
         current: {
             name: '',

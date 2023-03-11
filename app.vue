@@ -1,13 +1,13 @@
 <template>
     <SiteWrapper>
-        <SiteHeader />
-        <SiteMenu />
+        <SiteHeader v-if="isMounted" />
+        <SiteMenu v-if="isMounted" />
         <NuxtPage />
         <DebugQuickLinks />
         <DebugColorsheet />
         <DebugStylesheet />
-        <SiteFooter />
-        <SitePortal />
+        <SiteFooter v-if="isMounted" />
+        <SitePortal v-if="isMounted" />
     </SiteWrapper>
 </template>
 
@@ -15,8 +15,10 @@
 import { useGlobalData } from '@/data/global'
 import { usePageContextStore } from "~~/stores/portal"
 
+const isMounted = ref(false)
+
 const context = usePageContextStore()
-const { activeTheme, setActiveTheme, buildStyleSheet, buildThemes, buildThemeIndex, getEntryThemeIndex } = useThemes()
+const { activeTheme, buildStyleSheet, buildThemes, buildThemeIndex, getEntryThemeIndex } = useThemes()
 const { data } = useGlobalData()
 const { initLenis } = useLenis()
 const route = useRoute()
@@ -26,6 +28,7 @@ useHead({
     htmlAttrs: {
         class: 'root',
         'data-theme': () => activeTheme.value?.slug ?? 'base',
+        'data-loaded': false,
     },
     title: '',
     titleTemplate: (pageTitle) => !pageTitle ? data.value.siteTitle : `${pageTitle} | ${data.value.siteTitle}`,
@@ -41,6 +44,7 @@ onBeforeMount(async () => {
 })
 
 onMounted(() => {
+    isMounted.value = true
     console.warn('App Mounted')
     initLenis()
 })

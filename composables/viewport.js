@@ -10,6 +10,15 @@ const useRoot = () => {
     return { root, body }
 }
 
+const useViewport = () => {
+    const isLandscape = () => window.innerWidth >= window.innerHeight
+
+    return {
+        isLandscape,
+        is
+    }
+}
+
 const useFrame = () => {
     const { root } = useRoot()
     const frameBorder = useState('frameBorder', () => 0)
@@ -62,4 +71,4 @@ const useScreenLock = () => {
     }
 }
 
-export { useFrame, useRoot, useHeaderHeight, useScreenLock }
+export { useFrame, useRoot, useHeaderHeight, useScreenLock, useViewport }

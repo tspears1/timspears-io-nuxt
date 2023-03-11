@@ -1,0 +1,18 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.loading-screen {
+    @include absolute(0);
+    background: var(--c-theme-001);
+    display: grid;
+    place-items: center;
+
+    &__logo {
+        height: min(11.25rem, 40vw);
+        width: min(11.25rem, 40vw);
+    }
+
+    &__shape {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}

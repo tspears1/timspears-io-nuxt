@@ -5,6 +5,10 @@
     pointer-events: none;
     z-index: var(--z-portal);
 
+    [data-portal-open="true"] & {
+        pointer-events: all;
+    }
+
     &__panels {
         @include absolute(0);
         display: grid;

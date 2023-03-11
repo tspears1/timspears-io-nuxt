@@ -1,5 +1,10 @@
 <script setup>
     import { inView, timeline, stagger } from 'motion'
+    import { usePortalStore, usePageContextStore } from '~/stores/portal'
+    import { storeToRefs } from 'pinia'
+
+    const portal = usePortalStore()
+    const { transitionCompleted } = storeToRefs(portal)
 
     const props = defineProps({
         title: String,
@@ -16,7 +21,7 @@
 
     const sequence = computed(() => {
         let seq = [
-            [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1), at: 0.25 }],
+            [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
             [heroRef.value, { y: [ heroY.value, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
         ]
         if (props.eyebrow) {
@@ -25,11 +30,16 @@
         return seq
     })
 
-    onMounted(() => {
-        inView(heroRef.value, (info) => {
+    watch(transitionCompleted, (value) => {
+        if ( value == true ) {
             timeline(sequence.value)
-        })
+        }
     })
+
+    // onMounted(() => {
+    //     inView(heroRef.value, (info) => {
+    //     })
+    // })
 
 
 </script>
