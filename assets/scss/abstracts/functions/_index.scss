@@ -1,7 +1,8 @@
 @use 'sass:math';
 @forward "auto";
 @forward "contrast";
-@forward "grid-helpers";
 @forward "fluid";
+@forward "grid-helpers";
+@forward 'lists';
 @forward "strip-units";
 @forward "viewport";

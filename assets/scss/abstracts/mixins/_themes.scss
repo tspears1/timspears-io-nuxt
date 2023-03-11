@@ -3,3 +3,9 @@
     transition-duration: var(--duration-fast);
     transition-timing-function: var(--ease-out-expo);
 }
+
+@mixin section-themes() {
+    &--dark-matrix {
+        background: rgba(var(--c-theme-001-rgb), 0.5);
+    }
+}

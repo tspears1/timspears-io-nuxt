@@ -1,0 +1,36 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.button {
+    --button-stroke: var(--c-theme-001);
+    --button-padding-x: 1.1rem;
+    --button-padding-y: 0.8125rem;
+    align-items: center;
+    background: transparent;
+    border: 2px solid var(--button-stroke);
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+
+    &[data-theme="light"] {
+        --button-stroke: var(--c-theme-012);
+    }
+
+    &__text {
+        @include modern-text(500);
+        color: var(--button-stroke);
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        padding: var(--button-padding-y) var(--button-padding-x);
+        text-transform: uppercase;
+
+        + * {
+            border-left: 2px solid var(--button-stroke);
+        }
+    }
+
+    &__icon {
+        color: var(--button-stroke);
+        padding: var(--button-padding-y) var(--button-padding-x);
+    }
+}

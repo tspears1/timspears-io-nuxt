@@ -95,7 +95,7 @@
         border-right-color: var(--header-border-color);
     }
 
-    &:hover {
+    @include hover-style(mouse) {
         --logo-bg-alpha: 0.05;
     }
 
@@ -205,7 +205,7 @@
         background var(--duration-gentle) var(--ease-out-quad),
         border var(--duration-gentle) var(--ease-out-quad);
 
-    &:hover {
+    @include hover-style(mouse) {
         --trigger-bg-alpha: 0.05;
         cursor: pointer;
     }

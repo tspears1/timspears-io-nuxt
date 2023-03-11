@@ -1,0 +1,12 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.filter-bar {
+    align-items: center;
+    background: var(--c-theme-003);
+    display: grid;
+    justify-content: end;
+    padding: fluid(1.25, 2);
+
+    //temp.
+    min-height: 120px;
+}

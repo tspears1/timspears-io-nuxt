@@ -1,0 +1,130 @@
+//// ===================== Functions =====================
+// =====https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/
+
+// FIRST =============================
+@function first($list) {
+    @return nth($list, 1);
+}
+
+// LAST =============================
+@function last($list) {
+    @return nth($list, length($list));
+}
+
+// PREPEND =============================
+@function prepend($list, $value) {
+    @return join($value, $list);
+}
+
+// SLICE =============================
+@function slice($list, $start: 1, $end: length($list)) {
+    $result: null;
+
+    @if type-of($start) != number or type-of($end) != number {
+        @warn "Either $start or $end are not a number for `slice`.";
+    }
+
+    @else if $start > $end {
+        @warn "The start index has to be lesser than or equals to the end index for `slice`.";
+    }
+
+    @else if $start < 1 or $end < 1 {
+        @warn "List indexes must be non-zero integers for `slice`.";
+    }
+
+    @else if $start > length($list) {
+        @warn "List index is #{$start} but list is only #{length($list)} item long for `slice`.";
+    }
+
+    @else if $end > length($list) {
+        @warn "List index is #{$end} but list is only #{length($list)} item long for `slice`.";
+    }
+
+    @else {
+        $result: ();
+
+        @for $i from $start through $end {
+            $result: append($result, nth($list, $i));
+        }
+    }
+
+    @return $result;
+}
+
+// REVERSE =============================
+@function reverse($list, $recursive: false) {
+    $result: ();
+
+    @for $i from length($list) * -1 through -1 {
+        @if type-of(nth($list, abs($i))) == list and $recursive {
+            $result: append($result, reverse(nth($list, abs($i)), $recursive));
+        } @else {
+            $result: append($result, nth($list, abs($i)), $separator: comma);
+        }
+    }
+
+    @return $result;
+}
+
+// BUILD GRADIENT LIST =======================
+@function step-gradient-list($list, $index, $reverse: true) {
+    $new-list: $list;
+
+    // reverse list so its light to dark
+    @if $reverse {
+        $new-list: reverse($list);
+    }
+
+    // slice off index - 1
+    $new-list: slice($new-list, $index);
+
+    // @if length($new-list) > 1 {
+    //   // duplicate list, slice off last step, reverse list
+    //   $back-list: slice(reverse($new-list), 2);
+    //   // append duplicate list
+    //   $new-list: join($new-list, $back-list, $separator: comma);
+    // }
+
+    @return $new-list;
+}
+
+@function build-gradient($list, $index, $reverse: true) {
+    $step-list: step-gradient-list($list, $index);
+    $step-count: length($step-list);
+    $divide-by: 100% / $step-count;
+
+    $gradient-list: first($step-list);
+
+    @if $step-count <= 2 {
+        @return first($step-list), last($step-list);
+    }
+
+    @for $i from 1 to length($step-list) {
+        $step: nth($step-list, $i);
+        $last-position: $divide-by * ($i - 1);
+        $position: $divide-by * $i;
+
+        @if $i != 1 {
+            $gradient-list: append($gradient-list, $step $last-position, $separator: comma );
+        }
+
+        $gradient-list: append($gradient-list, $step $position, $separator: comma);
+
+        @if $i == length($step-list) {
+            $gradient-list: append($gradient-list, last($step-list) $last-position, $separator: comma);
+        }
+    }
+
+    @if $step-count <= 2 {
+        @return $step-list;
+    }
+
+    @return append($gradient-list, last($step-list) $divide-by * (length($step-list) - 1), $separator: comma);
+}
+
+  // BUILD GRADIENT ======================
+@mixin step-gradient($list, $index, $deg: 180deg, $reverse: true) {
+    --step-count: #{length(step-gradient-list($list, $index))};
+    --the-list: #{step-gradient-list($list, $index)};
+    background-image: linear-gradient($deg, build-gradient($list, $index, $reverse));
+}

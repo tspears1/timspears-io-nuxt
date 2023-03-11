@@ -1,0 +1,17 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.section {
+    @include section-themes();
+    --section-padding-x: #{fluid(1.25, 2.5)};
+    --section-padding-y: #{fluid(5, 7.5, false)};
+
+    padding: var(--section-padding-y) var(--section-padding-x);
+
+
+
+
+    // temp.
+    min-height: 100vh;
+
+
+}
