@@ -5,6 +5,7 @@
         <section class="section section--dark-matrix">
 
         </section>
+        <FilterModal />
     </main>
 </template>
 

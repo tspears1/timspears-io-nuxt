@@ -1,15 +1,27 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .filter-bar {
+    @include no-bullets();
     align-items: center;
     background: var(--c-theme-003);
     display: grid;
     gap: 1rem;
-    grid-auto-flow: column;
     grid-template-columns: max-content;
-    justify-content: end;
+    justify-content: start;
     padding: fluid(1.25, 2);
 
-    //temp.
-    min-height: 120px;
+    @include breakpoint( md ) {
+        grid-auto-flow: column;
+        justify-content: end;
+    }
+
+    .filter-group-move,
+    .filter-group-enter-active,
+    .filter-group-leave-active {
+        transition: all var(--duration-gentle) var(--ease-out-expo);
+
+        > * {
+            pointer-events: none;
+        }
+    }
 }

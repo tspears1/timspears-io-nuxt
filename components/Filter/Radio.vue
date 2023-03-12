@@ -1,6 +1,10 @@
 <script setup>
-
 import { camel, list } from 'radash'
+import { useFilterStore } from '~/stores/filters'
+import { storeToRefs } from 'pinia'
+
+const filters = useFilterStore()
+const { selectedFilter } = storeToRefs(filters)
 
 const { icons } = useButton()
 
@@ -44,9 +48,13 @@ const props = defineProps({
             return ['dark', 'light'].includes(value)
         }
     },
-    active: {
-        type: Boolean,
-        default: false,
+    name: {
+        type: String,
+        required: true,
+    },
+    value: {
+        type: String,
+        default: '',
     }
 })
 
@@ -55,12 +63,12 @@ const buttonRef = ref()
 </script>
 
 <template>
-    <button
-        :class="['button', { 'button--swap' : swapOrder, 'button--naked': naked }]"
+    <div
+        :class="['button filter-radio', { 'button--swap' : swapOrder, 'button--naked': naked }]"
         :style="`--button-panel-count: ${panelCount};`"
         :data-theme="theme"
         :data-size="size"
-        :data-active="active"
+        :data-active="selectedFilter == value"
         :data-panels="panelCount"
         ref="buttonRef"
     >
@@ -72,16 +80,25 @@ const buttonRef = ref()
                 :style="`--button-panel-index: ${n};`"
             />
         </div>
-        <div
-            :class="['button__text', {'sr-only': hiddenText }]"
+        <label
+            :class="['button__text filter-radio__label', {'sr-only': hiddenText }]"
         >
-            {{ text }}
-        </div>
+            <input
+                type="radio"
+                class="filter-radio__input"
+                :name="name"
+                :value="value"
+                v-model="selectedFilter"
+            >
+            <span>
+                {{ text }}
+            </span>
+        </label>
         <div
             v-if="icon"
             class="button__icon"
         >
             <component :is="icons[camel(icon)]" />
         </div>
-    </button>
+    </div>
 </template>

@@ -1,0 +1,10 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.filter-radio {
+
+    &__input {
+        @include absolute(0);
+        appearance: none;
+        z-index: 1;
+    }
+}
