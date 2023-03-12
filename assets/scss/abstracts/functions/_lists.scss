@@ -1,5 +1,6 @@
 //// ===================== Functions =====================
 // =====https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/
+@use "sass:math";
 
 // FIRST =============================
 @function first($list) {
@@ -91,7 +92,7 @@
 @function build-gradient($list, $index, $reverse: true) {
     $step-list: step-gradient-list($list, $index);
     $step-count: length($step-list);
-    $divide-by: 100% / $step-count;
+    $divide-by: math.div(100%, $step-count);
 
     $gradient-list: first($step-list);
 
@@ -123,7 +124,7 @@
 }
 
   // BUILD GRADIENT ======================
-@mixin step-gradient($list, $index, $deg: 180deg, $reverse: true) {
+@mixin step-gradient($list, $index: 1, $deg: 180deg, $reverse: true) {
     --step-count: #{length(step-gradient-list($list, $index))};
     --the-list: #{step-gradient-list($list, $index)};
     background-image: linear-gradient($deg, build-gradient($list, $index, $reverse));

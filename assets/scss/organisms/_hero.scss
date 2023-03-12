@@ -16,6 +16,7 @@
     position: relative;
     transform: translateY(var(--hero-translate));
     width: var(--content-x);
+    z-index: var(--z-hero);
 
     @include dvh-fallback() {
         --hero-height: #{frame(65svh)};

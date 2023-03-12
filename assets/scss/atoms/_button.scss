@@ -1,31 +1,67 @@
 @use '@/assets/scss/abstracts/' as *;
 
+$dark-list: var(--c-theme-001), var(--c-theme-003), var(--c-theme-005), var(--c-theme-007), var(--c-theme-009), var(--c-theme-011);
+$light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c-theme-006), var(--c-theme-005), var(--c-theme-002);
+
 .button {
+    $b: &;
+
     --button-border-size: 2px;
+    --button-color: var(--c-theme-001);
     --button-stroke: var(--c-theme-001);
     --button-padding-x: 1.1rem;
     --button-padding-y: 0;
     --button-panel-size: 3.75rem;
     --button-height: calc(var(--button-panel-size) - (var(--button-border-size) * 2));
+    --button-easing: var(--ease-out-expo);
+    --button-timing-out: 1500ms;
+    --button-timing-in: 1500ms;
     align-content: center;
     background: transparent;
     border: 2px solid var(--button-stroke);
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: 1fr var(--button-panel-size);
     grid-template-rows: var(--button-height);
     position: relative;
-
+    width: calc(var(--button-panel-size) * var(--button-panel-count));
+    z-index: 1;
 
     @include hover-style(mouse) {
         cursor: pointer;
+
+        #{$b}__panel {
+            background-position-y: 100%;
+            transform: scaleY(1);
+            transition: background-position var(--button-timing-in) var(--button-easing) calc(100ms * var(--button-panel-index));
+        }
+    }
+
+    &[data-active="true"] {
+        #{$b}__panel {
+            background-position-y: 100%;
+            transform: scaleY(1);
+            transition: background-position var(--button-timing-in) var(--button-easing) calc(100ms * var(--button-panel-index));
+        }
     }
 
     &[data-theme="light"] {
+        --button-color: var(--c-theme-012);
         --button-stroke: var(--c-theme-012);
+
+        &[data-active="true"],
+        &:hover {
+            --button-color: var(--c-theme-001);
+        }
     }
 
     &[data-size="compressed"] {
         --button-panel-size: 2.875rem;
+    }
+
+    &:where(:not(.button--naked)) {
+        .button__text + .button__icon {
+            border-left: 2px solid var(--button-stroke);
+        }
     }
 
     &__panels {
@@ -33,16 +69,35 @@
         display: grid;
         grid-template-columns: repeat(var(--button-panel-count), var(--button-panel-size));
         grid-template-rows: var(--button-panel-size);
-        justify-content: end
+        justify-content: end;
+        overflow: clip;
+        overflow: hidden;
+        z-index: -1;
     }
 
     &__panel {
-        // @include step-gradient($-gradient-6, 6);
+        background-position-y: -100%;
+        background-repeat: no-repeat;
+        background-size: 100% calc(var(--button-panel-size) * 7);
+        display: block;
+        grid-column: var(--button-panel-index) / span 1;
+        grid-row: 1 / span 1;
+        height: var(--button-panel-size);
+        transform: scaleY(-1) translateZ(0);
+        transition: background-position var(--button-timing-out) var(--button-easing) calc(100ms * (var(--button-panel-index) - 1));
+
+        [data-theme="dark"] & {
+            @include step-gradient($dark-list);
+        }
+
+        [data-theme="light"] & {
+            @include step-gradient($light-list);
+        }
     }
 
     &__text {
         @include modern-text(500);
-        color: var(--button-stroke);
+        color: var(--button-color);
         display: grid;
         font-size: 0.875rem;
         grid-column: 1 / span 1;
@@ -52,19 +107,17 @@
         padding: var(--button-padding-y) var(--button-padding-x);
         place-items: center;
         text-transform: uppercase;
-
-        + * {
-            border-left: 2px solid var(--button-stroke);
-        }
+        transition: color var(--button-timing-out) var(--button-easing);
     }
 
     &__icon {
-        color: var(--button-stroke);
+        color: var(--button-color);
         display: grid;
         grid-column: 2 / span 1;
         grid-row: 1 / span 1;
         padding: var(--button-padding-y) var(--button-padding-x);
         place-items: center;
+        transition: color var(--button-timing-out) var(--button-easing);
         width: max(var(--button-panel-size), 100%);
     }
 }

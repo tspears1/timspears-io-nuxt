@@ -4,6 +4,9 @@
     align-items: center;
     background: var(--c-theme-003);
     display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    grid-template-columns: max-content;
     justify-content: end;
     padding: fluid(1.25, 2);
 

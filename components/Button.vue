@@ -1,10 +1,11 @@
 <script setup>
 import arrowRight from '@/assets/svgs/button/arrow-right.svg'
 import caretDown from '@/assets/svgs/button/caret-down.svg'
+import grommet from '@/assets/svgs/button/grommet.svg'
 
 import { camel, list } from 'radash'
 
-const icons = { arrowRight, caretDown }
+const icons = { arrowRight, caretDown, grommet }
 
 const props = defineProps({
     text: {
@@ -23,6 +24,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    panelCount: {
+        type: Number,
+        default: 5,
+    },
     icon: {
         type: String,
         validator(value) {
@@ -35,37 +40,39 @@ const props = defineProps({
             return ['compressed', 'normal', 'giant' ].includes(value)
         }
     },
-    style: {
+    theme: {
         type: String,
         default: 'dark',
         validator(value) {
             return ['dark', 'light'].includes(value)
         }
+    },
+    active: {
+        type: Boolean,
+        default: false,
     }
 })
 
 const buttonRef = ref()
-
-const { height, width } = useElementSize(buttonRef)
-
-const panelCount = computed(() => list( Math.ceil( width.value / height.value ) - 1 ))
 
 </script>
 
 <template>
     <button
         :class="['button', { 'button--swap' : swapOrder, 'button--naked': naked }]"
-        :style="`--button-panel-count: ${panelCount.length};`"
-        :data-theme="style"
+        :style="`--button-panel-count: ${panelCount};`"
+        :data-theme="theme"
         :data-size="size"
+        :data-active="active"
+        :data-panels="panelCount"
         ref="buttonRef"
     >
         <div class="button__panels" v-if="panelCount">
             <span
                 class="button__panel"
-                v-for="n in panelCount"
+                v-for="n in list(1, panelCount)"
                 :key="`button__panel-${n}`"
-                :style="`--button-panel-index: ${n + 1};`"
+                :style="`--button-panel-index: ${n};`"
             />
         </div>
         <div
