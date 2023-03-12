@@ -1,27 +1,56 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .button {
+    --button-border-size: 2px;
     --button-stroke: var(--c-theme-001);
     --button-padding-x: 1.1rem;
-    --button-padding-y: 0.8125rem;
-    align-items: center;
+    --button-padding-y: 0;
+    --button-panel-size: 3.75rem;
+    --button-height: calc(var(--button-panel-size) - (var(--button-border-size) * 2));
+    align-content: center;
     background: transparent;
     border: 2px solid var(--button-stroke);
     display: grid;
-    grid-auto-columns: max-content;
-    grid-auto-flow: column;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: var(--button-height);
+    position: relative;
+
+
+    @include hover-style(mouse) {
+        cursor: pointer;
+    }
 
     &[data-theme="light"] {
         --button-stroke: var(--c-theme-012);
     }
 
+    &[data-size="compressed"] {
+        --button-panel-size: 2.875rem;
+    }
+
+    &__panels {
+        @include absolute(0);
+        display: grid;
+        grid-template-columns: repeat(var(--button-panel-count), var(--button-panel-size));
+        grid-template-rows: var(--button-panel-size);
+        justify-content: end
+    }
+
+    &__panel {
+        // @include step-gradient($-gradient-6, 6);
+    }
+
     &__text {
         @include modern-text(500);
         color: var(--button-stroke);
+        display: grid;
         font-size: 0.875rem;
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
         letter-spacing: 0.1em;
         line-height: 1;
         padding: var(--button-padding-y) var(--button-padding-x);
+        place-items: center;
         text-transform: uppercase;
 
         + * {
@@ -31,6 +60,11 @@
 
     &__icon {
         color: var(--button-stroke);
+        display: grid;
+        grid-column: 2 / span 1;
+        grid-row: 1 / span 1;
         padding: var(--button-padding-y) var(--button-padding-x);
+        place-items: center;
+        width: max(var(--button-panel-size), 100%);
     }
 }

@@ -22,11 +22,11 @@ const circleOffset = computed(() => circle.value ? setDashoffset(circle.value) :
 
 const onEnter = () => {
     const sequence = [
-        [circle.value, draw(circleOffset.value, false), { duration: 4 } ],
+        [circle.value, draw(circleOffset.value, false), { duration: 4.25, at: 0.5 } ],
         [
             [triangle.value, square.value, hexagon.value],
             { y: [60, 0], opacity: [ 0, 1 ] },
-            { delay: stagger(0.5), easing: spring({ damping: 5 }), duration: 0.75, at: 0.5 } ],
+            { delay: stagger(0.5), easing: spring({ damping: 5 }), duration: 0.75, at: 1.25 } ],
     ]
 
     timeline(sequence).finished.then(() => {

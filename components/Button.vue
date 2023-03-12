@@ -55,6 +55,7 @@ const panelCount = computed(() => list( Math.ceil( width.value / height.value ) 
 <template>
     <button
         :class="['button', { 'button--swap' : swapOrder, 'button--naked': naked }]"
+        :style="`--button-panel-count: ${panelCount.length};`"
         :data-theme="style"
         :data-size="size"
         ref="buttonRef"
@@ -64,6 +65,7 @@ const panelCount = computed(() => list( Math.ceil( width.value / height.value ) 
                 class="button__panel"
                 v-for="n in panelCount"
                 :key="`button__panel-${n}`"
+                :style="`--button-panel-index: ${n + 1};`"
             />
         </div>
         <div
