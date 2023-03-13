@@ -81,7 +81,9 @@ const buttonRef = ref()
             v-if="icon"
             class="button__icon"
         >
-            <component :is="icons[camel(icon)]" />
+            <div class="button__icon-wrapper">
+                <component :is="icons[camel(icon)]" />
+            </div>
         </div>
     </button>
 </template>
