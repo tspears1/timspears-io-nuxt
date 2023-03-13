@@ -8,7 +8,7 @@
 
     @include grid-items( center start );
     @include grid-content( x start );
-    color: var(--c-theme-text);
+    color: var(--eyebrow-color, var(--c-theme-text));
     display: grid;
     gap: 1.5rem;
     grid-auto-flow: column;
@@ -18,7 +18,7 @@
     }
 
     &__stem {
-        background: var(--c-theme-text);
+        background: var(--eyebrow-color, var(--c-theme-text));
         height: 2px;
         transform-origin: left;
         width: 8.5vw;
@@ -46,6 +46,13 @@
         .-billboard & {
             @include modern-text(900);
             letter-spacing: 0.75em;
+            text-transform: uppercase;
+        }
+
+        .-label & {
+            @include modern-text(900);
+            font-size: #{fluid(0.625, 0.75, false)};
+            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
     }

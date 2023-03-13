@@ -1,28 +1,53 @@
 <script setup>
 import { useFilterStore } from '~/stores/filters'
 import { storeToRefs } from 'pinia'
+import { spring } from 'motion'
+//import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 const filters = useFilterStore()
 const { modalOpen } = storeToRefs(filters)
 
+//const { activate, deactivate } = useFocusTrap(modalRef)
+
 const eyebrowRef = ref()
+const modalRef   = ref()
+
+watch(modalOpen, (value) => {
+    if ( value == true ) {
+        //activate()
+        setTimeout(() => {
+            eyebrowRef.value.play()
+        }, 750);
+    } else {
+        //deactivate()
+        eyebrowRef.value.exit()
+    }
+})
 
 </script>
 
 <template>
-    <div class="filter-modal">
+    <div class="filter-modal" ref="modalRef">
         <Presence>
             <Motion
                 v-show="modalOpen"
                 class="filter-modal__screen"
+                :initial="{ opacity: 0 }"
+                :animate="{ opacity: 1 }"
+                :exit="{ opacity: 0 }"
             />
         </Presence>
         <Presence>
             <Motion
                 v-show="modalOpen"
                 class="filter-modal__container"
+                :initial="{ opacity: 0, y: 60 }"
+                :animate="{ opacity: 1, y: 0 }"
+                :exit="{ opacity: 0, y: 60 }"
+                :transition="{ easing: spring(), delay: 0.25 }"
             >
                 <Eyebrow
+                    class="-label"
                     text="Services"
                     block="filter-modal"
                     ref="eyebrowRef"
@@ -39,13 +64,19 @@ const eyebrowRef = ref()
             <Motion
                 v-show="modalOpen"
                 class="filter-modal__footer"
+                :initial="{ opacity: 0, scale: 0 }"
+                :animate="{ opacity: 1, scale: 1 }"
+                :exit="{ opacity: 0, scale: 0 }"
+                :transition="{ easing: spring({ damping: 5 }), delay: 0.5 }"
             >
                 <Button
+                    @click="filters.closeModal"
                     text="Close Services Modal"
                     theme="light"
                     icon="times"
                     :panel-count="1"
                     hidden-text
+                    naked
                 />
             </Motion>
         </Presence>

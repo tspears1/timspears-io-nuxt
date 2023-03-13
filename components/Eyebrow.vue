@@ -47,10 +47,22 @@ const enterSequence = computed(() => {
     return sequence
 })
 
+const exitSequence = computed(() => {
+    let sequence = []
+    sequence = [...sequence, [letters.value, { y: [0, '100%'] }, { delay: stagger(0.075, { from: 'last' }), duration: 0.125, at: props.offset } ]]
+    if ( !props.icon ) {
+        sequence = [...sequence, [stem.value, { scaleX: [ 1, 0.001] }, { duation: 0.25, easing: cubicBezier.easeOutQuint, at: props.icon ? props.offset : '-0.5' }]]
+    }
+    return sequence
+})
+
 const play = () => timeline(enterSequence.value)
+
+const exit = () => timeline(exitSequence.value)
 
 defineExpose({
     play,
+    exit,
     stem,
     splitText,
     enterSequence,
