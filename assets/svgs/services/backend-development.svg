@@ -1,0 +1,6 @@
+<svg id="backend-development" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 28">
+  <rect x="19" y="12" width="19" height="4" fill="var(--icon-shade-002)"/>
+  <rect y="12" width="19" height="4" fill="var(--icon-shade-004)"/>
+  <path d="m19,0c-3.71,0-7.27,1.47-9.9,4.1-2.63,2.63-4.1,6.19-4.1,9.9s1.47,7.27,4.1,9.9c2.63,2.63,6.19,4.1,9.9,4.1V0Z" fill="var(--icon-shade-003)"/>
+  <path d="m19,28c3.71,0,7.27-1.48,9.9-4.1,2.63-2.63,4.1-6.19,4.1-9.9s-1.47-7.27-4.1-9.9C26.27,1.47,22.71,0,19,0v28Z" fill="var(--icon-shade-001)"/>
+</svg>

@@ -2,24 +2,30 @@
 import { useFilterStore } from '~/stores/filters'
 import { storeToRefs } from 'pinia'
 import { spring } from 'motion'
-//import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap.mjs'
 
 const filters = useFilterStore()
 const { modalOpen } = storeToRefs(filters)
 
-//const { activate, deactivate } = useFocusTrap(modalRef)
+const { serviceIcons } = useIcons()
 
 const eyebrowRef = ref()
 const modalRef   = ref()
 
+const { activate, deactivate } = useFocusTrap(modalRef)
+
+const onKeyDown = () => {
+
+}
+
 watch(modalOpen, (value) => {
     if ( value == true ) {
-        //activate()
         setTimeout(() => {
             eyebrowRef.value.play()
+            activate()
         }, 750);
     } else {
-        //deactivate()
+        deactivate()
         eyebrowRef.value.exit()
     }
 })
@@ -35,6 +41,7 @@ watch(modalOpen, (value) => {
                 :initial="{ opacity: 0 }"
                 :animate="{ opacity: 1 }"
                 :exit="{ opacity: 0 }"
+                @click="filters.closeModal"
             />
         </Presence>
         <Presence>
@@ -53,9 +60,13 @@ watch(modalOpen, (value) => {
                     ref="eyebrowRef"
                     offset="0"
                 />
-                <ul class="filter-modal__options">
+                <ul
+                    class="filter-modal__options"
+                    v-for="icon in serviceIcons"
+                    :key="`icon-${icon}`"
+                >
                     <li class="filter-modal__item">
-
+                        <IconService :icon="icon.slug" class="-coin-icon"/>
                     </li>
                 </ul>
             </Motion>
@@ -77,6 +88,7 @@ watch(modalOpen, (value) => {
                     :panel-count="1"
                     hidden-text
                     naked
+                    tabindex="0"
                 />
             </Motion>
         </Presence>

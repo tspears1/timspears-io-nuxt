@@ -1,0 +1,5 @@
+<svg id="graphic-design" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 34">
+      <circle cx="10.5" cy="23.5" r="10.5" fill="var(--icon-shade-003)"/>
+      <circle cx="25.5" cy="23.5" r="10.5" fill="var(--icon-shade-004)"/>
+      <ellipse cx="18" cy="10.5" rx="11" ry="10.5" fill="var(--icon-shade-001)"/>
+</svg>

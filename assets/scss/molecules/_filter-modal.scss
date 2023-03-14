@@ -23,6 +23,7 @@
         background: var(--c-theme-012);
         border-radius: 0.25rem;
         display: grid;
+        gap: 2rem;
         grid-column: 2 / span 1;
         grid-row: 2 / span 1;
         justify-items: center;
@@ -34,6 +35,11 @@
     &-eyebrow {
         --eyebrow-color: var(--c-theme-002);
         @include eyebrow();
+    }
+
+    &__options {
+        display: grid;
+        gap: 1.5rem;
     }
 
     &__footer {

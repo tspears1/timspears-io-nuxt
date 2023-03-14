@@ -21,6 +21,7 @@
     "@vueuse/gesture": "^2.0.0-beta.1",
     "@vueuse/integrations": "^9.13.0",
     "@vueuse/motion": "^2.0.0-beta.12",
+    "focus-trap": "^7.4.0",
     "imagesloaded": "^5.0.0",
     "javascript-color-gradient": "^2.4.4",
     "motion": "^10.15.5",

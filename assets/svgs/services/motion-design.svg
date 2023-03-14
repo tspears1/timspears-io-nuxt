@@ -1,0 +1,6 @@
+<svg id="motion-design" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 16">
+    <circle cx="8" cy="8" r="8" fill="var(--icon-shade-004)"/>
+    <circle cx="16" cy="8" r="8" fill="var(--icon-shade-003)"/>
+    <circle cx="24" cy="8" r="8" fill="var(--icon-shade-002)"/>
+    <circle cx="32" cy="8" r="8" fill="var(--icon-shade-001)"/>
+</svg>

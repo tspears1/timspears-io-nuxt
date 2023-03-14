@@ -1,0 +1,5 @@
+<svg id="brand-design" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 38">
+  <path d="m5.37,22.55L0,38h10.73l-5.36-15.45Z" fill="var(--icon-shade-004)"/>
+  <path d="m8.27,0h11.54l13.19,38h-11.54L10.74,7.1,8.27,0Z" fill="var(--icon-shade-001)" fill-rule="evenodd"/>
+  <path d="m21.46,38L10.74,7.1l-5.37,15.45,5.36,15.45h10.73Z" fill="var(--icon-shade-003)"/>
+</svg>
