@@ -11,6 +11,9 @@
 
     display: grid;
     place-items: center;
+    transition:
+        background var(--duration-moderate) var(--ease-out-cubic),
+        border var(--duration-moderate) var(--ease-out-cubic);
 
     &.-invert-icon {
         --icon-shade-001: var(--c-theme-011);

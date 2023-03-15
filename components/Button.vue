@@ -51,6 +51,13 @@ const props = defineProps({
 })
 
 const buttonRef = ref()
+const dynamicText = ref()
+
+const updateDynamicText = (value) => dynamicText.value = value
+
+defineExpose({
+    updateDynamicText
+})
 
 </script>
 
@@ -75,7 +82,7 @@ const buttonRef = ref()
         <div
             :class="['button__text', {'sr-only': hiddenText }]"
         >
-            {{ text }}
+            {{ dynamicText ?? text }}
         </div>
         <div
             v-if="icon"

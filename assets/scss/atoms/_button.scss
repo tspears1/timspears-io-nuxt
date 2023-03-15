@@ -13,10 +13,10 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     --button-padding-y: 0;
     --button-panel-size: 3.75rem;
     --button-height: calc(var(--button-panel-size) - (var(--button-border-size) * 2));
-    --button-content-easing: var(--ease-out-cubic);
-    --button-panel-easing: var(--ease-out-cubic);
-    --button-timing-out: var(--duration-gentle);
-    --button-timing-in: var(--duration-gentle);
+    --button-panel-easing-enter: var(--ease-out-cubic);
+    --button-panel-easing-exit: var(--ease-out-quad);
+    --button-timing-out: calc(var(--duration-adagio) - (var(--button-panel-count) * 100ms));
+    --button-timing-in: calc(var(--duration-adagio) - (var(--button-panel-count) * 100ms));
     @include grid-content( center center);
     background: transparent;
     border: 2px solid var(--button-stroke);
@@ -33,7 +33,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         #{$b}__panel {
             background-position-y: 100%;
             transform: scaleY(1);
-            transition: background-position var(--button-timing-in) var(--button-panel-easing) calc(100ms * var(--button-panel-index));
+            transition: background-position var(--button-timing-in) var(--button-panel-easing-enter) var(--button-panel-delay);
         }
     }
 
@@ -41,7 +41,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         #{$b}__panel {
             background-position-y: 100%;
             transform: scaleY(1);
-            transition: background-position var(--button-timing-in) var(--button-panel-easing) calc(100ms * var(--button-panel-index));
+            transition: background-position var(--button-timing-in) var(--button-panel-easing) var(--button-panel-delay);
         }
     }
 
@@ -78,6 +78,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     }
 
     &__panel {
+        --button-panel-delay: calc(100ms * ( var(--button-panel-index) - 1 ));
         background-position-y: -100%;
         background-repeat: no-repeat;
         background-size: 100% calc(var(--button-panel-size) * 7);
@@ -86,7 +87,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         grid-row: 1 / span 1;
         height: var(--button-panel-size);
         transform: scaleY(-1) translateZ(0);
-        transition: background-position var(--button-timing-out) var(--button-panel-easing) calc(100ms * (var(--button-panel-index) - 1));
+        transition: background-position var(--button-timing-out) var(--button-panel-easing-exit) var(--button-panel-delay);
 
         [data-theme="dark"] & {
             @include step-gradient($dark-list);
@@ -109,7 +110,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         padding: var(--button-padding-y) var(--button-padding-x);
         place-items: center;
         text-transform: uppercase;
-        transition: color var(--button-timing-out) var(--button-content-easing);
+        transition: color var(--button-timing-out) var(--button-panel-easing-exit);
     }
 
     &__icon {
@@ -119,7 +120,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         grid-row: 1 / span 1;
         padding: var(--button-padding-y) var(--button-padding-x);
         place-items: center;
-        transition: color var(--button-timing-out) var(--button-content-easing);
+        transition: color var(--button-timing-out) var(--button-panel-easing-exit);
         width: max(var(--button-height), 100%);
     }
 

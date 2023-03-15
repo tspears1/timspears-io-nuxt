@@ -60,13 +60,13 @@ watch(modalOpen, (value) => {
                     ref="eyebrowRef"
                     offset="0"
                 />
-                <ul
-                    class="filter-modal__options"
-                    v-for="icon in serviceIcons"
-                    :key="`icon-${icon}`"
-                >
-                    <li class="filter-modal__item">
-                        <IconService :icon="icon.slug" class="-coin-icon"/>
+                <ul class="filter-modal__options">
+                    <li
+                        class="filter-modal__item"
+                        v-for="icon in serviceIcons"
+                        :key="`icon-${icon}`"
+                    >
+                        <FilterIconRadio :icon="icon" />
                     </li>
                 </ul>
             </Motion>

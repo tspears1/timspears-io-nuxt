@@ -1,0 +1,45 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.filter-icon-radio {
+    $b: &;
+
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: max-content auto;
+    position: relative;
+
+    @include hover-style(mouse) {
+        #{$b}__icon {
+            background: rgba( var(--icon-invert-border-color), 0.05);
+        }
+    }
+
+    &__label {
+        @include modern-text();
+        color: var(--c-theme-001);
+        font-size: 1.1rem;
+        line-height: 1.2;
+        grid-column: 2 / span 1;
+        grid-row: 1 / span 1;
+    }
+
+    &__input {
+        @include absolute(0);
+        appearance: none;
+    }
+
+    &__icon {
+        @include size(calc(var(--icon-size) * 1.5));
+        background: rgba( var(--icon-invert-border-color), 0);
+        border: 1px solid var(--icon-border-color);
+        border-radius: 50%;
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+
+        [data-input-active="true"] & {
+            background: rgba( var(--icon-invert-border-color), 1);
+            border-color: var(--icon-invert-border-color);
+        }
+    }
+}

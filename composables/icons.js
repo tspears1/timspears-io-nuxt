@@ -46,10 +46,13 @@ const useIcons = () => {
 
     const serviceIconLabels = serviceIcons.map(i => omit(i, ['icon']))
 
+    const serviceIconSlugs = serviceIcons.map(i => i.slug)
+
     return {
         serviceIcons,
         serviceIconSet,
         serviceIconLabels,
+        serviceIconSlugs,
     }
 }
 

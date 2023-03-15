@@ -5,11 +5,19 @@ import { storeToRefs } from 'pinia'
 const filters = useFilterStore()
 const { selectedFilter } = storeToRefs(filters)
 
+const { serviceIcons } = useIcons()
+
 const order = ref([ '', 'services', 'awarded'])
+
+const serviceButton = ref()
 
 watch(selectedFilter, (selected) => {
     const first = order.value[0]
+    const serviceActive = serviceIcons.filter(icon => icon.slug == selected)
+    const active = serviceActive.length ? 'services' : selected
+    // need to remove filter if it already exists or check before updating.
     order.value = [selected, ...order.value.filter(item => item != selected && item != first), first]
+    serviceButton.value[0].updateDynamicText(serviceActive.length ? serviceActive[0].label : 'services')
 })
 
 
@@ -32,7 +40,6 @@ watch(selectedFilter, (selected) => {
                     icon="grommet"
                     theme="light"
                     :panel-count="3"
-                    naked
                 />
                 <Button
                     v-if="option == 'services'"
@@ -41,6 +48,7 @@ watch(selectedFilter, (selected) => {
                     icon="caret-down"
                     theme="light"
                     :panel-count="4"
+                    ref="serviceButton"
                     @click="filters.openModal"
                 />
                 <FilterRadio
