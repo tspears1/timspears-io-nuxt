@@ -1,13 +1,10 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .service-icon {
-    --icon-shade-001: var(--c-theme-002);
-    --icon-shade-002: var(--c-theme-004);
-    --icon-shade-003: var(--c-theme-006);
-    --icon-shade-004: var(--c-theme-008);
+    @include icon-shades();
     --icon-size: 2.5rem;
-    --icon-border-color: var(--c-theme-006);
-    --icon-invert-border-color: var(--c-theme-001-rgb);
+    --icon-border-color: var(--c-theme-002-rgb);
+    --icon-invert-border-color: var(--c-theme-002-rgb);
 
     display: grid;
     place-items: center;
@@ -16,26 +13,23 @@
         border var(--duration-moderate) var(--ease-out-cubic);
 
     &.-invert-icon {
-        --icon-shade-001: var(--c-theme-011);
-        --icon-shade-002: var(--c-theme-009);
-        --icon-shade-003: var(--c-theme-007);
-        --icon-shade-004: var(--c-theme-005);
+        @include icon-invert-shades();
     }
 
     &.-coin-icon {
         @include size(calc(var(--icon-size) * 2));
         background: rgba( var(--icon-invert-border-color), 0);
-        border: 1px solid var(--icon-border-color);
+        border: 1px solid rgba(var(--icon-border-color), 0.5);
         border-radius: 50%;
 
         &.-invert-icon {
             background: rgba( var(--icon-invert-border-color), 1);
-            border-color: var(--icon-invert-border-color);
+            border-color: rgba(var(--icon-invert-border-color), 1);
         }
     }
 
     &__wrapper {
-        @include size(var(--icon-size));
+        @include size(var(--icon-size-override, var(--icon-size)));
         display: grid;
         place-items: center;
     }

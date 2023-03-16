@@ -3,7 +3,7 @@
 .filter-modal {
     @include fixed(0);
     display: grid;
-    grid-template-columns: max(10vh, 2.5rem) 1fr max(10vh, 2.5rem);
+    grid-template-columns: fluid(2.5, 8, false) 1fr fluid(2.5, 8, false);
     grid-template-rows: 10vh 1fr 20vh;
     place-content: center;
     place-items: center;
@@ -23,11 +23,11 @@
         background: var(--c-theme-012);
         border-radius: 0.25rem;
         display: grid;
-        gap: 2rem;
+        gap: 3rem;
         grid-column: 2 / span 1;
         grid-row: 2 / span 1;
         justify-items: center;
-        padding: fluid(1.25, 2.5);
+        padding: fluid(2, 3);
         position: relative;
         width: min(100%, 28.75rem);
     }

@@ -1,6 +1,7 @@
 <script setup>
 import { useFilterStore } from '~/stores/filters'
 import { storeToRefs } from 'pinia'
+import { unique } from 'radash'
 
 const filters = useFilterStore()
 const { selectedFilter } = storeToRefs(filters)
@@ -15,9 +16,13 @@ watch(selectedFilter, (selected) => {
     const first = order.value[0]
     const serviceActive = serviceIcons.filter(icon => icon.slug == selected)
     const active = serviceActive.length ? 'services' : selected
-    // need to remove filter if it already exists or check before updating.
-    order.value = [selected, ...order.value.filter(item => item != selected && item != first), first]
-    serviceButton.value[0].updateDynamicText(serviceActive.length ? serviceActive[0].label : 'services')
+
+    order.value = unique([active, ...order.value.filter(item => item != selected && item != first), first])
+    //console.log('order: ', order.value, selected)
+    serviceButton.value[0].updateDynamicText( serviceActive.length ? serviceActive[0].label : 'services' )
+    serviceButton.value[0].updateDynamicPanels( serviceActive.length ? serviceActive[0].panels : 4 )
+    serviceButton.value[0].updateDynamicIcon( serviceActive.length ? 'times' : 'caret-down')
+    serviceActive.length ? serviceButton.value[0].activate() : serviceButton.value[0].deactivate()
 })
 
 

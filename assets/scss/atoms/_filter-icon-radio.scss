@@ -5,23 +5,56 @@
 
     align-items: center;
     display: grid;
-    gap: 2rem;
+    gap: fluid(1.5, 2rem);
     grid-template-columns: max-content auto;
     position: relative;
+    transform-style: preserve-3d;
 
     @include hover-style(mouse) {
-        #{$b}__icon {
-            background: rgba( var(--icon-invert-border-color), 0.05);
+        cursor: pointer;
+
+        &[data-input-active="false"] {
+            #{$b}__icon {
+                background: rgba( var(--icon-invert-border-color), 0.08);
+            }
         }
+    }
+
+    &[data-input-active="true"] {
+        #{$b}__label::before {
+            transform: translateY(0) rotateX(0);
+        }
+
+        #{$b}__label-wrapper {
+            transform: translateY(50%) rotateX(-90deg);
+        }
+
+
     }
 
     &__label {
         @include modern-text();
+        clip-path: inset(0);
         color: var(--c-theme-001);
-        font-size: 1.1rem;
-        line-height: 1.2;
+        font-size: fluid(0.875, 1.1rem);
+        line-height: 1;
         grid-column: 2 / span 1;
         grid-row: 1 / span 1;
+        position: relative;
+
+        &::before {
+            @include absolute(0);
+            @include classic-text(700, italic);
+            content: attr(data-label);
+            font-size: 0.95em;
+            transition: transform var(--duration-fast)  var(--ease-out-expo);
+            transform: translateY(-50%) rotateX(90deg);
+        }
+    }
+
+    &__label-wrapper {
+        display: block;
+        transition: transform var(--duration-fast)  var(--ease-out-expo);
     }
 
     &__input {
@@ -30,16 +63,18 @@
     }
 
     &__icon {
-        @include size(calc(var(--icon-size) * 1.5));
+        --icon-size-override: #{fluid(2, 2.5)};
+        @include size(calc(var(--icon-size-override) * 1.5 ));
         background: rgba( var(--icon-invert-border-color), 0);
-        border: 1px solid var(--icon-border-color);
+        border: 1px solid rgba(var(--icon-border-color), 0.5);
         border-radius: 50%;
         grid-column: 1 / span 1;
         grid-row: 1 / span 1;
 
         [data-input-active="true"] & {
+            @include icon-invert-shades();
             background: rgba( var(--icon-invert-border-color), 1);
-            border-color: var(--icon-invert-border-color);
+            border-color: rgba(var(--icon-invert-border-color), 1);
         }
     }
 }

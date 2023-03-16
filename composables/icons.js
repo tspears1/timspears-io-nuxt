@@ -14,31 +14,37 @@ const useIcons = () => {
             label: 'Back-end Development',
             slug: 'backend',
             icon: backendDevelopment,
+            panels: 7,
         },
         {
             label: 'Front-end Development',
             slug: 'frontend',
             icon: frontendDevelopment,
+            panels: 7,
         },
         {
             label: 'Brand Design',
             slug: 'brand',
             icon: brandDesign,
+            panels: 5,
         },
         {
             label: 'Graphic Design',
             slug: 'graphic',
             icon: graphicDesign,
+            panels: 5,
         },
         {
             label: 'Motion Design',
             slug: 'motion',
             icon: motionDesign,
+            panels: 5,
         },
         {
             label: 'Web Design',
             slug: 'web',
             icon: webDesign,
+            panels: 5,
         },
     ]
 

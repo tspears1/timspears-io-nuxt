@@ -11,6 +11,7 @@
     padding: fluid(1.25, 2);
 
     @include breakpoint( md ) {
+        @include sticky( calc(var(--header-height) + var(--frame-border)) x x x );
         grid-auto-flow: column;
         justify-content: end;
     }

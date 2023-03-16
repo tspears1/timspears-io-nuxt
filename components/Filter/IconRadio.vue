@@ -14,8 +14,10 @@ const props = defineProps({
 
 <template>
     <div class="filter-icon-radio">
-        <label class="filter-icon-radio__label">
-            {{ icon.label }}
+        <label class="filter-icon-radio__label" :data-label="icon.label">
+            <span class="filter-icon-radio__label-wrapper">
+                {{ icon.label }}
+            </span>
         </label>
         <IconService :icon="icon.slug" class="filter-icon-radio__icon" />
         <input
