@@ -44,8 +44,14 @@ watch(selectedFilter, (selected) => {
                 v-if="modalOpen"
                 class="filter-modal__screen"
                 :initial="{ opacity: 0 }"
-                :animate="{ opacity: 1 }"
-                :exit="{ opacity: 0 }"
+                :animate="{
+                    opacity: 1,
+                    transition: { easing: cubicBezier.easeOutCirc, duration: 1 }
+                }"
+                :exit="{
+                    opacity: 0,
+                    transition: { easing: cubicBezier.easeOutCirc, duration: 1, delay: 0.5 }
+                }"
                 @click="filters.closeModal"
             />
         </Presence>
@@ -62,7 +68,7 @@ watch(selectedFilter, (selected) => {
                 :exit="{
                     opacity: 0,
                     y: 30,
-                    transition: { easing: spring(), delay: 0.65 },
+                    transition: { easing: spring(), delay: 0.45 },
                 }"
             >
                 <Eyebrow
@@ -87,15 +93,6 @@ watch(selectedFilter, (selected) => {
                                 delay: 0.5 + 0.05 * (serviceIcons.length - index - 1)
                             }
                         }"
-                        :exit="{
-                            opacity: 0,
-                            x: 30,
-                            transition: {
-                                easing: cubicBezier.easeOutExpo,
-                                duration: 1,
-                                delay: 0.05 * index
-                            }
-                        }"
                     >
                         <FilterIconRadio :icon="icon" :data-input-active="selectedFilter === icon.slug"/>
                     </Motion>
@@ -107,9 +104,16 @@ watch(selectedFilter, (selected) => {
                 v-if="modalOpen"
                 class="filter-modal__footer"
                 :initial="{ opacity: 0, scale: 0 }"
-                :animate="{ opacity: 1, scale: 1 }"
-                :exit="{ opacity: 0, scale: 0 }"
-                :transition="{ easing: cubicBezier.easeOutExpo, duration: 1.25,  delay: 1 }"
+                :animate="{
+                    opacity: 1,
+                    scale: 1,
+                    transition: { easing: cubicBezier.easeOutExpo, duration: 1.25,  delay: 1 },
+                }"
+                :exit="{
+                    opacity: 0,
+                    scale: 0,
+                    transition: { easing: cubicBezier.easeInExpo, duration: 0.5 }
+                }"
             >
                 <Button
                     @click="filters.closeModal"

@@ -13,6 +13,14 @@
     @include hover-style(mouse) {
         cursor: pointer;
 
+        #{$b}__label::before {
+            transform: translateY(0) rotateX(0);
+        }
+
+        #{$b}__label-wrapper {
+            transform: translateY(50%) rotateX(-90deg);
+        }
+
         &[data-input-active="false"] {
             #{$b}__icon {
                 background: rgba( var(--icon-invert-border-color), 0.08);
@@ -28,8 +36,6 @@
         #{$b}__label-wrapper {
             transform: translateY(50%) rotateX(-90deg);
         }
-
-
     }
 
     &__label {
