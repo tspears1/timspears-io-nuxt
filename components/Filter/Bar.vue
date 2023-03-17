@@ -11,6 +11,7 @@ const { serviceIcons } = useIcons()
 const order = ref([ '', 'services', 'awarded'])
 
 const serviceButton = ref()
+const filterBar = ref()
 
 watch(selectedFilter, (selected) => {
     const first = order.value[0]
@@ -23,14 +24,15 @@ watch(selectedFilter, (selected) => {
     serviceButton.value[0].updateDynamicPanels( serviceActive.length ? serviceActive[0].panels : 4 )
     serviceButton.value[0].updateDynamicIcon( serviceActive.length ? 'times' : 'caret-down')
     serviceActive.length ? serviceButton.value[0].activate() : serviceButton.value[0].deactivate()
+    filterBar.value.scrollTo(0, 0)
 })
 
 
 </script>
 
 <template>
-    <nav class="filter-bar">
-        <TransitionGroup name="filter-group">
+    <nav class="filter-bar" ref="filterBar">
+        <TransitionGroup name="filter-group" tag="ul" class="filter-bar__list">
             <li
                 class="filter-bar__item"
                 v-for="option in order"

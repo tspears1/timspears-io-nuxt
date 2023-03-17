@@ -1,19 +1,40 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .filter-bar {
-    @include no-bullets();
-    align-items: center;
+    @include hide-scrollbars();
+    @include sticky( calc(var(--header-height) + var(--frame-border)) x x x );
     background: var(--c-theme-003);
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: max-content;
-    justify-content: start;
-    padding: fluid(1.25, 2);
+    overflow-x: auto;
+    width: frame(100vw);
 
     @include breakpoint( md ) {
-        @include sticky( calc(var(--header-height) + var(--frame-border)) x x x );
+        overflow: hidden;
+    }
+
+    &__list {
+        @include no-bullets();
+        align-items: center;
+        display: grid;
+        gap: 1rem;
         grid-auto-flow: column;
-        justify-content: end;
+        grid-template-columns: max-content;
+        justify-content: start;
+        padding: fluid(1.25, 2);
+
+        @include breakpoint( md ) {
+            justify-content: end;
+        }
+
+        &::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 1px;
+
+            @include breakpoint( md ) {
+                content: none;
+            }
+        }
     }
 
     .filter-group-move,

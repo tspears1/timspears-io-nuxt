@@ -8,6 +8,8 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
 
     --button-border-size: 2px;
     --button-color: var(--c-theme-001);
+    --button-font-size: 0.875rem;
+    --button-icon-size: 1rem;
     --button-stroke: var(--c-theme-001);
     --button-padding-x: 1.1rem;
     --button-padding-y: 0;
@@ -19,7 +21,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     --button-timing-in: calc(var(--duration-adagio) - (var(--button-panel-count) * 100ms));
     @include grid-content( center center);
     background: transparent;
-    border: 2px solid var(--button-stroke);
+    border: var(--button-border-size) solid var(--button-stroke);
     display: grid;
     grid-template-columns: 1fr var(--button-panel-size);
     grid-template-rows: var(--button-height);
@@ -57,17 +59,27 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     }
 
     &[data-size="compressed"] {
-        --button-panel-size: 2.875rem;
+        --button-font-size: 0.8125rem;
+        --button-icon-size: 0.45rem;
+        --button-padding-x: 0.25rem;
+        --button-panel-size: 2.325rem;
+
+        @include breakpoint( md ) {
+            --button-font-size: 0.875rem;
+            --button-icon-size: 0.5rem;
+            --button-padding-x: 1.1rem;
+            --button-panel-size: 2.875rem;
+        }
     }
 
     &:where(:not(.button--naked)) {
         .button__text + .button__icon {
-            border-left: 2px solid var(--button-stroke);
+            border-left: var(--button-border-size) solid var(--button-stroke);
         }
     }
 
     &__panels {
-        @include absolute(-2px x x -2px);
+        @include absolute(calc(var(--button-border-size) * -1) x x calc(var(--button-border-size) * -1));
         display: grid;
         grid-template-columns: repeat(var(--button-panel-count), var(--button-panel-size));
         grid-template-rows: var(--button-panel-size);
@@ -102,7 +114,7 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
         @include modern-text(500);
         color: var(--button-color);
         display: grid;
-        font-size: 0.875rem;
+        font-size: var(--button-font-size);
         grid-column: 1 / span 1;
         grid-row: 1 / span 1;
         letter-spacing: 0.1em;
@@ -125,12 +137,8 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     }
 
     &__icon-wrapper {
-        @include svg-contain($width: auto, $height: 1rem);
+        @include svg-contain($width: auto, $height: var(--button-icon-size));
         display: grid;
         place-items: center;
-
-        [data-size="compressed"] & {
-            height: 0.5rem;
-        }
     }
 }
