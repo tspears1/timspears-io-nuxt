@@ -1,0 +1,8 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.filter-grid {
+    @include grid-content( x center);
+    display: grid;
+    gap: fluid(2.5, 4);
+    grid-template-columns: repeat(2, 40.625rem);
+}

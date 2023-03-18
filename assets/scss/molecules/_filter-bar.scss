@@ -3,9 +3,11 @@
 .filter-bar {
     @include hide-scrollbars();
     @include sticky( calc(var(--header-height) + var(--frame-border)) x x x );
-    background: var(--c-theme-003);
+    background: rgba(var(--c-theme-001-rgb), 0.8);
+    backdrop-filter: blur(1.25rem);
     overflow-x: auto;
     width: frame(100vw);
+    z-index: var(--z-sticky);
 
     @include breakpoint( md ) {
         overflow: hidden;

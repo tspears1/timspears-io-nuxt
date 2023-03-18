@@ -1,0 +1,99 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.filter-card {
+    --card-border-color: var(--c-theme-008);
+    --card-padding-x: 1.25rem;
+    --card-padding-y: 1.9375rem;
+    aspect-ratio: 1 / 1;
+    display: grid;
+
+
+    &__content {
+        @include grid-content( end x );
+        display: grid;
+        grid-area: 1 / 1 / 1 / 1;
+        padding: var(--card-padding-x) var(--card-padding-x);
+        position: relative;
+        z-index: 1;
+    }
+
+    &__wrapper {
+        background: var(--c-theme-012);
+        // border-radius: 0.25rem;
+        box-shadow:
+            -2px -2px 4px 2px rgba(var(--c-theme-001-rgb), 0.05),
+            2px 2px 4px 2px rgba(var(--c-theme-001-rgb), 0.05);
+        display: grid;
+
+        height: 11.875rem;
+        overflow:hidden;
+    }
+
+    &__header {
+        @include grid-content( center space-between );
+        border-bottom: 2px solid var(--card-border-color);
+        display: grid;
+        grid-template-columns: 1fr max-content;
+    }
+
+    &__eyebrow {
+        @include modern-text();
+        color: var(--c-theme-004);
+        font-size: 1rem;
+        line-height: 1;
+        padding: var(--card-padding-y) var(--card-padding-x);
+    }
+
+    &__services {
+        border-left: 2px solid var(--card-border-color);
+        display: grid;
+        gap: var(--card-padding-x);
+        grid-auto-flow: column;
+        padding: 0 var(--card-padding-x);
+    }
+
+    &__icon {
+        --icon-size: 1.875rem;
+    }
+
+    &__title {
+        padding: var(--card-padding-y) var(--card-padding-x);
+    }
+
+    &__link {
+        @include poster-text();
+        @include pseudo-link();
+        color: var(--c-theme-002);
+        font-size: 2.625rem;
+    }
+
+    &__cta {
+        @include modern-text(500);
+        border-top: 2px solid var(--card-border-color);
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        padding: var(--card-padding-y) var(--card-padding-x);
+        text-transform: uppercase;
+    }
+
+    &__cta-text {
+        @include grid-content( center space-between );
+        display: grid;
+        grid-template-columns: 1fr max-content;
+    }
+
+    &__cta-icon {
+
+    }
+
+
+
+    &__media {
+        grid-area: 1 / 1 / 1 / 1;
+    }
+
+    &__img {
+        @include image-fit();
+    }
+
+}
