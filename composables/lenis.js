@@ -23,7 +23,7 @@ const useLenis = () => {
             lerp: 0.2,
             duration: 2.5,
             easing: easings.easeOutCubic,
-            smooth: true
+            smoothWheel: true
         })
 
         // loop

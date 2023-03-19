@@ -1,10 +1,32 @@
 <script setup>
+import { FastAverageColor } from 'fast-average-color'
+import { list, random } from 'radash'
+
+const { icons } = useButton()
+const fac = new FastAverageColor()
 
 const props = defineProps({
     card: Object,
 })
 
+const ignored = [
+    [255, 255, 255, 255], // white
+    [0, 0, 0, 255] // black
+]
+
 const imageRef = ref()
+const panelColor = ref()
+
+const panelGroup = computed(() => list(0, 64, () => random(10, 75) * 0.01))
+
+onMounted(() => {
+    nextTick(() => {
+        fac.getColorAsync(imageRef.value, {
+            ignoredColor: ignored,
+            algorithm: 'sqrt'
+        }).then(color => panelColor.value = color.value.slice(0, -1))
+    })
+})
 
 </script>
 
@@ -38,16 +60,27 @@ const imageRef = ref()
 
                     <div class="filter-card__cta">
                         <span class="filter-card__cta-text">View Project</span>
-                        <div class="filter-card__cta-icon"></div>
+                        <div class="filter-card__cta-icon">
+                            <component :is="icons.arrowRight" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="filter-card__media">
+            <div class="filter-card__panels">
+                <div
+                    class="filter-card__panel"
+                    v-for="(alpha, index) in panelGroup"
+                    :key="`${alpha}--${index}`"
+                    :style="`--card-panel-bg: ${panelColor}; --card-panel-alpha: ${alpha};`"
+                />
+            </div>
             <img
                 class="filter-card__img lazyload"
                 ref="imageRef"
                 :src="card.image"
+                crossorigin="anonymous"
             />
         </div>
     </article>

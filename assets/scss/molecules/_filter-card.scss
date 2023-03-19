@@ -1,20 +1,43 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .filter-card {
+    $b: &;
+
+    --card-arrow-size: #{fluid(1.875, 2.5rem)};
     --card-border-color: var(--c-theme-008);
-    --card-padding-x: 1.25rem;
-    --card-padding-y: 1.9375rem;
+    --card-padding-x: #{fluid(0.75, 1.25rem)};
+    --card-padding-y: #{fluid(1.25, 1.9375rem)};
+    --card-row-size: #{fluid( 3.5, 5rem)};
     aspect-ratio: 1 / 1;
     display: grid;
 
+    @include hover-style(mouse) {
+        cursor: pointer;
+
+        #{$b}__mask {
+            transform: translateY(calc(var(--card-row-size) * -1));
+        }
+
+        #{$b}__panel {
+            opacity: 0.8;
+            transform: scale(1);
+        }
+
+        #{$b}__img {
+            filter: blur(16px);
+        }
+
+
+    }
 
     &__content {
+        @include grid-items( end x );
         @include grid-content( end x );
         display: grid;
         grid-area: 1 / 1 / 1 / 1;
         padding: var(--card-padding-x) var(--card-padding-x);
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
 
     &__wrapper {
@@ -24,9 +47,12 @@
             -2px -2px 4px 2px rgba(var(--c-theme-001-rgb), 0.05),
             2px 2px 4px 2px rgba(var(--c-theme-001-rgb), 0.05);
         display: grid;
-
-        height: 11.875rem;
+        height: calc(100% - var(--card-row-size));
         overflow:hidden;
+    }
+
+    &__mask {
+        transition: transform var(--duration-slow) var(--ease-out-quint);
     }
 
     &__header {
@@ -39,7 +65,7 @@
     &__eyebrow {
         @include modern-text();
         color: var(--c-theme-004);
-        font-size: 1rem;
+        font-size: fluid(0.875, 1rem);
         line-height: 1;
         padding: var(--card-padding-y) var(--card-padding-x);
     }
@@ -53,7 +79,7 @@
     }
 
     &__icon {
-        --icon-size: 1.875rem;
+        --icon-size: #{fluid(1.25, 1.875rem)};
     }
 
     &__title {
@@ -64,36 +90,58 @@
         @include poster-text();
         @include pseudo-link();
         color: var(--c-theme-002);
-        font-size: 2.625rem;
+        font-size: fluid(1.5, 2.625rem);
     }
 
     &__cta {
-        @include modern-text(500);
+        @include grid-content( center space-between );
         border-top: 2px solid var(--card-border-color);
-        font-size: 0.875rem;
-        letter-spacing: 0.1em;
+        display: grid;
+        font-size: fluid(0.6875, 0.875rem);
+        grid-template-columns: 1fr max-content;
+        line-height: 1;
         padding: var(--card-padding-y) var(--card-padding-x);
-        text-transform: uppercase;
     }
 
     &__cta-text {
-        @include grid-content( center space-between );
-        display: grid;
-        grid-template-columns: 1fr max-content;
+        @include modern-text(500);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
     }
 
     &__cta-icon {
-
+        @include svg-contain(var(--card-arrow-size));
     }
-
-
 
     &__media {
         grid-area: 1 / 1 / 1 / 1;
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__panels {
+        @include absolute(0);
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+    }
+
+    &__panel {
+        aspect-ratio: 1 / 1;
+        background: rgba(var(--card-panel-bg), var(--card-panel-alpha));
+        mix-blend-mode: multiply;
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+            opacity var(--duration-quick) var(--ease-out-quint) calc(var(--card-panel-alpha) * 1s / 1.75),
+            transform var(--duration-quick) var(--ease-out-quint) calc(var(--card-panel-alpha) * 1s / 1.75);
+
+        z-index: 1;
     }
 
     &__img {
         @include image-fit();
+        transition: filter var(--duration-slow) var(--ease-in-out-cubic);
     }
 
 }

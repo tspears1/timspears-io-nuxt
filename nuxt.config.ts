@@ -51,8 +51,6 @@ export default defineNuxtConfig({
 
 // swiper
 // formkit
-// radash
-// what-input
 // lazy-sizes
 
 // <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
