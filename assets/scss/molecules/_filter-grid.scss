@@ -6,7 +6,7 @@
     gap: fluid(2, 4);
     grid-template-columns: 1fr;
 
-    @include breakpoint( sm ) {
+    @include breakpoint( md ) {
         grid-template-columns: repeat(2, 1fr);
     }
 
