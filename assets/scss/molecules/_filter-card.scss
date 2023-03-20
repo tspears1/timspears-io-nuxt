@@ -159,6 +159,7 @@
     &__img {
         @include image-fit();
         transition: filter var(--duration-slow) var(--ease-in-out-cubic);
+        transform: scale(1.1);
     }
 
 }

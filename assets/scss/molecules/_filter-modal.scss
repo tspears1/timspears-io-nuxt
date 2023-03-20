@@ -10,6 +10,10 @@
     pointer-events: none;
     z-index: var(--z-modal);
 
+    @include dvh-fallback() {
+        grid-template-rows: 10dvh 1fr 20dvh;
+    }
+
     [data-modal-open="true"] & {
         pointer-events: auto;
     }
