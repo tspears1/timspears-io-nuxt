@@ -1,29 +1,35 @@
 <script setup>
 import { urlFor } from '/sanityClient.ts'
 import { inView } from 'motion'
-import { invoke } from '@vueuse/shared';
 
 const props = defineProps({
     alt: String,
-    callback: Function,
-    pictureClass: String,
-    imageClass: String,
-    src: {
-        type: Object,
-        required: true,
+    amountInView: {
+        type: [Number, String],
+        default: 0.5,
     },
+    block: {
+        type: String,
+        default: 'sanity-image',
+    },
+    callback: Function,
+    imageClass: String,
+    pictureClass: String,
     quality: {
         type: Number,
         default: 75,
+    },
+    src: {
+        type: Object,
+        required: true,
     },
     width: Number,
 })
 
 const imageRef = ref()
-const isLoaded = ref(false)
-const isInView = ref(false)
 
 const assetWidth = computed(() => props.width ?? props.src.metadata.dimensions.width )
+
 const defaultSizes = computed(() => [ 375, 600, 768, 992, 1200, 1600, 1840 ].filter(s => s < assetWidth.value ))
 const srcset = computed(() => {
     const set = defaultSizes.value.map(size => `${urlFor(props.src).width(size).fit('max').auto('format').quality(props.quality)} ${size}w`)
@@ -31,25 +37,16 @@ const srcset = computed(() => {
 })
 
 onMounted(() => {
-    imageRef.value.addEventListener('lazyloaded', () => isLoaded.value = true)
-    inView(imageRef.value, () => isInView.value = true)
-})
-
-const stopEffect = watchEffect(() => {
-    console.log('effect RUn')
-    if ( props.callback ) {
-        if ( isLoaded.value && isInView.value ) {
-            props.callback()
-            console.log('image ready')
-            return () => stopEffect()
-        }
-    }
+    props.callback && inView(imageRef.value, () => props.callback(), { amount: props.amountInView })
 })
 
 </script>
 
 <template>
-    <picture :class="pictureClass">
+    <picture
+        :class="[`${block}__picture`, pictureClass]"
+        ref="imageRef"
+    >
         <source
             data-sizes="auto"
             :data-srcset="srcset"
@@ -57,9 +54,8 @@ const stopEffect = watchEffect(() => {
         />
         <img
             :src="src.metadata.lqip"
-            :class="[imageClass, `lazyload`]"
+            :class="[imageClass, `${block}__img lazyload`]"
             :alt="alt"
-            ref="imageRef"
         />
     </picture>
 </template>

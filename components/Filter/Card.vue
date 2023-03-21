@@ -3,11 +3,17 @@ import { list, random } from 'radash'
 import { hexToRGB } from '@/utils/color'
 
 const { icons } = useButton()
+const { awarded } = useIcons()
 
 const props = defineProps({
     card: Object,
+    cardIndex: {
+        type: Number,
+        default: 1,
+    },
 })
 
+const cardRef = ref()
 const panelGroup = computed(() => list(0, 64, () => random(10, 75) * 0.01))
 
 const panelColor = computed(() => {
@@ -15,12 +21,18 @@ const panelColor = computed(() => {
     return rgbArray ? rgbArray.join(', ') : null
 })
 
-const isLoaded = ref(false)
+const blurCard = ref(true)
+const imageCallback = () => blurCard.value = false
 
 </script>
 
 <template>
-    <article class="filter-card" :data-blur="!isLoaded">
+    <article
+        class="filter-card"
+        :data-blur="blurCard"
+        :style="`--card-panel-bg: ${panelColor}; --card-index: ${cardIndex};`"
+        ref="cardRef"
+    >
         <div class="filter-card__content">
             <div class="filter-card__wrapper">
                 <div class="filter-card__mask">
@@ -62,14 +74,14 @@ const isLoaded = ref(false)
                     class="filter-card__panel"
                     v-for="(alpha, index) in panelGroup"
                     :key="`${alpha}--${index}`"
-                    :style="`--card-panel-bg: ${panelColor}; --card-panel-alpha: ${alpha};`"
+                    :style="`--card-panel-alpha: ${alpha};`"
                 />
             </div>
             <SanityImage
-                picture-class="filter-card__picture"
-                image-class="filter-card__img"
+                block="filter-card"
                 :src="card.image"
-                :callback="() => isLoaded = true"
+                :callback="imageCallback"
+                :amount-in-view="0.6"
             />
         </div>
     </article>

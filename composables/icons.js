@@ -4,10 +4,13 @@ import frontendDevelopment from '@/assets/svgs/services/frontend-development.svg
 import graphicDesign from '@/assets/svgs/services/graphic-design.svg'
 import motionDesign from '@/assets/svgs/services/motion-design.svg'
 import webDesign from '@/assets/svgs/services/web-design.svg'
+import awardedIcon from '@/assets/svgs/services/awarded.svg'
 
 import { objectify, omit } from 'radash'
 
 const useIcons = () => {
+
+    const awarded = awardedIcon
 
     const serviceIcons = [
         {
@@ -55,6 +58,7 @@ const useIcons = () => {
     const serviceIconSlugs = serviceIcons.map(i => i.slug)
 
     return {
+        awarded,
         serviceIcons,
         serviceIconSet,
         serviceIconLabels,

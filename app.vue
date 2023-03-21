@@ -3,9 +3,6 @@
         <SiteHeader v-if="isMounted" />
         <SiteMenu v-if="isMounted" />
         <NuxtPage />
-        <DebugQuickLinks />
-        <DebugColorsheet />
-        <DebugStylesheet />
         <SiteFooter v-if="isMounted" />
         <SitePortal v-if="isMounted" />
     </SiteWrapper>

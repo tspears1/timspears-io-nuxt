@@ -27,7 +27,7 @@
         background: var(--c-theme-012);
         border-radius: 0.25rem;
         display: grid;
-        gap: 3rem;
+        gap: fluid(1.5rem, 3rem);
         grid-column: 2 / span 1;
         grid-row: 2 / span 1;
         justify-items: center;
@@ -43,7 +43,7 @@
 
     &__options {
         display: grid;
-        gap: 1.5rem;
+        gap: fluid(1.25, 1.5rem);
     }
 
     &__footer {

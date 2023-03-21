@@ -1,4 +1,11 @@
 <script setup>
+import { useFilterStore } from '~/stores/filters'
+import { storeToRefs } from 'pinia'
+
+const filters = useFilterStore()
+const { selectedFilter } = storeToRefs(filters)
+const { serviceIconSlugs } = useIcons()
+
 const { data } = useSanityQuery(groq`
     *[_type == "page" && pageTemplate == 'works-template']{
         "pageTitle": title,
@@ -15,13 +22,22 @@ const { data } = useSanityQuery(groq`
     }[0]
 `)
 
-const cards = computed(() => data.value.cards.map(card => ({
-    url: card.url,
-    image: card.image,
-    services: card.services,
-    title: card.cardTitle ?? card.title,
-    eyebrow: card.cardEyebrow ?? card.eyebrow
-})))
+const cards = computed(() => {
+    const stack = data.value.cards.map(card => ({
+        url: card.url,
+        image: card.image,
+        services: card.services,
+        title: card.cardTitle ?? card.title,
+        eyebrow: card.cardEyebrow ?? card.eyebrow,
+        awarded: false,
+    }))
+
+    return selectedFilter.value == 'awarded'
+        ? stack.filter(card => !!card.awarded)
+        : serviceIconSlugs.includes( selectedFilter.value)
+            ? stack.filter(card => card.services.includes( selectedFilter.value ))
+            : stack
+})
 
 </script>
 
@@ -31,11 +47,14 @@ const cards = computed(() => data.value.cards.map(card => ({
         <FilterBar />
         <section class="section section--dark-matrix">
             <div class="filter-grid" v-if="cards">
-                <FilterCard
-                    v-for="card in cards"
-                    :key="card.url"
-                    :card="card"
-                />
+                <KeepAlive>
+                    <FilterCard
+                        v-for="(card, index) in cards"
+                        :key="card.url"
+                        :card="card"
+                        :index="index + 1"
+                    />
+                </KeepAlive>
             </div>
         </section>
         <FilterModal />
