@@ -43,7 +43,7 @@
         }
     }
 
-    &.-blur-state {
+    &[data-blur="true"] {
         @include card-hover-state();
     }
 

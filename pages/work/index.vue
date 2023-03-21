@@ -1,41 +1,27 @@
 <script setup>
 const { data } = useSanityQuery(groq`
-    *[_type == "page" && slug.current == 'work']{
+    *[_type == "page" && pageTemplate == 'works-template']{
         "pageTitle": title,
-        eyebrow
+        eyebrow,
+        'cards': activeProjects[] -> {
+            'url': 'work/' + slug.current,
+            'image': cardImage.asset->,
+            title,
+            cardTitle,
+            eyebrow,
+            cardEyebrow,
+            'services': projectSkills[] -> slug.current
+        }
     }[0]
 `)
 
-const cards = [
-    {
-        eyebrow: 'Website Redesign',
-        title: 'myOrthos',
-        url: 'https://www.imdb.com',
-        services: ['frontend', 'motion'],
-        image: 'https://source.unsplash.com/random/800x800/?scifi/'
-    },
-    {
-        eyebrow: 'Icon Set',
-        title: 'Cookie Jar Kitchen',
-        url: 'https://www.imdb.com',
-        services: ['graphic', 'backend', 'frontend', 'web', 'motion', 'brand'],
-        image: 'https://source.unsplash.com/random/800x800/?woods/'
-    },
-    {
-        eyebrow: 'Website Redesign',
-        title: 'Ember Gardens',
-        url: 'https://www.imdb.com',
-        services: ['backend', 'frontend', 'web', 'motion'],
-        image: 'https://source.unsplash.com/random/800x800/?space/'
-    },
-    {
-        eyebrow: 'Brand New Logo',
-        title: 'Marge Bar',
-        url: 'https://www.imdb.com',
-        services: ['brand'],
-        image: 'https://source.unsplash.com/random/800x800/?hipster/'
-    },
-]
+const cards = computed(() => data.value.cards.map(card => ({
+    url: card.url,
+    image: card.image,
+    services: card.services,
+    title: card.cardTitle ?? card.title,
+    eyebrow: card.cardEyebrow ?? card.eyebrow
+})))
 
 </script>
 
@@ -44,10 +30,10 @@ const cards = [
         <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
         <FilterBar />
         <section class="section section--dark-matrix">
-            <div class="filter-grid">
+            <div class="filter-grid" v-if="cards">
                 <FilterCard
                     v-for="card in cards"
-                    :key="card.title"
+                    :key="card.url"
                     :card="card"
                 />
             </div>

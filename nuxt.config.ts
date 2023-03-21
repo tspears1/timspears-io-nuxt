@@ -8,7 +8,6 @@ export default defineNuxtConfig({
         '@nuxtjs/sanity',
         '@pinia/nuxt',
         '@vueuse/nuxt',
-        '@nuxt/image-edge',
     ],
 
     sanity: {

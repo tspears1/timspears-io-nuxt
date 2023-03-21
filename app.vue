@@ -13,6 +13,7 @@
 
 <script setup>
 // import 'container-query-polyfill'
+import 'lazysizes'
 import 'what-input'
 import { useGlobalData } from '@/data/global'
 import { usePageContextStore } from "~~/stores/portal"
