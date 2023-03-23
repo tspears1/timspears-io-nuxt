@@ -56,7 +56,7 @@
     &__content {
         @include grid-items( end x );
         @include grid-content( end x );
-        clip-path: inset(var(--card-padding-x));
+        clip-path: inset(0);
         display: grid;
         grid-area: 1 / 1 / 1 / 1;
         padding: var(--card-padding-x) var(--card-padding-x);

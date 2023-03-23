@@ -26,15 +26,6 @@ watch(modalOpen, (value) => {
     }
 })
 
-watch(selectedFilter, (selected) => {
-    const serviceActive = serviceIcons.filter(icon => icon.slug == selected)
-    if ( serviceActive.length ) {
-        setTimeout(() => {
-            filters.closeModal()
-        }, 100)
-    }
-})
-
 </script>
 
 <template>

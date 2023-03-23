@@ -15,7 +15,6 @@ const useViewport = () => {
 
     return {
         isLandscape,
-        is
     }
 }
 
@@ -40,35 +39,44 @@ const useFrame = () => {
 
 const useHeaderHeight = () => useState('headerHeight', () => 0)
 
+const useFilterBarHeight = () => useState('filterBarHeight', () => 0)
+
 const useScreenLock = () => {
     const { lenis } = useLenis()
 
     const isLocked = useState('isLocked', () => false)
 
-    const lockScreen = () => isLocked.value = true
+    const lockScreen = () => {
+        lenis.value.stop()
+        isLocked.value = true
+    }
 
-    const unlockScreen = () => isLocked.value = false
-
-    const toggleScreenLock = () => isLocked.value = !isLocked.value
+    const unlockScreen = () => {
+        lenis.value.start()
+        isLocked.value = false
+    }
 
     const resetScroll = () => {
         window.scrollTo(0, 0)
-        console.log('SCROLL RESET?')
     }
 
     watch(isLocked, (value) => {
         document.documentElement.dataset.isLocked = value
-        value == true ? lenis.value.stop() : lenis.value.start()
     })
-
 
     return {
         isLocked,
         lockScreen,
         unlockScreen,
         resetScroll,
-        toggleScreenLock,
     }
 }
 
-export { useFrame, useRoot, useHeaderHeight, useScreenLock, useViewport }
+export {
+    useFrame,
+    useRoot,
+    useFilterBarHeight,
+    useHeaderHeight,
+    useScreenLock,
+    useViewport
+}

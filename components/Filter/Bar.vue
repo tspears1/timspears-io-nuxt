@@ -4,29 +4,28 @@ import { storeToRefs } from 'pinia'
 import { unique } from 'radash'
 
 const filters = useFilterStore()
-const { selectedFilter } = storeToRefs(filters)
-
-const { serviceIcons } = useIcons()
+const { selectedFilter, activeService, isService } = storeToRefs(filters)
 
 const order = ref([ '', 'services', 'awarded'])
 
 const serviceButton = ref()
 const filterBar = ref()
 
+const { height } = useElementSize(filterBar, 110, { box: 'border-box'})
+const barHeight = useFilterBarHeight()
+watch( height, (value) => barHeight.value = value)
+
 watch(selectedFilter, (selected) => {
     const first = order.value[0]
-    const serviceActive = serviceIcons.filter(icon => icon.slug == selected)
-    const active = serviceActive.length ? 'services' : selected
+    const active =  isService.value ? 'services' : selected
 
     order.value = unique([active, ...order.value.filter(item => item != selected && item != first), first])
-    //console.log('order: ', order.value, selected)
-    serviceButton.value[0].updateDynamicText( serviceActive.length ? serviceActive[0].label : 'services' )
-    serviceButton.value[0].updateDynamicPanels( serviceActive.length ? serviceActive[0].panels : 4 )
-    serviceButton.value[0].updateDynamicIcon( serviceActive.length ? 'times' : 'caret-down')
-    serviceActive.length ? serviceButton.value[0].activate() : serviceButton.value[0].deactivate()
+    serviceButton.value[0].updateDynamicText( isService.value ? activeService.value.label : 'services' )
+    serviceButton.value[0].updateDynamicPanels( isService.value ? activeService.value.panels : 4 )
+    serviceButton.value[0].updateDynamicIcon( isService.value ? 'times' : 'caret-down')
+    isService.value ? serviceButton.value[0].activate() : serviceButton.value[0].deactivate()
     filterBar.value.scrollTo(0, 0)
 })
-
 
 </script>
 
