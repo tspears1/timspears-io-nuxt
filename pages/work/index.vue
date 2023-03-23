@@ -1,4 +1,5 @@
 <script setup>
+import { animate } from 'motion'
 import { useFilterStore } from '~/stores/filters'
 import { storeToRefs } from 'pinia'
 
@@ -15,13 +16,29 @@ const { data } = useSanityQuery(groq`
 const bar = ref()
 
 const onEnter = (el, done) => {
-    console.log({el}, 'entering')
-    done()
+    animate(
+        el,
+        { opacity: [0, 1] },
+        { duration: 1, easing: cubicBezier.easeOutQuint }
+    ).finished.then(() => done())
+}
+
+const onBeforeLeave = (el) => {
+    el.style.height = el.offsetHeight + 'px'
+    el.style.width = el.offsetWidth + 'px'
 }
 
 const onLeave = (el, done) => {
-    console.log({el}, 'leaving')
-    done()
+    animate(
+        el,
+        { opacity: [1, 0] },
+        { duration: 1, easing: cubicBezier.easeOutQuint }
+    ).finished.then(() => done())
+}
+
+const onAfterLeave = (el) => {
+    el.style.height = null
+    el.style.width = null
 }
 
 </script>
@@ -38,12 +55,14 @@ const onLeave = (el, done) => {
                 v-if="cards"
                 @enter="onEnter"
                 @leave="onLeave"
+                @before-leave="onBeforeLeave"
+                @after-leave="onAfterLeave"
             >
                 <FilterCard
                     v-for="(card, index) in cards"
                     :key="card.url"
                     :card="card"
-                    :index="index + 1"
+                    :card-index="index + 1"
                 />
             </TransitionGroup>
         </section>

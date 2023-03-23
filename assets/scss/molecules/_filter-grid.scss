@@ -5,6 +5,7 @@
     display: grid;
     gap: fluid(2, 4);
     grid-template-columns: 1fr;
+    position: relative;
 
     @include breakpoint( md ) {
         grid-template-columns: repeat(2, 1fr);

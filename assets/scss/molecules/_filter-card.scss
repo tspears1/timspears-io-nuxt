@@ -53,6 +53,14 @@
 
     }
 
+    &.filter-grid-move {
+        transition: all var(--duration-slow) var(--ease-out-quint);
+    }
+
+    &.filter-grid-leave-active {
+        position: absolute;
+    }
+
     &__content {
         @include grid-items( end x );
         @include grid-content( end x );
