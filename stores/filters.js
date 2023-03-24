@@ -8,6 +8,8 @@ const useFilterStore = defineStore('filters', () => {
     const activeService = computed(() => serviceIcons.filter(icon => icon.slug == selectedFilter.value)[0] ?? null)
     const isService = computed(() => !!serviceIcons.filter(icon => icon.slug == selectedFilter.value).length )
 
+    const resetFilter = () => selectedFilter.value = ''
+
     // CARD FILTERING ==========================================
     const { data } = useSanityQuery(groq`
         *[_type == 'page' && pageTemplate == 'works-template']{
@@ -18,6 +20,7 @@ const useFilterStore = defineStore('filters', () => {
                 cardTitle,
                 eyebrow,
                 cardEyebrow,
+                awarded,
                 'services': projectSkills[] -> slug.current
             }
         }[0]
@@ -30,7 +33,7 @@ const useFilterStore = defineStore('filters', () => {
             services: card.services,
             title: card.cardTitle ?? card.title,
             eyebrow: card.cardEyebrow ?? card.eyebrow,
-            awarded: false,
+            awarded: card.awarded,
         }))
 
         return selectedFilter.value == 'awarded'
@@ -92,6 +95,7 @@ const useFilterStore = defineStore('filters', () => {
         isService,
         modalOpen,
         openModal,
+        resetFilter,
         resetFilterScroll,
         scrollTopPadding,
         selectedFilter,

@@ -15,6 +15,10 @@ const { data } = useSanityQuery(groq`
 
 const bar = ref()
 
+onMounted(() => {
+    filters.resetFilter()
+})
+
 const onEnter = (el, done) => {
     animate(
         el,

@@ -3,7 +3,6 @@ import { list, random } from 'radash'
 import { hexToRGB } from '@/utils/color'
 
 const { icons } = useButton()
-const { awarded } = useIcons()
 
 const props = defineProps({
     card: Object,
@@ -51,12 +50,7 @@ const imageCallback = () => blurCard.value = false
                     </div>
 
                     <h3 class="filter-card__title">
-                        <a
-                            :href="card.url"
-                            class="filter-card__link"
-                        >
-                            {{ card.title }}
-                        </a>
+                        {{ card.title }}
                     </h3>
 
                     <div class="filter-card__cta">
@@ -67,6 +61,12 @@ const imageCallback = () => blurCard.value = false
                     </div>
                 </div>
             </div>
+            <NuxtLink
+                :to="card.url"
+                class="filter-card__link"
+            >
+                <span class="sr-only">{{ card.title }}</span>
+            </NuxtLink>
         </div>
         <div class="filter-card__media">
             <div class="filter-card__panels">
@@ -81,7 +81,7 @@ const imageCallback = () => blurCard.value = false
                 block="filter-card"
                 :src="card.image"
                 :callback="imageCallback"
-                :amount-in-view="0.6"
+                :amount-in-view="0.5"
             />
         </div>
     </article>
