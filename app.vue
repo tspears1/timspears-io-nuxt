@@ -14,11 +14,13 @@ import 'lazysizes'
 import 'what-input'
 import { useGlobalData } from '@/data/global'
 import { usePageContextStore } from "~~/stores/portal"
+import { useThemeStore } from '~~/stores/theme'
 
 const isMounted = ref(false)
 
 const context = usePageContextStore()
-const { activeTheme, buildStyleSheet, buildThemes, buildThemeIndex, getEntryThemeIndex } = useThemes()
+const theme = useThemeStore()
+const { activeTheme, buildStyleSheet, buildThemes } = useThemes()
 const { data } = useGlobalData()
 const { initLenis } = useLenis()
 const route = useRoute()
@@ -36,10 +38,11 @@ useHead({
 })
 
 onBeforeMount(async () => {
+    console.log(route.path)
     await buildThemes()
-    await buildThemeIndex()
+    await theme.buildThemeIndex()
     await buildStyleSheet()
-    const entry = getEntryThemeIndex({name: route.name })
+    const entry = theme.getEntryThemeIndex({path: route.path })
     await context.updateNextContext(entry)
 })
 

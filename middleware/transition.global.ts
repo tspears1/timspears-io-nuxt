@@ -1,4 +1,5 @@
 import { usePortalStore, usePageContextStore } from "~~/stores/portal"
+import { useThemeStore } from '~/stores/theme'
 import { storeToRefs } from 'pinia'
 
 export default defineNuxtRouteMiddleware((to, from) => {
@@ -11,9 +12,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
     const context = usePageContextStore()
     const { pageContext } = storeToRefs(context)
 
-    const { setActiveTheme, getEntryThemeIndex } = useThemes()
+    const { setActiveTheme } = useThemes()
+    const theme = useThemeStore()
 
-    const entry = getEntryThemeIndex(to)
+    //console.log({to})
+    const entry = theme.getEntryThemeIndex(to)
     if (entry) {
         context.updateNextContext(entry)
     }

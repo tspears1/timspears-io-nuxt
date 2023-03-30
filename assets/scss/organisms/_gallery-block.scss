@@ -1,0 +1,36 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.gallery-block {
+    background: var(--c-theme-002);
+    margin: frame(30vh) 0;
+    min-height: frame(100vh, $header: true);
+
+    &__wrapper {
+
+    }
+
+    &__gallery {
+
+    }
+
+    &__gallery-track {
+
+    }
+
+    &__gallery-item {
+
+    }
+
+    &__navigation {
+
+    }
+
+    &__navigation-track {
+
+    }
+
+    &__navigation-item {
+
+    }
+
+}

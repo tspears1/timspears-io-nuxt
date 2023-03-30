@@ -14,14 +14,6 @@ const useThemes = () => {
         }
     `)
 
-    const { data: entryData } = useSanityQuery(groq`
-        *[_type in ['home', 'page', 'work']]{
-            _type,
-            'slug': slug.current,
-            'theme': pageTheme->slug.current
-        }
-    `)
-
     const baseTheme = {
         name: 'Base',
         slug: 'base',
@@ -139,42 +131,13 @@ const useThemes = () => {
         return
     }
 
-    // THEME INDEX =============================================================
-    const themeIndex  = useState('themeIndex', () => [{}])
-
-    const getEntrySlug = (entry) => {
-        switch (entry._type) {
-            case 'index': return '/'
-            case 'home': return '/'
-                break
-            case 'work': return `/work/${entry.slug}`
-                break
-            default: return `/${entry.slug}`
-                break
-        }
-    }
-
-    const buildThemeIndex = () => {
-        themeIndex.value = entryData.value.map((entry) => ({
-                name: entry.slug ?? 'index',
-                slug: getEntrySlug(entry),
-                theme: entry.theme
-        }))
-    }
-
-    const getEntryThemeIndex = (entry) => {
-        return themeIndex.value.filter(t => t.name == entry.name)[0]
-    }
-
     return {
         themes,
         buildThemes,
-        buildThemeIndex,
         buildStyleSheet,
         cssVars,
         activeTheme,
         setActiveTheme,
-        getEntryThemeIndex,
         generateInvert,
         generateGradientPalette,
     }

@@ -1,3 +1,7 @@
-@function frame($value, $sides: 2) {
-    @return calc(#{$value} - (var(--frame-border) * #{$sides}));
+@function frame($value, $sides: 2, $header: false ) {
+    @if $header {
+        @return calc(#{$value} - var(--header-height) - (var(--frame-border) * #{$sides}));
+    } @else {
+        @return calc(#{$value} - (var(--frame-border) * #{$sides}));
+    }
 }

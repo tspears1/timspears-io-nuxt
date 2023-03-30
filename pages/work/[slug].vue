@@ -1,5 +1,12 @@
+<script setup>
+const route = useRoute()
+
+const title = route.params.slug
+
+</script>
 <template>
     <main class="page-wrapper">
-        <h1>Work</h1>
+        <Hero :title="title" />
+        <BlockGallery />
     </main>
 </template>
