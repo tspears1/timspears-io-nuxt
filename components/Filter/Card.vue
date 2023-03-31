@@ -20,7 +20,7 @@ const panelColor = computed(() => {
     return rgbArray ? rgbArray.join(', ') : null
 })
 
-const blurCard = ref(true)
+const blurCard = ref(false)
 const imageCallback = () => blurCard.value = false
 
 </script>
