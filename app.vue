@@ -38,7 +38,6 @@ useHead({
 })
 
 onBeforeMount(async () => {
-    console.log(route.path)
     await buildThemes()
     await theme.buildThemeIndex()
     await buildStyleSheet()
