@@ -1,7 +1,7 @@
 <script setup>
 import { useDrag } from '@vueuse/gesture'
 import { list } from 'radash'
-import { animate, glide } from 'motion'
+import { timeline, animate, glide } from 'motion'
 
 const galleryList = ref(list(1, 10))
 
@@ -18,9 +18,9 @@ const slideWidth = computed(() => trackWidth.value / galleryList.value.length / 
 const halfWindow = computed(() => (windowWidth.value - frameBorder.value * 2) / 2)
 const halfSlide = computed(() => slideWidth.value / 2)
 
-const trackMax = computed(() => halfWindow.value - trackWidth.value + halfSlide.value)
+const trackMax = computed(() => Math.floor(halfWindow.value - trackWidth.value + halfSlide.value))
 
-const onDrag = ({ dragging, first, last, vxvy: [vx], offset: [offsetX], distance, direction: [directionX], lastOffset: [lastOffsetX] }) => {
+const onGalleryDrag = ({ dragging, first, last, vxvy: [vx], offset: [offsetX] }) => {
     if( ! dragging ) {
         galleryTrack.value.style.cursor = 'grab'
         return
@@ -28,24 +28,64 @@ const onDrag = ({ dragging, first, last, vxvy: [vx], offset: [offsetX], distance
     galleryTrack.value.style.cursor = 'grabbing'
 
     animate(galleryTrack.value,
-        { x: offsetX },
-        { easing: glide({
-            velocity: vx * 200,
-            power: 2.7,
-            min: trackMax.value,
-            max: 0,
-            bounceStiffness: 150,
-        })}
-    )
+            { x: offsetX },
+            { easing: glide({
+                velocity: vx * 200,
+                power: 1.7,
+                min: trackMax.value,
+                max: 0,
+                bounceStiffness: 150,
+            }), at: 0})
+
+    animate([navTrackBack.value, navTrackFront.value],
+            { x: offsetX / 10 },
+            { easing: glide({
+                velocity: vx / 10 * 200,
+                power: 1.7,
+                min: trackMax.value / 10,
+                max: 0,
+                bounceStiffness: 150,
+            }), at: 0})
 }
 
-const draggable = useDrag(onDrag,{
+const onNavDrag = ({ dragging, first, last, vxvy: [vx], offset: [offsetX] }) => {
+    if( ! dragging ) {
+        navTrackBack.value.style.cursor = 'grab'
+        return
+    }
+    navTrackBack.value.style.cursor = 'grabbing'
+
+    animate([navTrackBack.value, navTrackFront.value],
+            { x: offsetX },
+            { easing: glide({
+                velocity: vx * 200,
+                power: 1.7,
+                min: trackMax.value / 10,
+                max: 0,
+                bounceStiffness: 150,
+            }), at: 0})
+
+    animate(galleryTrack.value,
+            { x: offsetX * 10 },
+            { easing: glide({
+                velocity: vx * 10 * 200,
+                power: 1.7,
+                min: trackMax.value,
+                max: 0,
+                bounceStiffness: 150,
+            }), at: 0})
+
+}
+
+
+useDrag(onGalleryDrag,{
     domTarget: galleryTrack,
     axis: 'x',
 })
 
-onMounted(() => {
-
+useDrag(onNavDrag,{
+    domTarget: navTrackBack,
+    axis: 'x',
 })
 
 </script>
