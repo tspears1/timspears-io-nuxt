@@ -1,36 +1,163 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .gallery-block {
+    $b: &;
+    --gallery-slide-gap: #{frame(7.5vw)};
+    --gallery-slide-height: #{frame(25vw)};
+    --gallery-slide-ratio: 1.777778;
+    --gallery-slide-width: calc(var(--gallery-slide-height) * var(--gallery-slide-ratio));
+    --gallery-slide-offset: #{calc( (frame(100vw) - var(--gallery-slide-width)) / 2 )};
+
+    --gallery-nav-gap: calc(var(--gallery-slide-gap) / 10);
+    --gallery-nav-height: calc(var(--gallery-slide-height) / 10);
+    --gallery-nav-width: calc(var(--gallery-slide-width) / 10);
+    --gallery-nav-offset: calc(var(--gallery-slide-offset) / 10);
+
     background: var(--c-theme-001);
     margin: frame(30vh) 0;
-    min-height: frame(100vh, $header: true);
+    //min-height: frame(100vh, $header: true);
+    overflow: hidden;
+    position: relative;
+
+    // DEV ONLY CENTER LINE
+    // &::before {
+    //     content: '';
+    //     position: fixed;
+    //     inset: 0;
+    //     width: 2px;
+    //     background: white;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    // }
 
     &__wrapper {
-
+        display: grid;
+        gap: fluid(2, 6, false);
+        padding: 8rem 0;
     }
 
     &__gallery {
+        display: grid;
+        grid-template-columns: 1fr var(--gallery-slide-width) 1fr;
+        width: frame(100vw);
+    }
 
+    &__gallery-inner {
+        display: grid;
+        grid-column: 2 / span 1;
     }
 
     &__gallery-track {
+        cursor: grab;
+        display: grid;
+        gap: var(--gallery-slide-gap);
+        grid-auto-columns: max-content;
+        grid-auto-flow: column;
+        touch-action: pan-y;
+        user-select: none;
+        will-change: transform;
 
+        &::after {
+            content: '';
+            height: 100%;
+            width: calc( var(--gallery-slide-offset) - var(--gallery-slide-gap) );
+        }
     }
 
     &__gallery-item {
+        aspect-ratio: var(--gallery-slide-ratio);
+        background: var(--c-theme-003);
+        height: var(--gallery-slide-height);
+    }
 
+    &__footer {
+        display: grid;
     }
 
     &__navigation {
+        align-items: center;
+        display: grid;
+        grid-area: 1 / 1 / 1 / 1;
+        grid-template-columns: 1fr frame(10vw) 1fr;
+        position: relative;
+        width: frame(100vw);
 
+
+        &--front {
+            pointer-events: none;
+
+            &::before,
+            &::after {
+                content: '';
+                grid-row: 1 / span 1;
+                height: 100%;
+                position: relative;
+                z-index: 3;
+            }
+
+            &::before {
+                background-image: linear-gradient(90deg, rgba(var(--c-theme-001-rgb), 1) 10%, rgba(var(--c-theme-001-rgb), 0.8) 80%);
+                grid-column: 1 / span 1;
+            }
+
+            &::after {
+                background-image: linear-gradient(270deg, rgba(var(--c-theme-001-rgb), 1) 10%, rgba(var(--c-theme-001-rgb), 0.8) 80%);
+                grid-column: 3 / span 1;
+            }
+
+            #{$b}__navigation-frame {
+                position: relative;
+
+                &::after {
+                    border: 1px solid var(--c-theme-012);
+                    content: '';
+                    inset: 0;
+                    position: absolute;
+                    z-index: 8;
+                }
+            }
+
+        }
+    }
+
+    &__navigation-frame {
+        align-items: center;
+        aspect-ratio: 3 / 2;
+        display: grid;
+        grid-column: 2 / span 1;
+        grid-row: 1/ span 1;
+        grid-template-columns: 1fr var(--gallery-nav-width) 1fr;
+        width: frame(10vw);
+    }
+
+    &__navigation-inner {
+        display: grid;
+        grid-column: 2 /span 2;
     }
 
     &__navigation-track {
+        cursor: grab;
+        display: grid;
+        gap: var(--gallery-nav-gap);
+        grid-auto-columns: max-content;
+        grid-auto-flow: column;
+        position: relative;
+        touch-action: pan-y;
+        user-select: none;
+        will-change: transform;
+        z-index: 1;
 
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
     }
 
     &__navigation-item {
-
+        aspect-ratio: var(--gallery-slide-ratio);
+        background: var(--c-theme-003);
+        height: var(--gallery-nav-height);
     }
 
 }
