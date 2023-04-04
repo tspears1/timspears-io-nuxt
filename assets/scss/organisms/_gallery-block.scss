@@ -2,10 +2,10 @@
 
 .gallery-block {
     $b: &;
-    --gallery-slide-gap: #{frame(7.5vw)};
-    --gallery-slide-height: #{frame(25vw)};
-    --gallery-slide-ratio: 1.777778;
-    --gallery-slide-width: calc(var(--gallery-slide-height) * var(--gallery-slide-ratio));
+    --gallery-slide-gap: #{max(frame(7.5vw), 1.25rem)};
+    --gallery-slide-height: calc(var(--gallery-slide-width) * var(--gallery-slide-ratio));
+    --gallery-slide-ratio: 1;
+    --gallery-slide-width: #{frame(75vw)};
     --gallery-slide-offset: #{calc( (frame(100vw) - var(--gallery-slide-width)) / 2 )};
 
     --gallery-nav-gap: calc(var(--gallery-slide-gap) / 10);
@@ -13,27 +13,21 @@
     --gallery-nav-width: calc(var(--gallery-slide-width) / 10);
     --gallery-nav-offset: calc(var(--gallery-slide-offset) / 10);
 
+    @include breakpoint( md ) {
+        --gallery-slide-height: #{frame(30vw)};
+        --gallery-slide-ratio: 1.777778;
+        --gallery-slide-width: calc(var(--gallery-slide-height) * var(--gallery-slide-ratio));
+    }
+
     background: var(--c-theme-001);
     margin: frame(30vh) 0;
-    //min-height: frame(100vh, $header: true);
     overflow: hidden;
     position: relative;
-
-    // DEV ONLY CENTER LINE
-    // &::before {
-    //     content: '';
-    //     position: fixed;
-    //     inset: 0;
-    //     width: 2px;
-    //     background: white;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    // }
 
     &__wrapper {
         display: grid;
         gap: fluid(2, 6, false);
-        padding: 8rem 0;
+        padding: fluid(3, 8rem) 0;
     }
 
     &__gallery {
@@ -78,7 +72,7 @@
         align-items: center;
         display: grid;
         grid-area: 1 / 1 / 1 / 1;
-        grid-template-columns: 1fr frame(10vw) 1fr;
+        grid-template-columns: 1fr 10vw 1fr;
         position: relative;
         width: frame(100vw);
 
@@ -122,12 +116,12 @@
 
     &__navigation-frame {
         align-items: center;
-        aspect-ratio: 3 / 2;
         display: grid;
         grid-column: 2 / span 1;
         grid-row: 1/ span 1;
         grid-template-columns: 1fr var(--gallery-nav-width) 1fr;
-        width: frame(10vw);
+        height: 10vh;
+        width: 10vw;
     }
 
     &__navigation-inner {
