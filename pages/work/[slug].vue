@@ -7,6 +7,7 @@ const title = route.params.slug
 <template>
     <main class="page-wrapper">
         <Hero :title="title" />
-        <BlockGallery />
+        <!-- <BlockGallery /> -->
+        <BlockSlider />
     </main>
 </template>

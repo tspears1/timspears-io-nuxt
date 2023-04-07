@@ -1,0 +1,45 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.slider-block {
+    --slider-slide-gap: #{ max(frame(7.5vw), 1.25rem) };
+    --slider-slide-ratio: 16 / 9;
+    --slider-slide-width: #{ frame(70vw) };
+
+    background: var(--c-theme-001);
+    margin: frame(30vh) 0;
+    overflow: hidden;
+    position: relative;
+
+    &__wrapper {
+        display: grid;
+        gap: fluid(2, 6, false);
+        padding: fluid(3, 8rem) 0;
+    }
+
+    &__slider {
+
+    }
+
+    &__slider-inner {
+        display: grid;
+        grid-template-columns: 1fr var(--slider-slide-width) 1fr;
+    }
+
+    &__slider-track {
+        grid-column: 2 / span 1;
+
+        .splide__list {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: var(--slider-slide-width);
+            gap: var(--slider-slide-gap);
+        }
+
+    }
+
+    &__slider-item {
+        aspect-ratio: var(--slider-slide-ratio);
+        background: var(--c-theme-003);
+        width: var(--slider-slide-width)
+    }
+}

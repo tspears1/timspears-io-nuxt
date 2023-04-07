@@ -2,13 +2,14 @@ import { defineStore } from 'pinia'
 
 const useThemeStore = defineStore('theme', () => {
     // DATA ==================================================
-    const { data: entryData } = useSanityQuery(groq`
+    const query = groq`
         *[_type in ['home', 'page', 'project']]{
             _type,
             'slug': slug.current,
             'theme': pageTheme->slug.current
         }
-    `)
+    `
+    const sanity = useSanity()
 
     // STATE ==================================================
     const themeIndex = ref([])
@@ -28,7 +29,8 @@ const useThemeStore = defineStore('theme', () => {
 
     // METHODS ================================================
 
-    const buildThemeIndex = () => {
+    const buildThemeIndex = async () => {
+        const { data: entryData } = await useAsyncData('themes', () => sanity.fetch(query))
         themeIndex.value = entryData.value.map((entry) => ({
                 name: entry.slug ?? 'index',
                 slug: getEntrySlug(entry),
