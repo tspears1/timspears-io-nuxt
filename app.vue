@@ -30,7 +30,6 @@ useHead({
     htmlAttrs: {
         class: 'root',
         'data-theme': () => activeTheme.value?.slug ?? 'base',
-        'data-loaded': false,
     },
     title: '',
     titleTemplate: (pageTitle) => !pageTitle ? data.value.siteTitle : `${pageTitle} | ${data.value.siteTitle}`,

@@ -16,7 +16,7 @@
     background: rgba(var(--c-theme-bg-rgb), var(--header-bg-alpha));
     backdrop-filter: blur(1.25rem);
     border-bottom: 2px solid var(--header-border-color);
-    display: grid;
+    display: none;
     grid-template-columns: var(--grid-columns);
     grid-template-rows: fluid(4.75, 7.1875, true, sm, lg);
     justify-content: space-between;
@@ -29,6 +29,10 @@
 
     @include breakpoint( md ) {
         --grid-columns: max-content 1fr max-content;
+    }
+
+    [data-loaded] & {
+        display: grid;
     }
 
     [data-menu-open="true"] & {

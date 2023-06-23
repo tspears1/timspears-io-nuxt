@@ -18,3 +18,11 @@
     background-size: calc(var(--bg-pattern-size) * 2) calc(var(--bg-pattern-size) * 2);
     background-position: 0 0, var(--bg-pattern-size) var(--bg-pattern-size);
 }
+
+.page-wrapper {
+    display: none;
+
+    [data-loaded] & {
+        display: block;
+    }
+}

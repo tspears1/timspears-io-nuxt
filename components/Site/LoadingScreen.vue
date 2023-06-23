@@ -30,8 +30,8 @@ const onEnter = () => {
     ]
 
     timeline(sequence).finished.then(() => {
-        portal.isLoaded()
         portalActive.value = true
+        document.documentElement.dataset.loaded = true
         setTimeout(() => {
             setActiveTheme(pageContext.value.next.theme)
         }, 1500);

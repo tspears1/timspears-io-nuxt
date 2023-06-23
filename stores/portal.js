@@ -3,20 +3,11 @@ import { defineStore } from "pinia"
 const usePortalStore = defineStore('portal', () => {
 
     const loadingScreenActive = ref(true)
-    const siteLoaded = ref(false)
     const portalActive = ref(false)
     const transitionCompleted = ref(false)
 
     const transitionDone = () => transitionCompleted.value = true
     const transitionReset = () => transitionCompleted.value = false
-
-    const isLoaded = () => siteLoaded.value = true
-
-    watch(siteLoaded, (value) => {
-        if (value == true) {
-            document.documentElement.dataset.loaded = true
-        }
-    })
 
     watch(portalActive, (value) => document.documentElement.dataset.portalOpen = value )
 
@@ -25,7 +16,6 @@ const usePortalStore = defineStore('portal', () => {
     return {
         loadingScreenActive,
         portalActive,
-        isLoaded,
         transitionCompleted,
         transitionDone,
         transitionReset,
