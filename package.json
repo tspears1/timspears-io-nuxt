@@ -23,6 +23,7 @@
     "@vueuse/gesture": "^2.0.0-beta.1",
     "@vueuse/integrations": "^10.2.0",
     "blurhash": "^2.0.5",
+    "chroma-js": "^2.4.2",
     "container-query-polyfill": "^1.0.2",
     "focus-trap": "^7.4.3",
     "imagesloaded": "^5.0.0",

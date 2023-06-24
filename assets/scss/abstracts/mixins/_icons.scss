@@ -1,13 +1,13 @@
 @mixin icon-shades() {
-    --icon-shade-001: var(--c-theme-002);
-    --icon-shade-002: var(--c-theme-004);
-    --icon-shade-003: var(--c-theme-006);
-    --icon-shade-004: var(--c-theme-008);
+    --icon-shade-001: var(--c-theme-800);
+    --icon-shade-002: var(--c-theme-600);
+    --icon-shade-003: var(--c-theme-400);
+    --icon-shade-004: var(--c-theme-200);
 }
 
 @mixin icon-invert-shades() {
-    --icon-shade-001: var(--c-theme-011);
-    --icon-shade-002: var(--c-theme-009);
-    --icon-shade-003: var(--c-theme-007);
-    --icon-shade-004: var(--c-theme-005);
+    --icon-shade-001: var(--c-theme-100);
+    --icon-shade-002: var(--c-theme-300);
+    --icon-shade-003: var(--c-theme-500);
+    --icon-shade-004: var(--c-theme-700);
 }

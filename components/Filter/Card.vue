@@ -1,6 +1,6 @@
 <script setup>
 import { list, random } from 'radash'
-import { hexToRGB } from '@/utils/color'
+import { convertHSL } from '@/utils/color'
 
 const { icons } = useButton()
 
@@ -15,10 +15,7 @@ const props = defineProps({
 const cardRef = ref()
 const panelGroup = computed(() => list(0, 64, () => random(10, 75) * 0.01))
 
-const panelColor = computed(() => {
-    const rgbArray = hexToRGB( props.card.image?.metadata?.palette?.dominant?.background )
-    return rgbArray ? rgbArray.join(', ') : null
-})
+const panelColor = computed(() => convertHSL(props.card.image?.metadata?.palette?.dominant?.background ) ?? null )
 
 const blurCard = ref(false)
 const imageCallback = () => blurCard.value = false

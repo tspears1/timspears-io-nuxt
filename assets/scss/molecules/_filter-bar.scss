@@ -3,7 +3,7 @@
 .filter-bar {
     @include hide-scrollbars();
     @include sticky( calc(var(--header-height) + var(--frame-border)) x x x );
-    background: rgba(var(--c-theme-001-rgb), 0.8);
+    background: hsl(var(--c-theme-950-hsl) / 0.8);
     backdrop-filter: blur(1.25rem);
     overflow-x: auto;
     width: frame(100vw);

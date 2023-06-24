@@ -21,8 +21,8 @@ onMounted(() => isMounted.value = true )
             >
                 <div
                     class="colorsheet-theme-tile"
-                    :style="`--tile-bg: ${color};`"
-                    :data-color="color"
+                    :style="`--tile-bg: hsl(${color});`"
+                    :data-color="`hsl(${color})`"
                     v-for="color in theme.palette"
                     :key="color"
                 />
@@ -63,7 +63,7 @@ onMounted(() => isMounted.value = true )
     &-tile {
         aspect-ratio: 1/1;
         background: var(--tile-bg);
-        box-shadow: 2px 2px 8px rgb(0 0 0 / 0.15);
+        box-shadow: 2px 2px 8px hsl(0 0% 0% / 0.15);
         display: grid;
         place-items: center;
         width: 100%;

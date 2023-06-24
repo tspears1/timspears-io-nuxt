@@ -1,16 +1,16 @@
 @use '@/assets/scss/abstracts/' as *;
 
-$dark-list: var(--c-theme-001), var(--c-theme-003), var(--c-theme-005), var(--c-theme-007), var(--c-theme-009), var(--c-theme-011);
-$light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c-theme-006), var(--c-theme-005), var(--c-theme-002);
+$dark-list: var(--c-theme-950), var(--c-theme-800), var(--c-theme-600), var(--c-theme-400), var(--c-theme-200), var(--c-theme-50);
+$light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-theme-500), var(--c-theme-700), var(--c-theme-900);
 
 .button {
     $b: &;
 
     --button-border-size: 2px;
-    --button-color: var(--c-theme-001);
+    --button-color: var(--c-theme-950);
     --button-font-size: 0.875rem;
     --button-icon-size: 1rem;
-    --button-stroke: var(--c-theme-001);
+    --button-stroke: var(--c-theme-950);
     --button-padding-x: 1.1rem;
     --button-padding-y: 0;
     --button-panel-size: 3.75rem;
@@ -48,13 +48,13 @@ $light-list: var(--c-theme-012), var(--c-theme-010), var(--c-theme-008), var(--c
     }
 
     &[data-theme="light"] {
-        --button-color: var(--c-theme-012);
-        --button-stroke: var(--c-theme-012);
+        --button-color: var(--c-theme-50);
+        --button-stroke: var(--c-theme-50);
 
         &[data-active="true"],
         &:hover {
-            --button-color: var(--c-theme-001);
-            --icon-center: var(--c-theme-001);
+            --button-color: var(--c-theme-950);
+            --icon-center: var(--c-theme-950);
         }
     }
 

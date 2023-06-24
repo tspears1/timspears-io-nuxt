@@ -6,6 +6,6 @@
 
 @mixin section-themes() {
     &--dark-matrix {
-        background: rgba(var(--c-theme-001-rgb), 0.5);
+        background: hsl(var(--c-theme-950-hsl) / 0.5);
     }
 }

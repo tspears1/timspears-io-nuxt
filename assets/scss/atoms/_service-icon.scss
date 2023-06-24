@@ -3,8 +3,8 @@
 .service-icon {
     @include icon-shades();
     --icon-size: 2.5rem;
-    --icon-border-color: var(--c-theme-002-rgb);
-    --icon-invert-border-color: var(--c-theme-002-rgb);
+    --icon-border-color: var(--c-theme-900-hsl);
+    --icon-invert-border-color: var(--c-theme-900-hsl);
 
     display: grid;
     place-items: center;
@@ -18,13 +18,13 @@
 
     &.-coin-icon {
         @include size(calc(var(--icon-size) * 2));
-        background: rgba( var(--icon-invert-border-color), 0);
-        border: 1px solid rgba(var(--icon-border-color), 0.5);
+        background: hsl( var(--icon-invert-border-color) / 0);
+        border: 1px solid hsl(var(--icon-border-color) / 0.5);
         border-radius: 50%;
 
         &.-invert-icon {
-            background: rgba( var(--icon-invert-border-color), 1);
-            border-color: rgba(var(--icon-invert-border-color), 1);
+            background: hsl( var(--icon-invert-border-color) / 1);
+            border-color: hsl(var(--icon-invert-border-color) / 1);
         }
     }
 

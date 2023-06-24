@@ -5,22 +5,38 @@
 @mixin updateThemePrimary($theme, $bg, $text) {
     &[data-theme="#{$theme}"] {
         --c-theme-bg: var(--c-theme-#{$bg});
-        --c-theme-bg-rgb: var(--c-theme-#{$bg}-rgb);
+        --c-theme-bg-hsl: var(--c-theme-#{$bg}-hsl);
 
         --c-theme-text: var(--c-theme-#{$text});
-        --c-theme-text-rgb: var(--c-theme-#{$text}-rgb);
+        --c-theme-text-hsl: var(--c-theme-#{$text}-hsl);
     }
 }
 
 :root {
     @each $name, $value in $colors {
-        --c-#{$name}: #{$value};
-        --c-#{$name}-rgb: #{red($value)}, #{green($value)}, #{blue($value)};
+        --c-#{$name}: hsl(#{$value});
+        --c-#{$name}-hsl: #{$value};
     }
 
-    --c-theme-bg: var(--c-theme-002);
-    --c-theme-bg-rgb: var(--c-theme-002-rgb);
+    --c-theme-bg: var(--c-theme-900);
+    --c-theme-bg-hsl: var(--c-theme-900-hsl);
 
-    --c-theme-text: var(--c-theme-011);
-    --c-theme-text-rgb: var(--c-theme-011-rgb);
+    --c-theme-text: var(--c-theme-100);
+    --c-theme-text-hsl: var(--c-theme-100-hsl);
 }
+
+// convert sheet key
+// black   1000
+// 01      950 // darkest / shade
+// 02      900 // base
+// 03      800
+// 04      700
+// 05      600
+// 06
+// 07      500
+// 08      400
+// 09      300
+// 10      200
+// 11      100 // invert
+// 12      50 // lightest / tint
+// white   0

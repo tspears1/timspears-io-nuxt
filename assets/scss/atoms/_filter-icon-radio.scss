@@ -23,7 +23,7 @@
 
         &[data-input-active="false"] {
             #{$b}__icon {
-                background: rgba( var(--icon-invert-border-color), 0.08);
+                background: hsl( var(--icon-invert-border-color) / 0.08);
             }
         }
     }
@@ -41,7 +41,7 @@
     &__label {
         @include modern-text();
         clip-path: inset(0);
-        color: var(--c-theme-001);
+        color: var(--c-theme-950);
         font-size: fluid(0.875, 1.1rem);
         line-height: 1;
         grid-column: 2 / span 1;
@@ -71,16 +71,16 @@
     &__icon {
         --icon-size-override: #{fluid(2, 2.5)};
         @include size(calc(var(--icon-size-override) * 1.5 ));
-        background: rgba( var(--icon-invert-border-color), 0);
-        border: 1px solid rgba(var(--icon-border-color), 0.5);
+        background: hsl( var(--icon-invert-border-color) / 0);
+        border: 1px solid hsl(var(--icon-border-color) / 0.5);
         border-radius: 50%;
         grid-column: 1 / span 1;
         grid-row: 1 / span 1;
 
         [data-input-active="true"] & {
             @include icon-invert-shades();
-            background: rgba( var(--icon-invert-border-color), 1);
-            border-color: rgba(var(--icon-invert-border-color), 1);
+            background: hsl( var(--icon-invert-border-color) / 1);
+            border-color: hsl(var(--icon-invert-border-color) / 1);
         }
     }
 }

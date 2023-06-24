@@ -1,4 +1,5 @@
 import { defineStore } from "pinia"
+import { useFilterData } from '@/data/filtering'
 
 const useFilterStore = defineStore('filters', () => {
     // SELECTED FILTER =========================================
@@ -11,23 +12,10 @@ const useFilterStore = defineStore('filters', () => {
     const resetFilter = () => selectedFilter.value = ''
 
     // CARD FILTERING ==========================================
-    const { data } = useSanityQuery(groq`
-        *[_type == 'page' && pageTemplate == 'works-template']{
-            'cards': activeProjects[] -> {
-                'url': 'work/' + slug.current,
-                'image': cardImage.asset->,
-                title,
-                cardTitle,
-                eyebrow,
-                cardEyebrow,
-                awarded,
-                'services': projectSkills[] -> slug.current
-            }
-        }[0]
-    `)
+    const { data } = useFilterData()
 
     const cards = computed(() => {
-        const stack = data.value.cards.map(card => ({
+        const stack = data?.value.cards.map(card => ({
             url: card.url,
             image: card.image,
             services: card.services,

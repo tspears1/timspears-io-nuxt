@@ -2,18 +2,15 @@
     --bg-pattern-size: 3px;
     --bg-pattern-dot: 1px;
     --bg-pattern-alpha: 0.2;
-    background-color: var(--c-theme-011);
+    background-color: var(--c-theme-100);
     background-image:
         radial-gradient(
-            rgba(var(--c-theme-002-rgb),
-            var(--bg-pattern-alpha)) var(--bg-pattern-dot),
+            hsl(var(--c-theme-900-hsl) / var(--bg-pattern-alpha)) var(--bg-pattern-dot),
             transparent var(--bg-pattern-dot)
         ),
         radial-gradient(
-            rgba(var(--c-theme-002-rgb),
-            var(--bg-pattern-alpha)) var(--bg-pattern-dot),
-            rgba(var(--c-theme-011-rgb),
-            var(--bg-pattern-alpha)) var(--bg-pattern-dot)
+            hsl(var(--c-theme-900-hsl) / var(--bg-pattern-alpha)) var(--bg-pattern-dot),
+            hsl(var(--c-theme-100-hsl) / var(--bg-pattern-alpha)) var(--bg-pattern-dot)
         );
     background-size: calc(var(--bg-pattern-size) * 2) calc(var(--bg-pattern-size) * 2);
     background-position: 0 0, var(--bg-pattern-size) var(--bg-pattern-size);

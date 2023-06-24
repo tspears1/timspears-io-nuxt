@@ -20,11 +20,11 @@
 
     &__screen {
         @include absolute(0);
-        background: rgb(var(--c-theme-001-rgb), 0.8);
+        background: hsl(var(--c-theme-950-hsl) / 0.8);
     }
 
     &__container {
-        background: var(--c-theme-012);
+        background: var(--c-theme-50);
         border-radius: 0.25rem;
         display: grid;
         gap: fluid(1.5rem, 3rem);
@@ -37,7 +37,7 @@
     }
 
     &-eyebrow {
-        --eyebrow-color: var(--c-theme-002);
+        --eyebrow-color: var(--c-theme-900);
         @include eyebrow();
     }
 

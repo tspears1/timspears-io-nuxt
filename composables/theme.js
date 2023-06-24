@@ -2,6 +2,8 @@ import Values from 'values.js'
 import Gradient from 'javascript-color-gradient'
 import { unique } from 'radash'
 
+import { colorScale, convertHSL } from '../utils/color'
+
 const useThemes = () => {
 
     // SETUP =============================================================
@@ -17,20 +19,19 @@ const useThemes = () => {
     const baseTheme = {
         name: 'Base',
         slug: 'base',
-        base: '#000',
+        base: '217 16% 16%',
         palette: [
-            '#000000',
-            '#010101',
-            '#121212',
-            '#343434',
-            '#565656',
-            '#787878',
-            '#9A9A9A',
-            '#ABABAB',
-            '#CDCDCD',
-            '#DEDEDE',
-            '#EFEFEF',
-            '#FFFFFF',
+            '240 9% 98%',
+            '216 14% 93%',
+            '220 14% 88%',
+            '214 15% 82%',
+            '215 14% 74%',
+            '215 14% 64%',
+            '215 14% 53%',
+            '216 16% 44%',
+            '216 16% 36%',
+            '215 17% 26%',
+            '217 16% 16%',
         ],
     }
 
@@ -39,9 +40,6 @@ const useThemes = () => {
 
     const setActiveTheme = (theme) => {
         activeTheme.value = themes.value.filter(t => t.slug == theme)[0]
-        // useHead({
-        //     meta: [{ name: 'theme-color', content: activeTheme.value.base }]
-        // })
         console.log('new active theme', activeTheme.value)
     }
 
@@ -66,7 +64,7 @@ const useThemes = () => {
     }
 
     const generateInvert = (base) => {
-        const tints = base.tints(10).map((tint) => `#${tint.hex}`)
+        const tints = base.tints(8).map((tint) => `#${tint.hex}`)
         return tints[tints.length - 2]
     }
 
@@ -74,14 +72,13 @@ const useThemes = () => {
         const _base       = new Values(base)
         const _baseHex    = `#${_base.hex}`
         const _invertHex  = invert ?? generateInvert(_base)
-        const _tint       = new Values(_invertHex).tints(12).map((tint) => `#${tint.hex}`)[2]
-        const _shade      = _base.shades(12).map((shade) => `#${shade.hex}`)[0]
+        const _tint       = new Values(_invertHex).tints(12).map((tint) => `#${tint.hex}`)[3]
+        const _shade      = _base.shades(10).map((shade) => `#${shade.hex}`)[2]
         const _gradient   = new Gradient()
-                                .setColorGradient(_baseHex, _invertHex)
-                                .setMidpoint(10)
+                                .setColorGradient(_invertHex, _baseHex)
+                                .setMidpoint(9)
                                 .getColors()
-        const palette    = [_shade, _baseHex, ..._gradient.slice(1, -1), _invertHex, _tint]
-
+        const palette    = [_tint, _invertHex, ..._gradient.slice(1, -1), _baseHex, _shade].map((color) => convertHSL(color))
         return { palette }
     }
 
@@ -89,17 +86,16 @@ const useThemes = () => {
         return {
             name: theme.slug,
             colors: theme.palette.map((color, index) => {
-                return `--c-theme-${theme.slug}-${pad(index + 1, '00')}: ${color};`
+                return `--c-theme-${theme.slug}-${colorScale[index]}: hsl(${color});`
             }),
-            colorsRGB: theme.palette.map((color, index) => {
-                const rgb = new Values(color).rgb.join(', ')
-                return `--c-theme-${theme.slug}-${pad(index + 1, '00')}-rgb: ${rgb};`
+            colorsHSL: theme.palette.map((color, index) => {
+                return `--c-theme-${theme.slug}-${colorScale[index]}-hsl: ${color};`
             }),
             themeColors: theme.palette.map((color, index) => {
-                return `--c-theme-${pad(index + 1, '00')}: var(--c-theme-${theme.slug}-${pad(index + 1, '00')});`
+                return `--c-theme-${colorScale[index]}: var(--c-theme-${theme.slug}-${colorScale[index]});`
             }),
-            themeColorsRGB: theme.palette.map((color, index) => {
-                return `--c-theme-${pad(index + 1, '00')}-rgb: var(--c-theme-${theme.slug}-${pad(index + 1, '00')}-rgb);`
+            themeColorsHSL: theme.palette.map((color, index) => {
+                return `--c-theme-${colorScale[index]}-hsl: var(--c-theme-${theme.slug}-${colorScale[index]}-hsl);`
             })
 
         }
@@ -112,7 +108,7 @@ const useThemes = () => {
         styleEl.prepend(`
             :root {
                 ${ cssVars.value.map(theme => theme.colors.join("\n")).join("\n")}
-                ${ cssVars.value.map(theme => theme.colorsRGB.join("\n")).join("\n")}
+                ${ cssVars.value.map(theme => theme.colorsHSL.join("\n")).join("\n")}
             }
         `)
 
@@ -120,7 +116,7 @@ const useThemes = () => {
             return `
                 [data-theme="${theme.name}"] {
                     ${theme.themeColors.join("\n")}
-                    ${theme.themeColorsRGB.join("\n")}
+                    ${theme.themeColorsHSL.join("\n")}
                 }
             `
         }).join("\n")

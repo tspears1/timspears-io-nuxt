@@ -5,6 +5,8 @@ import { timeline, stagger } from 'motion'
 import { usePortalStore, usePageContextStore } from '~/stores/portal'
 import { storeToRefs } from 'pinia'
 
+import { colorScale } from '../../utils/color'
+
 const { unlockScreen } = useScreenLock()
 const { isLandscape } = useViewport()
 
@@ -21,8 +23,8 @@ const currentRef    = ref()
 const nextRef       = ref()
 const currentTheme  = computed(() => pageContext.value.current.theme ?? 'base' )
 const nextTheme     = computed(() => pageContext.value.next.theme ?? 'base')
-const currentPanels = computed(() => list(1, 12, i => pad(i, '00')) )
-const nextPanels    = computed(() => list(1, 12, i => pad(i, '00')).reverse() )
+const currentPanels = computed(() => list(1, 11, i => colorScale[i - 1]).reverse() )
+const nextPanels    = computed(() => list(1, 11, i => colorScale[i - 1]) )
 
 
 const portalOpen = () => {
@@ -32,7 +34,7 @@ const portalOpen = () => {
     const sequence = [
         [[...currentRef.value, ...nextRef.value], panelEnterMotion, { delay: stagger(0.08), easing: cubicBezier.easeInOutCubic, duration: 0.5 }],
         [loadingScreen.value, { opacity: 0 }, { duration: 0.01 }],
-        [[...currentRef.value, ...nextRef.value], panelExitMotion, { duration: 1, easing: cubicBezier.easeOutExpo, at: "<" }],
+        [[...currentRef.value, ...nextRef.value], panelExitMotion, { duration: 0.75, easing: cubicBezier.easeOutQuart, at: "<" }],
     ]
     timeline(sequence).finished.then(() => {
         portal.transitionDone()

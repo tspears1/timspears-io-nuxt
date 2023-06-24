@@ -13,7 +13,7 @@
 
     @include sticky(var(--frame-border) auto auto);
     align-items: stretch;
-    background: rgba(var(--c-theme-bg-rgb), var(--header-bg-alpha));
+    background: hsl(var(--c-theme-bg-hsl) / var(--header-bg-alpha));
     backdrop-filter: blur(1.25rem);
     border-bottom: 2px solid var(--header-border-color);
     display: none;
@@ -84,9 +84,9 @@
 
 .site-logo {
     --logo-bg-alpha: 0;
-    --logo-bg-rgb: var(--c-theme-text-rgb);
+    --logo-bg-hsl: var(--c-theme-text-hsl);
     @include padding( x var(--header-padding-x));
-    background: rgba(var(--logo-bg-rgb), var(--logo-bg-alpha));
+    background: hsl(var(--logo-bg-hsl) / var(--logo-bg-alpha));
     border-right: 2px solid transparent;
     display: grid;
     position: relative;
@@ -104,7 +104,7 @@
     }
 
     [data-menu-open="true"] & {
-        --logo-bg-rgb: var(--c-theme-bg-rgb);
+        --logo-bg-hsl: var(--c-theme-bg-hsl);
     }
 
     [data-portal-open="true"] & {
@@ -196,12 +196,12 @@
 
 .site-menu__trigger {
     --trigger-bg-alpha: 0;
-    --trigger-bg-rgb: var(--c-theme-text-rgb);
+    --trigger-bg-hsl: var(--c-theme-text-hsl);
     $b: &;
     @include grid-items(center);
     @include grid-self( x end );
     @include padding( x var(--header-padding-x));
-    background: rgba(var(--trigger-bg-rgb), var(--trigger-bg-alpha));
+    background: hsl(var(--trigger-bg-hsl) / var(--trigger-bg-alpha));
     border-left: 2px solid var(--header-border-color);
     display: grid;
     position: relative;
@@ -215,7 +215,7 @@
     }
 
     [data-menu-open="true"] & {
-        --trigger-bg-rgb: var(--c-theme-bg-rgb);
+        --trigger-bg-hsl: var(--c-theme-bg-hsl);
     }
 
     [data-portal-open="true"] & {

@@ -2,7 +2,7 @@
 
 :root {
     --frame-border: 0.625rem;
-    --frame-color: var(--c-pure-white);
+    --frame-color: var(--c-neutral-0);
 
     @include breakpoint( sm ) {
         --frame-border: 1.25rem;
