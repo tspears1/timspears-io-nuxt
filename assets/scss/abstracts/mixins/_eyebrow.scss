@@ -38,8 +38,8 @@
         line-height: 1;
 
         .-is-splitting & {
-            clip-path: inset(0);
-            overflow: hidden;
+            clip-path: inset(-0.25em);
+            //overflow: hidden;
             position: relative;
         }
 
@@ -58,7 +58,7 @@
     }
 
     &__letter {
-        transform: translateY(100%);
+        transform: translateY(calc(100% + 0.25em));
     }
 
 

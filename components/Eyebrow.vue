@@ -43,13 +43,13 @@ const enterSequence = computed(() => {
     if ( !props.icon ) {
         sequence = [[stem.value, { scaleX: [ 0.001, 1] }, { duation: 0.5, easing: cubicBezier.easeOutQuint, at: props.offset }]]
     }
-    sequence = [...sequence, [letters.value, { y: ['100%', 0] }, { delay: stagger(0.075), duration: 0.125, at: props.icon ? props.offset : '-0.5' } ]]
+    sequence = [...sequence, [letters.value, { y: ['calc(100% + 0.25em)', 0] }, { delay: stagger(0.075), duration: 0.125, at: props.icon ? props.offset : '-0.5' } ]]
     return sequence
 })
 
 const exitSequence = computed(() => {
     let sequence = []
-    sequence = [...sequence, [letters.value, { y: [0, '100%'] }, { delay: stagger(0.075, { from: 'last' }), duration: 0.125, at: props.offset } ]]
+    sequence = [...sequence, [letters.value, { y: [0, 'calc(100% + 0.25em)'] }, { delay: stagger(0.075, { from: 'last' }), duration: 0.125, at: props.offset } ]]
     if ( !props.icon ) {
         sequence = [...sequence, [stem.value, { scaleX: [ 1, 0.001] }, { duation: 0.25, easing: cubicBezier.easeOutQuint, at: props.icon ? props.offset : '-0.5' }]]
     }

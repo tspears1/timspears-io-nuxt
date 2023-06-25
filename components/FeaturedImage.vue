@@ -6,7 +6,6 @@ const props = defineProps({
     }
 })
 
-
 const dominantColor = computed(() => convertHSL(props.src?.image?.metadata?.palette?.dominant?.background ) ?? null )
 const background = computed(() => {
     const bg = props.src?.background

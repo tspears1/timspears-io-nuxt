@@ -10,6 +10,7 @@
 
     &__img {
         @include image-fit();
+        @include lazy();
 
         [data-fit="contain"] & {
             object-fit: contain;

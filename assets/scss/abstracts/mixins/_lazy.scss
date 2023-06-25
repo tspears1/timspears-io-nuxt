@@ -1,0 +1,19 @@
+@mixin lazy() {
+    &.lazyload,
+    &.lazyloading {
+        filter: blur(8px);
+        opacity: 0.5;
+    }
+
+    &.lazyloaded {
+        filter: blur(0);
+        opacity: 1;
+        transition:
+            filter var(--duration-fast) var(--ease-out-expo),
+            opacity var(--duration-fast) var(--ease-out-expo);
+
+        &.-durationSlow {
+            transition-duration: var(--duration-slow);
+        }
+    }
+}

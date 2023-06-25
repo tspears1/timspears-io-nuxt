@@ -5,10 +5,10 @@ const { data } = useProjectData(route.params.slug)
 
 </script>
 <template>
-    <main class="page-wrapper" v-if="data">
-        <Hero class="-project" :title="data?.title" :eyebrow="data?.eyebrow "/>
-        <FeaturedImage :src="data?.image" />
-        <!-- Project Bar -->
-        <BlockDesigner :content="data?.content" />
+    <main class="page-wrapper">
+        <Hero class="-project" :title="data?.title" :eyebrow="data?.eyebrow " v-if="data" />
+        <FeaturedImage :src="data?.image" v-if="data" />
+        <ProjectBar :client="data?.client" :year="data?.year" :services="data?.services" v-if="data" />
+        <BlockDesigner :content="data?.content ?? []" v-if="data" />
     </main>
 </template>

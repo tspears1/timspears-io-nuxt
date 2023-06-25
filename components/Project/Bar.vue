@@ -1,0 +1,43 @@
+<script setup>
+const props = defineProps({
+    client: String,
+    year: [Number, String],
+    services: Array,
+})
+
+const { serviceIconLabels } = useIcons()
+
+const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug)[0].label
+
+</script>
+
+<template>
+    <section class="project-bar">
+        <div class="project-bar__cell">
+            <div class="project-bar__label">
+                Client
+            </div>
+            <div class="project-bar__text">
+                {{ props.client }}
+            </div>
+        </div>
+        <div class="project-bar__cell">
+            <div class="project-bar__label">
+                Year
+            </div>
+            <div class="project-bar__text">
+                <Counter class="project-bar__counter" :value="props.year" />
+            </div>
+        </div>
+        <div class="project-bar__cell">
+            <div class="project-bar__label">
+                Skills
+            </div>
+            <div class="project-bar__group">
+                <span class="project-bar__tag" v-for="(skill, index) in props.services" :key="index">
+                    {{ getLabel(skill) }}
+                </span>
+            </div>
+        </div>
+    </section>
+</template>

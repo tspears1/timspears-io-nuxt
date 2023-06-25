@@ -1,0 +1,40 @@
+@use '@/assets/scss/abstracts/' as *;
+.counter {
+    --nums-font-size: 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: var(--nums-font-size);
+    font-weight: 600;
+    justify-content: flex-start;
+    line-height: 1;
+    position: relative;
+
+    &__number__value {
+        min-width: 1.1ch;
+        position: relative;
+
+        &.nums_wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+    }
+
+    &__current {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &__nums {
+        @include absolute(x x 0 0);
+        display: grid;
+        transform: translateY(calc(var(--nums-font-size) * var(--nums-index)));
+        transition: transform calc(var(--counter-duration, var(--duration-adagio)) - var(--counter-offset, 0ms)) var(--ease-in-out-quad) var(--counter-offset, 0ms);
+        width: 100%;
+
+        .-active & {
+            transform: translateY(0);
+        }
+    }
+}

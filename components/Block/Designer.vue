@@ -3,7 +3,8 @@
 const props = defineProps({
     content: {
         type: Array,
-        required: true,
+        required: false,
+        default: () => [],
     },
 })
 
@@ -16,7 +17,7 @@ const componentsList = {
     textHeadingBlock: resolveComponent('BlockTextHeading'),
 }
 
-const activeComponents = computed(() => props.content.filter((component) => componentsList[component._type]) )
+const activeComponents = computed(() => props?.content?.filter((component) => componentsList[component._type]) )
 
 </script>
 
