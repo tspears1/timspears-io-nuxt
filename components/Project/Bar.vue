@@ -13,7 +13,7 @@ const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug
 
 <template>
     <section class="project-bar">
-        <div class="project-bar__cell">
+        <div class="project-bar__cell project-bar__cell--client">
             <div class="project-bar__label">
                 Client
             </div>
@@ -21,7 +21,7 @@ const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug
                 {{ props.client }}
             </div>
         </div>
-        <div class="project-bar__cell">
+        <div class="project-bar__cell project-bar__cell--year">
             <div class="project-bar__label">
                 Year
             </div>
@@ -29,7 +29,7 @@ const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug
                 <Counter class="project-bar__counter" :value="props.year" />
             </div>
         </div>
-        <div class="project-bar__cell">
+        <div class="project-bar__cell project-bar__cell--skills">
             <div class="project-bar__label">
                 Skills
             </div>
