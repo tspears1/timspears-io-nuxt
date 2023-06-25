@@ -1,0 +1,19 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.featured-image {
+    @include size(var(--content-x), frame(50vh, 2, true));
+    background: var(--image-bg, var(--c-theme-300));
+
+    @include breakpoint(md) {
+        height: var(--content-y);
+    }
+
+    &__img {
+        @include image-fit();
+
+        [data-fit="contain"] & {
+            object-fit: contain;
+        }
+    }
+
+}

@@ -4,6 +4,7 @@ const useFilterData = () => {
             'cards': activeProjects[] -> {
                 'url': 'work/' + slug.current,
                 'image': cardImage.asset->,
+                'featuredImage': featuredImage.image.asset->,
                 title,
                 cardTitle,
                 eyebrow,

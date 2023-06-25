@@ -16,7 +16,6 @@ const cardRef = ref()
 const panelGroup = computed(() => list(0, 64, () => random(10, 75) * 0.01))
 
 const panelColor = computed(() => convertHSL(props.card.image?.metadata?.palette?.dominant?.background ) ?? null )
-
 const blurCard = ref(false)
 const imageCallback = () => blurCard.value = false
 

@@ -4,8 +4,9 @@
     --hero-bg-color: var(--c-theme-bg);
     --hero-title-size: #{fluid(4.6875, 11.25, false)};
     --hero-padding-bottom: #{fluid(1.875rem, 2.5rem)};
-    --hero-height: #{frame(65vh)};
-    --hero-translate: #{calc(frame(35vh) - var(--hero-padding-bottom))};
+    --hero-height: var(--_hero-height, #{frame(65vh)});
+    --hero-translate-y: var(--_hero-translate-y, #{frame(35vh)});
+    --hero-translate: calc(var(--hero-translate-y) - var(--hero-padding-bottom));
     @include grid-items( end x );
     @include padding( x var(--hero-padding-bottom) 2.5rem);
     @include splitting($gap: 0.12em, $parent: 'title');
@@ -19,8 +20,28 @@
     z-index: var(--z-hero);
 
     @include dvh-fallback() {
-        --hero-height: #{frame(65svh)};
-        --hero-translate: #{calc(frame(35svh) - var(--hero-padding-bottom))};
+        --_hero-height: #{frame(65svh)};
+        --_hero-translate-y: #{frame(35svh)};
+    }
+
+    &.-project {
+        --_hero-height: #{frame(50vh)};
+        --_hero-translate-y: #{frame(50vh)};
+
+        @include dvh-fallback() {
+            --_hero-height: #{frame(50svh)};
+            --_hero-translate-y: #{frame(50svh)};
+        }
+
+        @include breakpoint(md) {
+            --_hero-height: #{frame(65vh)};
+            --_hero-translate-y: #{frame(35vh)};
+
+            @include dvh-fallback() {
+                --_hero-height: #{frame(65svh)};
+                --_hero-translate-y: #{frame(35svh)};
+            }
+        }
     }
 
     &.-compressed {
@@ -29,12 +50,12 @@
 
     &.-billboard {
         --hero-title-size: #{fluid(4.6875, 13.75, false)};
-        --hero-height: #{frame(75vh)};
-        --hero-translate: #{calc(frame(25vh) - var(--hero-padding-bottom))};
+        --_hero-height: #{frame(75vh)};
+        --_hero-translate-y: #{frame(25vh)};
 
         @include dvh-fallback() {
-            --hero-height: #{frame(75svh)};
-            --hero-translate: #{calc(frame(25svh) - var(--hero-padding-bottom))};
+            --_hero-height: #{frame(75svh)};
+            --_hero-translate-y: #{frame(25svh)};
         }
     }
 

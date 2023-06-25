@@ -17,7 +17,7 @@ const useFilterStore = defineStore('filters', () => {
     const cards = computed(() => {
         const stack = data?.value.cards.map(card => ({
             url: card.url,
-            image: card.image,
+            image: card.image ?? card.featuredImage,
             services: card.services,
             title: card.cardTitle ?? card.title,
             eyebrow: card.cardEyebrow ?? card.eyebrow,
