@@ -19,7 +19,7 @@ const useThemes = () => {
     const baseTheme = {
         name: 'Base',
         slug: 'base',
-        base: '217 16% 16%',
+        base: '#22272f',
         palette: [
             '240 9% 98%',
             '216 14% 93%',
