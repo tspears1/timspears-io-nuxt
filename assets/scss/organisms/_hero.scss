@@ -14,9 +14,9 @@
     color: var(--c-theme-text);
     display: grid;
     height: var(--hero-height);
+    max-width: var(--content-x);
     position: relative;
     transform: translateY(var(--hero-translate));
-    width: var(--content-x);
     z-index: var(--z-hero);
 
     @include dvh-fallback() {

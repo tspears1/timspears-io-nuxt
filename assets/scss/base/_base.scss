@@ -93,7 +93,7 @@ body {
     @include grid-items( start center);
     display: grid;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
 
     @include dvh-fallback() {
         min-height: 100dvh;
