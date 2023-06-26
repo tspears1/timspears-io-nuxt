@@ -63,6 +63,7 @@
         @include absolute( x x calc(100% - 0.1rem) 0 );
         background: var(--hero-bg-color);
         height: var(--content-y);
+        overflow: hidden;
         width: var(--content-x);
     }
 

@@ -3,6 +3,8 @@
     @if $parent {
         &__#{$parent} {
             display: grid;
+            max-width: var(--content-x);
+            overflow: hidden;
 
             > * {
                 grid-area: 1 / 1 / 1 / 1;
