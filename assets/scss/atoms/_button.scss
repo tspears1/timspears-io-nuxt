@@ -72,6 +72,13 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         }
     }
 
+    &::after {
+        @include absolute(calc( var(--button-border-size) * -1));
+        content: '';
+        border: var(--button-border-size) solid var(--button-stroke);
+        z-index: 1;
+    }
+
     &:where(:not(.button--naked)) {
         .button__text + .button__icon {
             border-left: var(--button-border-size) solid var(--button-stroke);

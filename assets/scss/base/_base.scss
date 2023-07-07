@@ -99,3 +99,7 @@ body {
         min-height: 100dvh;
     }
 }
+
+:root {
+    --test-type-h1: #{fluid(2, 4)};
+}
