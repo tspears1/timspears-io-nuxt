@@ -1,18 +1,27 @@
 <script setup>
+import { inView } from 'motion'
+
 const props = defineProps({
     client: String,
     year: [Number, String],
     services: Array,
 })
 
+const barRef = ref()
+const counter = ref()
+
 const { serviceIconLabels } = useIcons()
 
 const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug)[0].label
 
+onMounted(() => {
+    inView(barRef.value, () => counter.value.toggle(), { amount: 0.3 })
+})
+
 </script>
 
 <template>
-    <section class="project-bar">
+    <section class="project-bar" ref="barRef">
         <div class="project-bar__cell project-bar__cell--client">
             <div class="project-bar__label">
                 Client
@@ -26,7 +35,7 @@ const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug
                 Year
             </div>
             <div class="project-bar__text">
-                <Counter class="project-bar__counter" :value="props.year" />
+                <Counter class="project-bar__counter" :value="props.year" ref="counter"/>
             </div>
         </div>
         <div class="project-bar__cell project-bar__cell--skills">

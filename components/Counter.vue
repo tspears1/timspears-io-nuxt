@@ -31,8 +31,6 @@ const props = defineProps({
 
 const active = ref(false)
 
-onMounted(() => {})
-
 const characterSet = computed(() => {
     let parentArray = []
     Array.from(props.value).forEach((char) => {
@@ -71,6 +69,10 @@ const buildRotoList = (value, custom = null) => {
     }
     return list
 }
+
+defineExpose({
+    toggle,
+})
 </script>
 
 <template>

@@ -76,7 +76,7 @@
     }
 
     &__counter {
-        --nums-font-size: fluid(1.125rem, 2.125rem);
+        --nums-font-size: #{fluid(1.125rem, 2.125rem)};
     }
 
     &__group {

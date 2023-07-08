@@ -7,23 +7,23 @@
 
 .skip-content {
     background-color: var(--c-sea);
+    block-size: 1px;
     border-radius: 0.75rem;
     color: var(--c-white);
     display: block;
-    block-size: 1px;
+    inline-size: 1px;
     left: -10000px;
     overflow: hidden;
     padding: 0.75rem 1.5rem;
     position: absolute;
     top: auto;
-    inline-size: 1px;
     z-index: 9999;
 }
 
 .skip-content:focus {
-    left: 30px;
-    top: 30px;
     block-size: auto;
-    overflow: visible;
     inline-size: auto;
+    left: 30px;
+    overflow: visible;
+    top: 30px;
 }
