@@ -5,10 +5,10 @@
 @mixin size($width, $height: $width) {
 
   @if $width and $height != 'n' and $height != 'x' and $height != 'null' {
-    height: $height;
+    block-size: $height;
   }
 
   @if $width != 'n' and $width != 'x' and $width != 'null' {
-    width: $width;
+    inline-size: $width;
   }
 }

@@ -27,7 +27,7 @@
         @include margin( 3.75rem x );
         background-color: var(--section-color-text-fade, var(--section-color-text));
         border: 0;
-        height: 1px;
+        block-size: 1px;
         padding: 0;
     }
 

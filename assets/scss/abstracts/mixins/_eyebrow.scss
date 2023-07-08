@@ -19,9 +19,9 @@
 
     &__stem {
         background: var(--eyebrow-color, var(--c-theme-text));
-        height: 2px;
+        block-size: 2px;
         transform-origin: left;
-        width: fluid(5, 8, false);
+        inline-size: fluid(5, 8, false);
 
         .-is-splitting & {
             transform: scaleX(0);

@@ -11,12 +11,12 @@
     position: relative;
 
     &__number__value {
-        min-width: 1.1ch;
+        min-inline-size: 1.1ch;
         position: relative;
 
         &.nums_wrapper {
             overflow: hidden;
-            width: 100%;
+            inline-size: 100%;
         }
     }
 
@@ -31,7 +31,7 @@
         display: grid;
         transform: translateY(calc(var(--nums-font-size) * var(--nums-index)));
         transition: transform calc(var(--counter-duration, var(--duration-adagio)) - var(--counter-offset, 0ms)) var(--ease-in-out-quad) var(--counter-offset, 0ms);
-        width: 100%;
+        inline-size: 100%;
 
         .-active & {
             transform: translateY(0);

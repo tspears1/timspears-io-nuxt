@@ -3,7 +3,7 @@
     @if $parent {
         &__#{$parent} {
             display: grid;
-            max-width: var(--content-x);
+            max-inline-size: var(--content-x);
             overflow: hidden;
 
             > * {

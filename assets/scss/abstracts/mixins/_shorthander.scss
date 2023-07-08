@@ -12,26 +12,27 @@
     } @else if $position == 'null' {
         // do nothing
     } @else {
+        $position-prefix: 'inset-';
         position: $position;
     }
 
     @if length($value) == 1 and $value != 'n' and $value != 'x' and $value != 'null' {
-        #{$position-prefix}top: auto($value);
-        #{$position-prefix}right: auto($value);
-        #{$position-prefix}bottom: auto($value);
-        #{$position-prefix}left: auto($value);
+        #{$position-prefix}block-start: auto($value);
+        #{$position-prefix}inline-end: auto($value);
+        #{$position-prefix}block-end: auto($value);
+        #{$position-prefix}inline-start: auto($value);
     }
 
     @if length($value) == 2 {
         $value-y: nth($value, 1);
         $value-x: nth($value, 2);
         @if $value-y != 'n' and $value-y != 'x' and $value-y != 'null' {
-            #{$position-prefix}top: auto($value-y);
-            #{$position-prefix}bottom: auto($value-y);
+            #{$position-prefix}block-start: auto($value-y);
+            #{$position-prefix}block-end: auto($value-y);
         }
         @if $value-x != 'n' and $value-x != 'x' and $value-x != 'null' {
-            #{$position-prefix}left: auto($value-x);
-            #{$position-prefix}right: auto($value-x);
+            #{$position-prefix}inline-start: auto($value-x);
+            #{$position-prefix}inline-end: auto($value-x);
         }
     }
 
@@ -41,14 +42,14 @@
         $value-y-bottom: nth($value, 3);
 
         @if $value-y-top != 'n' and $value-y-top != 'x' and $value-y-top != 'null' {
-            #{$position-prefix}top: auto($value-y-top);
+            #{$position-prefix}block-start: auto($value-y-top);
         }
         @if $value-x != 'n' and $value-x != 'x' and $value-x != 'null' {
-            #{$position-prefix}right: auto($value-x);
-            #{$position-prefix}left: auto($value-x);
+            #{$position-prefix}inline-end: auto($value-x);
+            #{$position-prefix}inline-start: auto($value-x);
         }
         @if $value-y-bottom != 'n' and $value-y-bottom != 'x' and $value-y-bottom != 'null' {
-            #{$position-prefix}bottom: auto($value-y-bottom);
+            #{$position-prefix}block-end: auto($value-y-bottom);
         }
     }
 
@@ -59,16 +60,16 @@
         $value-left: nth($value, 4);
 
         @if $value-top != 'n' and $value-top != 'x' and $value-top != 'null' {
-            #{$position-prefix}top: auto($value-top);
+            #{$position-prefix}block-start: auto($value-top);
         }
         @if $value-right != 'n' and $value-right != 'x' and $value-right != 'null' {
-            #{$position-prefix}right: auto($value-right);
+            #{$position-prefix}inline-end: auto($value-right);
         }
         @if $value-bottom != 'n' and $value-bottom != 'x' and $value-bottom != 'null' {
-            #{$position-prefix}bottom: auto($value-bottom);
+            #{$position-prefix}block-end: auto($value-bottom);
         }
         @if $value-left != 'n' and $value-left != 'x' and $value-left != 'null' {
-            #{$position-prefix}left: auto($value-left);
+            #{$position-prefix}inline-start: auto($value-left);
         }
     }
 }
@@ -96,7 +97,7 @@
 
 /* Inset */
 @mixin inset($value) {
-    @include shorthander(null, $value);
+    @include shorthander(inset, $value);
 }
 
 /* Padding */

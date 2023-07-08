@@ -22,7 +22,7 @@
         7.1px 6.9px 14.9px hsl(var(--card-shadow-color) / 0.55);
     container-type: inline-size;
     display: grid;
-    height: 100%;
+    block-size: 100%;
 
     @mixin card-hover-state {
         #{$b}__panel {
@@ -87,7 +87,7 @@
             -2px -2px 4px 2px hsl(var(--card-panel-bg) / 0.1),
             2px 2px 4px 2px hsl(var(--card-panel-bg) / 0.1);
         display: grid;
-        height: calc(100% - var(--card-row-size));
+        block-size: calc(100% - var(--card-row-size));
         transition: transform var(--duration-moderate) var(--ease-out-expo);
         overflow:hidden;
     }
@@ -98,7 +98,7 @@
 
     &__header {
         @include grid-content( center space-between );
-        border-bottom: 2px solid var(--card-border-color);
+        border-block-end: 2px solid var(--card-border-color);
         display: grid;
         grid-template-columns: 1fr max-content;
     }
@@ -112,7 +112,7 @@
     }
 
     &__services {
-        border-left: 2px solid var(--card-border-color);
+        border-inline-start: 2px solid var(--card-border-color);
         display: grid;
         gap: var(--card-padding-x);
         grid-auto-flow: column;
@@ -136,7 +136,7 @@
 
     &__cta {
         @include grid-content( center space-between );
-        border-top: 2px solid var(--card-border-color);
+        border-block-start: 2px solid var(--card-border-color);
         display: grid;
         font-size: c-fluid(0.6875rem, 0.875rem, $card-min, $card-max, false);
         grid-template-columns: 1fr max-content;

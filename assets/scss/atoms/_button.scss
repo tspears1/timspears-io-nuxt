@@ -26,7 +26,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
     grid-template-columns: 1fr var(--button-panel-size);
     grid-template-rows: var(--button-height);
     position: relative;
-    width: calc(var(--button-panel-size) * var(--button-panel-count));
+    inline-size: calc(var(--button-panel-size) * var(--button-panel-count));
     z-index: 1;
 
     @include hover-style(mouse) {
@@ -81,7 +81,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
 
     &:where(:not(.button--naked)) {
         .button__text + .button__icon {
-            border-left: var(--button-border-size) solid var(--button-stroke);
+            border-inline-start: var(--button-border-size) solid var(--button-stroke);
         }
     }
 
@@ -104,7 +104,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         display: block;
         grid-column: var(--button-panel-index) / span 1;
         grid-row: 1 / span 1;
-        height: var(--button-panel-size);
+        block-size: var(--button-panel-size);
         transform: scaleY(-1) translateZ(0);
         transition: background-position var(--button-timing-out) var(--button-panel-easing-exit) var(--button-panel-delay);
 
@@ -140,7 +140,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         padding: var(--button-padding-y) var(--button-padding-x);
         place-items: center;
         transition: color var(--button-timing-out) var(--button-panel-easing-exit);
-        width: max(var(--button-height), 100%);
+        inline-size: max(var(--button-height), 100%);
     }
 
     &__icon-wrapper {

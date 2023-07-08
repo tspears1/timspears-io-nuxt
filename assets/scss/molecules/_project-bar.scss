@@ -9,7 +9,7 @@
     border: solid var(--_border-color);
     border-width: var(--_border-width) 0;
     display: grid;
-    width: var(--content-x);
+    inline-size: var(--content-x);
 
     @include breakpoint(md) {
         grid-template-columns: repeat(2, 1fr);

@@ -1,23 +1,23 @@
 
 // Image Fit
 @mixin image-fit( $fit: 'cover', $position: null) {
-    height: 100%;
+    block-size: 100%;
     object-fit: #{ $fit };
     @if $position {
         object-position: #{ $position };
     }
-    width: 100%;
+    inline-size: 100%;
 }
 
 // SVG Contain
 @mixin svg-contain( $width, $height: auto ) {
-    height: #{ $height };
-    width: #{ $width };
+    block-size: #{ $height };
+    inline-size: #{ $width };
 
     svg {
-        height: 100%;
+        block-size: 100%;
         object-fit: contain;
-        width: 100%;
+        inline-size: 100%;
     }
 }
 

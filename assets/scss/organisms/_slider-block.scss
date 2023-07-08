@@ -61,7 +61,7 @@
         aspect-ratio: var(--slider-slide-ratio);
         background: var(--c-theme-800);
         transition: var(--slider-item-transition);
-        width: var(--slider-slide-width);
+        inline-size: var(--slider-slide-width);
 
         &.is-active {
             transform: scale(1.08);
@@ -81,7 +81,7 @@
         &::after {
             content: '';
             grid-row: 1 / span 1;
-            height: 100%;
+            block-size: 100%;
             pointer-events: none;
             position: relative;
             z-index: 3;
@@ -132,7 +132,7 @@
         aspect-ratio: var(--slider-slide-ratio);
         background: var(--c-theme-800);
         transition: var(--slider-item-transition);
-        width: var(--slider-nav-width);
+        inline-size: var(--slider-nav-width);
 
         &.is-active {
             transform: scale(1.08);

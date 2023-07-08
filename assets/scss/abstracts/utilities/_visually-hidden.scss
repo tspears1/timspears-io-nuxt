@@ -10,20 +10,20 @@
     border-radius: 0.75rem;
     color: var(--c-white);
     display: block;
-    height: 1px;
+    block-size: 1px;
     left: -10000px;
     overflow: hidden;
     padding: 0.75rem 1.5rem;
     position: absolute;
     top: auto;
-    width: 1px;
+    inline-size: 1px;
     z-index: 9999;
 }
 
 .skip-content:focus {
     left: 30px;
     top: 30px;
-    height: auto;
+    block-size: auto;
     overflow: visible;
-    width: auto;
+    inline-size: auto;
 }

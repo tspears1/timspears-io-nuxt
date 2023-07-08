@@ -7,8 +7,8 @@
     place-items: center;
 
     &__logo {
-        height: min(11.25rem, 40vw);
-        width: min(11.25rem, 40vw);
+        block-size: min(11.25rem, 40vw);
+        inline-size: min(11.25rem, 40vw);
     }
 
     &__shape {

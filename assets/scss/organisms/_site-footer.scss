@@ -2,8 +2,8 @@
     background: var(--c-theme-text);
     color: var(--c-theme-bg);
     display: none;
-    height: 60vh;
-    width: var(--content-x);
+    block-size: 60vh;
+    inline-size: var(--content-x);
 
     [data-loaded] & {
         display: grid;

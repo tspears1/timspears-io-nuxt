@@ -113,7 +113,7 @@ meter {
 // }
 
 // html, body {
-//     height: 100%;
+//     block-size: 100%;
 // }
 
 // body {
@@ -123,7 +123,7 @@ meter {
 
 // img, picture, video, canvas, svg {
 //     display: block;
-//     max-width: 100%;
+//     max-inline-size: 100%;
 // }
 
 // input, button, textarea, select {

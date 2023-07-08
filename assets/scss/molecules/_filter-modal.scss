@@ -33,7 +33,7 @@
         justify-items: center;
         padding: fluid(2, 3);
         position: relative;
-        width: min(100%, 28.75rem);
+        inline-size: min(100%, 28.75rem);
     }
 
     &-eyebrow {

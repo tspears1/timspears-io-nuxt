@@ -6,7 +6,7 @@
     background: hsl(var(--c-theme-950-hsl) / 0.8);
     backdrop-filter: blur(1.25rem);
     overflow-x: auto;
-    width: frame(100vw);
+    inline-size: frame(100vw);
     z-index: var(--z-sticky);
 
     @include breakpoint( md ) {
@@ -30,8 +30,8 @@
         &::after {
             content: '';
             display: block;
-            height: 100%;
-            width: 1px;
+            block-size: 100%;
+            inline-size: 1px;
 
             @include breakpoint( md ) {
                 content: none;

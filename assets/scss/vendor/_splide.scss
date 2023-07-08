@@ -55,7 +55,7 @@
     &__list {
         backface-visibility: hidden;
         display: flex;
-        height: 100%;
+        block-size: 100%;
         margin: 0 !important;
         padding: 0 !important;
     }
@@ -91,7 +91,7 @@
 
     &__progress {
         &__bar {
-            width: 0;
+            inline-size: 0;
         }
     }
 
@@ -152,17 +152,17 @@
     &__spinner {
         animation: splide-loading 1s infinite linear;
         border: $border;
-        border-left-color: transparent;
+        border-inline-start-color: transparent;
         border-radius: 50%;
         bottom: 0;
         contain: strict;
         display: inline-block;
-        height: $size;
+        block-size: $size;
         left: 0;
         margin: auto;
         position: absolute;
         right: 0;
         top: 0;
-        width: $size;
+        inline-size: $size;
     }
 }

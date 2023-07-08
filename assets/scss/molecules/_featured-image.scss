@@ -5,7 +5,7 @@
     background: var(--image-bg, var(--c-theme-300));
 
     @include breakpoint(md) {
-        height: var(--content-y);
+        block-size: var(--content-y);
     }
 
     &__img {

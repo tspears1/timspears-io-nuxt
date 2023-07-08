@@ -13,11 +13,11 @@
     background: var(--hero-bg-color);
     color: var(--c-theme-text);
     display: grid;
-    height: var(--hero-height);
-    max-width: var(--content-x);
+    block-size: var(--hero-height);
+    max-inline-size: var(--content-x);
     position: relative;
     transform: translateY(var(--hero-translate));
-    width: var(--content-x);
+    inline-size: var(--content-x);
     z-index: var(--z-hero);
 
     @include dvh-fallback() {
@@ -63,9 +63,9 @@
     &__screen {
         @include absolute( x x calc(100% - 0.1rem) 0 );
         background: var(--hero-bg-color);
-        height: var(--content-y);
+        block-size: var(--content-y);
         overflow: hidden;
-        width: var(--content-x);
+        inline-size: var(--content-x);
     }
 
     &__grid {

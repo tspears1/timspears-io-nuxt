@@ -15,7 +15,7 @@
     align-items: stretch;
     background: hsl(var(--c-theme-bg-hsl) / var(--header-bg-alpha));
     backdrop-filter: blur(1.25rem);
-    border-bottom: 2px solid var(--header-border-color);
+    border-block-end: 2px solid var(--header-border-color);
     display: none;
     grid-template-columns: var(--grid-columns);
     grid-template-rows: fluid(4.75, 7.1875, true, sm, lg);
@@ -24,7 +24,7 @@
     transition:
         background var(--duration-gentle) var(--ease-out-quad),
         border var(--duration-gentle) var(--ease-out-quad);
-    width: frame(100vw);
+    inline-size: frame(100vw);
     z-index: var(--z-header);
 
     @include breakpoint( md ) {
@@ -87,7 +87,7 @@
     --logo-bg-hsl: var(--c-theme-text-hsl);
     @include padding( x var(--header-padding-x));
     background: hsl(var(--logo-bg-hsl) / var(--logo-bg-alpha));
-    border-right: 2px solid transparent;
+    border-inline-end: 2px solid transparent;
     display: grid;
     position: relative;
     place-items: center;
@@ -96,7 +96,7 @@
         border var(--duration-gentle) var(--ease-out-quad);
 
     @include breakpoint( md ) {
-        border-right-color: var(--header-border-color);
+        border-inline-end-color: var(--header-border-color);
     }
 
     @include hover-style(mouse) {
@@ -112,9 +112,9 @@
     }
 
     &__svg {
-        height: auto;
+        block-size: auto;
         overflow: visible;
-        width: fluid(5.625rem, 7.5rem, true, sm, lg);
+        inline-size: fluid(5.625rem, 7.5rem, true, sm, lg);
 
         > * {
             transition:
@@ -202,7 +202,7 @@
     @include grid-self( x end );
     @include padding( x var(--header-padding-x));
     background: hsl(var(--trigger-bg-hsl) / var(--trigger-bg-alpha));
-    border-left: 2px solid var(--header-border-color);
+    border-inline-start: 2px solid var(--header-border-color);
     display: grid;
     position: relative;
     transition:

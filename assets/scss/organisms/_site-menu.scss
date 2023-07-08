@@ -105,7 +105,7 @@
         @include no-bullets();
         display: grid;
         grid-template-rows: repeat(calc(var(--menu-row-count) / 2), 1fr);
-        height: var(--content-y);
+        block-size: var(--content-y);
         position: relative;
     }
 
