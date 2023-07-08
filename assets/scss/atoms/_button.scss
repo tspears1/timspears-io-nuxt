@@ -76,6 +76,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         @include absolute(calc( var(--button-border-size) * -1));
         content: '';
         border: var(--button-border-size) solid var(--button-stroke);
+        pointer-events: none;
         z-index: 1;
     }
 

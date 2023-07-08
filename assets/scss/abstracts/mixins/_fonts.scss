@@ -1,53 +1,53 @@
 
-@mixin modern-text($weight: 400) {
-    font-family: strawford, Helvetica, Arial, sans-serif;
+@mixin modern-text($weight: var(--font-weight-regular)) {
+    font-family: var(--font-modern);
     font-weight: $weight;
 }
 
 @mixin poster-text($style: normal) {
-    font-family: novelaposter, 'Times New Roman', Times, serif;
+    font-family: var(--font-poster);
     font-style: $style;
     font-weight: normal;
 }
 
 @mixin display-text($style: normal) {
-    font-family: noveladisplay, 'Times New Roman', Times, serif;
+    font-family: var(--font-display);
     font-style: $style;
     font-weight: normal;
 }
 
-@mixin classic-text($weight: 400, $style: normal) {
-    font-family: novela, 'Times New Roman', Times, serif;
+@mixin classic-text($weight: var(--font-weight-regular), $style: normal) {
+    font-family: var(--font-classic);
     font-style: $style;
     font-weight: $weight;
 }
 
 .modern-thin {
-    @include modern-text(100);
+    @include modern-text(var(--font-weight-thin));
 }
 
 .modern-extralight {
-    @include modern-text(200);
+    @include modern-text(var(--font-weight-extralight));
 }
 
 .modern-light {
-    @include modern-text(300);
+    @include modern-text(var(--font-weight-light));
 }
 
 .modern-regular {
-    @include modern-text(400);
+    @include modern-text(var(--font-weight-regular));
 }
 
 .modern-medium {
-    @include modern-text(500);
+    @include modern-text(var(--font-weight-medium));
 }
 
 .modern-bold {
-    @include modern-text(700);
+    @include modern-text(var(--font-weight-bold));
 }
 
 .modern-black {
-    @include modern-text(900);
+    @include modern-text(var(--font-weight-black));
 }
 
 .poster {
@@ -75,25 +75,25 @@
 }
 
 .classic-semibold {
-    @include classic-text(600);
+    @include classic-text(var(--font-weight-semibold));
 }
 
 .classic-semibold-italic {
-    @include classic-text(600, italic);
+    @include classic-text(var(--font-weight-semibold), italic);
 }
 
 .classic-bold {
-    @include classic-text(700);
+    @include classic-text(var(--font-weight-bold));
 }
 
 .classic-bold-italic {
-    @include classic-text(700, italic);
+    @include classic-text(var(--font-weight-bold), italic);
 }
 
 .classic-black {
-    @include classic-text(900);
+    @include classic-text(var(--font-weight-black));
 }
 
 .classic-black-italic {
-    @include classic-text(900, italic);
+    @include classic-text(var(--font-weight-black), italic);
 }

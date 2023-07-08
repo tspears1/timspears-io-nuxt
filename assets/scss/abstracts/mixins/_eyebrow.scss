@@ -28,10 +28,6 @@
         }
     }
 
-    &__digit {
-
-    }
-
     &__text {
         @include classic-text(700);
         font-size: #{fluid(0.75, 1.125, false)};

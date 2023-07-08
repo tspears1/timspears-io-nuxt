@@ -1,0 +1,12 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.text-motion {
+    @include splitting($parent: 'wrapper');
+    clip-path: inset(-0.25em);
+    position: relative;
+
+    &__word,
+    &__letter {
+        clip-path: inset(0);
+    }
+}

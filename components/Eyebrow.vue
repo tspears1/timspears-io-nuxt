@@ -1,5 +1,5 @@
 <script setup>
-import { timeline, stagger } from 'motion'
+import { timeline, stagger, inView } from 'motion'
 import { pad } from '../utils/numbers'
 
 const props = defineProps({
@@ -28,12 +28,19 @@ const props = defineProps({
         required: false,
         default: 0,
     },
+    autoplay: {
+        type: Boolean,
+        required: false,
+        default: true,
+    },
 })
 
+const eyebrowRef = ref()
 const stem = ref()
 const splitText = ref(null)
 
 const parentClass = computed(() => props.block ? `${props.block}-eyebrow` : 'eyebrow')
+const fullText = computed(() => props.digit ? `${pad(props.digit)} / ${props.text}` : props.text)
 const letters = computed(() => splitText.value.letters )
 
 const generateClass = (phrase) => `${parentClass.value}__${phrase}`
@@ -60,6 +67,10 @@ const play = () => timeline(enterSequence.value)
 
 const exit = () => timeline(exitSequence.value)
 
+onMounted(() => {
+    props.autoplay && inView(eyebrowRef.value, () => play(), { amount: 0.4 })
+})
+
 defineExpose({
     play,
     exit,
@@ -72,19 +83,15 @@ defineExpose({
 </script>
 
 <template>
-    <div :class="[parentClass, { '-is-splitting': !frozen }]">
+    <div :class="[parentClass, { '-is-splitting': !frozen }]" ref="eyebrowRef">
         <div v-if="icon" :class="generateClass('icon')" />
         <div v-else :class="generateClass('stem')" ref="stem" />
 
-        <div v-if="digit" :class="generateClass('digit')">
-            {{ `${pad(digit)} /`  }}
-        </div>
-
         <div v-if="frozen" :class="generateClass('text')">
-            {{  text }}
+            {{ fullText }}
         </div>
         <div v-else :class="generateClass('text')">
-            <TextSplitting ref="splitText" :block="parentClass" :content="text" />
+            <TextSplitting ref="splitText" :block="parentClass" :content="fullText" />
         </div>
     </div>
 </template>

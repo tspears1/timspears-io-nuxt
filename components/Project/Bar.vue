@@ -7,7 +7,6 @@ const props = defineProps({
     services: Array,
 })
 
-const barRef = ref()
 const counter = ref()
 
 const { serviceIconLabels } = useIcons()
@@ -15,13 +14,13 @@ const { serviceIconLabels } = useIcons()
 const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug)[0].label
 
 onMounted(() => {
-    inView(barRef.value, () => counter.value.toggle(), { amount: 0.3 })
+    inView(counter.value.$el, () => counter.value.toggle(), { amount: 0.4 })
 })
 
 </script>
 
 <template>
-    <section class="project-bar" ref="barRef">
+    <section class="project-bar">
         <div class="project-bar__cell project-bar__cell--client">
             <div class="project-bar__label">
                 Client

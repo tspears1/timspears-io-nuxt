@@ -51,7 +51,7 @@ const onAfterLeave = (el) => {
     <main class="page-wrapper">
         <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
         <FilterBar ref="bar"/>
-        <section id="filter-grid" class="section section--dark-matrix">
+        <section id="filter-grid" class="section" section-theme="dark-matrix">
             <TransitionGroup
                 tag="div"
                 name="filter-grid"

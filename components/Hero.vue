@@ -50,6 +50,7 @@
                 block="hero"
                 ref="eyebrowRef"
                 offset="-1.5"
+                :autoplay="false"
             />
             <h1 class="hero__title" v-if="title">
                 <TextSplitting

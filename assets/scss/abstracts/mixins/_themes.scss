@@ -5,7 +5,23 @@
 }
 
 @mixin section-themes() {
-    &--dark-matrix {
-        background: hsl(var(--c-theme-950-hsl) / 0.5);
+    &[section-theme='dark-matrix'] {
+        --section-background:               hsl(var(--c-theme-950-hsl) / 0.5);
+    }
+
+    &[section-theme='light'] {
+        --section-background:               var(--c-theme-50);
+        --section-color-heading:            var(--c-theme-900);
+        --section-color-text:               var(--c-theme-950);
+        --section-color-accent:             var(--c-theme-800);
+        --section-color-highlight:          var(--c-theme-200);
+    }
+
+    &[section-theme='dark'] {
+        --section-background:               var(--c-theme-bg);
+        --section-color-heading:            var(--c-theme-50);
+        --section-color-text:               var(--c-neutral-0);
+        --section-color-accent:             var(--c-theme-100);
+        --section-color-highlight:          var(--c-theme-700);
     }
 }

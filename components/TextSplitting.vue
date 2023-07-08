@@ -5,6 +5,7 @@ const isSplit = ref(true)
 const words = ref()
 const wordWraps = ref()
 const letters = ref()
+const letterSpans = ref()
 
 const props = defineProps({
     content: {
@@ -84,7 +85,7 @@ const renderBlock = (block, index) => {
                 ref: letters,
                 ref_for: true
             },
-            props.letterWrapper ? h('span', block) : block
+            props.letterWrapper ? h(props.tag, { ref: letterSpans, ref_for: true }, block) : block
         )
     }
 }
@@ -108,6 +109,7 @@ defineExpose({
     revert,
     isSplit,
     letters,
+    letterSpans,
     words,
     wordWraps
 })

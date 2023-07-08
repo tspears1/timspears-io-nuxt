@@ -1,8 +1,51 @@
 <script setup>
+const props = defineProps({
+    content: {
+        type: Object,
+        required: true,
+    }
+})
+
+const {
+    sectionEyebrow: eyebrow,
+    sectionHeading: heading,
+    button,
+    contentSimple: content,
+    alignmentX,
+    invertTheme,
+} = props.content
+
 
 </script>
 <template>
-    <div>
-        <h3>Project Intro</h3>
-    </div>
+    <section
+        class="section project-intro-block"
+        :section-theme="invertTheme ? 'dark' : 'light'"
+        :section-layout="alignmentX ? 'columns-reverse' : 'columns'"
+    >
+        <Eyebrow
+            v-if="eyebrow"
+            v-bind="eyebrow"
+            :offset="0.5"
+            class="section__eyebrow project-intro-block__eyebrow"
+        />
+
+        <h2
+            v-if="heading"
+            class="section__heading project-intro-block__heading"
+            :heading-size="heading.size"
+            :heading-style="heading.style"
+        >
+            <TextMotion
+                :text="heading.text"
+                exit
+                :stagger="0.035"
+                :duration="0.5"
+                :inview="0.95"
+                transition-type="letter"
+                :transition-name="['slide-up', 'slide-down']"
+            />
+        </h2>
+
+    </section>
 </template>

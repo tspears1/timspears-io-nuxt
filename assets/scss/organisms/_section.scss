@@ -4,6 +4,60 @@
     @include section-themes();
     --section-padding-x: #{fluid(1.25, 2.5)};
     --section-padding-y: #{fluid(3, 7.5, false)};
-
+    background: var(--section-background, var(--c-theme-0));
     padding: var(--section-padding-y) var(--section-padding-x);
+
+    &[section-layout='columns'],
+    &[section-layout='columns-reverse'] {
+        display: grid;
+        row-gap: var(--section-padding-y);
+
+        @include breakpoint(lg) {
+            column-gap: fluid(2, 4, false);
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: fluid(1.5, 2, false);
+        }
+    }
+
+    &[section-layout='columns-reverse'] {
+        @include breakpoint(lg) {
+            > *:first-child {
+                grid-column: 2;
+            }
+        }
+    }
+
+    &__eyebrow {
+        --eyebrow-color: var(--section-color-accent);
+
+        @include breakpoint(lg) {
+            grid-column: span 2;
+        }
+    }
+
+    &__heading {
+        --heading-color: var(--section-color-heading);
+        --heading-font-family: var(--font-modern);
+        --heading-font-size: #{fluid(4.5, 7.5, false)};
+        --heading-font-weight: var(--font-weight-bold);
+        --heading-line-height: 1.05;
+
+        color: var(--heading-color);
+        font-family: var(--heading-font-family);
+        font-size: var(--heading-font-size);
+        font-weight: var(--heading-font-weight);
+        line-height: var(--heading-line-height);
+
+        &[heading-size="h2"] {
+            --heading-font-size: #{fluid(4.5, 7.5, false)};
+        }
+
+        &[heading-size="h3"] {
+            --heading-font-size: #{fluid(4, 5.625, false)};
+        }
+
+        &[heading-size="h4"] {
+            --heading-font-size: #{fluid(3, 3.75, false)};
+        }
+    }
 }
