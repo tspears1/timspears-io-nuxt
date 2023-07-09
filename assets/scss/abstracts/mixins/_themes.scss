@@ -6,22 +6,34 @@
 
 @mixin section-themes() {
     &[section-theme='dark-matrix'] {
-        --section-background:               hsl(var(--c-theme-950-hsl) / 0.5);
+        --section-color-background:         hsl(var(--c-theme-950-hsl) / 0.5);
     }
 
     &[section-theme='light'] {
-        --section-background:               var(--c-theme-50);
+        --section-color-background:         var(--c-theme-50);
         --section-color-heading:            var(--c-theme-900);
         --section-color-text:               var(--c-theme-950);
         --section-color-accent:             var(--c-theme-800);
         --section-color-highlight:          var(--c-theme-200);
+
+        --section-color-panel-1:            var(--c-theme-100);
+        --section-color-panel-2:            var(--c-theme-300);
+        --section-color-panel-3:            var(--c-theme-500);
+        --section-color-panel-4:            var(--c-theme-700);
+        --section-color-panel-5:            var(--c-theme-900);
     }
 
     &[section-theme='dark'] {
-        --section-background:               var(--c-theme-bg);
+        --section-color-background:         var(--c-theme-900);
         --section-color-heading:            var(--c-theme-50);
         --section-color-text:               var(--c-neutral-0);
         --section-color-accent:             var(--c-theme-100);
         --section-color-highlight:          var(--c-theme-700);
+
+        --section-color-panel-1:            var(--c-theme-800);
+        --section-color-panel-2:            var(--c-theme-600);
+        --section-color-panel-3:            var(--c-theme-400);
+        --section-color-panel-4:            var(--c-theme-200);
+        --section-color-panel-5:            var(--c-theme-50);
     }
 }

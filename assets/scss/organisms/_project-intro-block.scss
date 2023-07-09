@@ -1,3 +1,50 @@
-.project-intro-block {
+@use '@/assets/scss/abstracts/' as *;
 
+.project-intro-block {
+    $b: &;
+
+    &__content {
+        --text-font-size: #{fluid( 1.5, 2.25, false)};
+        --text-line-height: 1.3;
+        max-inline-size: var(--size-content-3);
+    }
+
+    &[section-layout='columns'] {
+        @include breakpoint(lg) {
+            #{$b}__content {
+                justify-self: end;
+            }
+
+        }
+    }
+
+    &[section-layout='columns-reverse'] {
+        @include breakpoint(lg) {
+            #{$b}__eyebrow {
+                justify-self: end;
+            }
+
+            #{$b}__heading {
+                grid-column: 2;
+                grid-row: 2;
+                justify-self: end;
+                text-align: end;
+
+                .text-motion__splitting {
+                    flex-direction: row-reverse;
+                }
+            }
+
+            #{$b}__content {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            #{$b}__button {
+                grid-column: 2;
+            }
+
+        }
+
+    }
 }

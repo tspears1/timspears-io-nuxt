@@ -47,5 +47,16 @@ const {
             />
         </h2>
 
+        <div v-if="content" class="section__content project-intro-block__content rich-text">
+            <SanityContent :blocks="content" />
+        </div>
+
+        <Button
+            v-if="button"
+            v-bind="button"
+            class="section__button project-intro-block__button"
+            icon="arrow-right"
+        />
+
     </section>
 </template>

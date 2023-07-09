@@ -58,6 +58,17 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         }
     }
 
+    &[data-theme="dark"] {
+        --button-color: var(--c-theme-950);
+        --button-stroke: var(--c-theme-950);
+
+        &[data-active="true"],
+        &:hover {
+            --button-color: var(--c-theme-50);
+            --icon-center: var(--c-theme-50);
+        }
+    }
+
     &[data-size="compressed"] {
         --button-font-size: 0.8125rem;
         --button-icon-size: 0.45rem;

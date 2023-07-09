@@ -9,6 +9,14 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    url: {
+        type: String,
+        required: false,
+    },
+    target: {
+        type: Boolean,
+        required: false,
+    },
     naked: {
         type: Boolean,
         default: false,
@@ -81,7 +89,8 @@ defineExpose({
 </script>
 
 <template>
-    <button
+    <component
+        :is="url ? 'a' : 'button'"
         :class="['button', { 'button--swap' : swapOrder, 'button--naked': naked }]"
         :style="`--button-panel-count: ${panels};`"
         :data-theme="theme"
@@ -89,6 +98,8 @@ defineExpose({
         :data-active="isActive"
         :data-panels="panels"
         ref="buttonRef"
+        :href="url ? url : null"
+        :target="target ? '_blank' : null"
     >
         <div class="button__panels" v-if="panels">
             <span
@@ -111,5 +122,5 @@ defineExpose({
                 <component :is="icons[camel(hasIcon)]" />
             </div>
         </div>
-    </button>
+    </component>
 </template>

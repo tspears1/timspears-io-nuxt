@@ -1,16 +1,18 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .section {
+    $b: &;
+
     @include section-themes();
     --section-padding-x: #{fluid(1.25, 2.5)};
     --section-padding-y: #{fluid(3, 7.5, false)};
-    background: var(--section-background, var(--c-theme-0));
+    background: var(--section-color-background, var(--c-theme-0));
     padding: var(--section-padding-y) var(--section-padding-x);
 
     &[section-layout='columns'],
     &[section-layout='columns-reverse'] {
         display: grid;
-        row-gap: var(--section-padding-y);
+        row-gap: calc(var(--section-padding-y) / 2);
 
         @include breakpoint(lg) {
             column-gap: fluid(2, 4, false);
@@ -38,7 +40,7 @@
     &__heading {
         --heading-color: var(--section-color-heading);
         --heading-font-family: var(--font-modern);
-        --heading-font-size: #{fluid(4.5, 7.5, false)};
+        --heading-font-size: #{fluid(2.5, 3.25, false)};
         --heading-font-weight: var(--font-weight-bold);
         --heading-line-height: 1.05;
 
@@ -58,6 +60,15 @@
 
         &[heading-size="h4"] {
             --heading-font-size: #{fluid(3, 3.75, false)};
+        }
+
+        &[heading-style="poster"] {
+            --heading-font-family: var(--font-poster);
+            --heading-font-weight: var(--font-weight-black);
+        }
+
+        &[heading-style="thin"] {
+            --heading-font-weight: var(--font-weight-thin);
         }
     }
 }
