@@ -1,0 +1,31 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.text-block {
+
+    &__heading {
+        --text-align: center;
+        text-align: var(--text-align);
+        text-wrap: balance;
+    }
+
+    &__content {
+        --text-font-size: #{fluid( 1.25, 1.625, false)};
+        --text-line-height: 1.6;
+        --text-inline-size: var(--size-content-3);
+        color: var(--section-color-text);
+        text-align: center;
+
+        @include breakpoint(xxxl) {
+            --text-inline-size: var(--size-content-4);
+        }
+
+        [block-style='spotlight'] & {
+            --text-font-size:#{fluid( 1.325, 2.25, false)};
+            --text-inline-size: var(--size-content-2);
+
+            @include breakpoint(xxxl) {
+                --text-inline-size: var(--size-content-3);
+            }
+        }
+    }
+}

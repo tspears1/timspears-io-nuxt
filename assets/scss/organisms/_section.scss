@@ -17,7 +17,7 @@
         @include breakpoint(lg) {
             column-gap: fluid(2, 4, false);
             grid-template-columns: repeat(2, 1fr);
-            row-gap: fluid(1.5, 2, false);
+            row-gap: fluid(1.5, 2.5, false);
         }
     }
 
@@ -26,6 +26,16 @@
             > *:first-child {
                 grid-column: 2;
             }
+        }
+    }
+
+    &[section-layout='stacked'] {
+        display: grid;
+        justify-content: center;
+        row-gap: calc(var(--section-padding-y) / 2);
+
+        @include breakpoint(lg) {
+            row-gap: fluid(1.5, 2.5, false);
         }
     }
 

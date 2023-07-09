@@ -5,6 +5,10 @@
     clip-path: inset(-0.25em);
     position: relative;
 
+    &__splitting {
+        justify-content: var(--text-align, start);
+    }
+
     &__word,
     &__letter {
         clip-path: inset(0);
