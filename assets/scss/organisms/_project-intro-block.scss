@@ -4,7 +4,7 @@
     $b: &;
 
     &__content {
-        --text-font-size: #{fluid( 1.5, 2.25, false)};
+        --text-font-size: #{fluid( 1.25, 2.25, false)};
         --text-line-height: 1.3;
         max-inline-size: var(--size-content-3);
     }

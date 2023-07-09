@@ -51,11 +51,11 @@
         line-height: var(--heading-line-height);
 
         &[heading-size="h2"] {
-            --heading-font-size: #{fluid(4.5, 7.5, false)};
+            --heading-font-size: #{fluid(4, 7.5, false)};
         }
 
         &[heading-size="h3"] {
-            --heading-font-size: #{fluid(4, 5.625, false)};
+            --heading-font-size: #{fluid(3.5, 5.625, false)};
         }
 
         &[heading-size="h4"] {
