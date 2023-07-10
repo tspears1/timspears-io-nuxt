@@ -1,0 +1,50 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.text-heading-block {
+    $b: &;
+
+    &__content {
+        --text-font-size: #{fluid( 1.25, 1.625, false)};
+        --text-line-height: 1.6;
+        --text-inline-size: var(--size-content-3);
+        color: var(--section-color-text);
+
+        @include breakpoint( xxl ) {
+            --text-inline-size: var(--size-content-4);
+        }
+
+        @include breakpoint( xxxl ) {
+            --text-inline-size: var(--size-content-5);
+        }
+    }
+
+    &[section-layout='columns'] {
+        @include breakpoint(lg) {
+            #{$b}__content {
+                justify-self: end;
+            }
+
+        }
+    }
+
+    &[section-layout='columns-reverse'] {
+        @include breakpoint(lg) {
+            #{$b}__eyebrow {
+                justify-self: end;
+            }
+
+            #{$b}__heading {
+                --text-align: end;
+                grid-column: 2;
+                grid-row: 2;
+                justify-self: var(--text-align);
+                text-align: var(--text-align);
+            }
+
+            #{$b}__content {
+                grid-column: 1;
+                grid-row: 2;
+            }
+        }
+    }
+}

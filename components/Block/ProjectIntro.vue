@@ -31,7 +31,7 @@ const {
         />
 
         <h2
-            v-if="heading"
+            v-if="heading?.text"
             class="section__heading project-intro-block__heading"
             :heading-size="heading.size"
             :heading-style="heading.style"
@@ -48,7 +48,7 @@ const {
         </h2>
 
         <div v-if="content" class="section__content project-intro-block__content rich-text">
-            <SanityContent :blocks="content" />
+            <TextContent :blocks="content" />
         </div>
 
         <Button
@@ -56,6 +56,7 @@ const {
             v-bind="button"
             class="section__button project-intro-block__button"
             icon="arrow-right"
+            :theme="invertTheme ? 'light' : 'dark'"
         />
 
     </section>

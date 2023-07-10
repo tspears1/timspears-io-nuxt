@@ -119,7 +119,6 @@ onMounted(() => {
 
     props.autoplay && inView(blockRef.value,
         (info) => {
-            console.log('text entering')
             !hasEntered ? startMotion.play() : enter()
             hasEntered = true
 
