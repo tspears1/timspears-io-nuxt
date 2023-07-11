@@ -14,7 +14,7 @@
     grid-auto-flow: column;
 
     &__icon {
-
+        clip-path: inset(0);
     }
 
     &__stem {

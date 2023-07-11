@@ -18,33 +18,61 @@
         }
     }
 
-    &[section-layout='columns'] {
-        @include breakpoint(lg) {
+    @include breakpoint(lg) {
+        &__eyebrow {
+            grid-area: EYEBROW;
+        }
+
+        &__heading {
+            grid-area: HEADING;
+        }
+
+        &__content {
+            grid-area: CONTENT;
+        }
+
+        &:where([section-layout='columns']) {
+            grid-template-areas:
+                'EYEBROW EYEBROW'
+                'HEADING CONTENT';
+
             #{$b}__content {
                 justify-self: end;
             }
-
         }
-    }
 
-    &[section-layout='columns-reverse'] {
-        @include breakpoint(lg) {
+        &:where([section-layout='columns'][section-alignment='end']) {
+            grid-template-areas:
+                'XXXXXXX CONTENT'
+                'EYEBROW CONTENT'
+                'HEADING CONTENT';
+        }
+
+        &:where([section-layout='columns-reverse']) {
+            grid-template-areas:
+                'EYEBROW EYEBROW'
+                'CONTENT HEADING';
+
             #{$b}__eyebrow {
                 justify-self: end;
             }
 
             #{$b}__heading {
                 --text-align: end;
-                grid-column: 2;
-                grid-row: 2;
                 justify-self: var(--text-align);
                 text-align: var(--text-align);
             }
 
             #{$b}__content {
-                grid-column: 1;
-                grid-row: 2;
+                justify-self: end;
             }
+        }
+
+        &:where([section-layout='columns-reverse'][section-alignment='end']) {
+            grid-template-areas:
+                'CONTENT XXXXXXX'
+                'CONTENT EYEBROW'
+                'CONTENT HEADING';
         }
     }
 }
