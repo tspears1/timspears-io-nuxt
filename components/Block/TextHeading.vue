@@ -7,21 +7,21 @@ const props = defineProps({
 })
 
 const {
-    sectionEyebrow: eyebrow,
-    sectionHeading: heading,
-    contentFull: content,
-    alignmentX,
-    alignmentY,
-    invertTheme,
+    eyebrow,
+    heading,
+    content,
+    layout,
+    alignment,
+    theme,
 } = props.content
 
 </script>
 <template>
     <section
         class="section text-heading-block"
-        :section-theme="invertTheme ? 'dark' : 'light'"
-        :section-layout="alignmentX ? 'columns-reverse' : 'columns'"
-        :section-alignment="alignmentY ? 'end' : 'start'"
+        :section-theme="theme"
+        :section-layout="layout"
+        :section-alignment="alignment"
     >
         <Eyebrow
             v-if="eyebrow"

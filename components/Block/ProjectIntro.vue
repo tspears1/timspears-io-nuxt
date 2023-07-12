@@ -7,12 +7,12 @@ const props = defineProps({
 })
 
 const {
-    sectionEyebrow: eyebrow,
-    sectionHeading: heading,
+    eyebrow,
+    heading,
     button,
-    contentSimple: content,
-    alignmentX,
-    invertTheme,
+    content,
+    layout,
+    theme,
 } = props.content
 
 
@@ -20,8 +20,8 @@ const {
 <template>
     <section
         class="section project-intro-block"
-        :section-theme="invertTheme ? 'dark' : 'light'"
-        :section-layout="alignmentX ? 'columns-reverse' : 'columns'"
+        :section-theme="theme"
+        :section-layout="layout"
     >
         <Eyebrow
             v-if="eyebrow"
@@ -56,7 +56,7 @@ const {
             v-bind="button"
             class="section__button project-intro-block__button"
             icon="arrow-right"
-            :theme="invertTheme ? 'light' : 'dark'"
+            :theme="theme == 'dark' ? 'light' : 'dark'"
         />
 
     </section>

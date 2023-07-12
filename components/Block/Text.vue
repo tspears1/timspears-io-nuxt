@@ -7,17 +7,17 @@ const props = defineProps({
 })
 
 const {
-    sectionHeading: heading,
-    spotlightText: spotlight,
-    contentText: content,
-    invertTheme,
+    heading,
+    spotlight,
+    content,
+    theme,
 } = props.content
 
 </script>
 <template>
     <section
         class="section text-block"
-        :section-theme="invertTheme ? 'dark' : 'light'"
+        :section-theme="theme"
         :block-style="spotlight ? 'spotlight' : null"
         section-layout="stacked"
     >
