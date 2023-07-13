@@ -17,7 +17,7 @@ const {
 <template>
     <section
         class="section text-block"
-        :section-theme="theme"
+        :section-theme="theme ?? 'light'"
         :block-style="spotlight ? 'spotlight' : null"
         section-layout="stacked"
     >

@@ -16,13 +16,15 @@ const useProjectData = (slug) => {
             overview,
             'services': projectSkills[] -> slug.current,
             'content': contentDesigner[] {
-                // Awards Block
+                // Awards Block ====================================
                 _type == 'awardsBlock' => {
                     _type,
                     'heading': sectionHeading,
                     'awards': awardsList[] {
                         _type,
+                        'id': _key,
                         title,
+                        subtitle,
                         competition,
                         presenter -> {
                             _type,
@@ -36,18 +38,18 @@ const useProjectData = (slug) => {
                     }
                 },
 
-                // Gallery Block
+                // Gallery Block ====================================
                 _type == 'galleryBlock' => {
                     _type,
                     'heading': sectionHeading,
                     mediaGroup[] {
                         _type,
                         caption,
-                        //media.asset->
+                        'image': media.asset->
                     },
                 },
 
-                // Intro Block
+                // Intro Block ====================================
                 _type == 'projectIntro' => {
                     _type,
                     'heading': sectionHeading,
@@ -64,20 +66,20 @@ const useProjectData = (slug) => {
                     ),
                 },
 
-                // Media Block
+                // Media Block ====================================
                 _type == 'mediaBlock' => {
                     _type,
                     'heading': sectionHeading,
-                    mediaGroup[] {
+                    'media': mediaGroup[] {
                         _type,
                         caption,
+                        'image' : media.asset->,
                         layout,
-                        //media.asset ->,
                         spacing,
                     }
                 },
 
-                // Text Block
+                // Text Block ====================================
                 _type == 'textBlock' => {
                     _type,
                     'heading': sectionHeading,
@@ -89,7 +91,7 @@ const useProjectData = (slug) => {
                     ),
                 },
 
-                // Text w Heading Block
+                // Text w Heading Block ====================================
                 _type == 'textHeadingBlock' => {
                     _type,
                     'eyebrow': sectionEyebrow,

@@ -1,0 +1,101 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.awards-block {
+    $b: &;
+
+    --awards-text-size: #{fluid(1.1, 1.375, false)};
+    --awards-padding-y: #{fluid(1.875, 3.75, false)};
+    --awards-subtext-size: #{fluid(0.6875, 0.75, false)};
+
+    display: grid;
+    gap: var(--awards-padding-y);
+
+    &__heading {
+        text-wrap: balance;
+    }
+
+    &__awards {
+
+    }
+
+    &__award {
+        align-items: center;
+        border-block-start: 2px solid var(--section-color-panel-4);
+        display: grid;
+        gap: fluid(1, 2.5, false);
+        padding: var(--awards-padding-y) 0;
+
+        @include breakpoint(md) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &:last-child {
+            border-block-end: 2px solid var(--section-color-panel-4);
+        }
+    }
+
+    &__col {
+        display: grid;
+        gap: 0.5rem;
+
+        &:first-child {
+            #{$b}__text {
+                font-size: calc( var(--awards-text-size) * 1.5);
+                font-weight: var(--font-weight-bold);
+            }
+
+            #{$b}__subtext {
+                font-size: calc( var(--awards-subtext-size) * 1.5);
+            }
+
+        }
+
+        @include breakpoint(md) {
+
+            &:where(:not(:first-child):not(:last-child)) {
+                justify-self: center;
+                text-align: center;
+            }
+
+            &:first-child {
+                justify-self: start;
+                text-align: start;
+
+                #{$b}__text {
+                    font-size: var(--awards-text-size);
+                    font-weight: var(--font-weight-medium);
+                }
+
+                #{$b}__subtext {
+                    font-size: var(--awards-subtext-size);
+                }
+            }
+
+            &:last-child {
+                justify-self: end;
+                text-align: end;
+            }
+        }
+
+    }
+
+    &__text {
+        color: var(--section-color-heading);
+        font-size: var(--awards-text-size);
+        font-family: var(--font-modern);
+        font-weight: var(--font-weight-medium);
+        line-height: 1.2;
+
+    }
+
+    &__subtext {
+        color: var(--section-color-text);
+        font-size: var(--awards-subtext-size);
+        font-family: var(--font-modern);
+        font-weight: var(--font-weight-regular);
+        letter-spacing: 0.05em;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-wrap: balance;
+    }
+}
