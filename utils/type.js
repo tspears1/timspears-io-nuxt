@@ -24,4 +24,9 @@ const is = {
     // key: a => !defaultInstanceSettings.hasOwnProperty(a) && !defaultTweenSettings.hasOwnProperty(a) && a !== 'targets' && a !== 'keyframes',
 }
 
-export { is, stringContains }
+const ratioStringToNumber = (ratio, seperator = ':') => {
+    const ratioArray = ratio.split(seperator).map(Number)
+    return (ratioArray[0] / ratioArray[1]).toFixed(2)
+}
+
+export { is, stringContains, ratioStringToNumber }

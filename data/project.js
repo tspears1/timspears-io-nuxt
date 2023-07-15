@@ -70,12 +70,18 @@ const useProjectData = (slug) => {
                 _type == 'mediaBlock' => {
                     _type,
                     'heading': sectionHeading,
+                    layout,
                     'media': mediaGroup[] {
                         _type,
-                        caption,
+                        'caption': media.caption,
+                        'attribution': media.attribution,
+                        'hotspot': media.hotspot,
                         'image' : media.asset->,
-                        layout,
                         spacing,
+                        'ratio': select(
+                            ratio == 'null' => null,
+                            ratio != 'null' => ratio
+                        ),
                     }
                 },
 

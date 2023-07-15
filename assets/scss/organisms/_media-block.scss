@@ -1,0 +1,75 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.media-block {
+    $b: &;
+
+    &:is([media-layout='grid']) {
+        padding-block: #{fluid(1, 2, false)};
+    }
+
+    :where(#{$b}__content--full) {
+        block-size: var(--content-y);
+        inline-size: var(--content-x);
+        overflow: hidden;
+        position: relative;
+
+        #{$b}__media {
+            @include absolute(0);
+            will-change: transform;
+        }
+
+        #{$b}__img {
+            @include image-fit('cover');
+            object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
+        }
+
+        #{$b}__overlay {
+            @include absolute(0);
+            background: var(--c-theme-950);
+            pointer-events: none;
+        }
+    }
+
+    :where(#{$b}__content--grid) {
+        display: grid;
+        gap: fluid(1, 2, false);
+        grid-template-columns: repeat(6, 1fr);
+
+        #{$b}__media {
+            aspect-ratio: 16/9;
+            clip-path: inset(0);
+            grid-column: span calc( 6 / var(--media-spacing));
+            inline-size: 100%;
+            position: relative;
+        }
+
+        #{$b}__picture {
+            @include size(100%, 100%);
+            display: block;
+        }
+
+        #{$b}__img {
+            @include image-fit('cover');
+            object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
+        }
+
+        #{$b}__overlay {
+            @include absolute(0);
+            background: var(--c-theme-950);
+            pointer-events: none;
+        }
+    }
+
+    &__caption {
+        color: var(--section-color-text);
+        font-family: var(--font-modern);
+        font-size: fluid(0.6875, 0.875, false);
+        font-weight: var(--font-weight-medium);
+        line-height: 1.2;
+        letter-spacing: 0.075em;
+        padding-block: fluid(0.5, 0.75, false);
+        .section--flush & {
+            padding-inline: var(--section-padding-x);
+        }
+    }
+}

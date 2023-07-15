@@ -3,9 +3,12 @@
 .awards-block {
     $b: &;
 
-    --awards-text-size: #{fluid(1.1, 1.375, false)};
+    --awards-border-scale: 0;
+    --awards-delay: 300ms;
     --awards-padding-y: #{fluid(1.875, 3.75, false)};
     --awards-subtext-size: #{fluid(0.6875, 0.75, false)};
+    --awards-text-size: #{fluid(1.1, 1.375, false)};
+    --awards-transform-origin: right;
 
     display: grid;
     gap: var(--awards-padding-y);
@@ -16,21 +19,44 @@
 
     &__awards {
 
+        &[in-view] {
+            --awards-border-scale: 1;
+            --awards-transform-origin: left;
+        }
     }
 
     &__award {
         align-items: center;
-        border-block-start: 2px solid var(--section-color-panel-4);
         display: grid;
         gap: fluid(1, 2.5, false);
         padding: var(--awards-padding-y) 0;
+        position: relative;
 
         @include breakpoint(md) {
             grid-template-columns: repeat(3, 1fr);
         }
 
+        &::before,
+        &::after {
+            background-color: var(--section-color-panel-4);
+            block-size: 2px;
+            transition: scale var(--duration-moderate) var(--ease-out-expo);
+            transform-origin: var(--awards-transform-origin) center;
+            scale: var(--awards-border-scale) 1;
+        }
+
+        &::before {
+            @include absolute( 0 0 x 0);
+            content: '';
+            transition-delay: calc(var(--awards-delay) * var(--index));
+        }
+
         &:last-child {
-            border-block-end: 2px solid var(--section-color-panel-4);
+            &::after {
+                @include absolute( x 0 0 0 );
+                content: '';
+                transition-delay: calc(var(--awards-delay) * (var(--list-length) + 1));
+            }
         }
     }
 

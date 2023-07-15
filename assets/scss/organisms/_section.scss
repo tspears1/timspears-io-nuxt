@@ -9,6 +9,10 @@
     background: var(--section-color-background, var(--c-theme-0));
     padding: var(--section-padding-y) var(--section-padding-x);
 
+    &--flush {
+        padding: 0;
+    }
+
     &[section-layout='columns'],
     &[section-layout='columns-reverse'] {
         display: grid;

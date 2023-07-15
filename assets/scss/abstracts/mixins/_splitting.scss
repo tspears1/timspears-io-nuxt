@@ -4,7 +4,7 @@
         &__#{$parent} {
             display: grid;
             max-inline-size: var(--content-x);
-            overflow: hidden;
+            //overflow: hidden;
 
             > * {
                 grid-area: 1 / 1 / 1 / 1;

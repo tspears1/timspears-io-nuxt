@@ -1,4 +1,6 @@
 <script setup>
+import { inView } from 'motion'
+
 const route = useRoute()
 const props = defineProps({
     content: {
@@ -8,6 +10,20 @@ const props = defineProps({
 })
 
 const { heading, awards } = props.content
+
+const awardsRef = ref(null)
+const isInView = ref(false)
+
+onMounted(() => {
+    inView(awardsRef.value, () => {
+        isInView.value = true
+
+        return () => {
+            isInView.value = false
+        }
+    }, { amount: 'any' })
+})
+
 </script>
 <template>
     <section class="section awards-block" section-theme="light">
@@ -28,11 +44,17 @@ const { heading, awards } = props.content
             />
         </h3>
 
-        <div class="awards-block__awards">
+        <div
+            class="awards-block__awards"
+            :in-view="isInView || null"
+            :style="`--list-length: ${awards.length};`"
+            ref="awardsRef"
+        >
             <div
                 class="awards-block__award"
-                v-for="award in awards"
+                v-for="(award, index) in awards"
                 :key="award.id"
+                :style="`--index: ${index};`"
             >
                 <div class="awards-block__col">
                     <h4
