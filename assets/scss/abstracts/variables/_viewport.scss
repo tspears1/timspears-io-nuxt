@@ -6,8 +6,15 @@
     --content-top: calc(var(--frame-border) + var(--header-height, var(--header-height-initial)));
     --content-x: calc(100vw - ( var(--frame-border) * 2 ));
     --content-y: calc(100vh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
+    --content-y-dvh: var(--content-y);
+    --content-y-svh: var(--content-y);
+    --content-y-lvh: var(--content-y);
 
     @include dvh-fallback() {
-        --content-y: calc(100dvh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
+        --content-y-dvh: calc(100dvh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
+        --content-y-svh: calc(100svh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
+        --content-y-lvh: calc(100lvh - var(--header-height, var(--header-height-initial)) - ( var(--frame-border) * 2 ));
     }
+
+
 }

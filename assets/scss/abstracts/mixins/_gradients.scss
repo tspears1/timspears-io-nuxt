@@ -1,0 +1,46 @@
+@use '@/assets/scss/abstracts/functions/lists' as *;
+@use '@/assets/scss/abstracts/functions/math' as *;
+@use 'sass:math';
+
+$aspect-ratios: (
+    '1:1': ( columns: 8, rows: 8, slug: '1x1' ),
+    '4:3': ( columns: 12, rows: 9, slug: '4x3' ),
+    '16:9': ( columns: 16, rows: 9, slug: '16x9' ),
+    '21:9': ( columns: 21, rows: 9, slug: '21x9' ),
+);
+
+// BUILD GRADIENT ======================
+@mixin step-gradient($list, $index: 1, $deg: 180deg, $reverse: true) {
+    --step-count: #{length(step-gradient-list($list, $index))};
+    --the-list: #{step-gradient-list($list, $index)};
+    background-image: linear-gradient($deg, build-gradient($list, $index, $reverse));
+}
+
+@mixin step-gradient-columns($ratio, $index: 1, $deg: 180deg, $reverse: false) {
+    $columns: map-get(map-get($aspect-ratios, $ratio), columns);
+    $rows: map-get(map-get($aspect-ratios, $ratio), rows);
+    $lists: ();
+    $x-positions: ();
+    $positions: ();
+    @for $i from 1 through $columns {
+        $x-positions: append($x-positions, (percentage(math.div($i, $columns - 1))), $separator: comma);
+        @if $i != $columns {
+            $positions: append($positions, nth($x-positions, $i) 0%, $separator: comma);
+        }
+        $random-alphas: random-list($rows);
+        $hsla-steps: ();
+        $hsl-variable: var(--gradient-hsl);
+        @for $j from 1 through $rows {
+            $hsla-steps: append($hsla-steps, hsl($hsl-variable / nth($random-alphas, $j)), $separator: comma);
+        }
+        $lists: append($lists, linear-gradient($deg, build-gradient($hsla-steps, $index, $reverse)), $separator: comma);
+    }
+
+    --gradient-columns: #{$columns};
+    --gradient-rows: #{$rows};
+    background-image: $lists;
+    background-size: calc(100% / var(--gradient-columns) + 0.1%) 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 0%, $positions;
+}
+

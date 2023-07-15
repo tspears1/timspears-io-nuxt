@@ -44,10 +44,23 @@ const gridLayoutMotion = () => {
     gridMedia.forEach((m, i) => {
         const image = m.querySelector('.media-block__picture')
         const overlay = m.querySelector('.media-block__overlay')
+        const gradient = m.querySelector('.media-block__gradient')
         scroll(
             timeline([
-                [image, { scale: [1, 1.2], y: [ '-50%', 0] }, { at: 0, easing: [0.33, 1, 0.68, 1] }],
-                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInCubic }]
+                [image, { scale: [2, 1], y: [ '-80%', 0], filter: ['blur(65px)', 'blur(0px)'] },
+                    {
+                        at: 0,
+                        easing: [0.33, 1, 0.68, 1],
+                        scale: { easing: cubicBezier.easeInQuad},
+                        filter: { easing: cubicBezier.easeInQuad }
+                    }
+                ],
+                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInCubic }],
+                [gradient, { opacity: [0, 1, 0], scale: [1.1, 1] }, {
+                    at: 0,
+                    easing: cubicBezier.easeInCubic,
+                    scale: { easing: cubicBezier.easeInQuad },
+                }]
             ]),
             { target: m, offset: ['start end', 'end end']}
         )
@@ -97,6 +110,7 @@ const gridLayoutMotion = () => {
                 class="media-block__media"
                 v-for="(item, index) in media"
                 :key="item.image._id"
+                :media-aspect-ratio="item.ratio || '16:9'"
                 :style="`--media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
@@ -104,6 +118,7 @@ const gridLayoutMotion = () => {
                     :src="item.image"
                 />
                 <div class="media-block__overlay"></div>
+                <div class="media-block__gradient"></div>
             </div>
         </div>
         <div class="media-block__caption">{{ sectionCaption.join(' | ') }}</div>

@@ -63,7 +63,7 @@
     &__screen {
         @include absolute( x x calc(100% - 0.1rem) 0 );
         background: var(--hero-bg-color);
-        block-size: var(--content-y);
+        block-size: var(--content-y-dvh);
         overflow: hidden;
         inline-size: var(--content-x);
     }

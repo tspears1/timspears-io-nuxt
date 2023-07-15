@@ -1,0 +1,9 @@
+@use '@/assets/scss/abstracts/mixins/gradients' as *;
+@use 'sass:map';
+
+// :where(html) {
+//     --ratio-gradient-hsl: var(--c-theme-950-hsl);
+//     @each $ratio in map-keys($aspect-ratios) {
+//         @include step-gradient-columns($ratio);
+//     }
+// }

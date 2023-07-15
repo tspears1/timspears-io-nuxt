@@ -74,10 +74,10 @@
     // reverse list so its light to dark
     @if $reverse {
         $new-list: reverse($list);
+        // slice off index - 1
+        $new-list: slice($new-list, $index);
     }
 
-    // slice off index - 1
-    $new-list: slice($new-list, $index);
 
     // @if length($new-list) > 1 {
     //   // duplicate list, slice off last step, reverse list
@@ -121,11 +121,4 @@
     }
 
     @return append($gradient-list, last($step-list) $divide-by * (length($step-list) - 1), $separator: comma);
-}
-
-  // BUILD GRADIENT ======================
-@mixin step-gradient($list, $index: 1, $deg: 180deg, $reverse: true) {
-    --step-count: #{length(step-gradient-list($list, $index))};
-    --the-list: #{step-gradient-list($list, $index)};
-    background-image: linear-gradient($deg, build-gradient($list, $index, $reverse));
 }

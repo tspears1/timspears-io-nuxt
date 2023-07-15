@@ -8,7 +8,7 @@
     }
 
     :where(#{$b}__content--full) {
-        block-size: var(--content-y);
+        block-size: var(--content-y-lvh);
         inline-size: var(--content-x);
         overflow: hidden;
         position: relative;
@@ -36,12 +36,46 @@
         grid-template-columns: repeat(6, 1fr);
 
         #{$b}__media {
-            aspect-ratio: 16/9;
+            aspect-ratio: var(--media-ratio);
             clip-path: inset(0);
             grid-column: span calc( 6 / var(--media-spacing));
             inline-size: 100%;
             position: relative;
+
+            &[media-aspect-ratio='1:1'] {
+                .media-block__gradient {
+                    @include step-gradient-columns('1:1');
+                }
+            }
+
+            &[media-aspect-ratio='4:3'] {
+                .media-block__gradient {
+                    @include step-gradient-columns('4:3');
+                }
+            }
+
+            &[media-aspect-ratio='16:9'] {
+                .media-block__gradient {
+                    @include step-gradient-columns('16:9');
+                }
+            }
+
+            &[media-aspect-ratio='21:9'] {
+                .media-block__gradient {
+                    @include step-gradient-columns('21:9');
+                }
+            }
         }
+
+        #{$b}__gradient {
+            --gradient-hsl: var(--c-theme-950-hsl);
+            @include absolute(0);
+            content: '';
+            filter: blur(1px);
+            mix-blend-mode: luminosity;
+            pointer-events: none;
+        }
+
 
         #{$b}__picture {
             @include size(100%, 100%);

@@ -1,0 +1,14 @@
+@use 'sass:math';
+
+@function roundDecimal($number, $decimal: 2) {
+    $base: math.pow(10, $decimal);
+    @return math.div(math.round($number * $base), $base);
+}
+
+@function random-list($length: 10, $decimal: 2) {
+    $list: ();
+    @for $i from 1 through $length {
+        $list: append($list, roundDecimal(math.random(), $decimal), $separator: comma);
+    }
+    @return $list;
+}
