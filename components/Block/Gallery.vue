@@ -1,4 +1,7 @@
 <script setup>
+// ==============================================================================================
+// This component has been deprecated in favor of the new Slider component. =====================
+// ==============================================================================================
 import { useDrag } from '@vueuse/gesture'
 import { list } from 'radash'
 import { animate, glide } from 'motion'

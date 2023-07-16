@@ -32,7 +32,7 @@ onMounted(() => {
 const fullLayoutMotion = () => {
     scroll(
         timeline([
-            [fullMediaRef.value, { scale: [1, 1.2], y: [ '-50%', 0] }, { at: 0, easing: [0.33, 1, 0.68, 1] }],
+            [fullMediaRef.value, { scale: [0.9, 1.2], y: [ '-75%', 0] }, { at: 0, easing: [0.33, 1, 0.68, 1] }],
             [overlayRef.value, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInCubic }]
         ]),
         { target: sectionRef.value, offset: ['start end', 'end end']}
@@ -121,6 +121,6 @@ const gridLayoutMotion = () => {
                 <div class="media-block__gradient"></div>
             </div>
         </div>
-        <div class="media-block__caption">{{ sectionCaption.join('  ') }}</div>
+        <div class="media-block__caption">{{ sectionCaption.join('  ')}}</div>
     </section>
 </template>
