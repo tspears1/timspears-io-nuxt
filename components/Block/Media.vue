@@ -51,18 +51,18 @@ const gridLayoutMotion = () => {
                     {
                         at: 0,
                         easing: [0.33, 1, 0.68, 1],
-                        scale: { easing: cubicBezier.easeInQuad},
-                        filter: { easing: cubicBezier.easeInQuad }
+                        scale: { easing: cubicBezier.easeInCubic},
+                        filter: { easing: cubicBezier.easeInCubic }
                     }
                 ],
                 [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInCubic }],
-                [gradient, { opacity: [0, 1, 0], scale: [1.1, 1] }, {
+                [gradient, { opacity: [0, 1, 0], scale: [1.3, 1] }, {
                     at: 0,
                     easing: cubicBezier.easeInCubic,
-                    scale: { easing: cubicBezier.easeInQuad },
+                    scale: { easing: cubicBezier.easeInCubic },
                 }]
             ]),
-            { target: m, offset: ['0.3 0.8', '0 0.2']}
+            { target: m, offset: ['0.1 0.8', '0 0.2']}
         )
     })
 }
