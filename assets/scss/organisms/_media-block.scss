@@ -15,6 +15,7 @@
 
         #{$b}__media {
             @include absolute(0);
+            overflow: hidden;
             will-change: transform;
         }
 
@@ -38,9 +39,14 @@
         #{$b}__media {
             aspect-ratio: var(--media-ratio);
             clip-path: inset(0);
-            grid-column: span calc( 6 / var(--media-spacing));
+            grid-column: span 6;
             inline-size: 100%;
+            overflow: hidden;
             position: relative;
+
+            @include breakpoint(sm) {
+                grid-column: span calc( 6 / var(--media-spacing));
+            }
 
             &[media-aspect-ratio='1:1'] {
                 .media-block__gradient {
@@ -74,6 +80,7 @@
             filter: blur(1px);
             mix-blend-mode: luminosity;
             pointer-events: none;
+            will-change: transform;
         }
 
 

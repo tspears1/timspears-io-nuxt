@@ -1,5 +1,5 @@
 <script setup>
-import { scroll, timeline } from 'motion'
+import { scroll, timeline, ScrollOffset } from 'motion'
 const props = defineProps({
     content: {
         type: Object,
@@ -62,7 +62,7 @@ const gridLayoutMotion = () => {
                     scale: { easing: cubicBezier.easeInQuad },
                 }]
             ]),
-            { target: m, offset: ['start end', 'end end']}
+            { target: m, offset: ['0.3 0.8', '0 0.2']}
         )
     })
 }
