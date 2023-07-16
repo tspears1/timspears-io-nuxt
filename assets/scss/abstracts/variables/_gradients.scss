@@ -1,9 +1,19 @@
 @use '@/assets/scss/abstracts/mixins/gradients' as *;
 @use 'sass:map';
 
-// :where(html) {
-//     --ratio-gradient-hsl: var(--c-theme-950-hsl);
-//     @each $ratio in map-keys($aspect-ratios) {
-//         @include step-gradient-columns($ratio);
-//     }
-// }
+:where(html) {
+    --ratio-gradient-hsl: var(--c-theme-950-hsl);
+    @each $ratio in map-keys($aspect-ratios) {
+        $slug: map-get(map-get($aspect-ratios, $ratio), slug);
+        @include step-gradient-columns($ratio);
+
+        :where([ratio-gradient="#{$ratio}"]) {
+            --ratio-gradient-columns:                   var(--ratio-gradient-#{$slug}-columns);
+            --ratio-gradient-rows:                      var(--ratio-gradient-#{$slug}-rows);
+            --ratio-gradient-background-image:          var(--ratio-gradient-#{$slug}-background-image);
+            --ratio-gradient-background-position:       var(--ratio-gradient-#{$slug}-background-position);
+            --ratio-gradient-background-size:           var(--ratio-gradient-#{$slug}-background-size);
+            --ratio-gradient-background-repeat:         var(--ratio-gradient-#{$slug}-background-repeat);
+        }
+    }
+}

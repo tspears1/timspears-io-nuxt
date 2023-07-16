@@ -19,9 +19,10 @@ $aspect-ratios: (
 @mixin step-gradient-columns($ratio, $index: 1, $deg: 180deg, $reverse: false) {
     $columns: map-get(map-get($aspect-ratios, $ratio), columns);
     $rows: map-get(map-get($aspect-ratios, $ratio), rows);
+    $slug: map-get(map-get($aspect-ratios, $ratio), slug);
     $lists: ();
     $x-positions: ();
-    $positions: ();
+    $positions: ( '0% 0%' );
     @for $i from 1 through $columns {
         $x-positions: append($x-positions, (percentage(math.div($i, $columns - 1))), $separator: comma);
         @if $i != $columns {
@@ -29,20 +30,18 @@ $aspect-ratios: (
         }
         $random-alphas: random-list($rows);
         $hsla-steps: ();
-        $hsl-variable: var(--gradient-hsl);
+        $hsl-variable: var(--ratio-gradient-hsl);
         @for $j from 1 through $rows {
             $hsla-steps: append($hsla-steps, hsl($hsl-variable / nth($random-alphas, $j)), $separator: comma);
         }
         $lists: append($lists, linear-gradient($deg, build-gradient($hsla-steps, $index, $reverse)), $separator: comma);
     }
 
-    --gradient-columns: #{$columns};
-    --gradient-rows: #{$rows};
-    --gradient-lists: #{$lists};
-    --gradient-positions: #{$positions};
-    background-image: var(--gradient-lists);
-    background-size: calc(100% / var(--gradient-columns) + 0.1%) 100%;
-    background-repeat: no-repeat;
-    background-position: 0% 0%, var(--gradient-positions);
+    --ratio-gradient-#{$slug}-columns: #{$columns};
+    --ratio-gradient-#{$slug}-rows: #{$rows};
+    --ratio-gradient-#{$slug}-background-image: #{$lists};
+    --ratio-gradient-#{$slug}-background-position: #{$positions};
+    --ratio-gradient-#{$slug}-background-size: calc(100% / var(--ratio-gradient-#{$slug}-columns) + 0.1%) 100%;
+    --ratio-gradient-#{$slug}-background-repeat: no-repeat;
 }
 

@@ -7,6 +7,17 @@
         padding-block: #{fluid(1, 2, false)};
     }
 
+    &__img {
+        @include image-fit('cover');
+        object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
+    }
+
+    &__overlay {
+        @include absolute(0);
+        background: var(--c-theme-950);
+        pointer-events: none;
+    }
+
     :where(#{$b}__content--full) {
         block-size: var(--content-y-lvh);
         inline-size: var(--content-x);
@@ -17,17 +28,6 @@
             @include absolute(0);
             overflow: hidden;
             will-change: transform;
-        }
-
-        #{$b}__img {
-            @include image-fit('cover');
-            object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
-        }
-
-        #{$b}__overlay {
-            @include absolute(0);
-            background: var(--c-theme-950);
-            pointer-events: none;
         }
     }
 
@@ -47,57 +47,24 @@
             @include breakpoint(sm) {
                 grid-column: span calc( 6 / var(--media-spacing));
             }
-
-            &[media-aspect-ratio='1:1'] {
-                .media-block__gradient {
-                    @include step-gradient-columns('1:1');
-                }
-            }
-
-            &[media-aspect-ratio='4:3'] {
-                .media-block__gradient {
-                    @include step-gradient-columns('4:3');
-                }
-            }
-
-            &[media-aspect-ratio='16:9'] {
-                .media-block__gradient {
-                    @include step-gradient-columns('16:9');
-                }
-            }
-
-            &[media-aspect-ratio='21:9'] {
-                .media-block__gradient {
-                    @include step-gradient-columns('21:9');
-                }
-            }
         }
 
         #{$b}__gradient {
-            --gradient-hsl: var(--c-theme-950-hsl);
             @include absolute(0);
+            background-image: var(--ratio-gradient-background-image);
+            background-position: var(--ratio-gradient-background-position);
+            background-repeat: var(--ratio-gradient-background-repeat);
+            background-size: var(--ratio-gradient-background-size);
             content: '';
-            filter: blur(1px);
+            //filter: blur(1px);
             mix-blend-mode: luminosity;
             pointer-events: none;
             will-change: transform;
         }
 
-
         #{$b}__picture {
             @include size(100%, 100%);
             display: block;
-        }
-
-        #{$b}__img {
-            @include image-fit('cover');
-            object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
-        }
-
-        #{$b}__overlay {
-            @include absolute(0);
-            background: var(--c-theme-950);
-            pointer-events: none;
         }
     }
 
@@ -109,6 +76,7 @@
         line-height: 1.5;
         letter-spacing: 0.075em;
         padding-block: fluid(0.75, 0.1, false);
+
         .section--flush & {
             padding-inline: var(--section-padding-x);
         }

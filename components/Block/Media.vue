@@ -110,7 +110,7 @@ const gridLayoutMotion = () => {
                 class="media-block__media"
                 v-for="(item, index) in media"
                 :key="item.image._id"
-                :media-aspect-ratio="item.ratio || '16:9'"
+                :ratio-gradient="item.ratio || '16:9'"
                 :style="`--media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
