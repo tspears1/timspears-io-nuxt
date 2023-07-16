@@ -38,9 +38,11 @@ $aspect-ratios: (
 
     --gradient-columns: #{$columns};
     --gradient-rows: #{$rows};
-    background-image: $lists;
+    --gradient-lists: #{$lists};
+    --gradient-positions: #{$positions};
+    background-image: var(--gradient-lists);
     background-size: calc(100% / var(--gradient-columns) + 0.1%) 100%;
     background-repeat: no-repeat;
-    background-position: 0% 0%, $positions;
+    background-position: 0% 0%, var(--gradient-positions);
 }
 

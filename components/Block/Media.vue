@@ -55,14 +55,14 @@ const gridLayoutMotion = () => {
                         filter: { easing: cubicBezier.easeInCubic }
                     }
                 ],
-                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInCubic }],
-                [gradient, { opacity: [0, 1, 0], scale: [1.3, 1] }, {
+                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInQuad }],
+                [gradient, { opacity: [0, 1, 1, 1, 0], scale: [1.3, 1] }, {
                     at: 0,
-                    easing: cubicBezier.easeInCubic,
+                    easing: cubicBezier.easeInQuint,
                     scale: { easing: cubicBezier.easeInCubic },
                 }]
             ]),
-            { target: m, offset: ['0.1 0.8', '0 0.2']}
+            { target: m, offset: ['0.0 0.9', '0.4 0.5']}
         )
     })
 }
@@ -121,6 +121,6 @@ const gridLayoutMotion = () => {
                 <div class="media-block__gradient"></div>
             </div>
         </div>
-        <div class="media-block__caption">{{ sectionCaption.join(' | ') }}</div>
+        <div class="media-block__caption">{{ sectionCaption.join('  ') }}</div>
     </section>
 </template>
