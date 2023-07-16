@@ -1,9 +1,14 @@
 <script setup>
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide'
 
-import { list } from 'radash'
+const props = defineProps({
+    content: {
+        type: Object,
+        required: true,
+    }
+})
 
-const slideList = ref(list(1, 10))
+const { heading, mediaGroup } = props.content
 
 const sliderRef = ref()
 const navigationRef = ref()
@@ -56,6 +61,22 @@ const stopGrabbing = () => grabbing.value = false
         class="slider-block"
         :data-is-grabbing="grabbing"
     >
+        <h3
+            v-if="heading?.text"
+            class="section__heading slider-block__heading"
+            :heading-size="heading.size"
+            :heading-style="heading.style"
+        >
+            <TextMotion
+                :text="heading.text"
+                exit
+                :stagger="0.035"
+                :duration="0.5"
+                :inview="0.95"
+                transition-type="letter"
+                :transition-name="['slide-left', 'slide-right']"
+            />
+        </h3>
         <div class="slider-block__wrapper">
             <Splide
                 class="slider-block__slider"
@@ -71,10 +92,18 @@ const stopGrabbing = () => grabbing.value = false
                         @mouseup="stopGrabbing"
                     >
                         <SplideSlide
-                            v-for="(n, index) in slideList.length"
+                            v-for="(item, index) in mediaGroup"
                             :key="`${index}-slider-item`"
                             class="slider-block__slider-item"
                         >
+                            <div class="slider-block__slider-item-wrapper">
+                                <SanityImage
+                                    block="slider-block"
+                                    :src="item.image"
+                                    :style="`--media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
+                                />
+                            </div>
+                            <div class="slider-block__slider-item-caption">{{  item.caption }}</div>
                         </SplideSlide>
 
                     </SplideTrack>
@@ -95,7 +124,7 @@ const stopGrabbing = () => grabbing.value = false
                         @mouseup="stopGrabbing"
                     >
                         <SplideSlide
-                            v-for="(n, index) in slideList.length"
+                            v-for="(n, index) in mediaGroup"
                             :key="`${index}-navigation-item`"
                             class="slider-block__navigation-item"
                             @keydown.up.prevent="toPrevSlide"

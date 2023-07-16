@@ -42,10 +42,11 @@ const useProjectData = (slug) => {
                 _type == 'galleryBlock' => {
                     _type,
                     'heading': sectionHeading,
-                    mediaGroup[] {
+                    'mediaGroup': mediaGroup[] {
                         _type,
-                        caption,
-                        'image': media.asset->
+                        'caption': caption,
+                        'hotspot': hotspot,
+                        'image': asset->
                     },
                 },
 

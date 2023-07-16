@@ -11,17 +11,17 @@ const props = defineProps({
 
 const { heading, awards } = props.content
 
-const awardsRef = ref(null)
-const isInView = ref(false)
+const awardRef = ref([])
+
 
 onMounted(() => {
-    inView(awardsRef.value, () => {
-        isInView.value = true
+    inView(awardRef.value, (entry) => {
+        entry.target.setAttribute('in-view', entry.isIntersecting)
 
         return () => {
-            isInView.value = false
+            entry.target.removeAttribute('in-view')
         }
-    }, { amount: 'any' })
+    }, { amount: 0.5 })
 })
 
 </script>
@@ -46,15 +46,14 @@ onMounted(() => {
 
         <div
             class="awards-block__awards"
-            :in-view="isInView || null"
             :style="`--list-length: ${awards.length};`"
-            ref="awardsRef"
         >
             <div
                 class="awards-block__award"
                 v-for="(award, index) in awards"
                 :key="award.id"
                 :style="`--index: ${index};`"
+                ref="awardRef"
             >
                 <div class="awards-block__col">
                     <h4

@@ -4,7 +4,7 @@
     $b: &;
 
     --awards-border-scale: 0;
-    --awards-delay: 300ms;
+    --awards-delay: 150ms;
     --awards-padding-y: #{fluid(1.875, 3.75, false)};
     --awards-subtext-size: #{fluid(0.6875, 0.75, false)};
     --awards-text-size: #{fluid(1.1, 1.375, false)};
@@ -15,14 +15,6 @@
 
     &__heading {
         text-wrap: balance;
-    }
-
-    &__awards {
-
-        &[in-view] {
-            --awards-border-scale: 1;
-            --awards-transform-origin: left;
-        }
     }
 
     &__award {
@@ -57,6 +49,11 @@
                 content: '';
                 transition-delay: calc(var(--awards-delay) * (var(--list-length) + 1));
             }
+        }
+
+        &[in-view] {
+            --awards-border-scale: 1;
+            --awards-transform-origin: left;
         }
     }
 
