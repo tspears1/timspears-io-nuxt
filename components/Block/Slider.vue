@@ -13,6 +13,10 @@ const { heading, mediaGroup } = props.content
 const sliderRef = ref()
 const navigationRef = ref()
 const grabbing = ref(false)
+const activeSlide = ref(0)
+
+const isFirstSlide = computed(() => activeSlide.value === 0)
+const isLastSlide = computed(() => activeSlide.value === mediaGroup.length - 1)
 
 const sliderOptions = {
     arrows: false,
@@ -39,6 +43,7 @@ const navSplide = computed(() => navigationRef.value.splide)
 
 onMounted(() => {
     const navSplide = navigationRef.value?.splide
+    addNavWindow()
     navSplide && sliderRef.value?.sync( navSplide )
 })
 
@@ -53,6 +58,15 @@ const toNextSlide = () => {
 const startGrabbing = () => grabbing.value = true
 
 const stopGrabbing = () => grabbing.value = false
+
+const addNavWindow = () => {
+    const navTrack = navigationRef.value?.splide?.Components.Elements.track
+    const navWindow = document.createElement('div')
+    navWindow.classList.add('slider-block__navigation-window')
+    navTrack.appendChild(navWindow)
+}
+
+const updateActiveSlide = (splide, current, previous) => activeSlide.value = current
 
 </script>
 
@@ -95,6 +109,10 @@ const stopGrabbing = () => grabbing.value = false
                             v-for="(item, index) in mediaGroup"
                             :key="`${index}-slider-item`"
                             class="slider-block__slider-item"
+                            @keydown.up.prevent="toPrevSlide"
+                            @keydown.left="toPrevSlide"
+                            @keydown.down.prevent="toNextSlide"
+                            @keydown.right="toNextSlide"
                         >
                             <div class="slider-block__slider-item-wrapper">
                                 <SanityImage
@@ -116,8 +134,12 @@ const stopGrabbing = () => grabbing.value = false
                 :has-track="false"
                 ref="navigationRef"
                 @splide:dragged="stopGrabbing"
+                @splide:move="updateActiveSlide"
             >
-                <div class="slider-block__navigation-inner">
+                <div
+                    class="slider-block__navigation-inner"
+                    :class="{'slider-block__navigation--first': isFirstSlide, 'slider-block__navigation--last': isLastSlide}"
+                >
                     <SplideTrack
                         class="slider-block__navigation-track"
                         @mousedown="startGrabbing"

@@ -1,20 +1,22 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .slider-block {
-    --slider-slide-gap: #{ max(frame(7.5vw), 1.25rem) };
+    --slider-slide-gap: #{ max(frame(7.5vw), 1.5rem) };
     --slider-slide-ratio: 1;
     --slider-slide-width: #{ frame(80vw) };
     --slider-slide-offset: #{ calc( ( frame(100vw) - var(--slider-slide-width) ) / 2 ) };
 
-    --slider-nav-gap: calc(var(--slider-slide-gap) / 15 );
-    --slider-nav-width: calc(var(--slider-slide-width) / 15 );
-    --slider-nav-offset: calc(var(--slider-slide-offset) / 15 * 2);
+    --slider-nav-gap: calc(var(--slider-slide-gap) / 6 );
+    --slider-nav-width: calc(var(--slider-slide-width) / 6 );
+    --slider-nav-offset: calc(var(--slider-slide-offset) / 6 * 2.5);
 
     --slider-item-transition: scale var(--duration-moderate) var(--ease-out-quad);
 
     @include breakpoint( sm ) {
         --slider-slide-ratio: 16 / 9;
         --slider-slide-width: #{ frame(60vw) };
+        --slider-nav-gap: calc(var(--slider-slide-gap) / 15 );
+        --slider-nav-width: calc(var(--slider-slide-width) / 15 );
         --slider-nav-offset: calc(var(--slider-slide-offset) / 15);
     }
 
@@ -26,12 +28,8 @@
 
     &__wrapper {
         display: grid;
-        gap: fluid(3, 4.5, false);
-        padding: fluid(3, 8rem) 0;
-    }
-
-    &__slider {
-
+        gap: fluid(4, 6, false);
+        padding: fluid(3, 6, false) 0;
     }
 
     &__slider-inner {
@@ -75,14 +73,25 @@
                 opacity: 1;
             }
 
+            #{$b}__slider-item-wrapper::before {
+                opacity: 0.8;
+            }
         }
     }
 
     &__slider-item-wrapper {
         aspect-ratio: var(--slider-slide-ratio);
         background: var(--c-theme-800);
-        box-shadow: var(--shadow-5);
         inline-size: var(--slider-slide-width);
+        position: relative;
+
+        &::before {
+            @include absolute(0);
+            box-shadow: var(--shadow-5);
+            content: '';
+            transition: opacity var(--duration-moderate) var(--ease-out-expo);
+            opacity: 0.5;
+        }
     }
 
     &__slider-item-caption {
@@ -93,7 +102,7 @@
         line-height: 1.5;
         letter-spacing: 0.075em;
         opacity: 0;
-        transition: opacity var(--duration-moderate) var(--ease-out-expo);
+        transition: opacity var(--duration-slow) var(--ease-out-circ) var(--duration-moderate);
     }
 
     &__img {
@@ -132,13 +141,6 @@
         grid-column: 2 / span 1;
         position: relative;
 
-        &::after {
-            position: absolute;
-            inset: -2vh calc(var(--slider-nav-offset) * -1);
-            content: '';
-            border: 1px solid var(--c-theme-400);
-        }
-
         &:hover {
             cursor: grab;
         }
@@ -152,6 +154,51 @@
             grid-auto-flow: column;
             grid-auto-columns: var(--slider-nav-width);
             gap: var(--slider-nav-gap);
+        }
+    }
+
+    &__navigation-window {
+        --_arrow-size: 0.25rem;
+        --_arrow-offset: calc(var(--slider-nav-offset) * 1.25);
+        border: 1px solid var(--c-theme-400);
+        inset: -2vh calc(var(--slider-nav-offset) * -1);
+        position: absolute;
+        z-index: 4;
+
+        @include breakpoint(sm) {
+            --_arrow-offset: var(--slider-nav-offset);
+        }
+
+        &::before,
+        &::after {
+            block-size: 0;
+            border-bottom: var(--_arrow-size) solid transparent;
+            border-top: var(--_arrow-size) solid transparent;
+            content: '';
+            inline-size: 0;
+            opacity: 1;
+            pointer-events: none;
+            position: absolute;
+            transition: opacity var(--duration-moderate) var(--ease-out-expo);
+            z-index: 5;
+        }
+
+        &::before {
+            border-right: calc(var(--_arrow-size) * 2 * 0.866) solid var(--c-neutral-0);
+            inset: calc(50% - var(--_arrow-size)) auto 0 calc(var(--_arrow-offset) * -1);
+
+            .slider-block__navigation--first & {
+                opacity: 0;
+            }
+        }
+
+        &::after {
+            border-left: calc(var(--_arrow-size) * 2 * 0.866) solid var(--c-neutral-0);
+            inset: calc(50% - var(--_arrow-size)) calc(var(--_arrow-offset) * -1) 0 auto;
+
+            .slider-block__navigation--last & {
+                opacity: 0;
+            }
         }
     }
 
