@@ -109,10 +109,6 @@ const updateActiveSlide = (splide, current, previous) => activeSlide.value = cur
                             v-for="(item, index) in mediaGroup"
                             :key="`${index}-slider-item`"
                             class="slider-block__slider-item"
-                            @keydown.up.prevent="toPrevSlide"
-                            @keydown.left="toPrevSlide"
-                            @keydown.down.prevent="toNextSlide"
-                            @keydown.right="toNextSlide"
                         >
                             <div class="slider-block__slider-item-wrapper">
                                 <SanityImage
