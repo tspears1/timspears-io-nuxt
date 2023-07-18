@@ -20,8 +20,8 @@ const useLenis = () => {
 
     const initLenis = () => {
         lenis.value = new Lenis({
-            lerp: 0.2,
-            duration: 1,
+            lerp: 0.5, // 0.2
+            duration: 1.2, // 1
             easing: easings.easeOutCubic,
             smoothWheel: true
         })

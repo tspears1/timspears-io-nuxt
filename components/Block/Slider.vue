@@ -26,6 +26,7 @@ const sliderOptions = {
     pagination: false,
     easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
     updateOnMove: true,
+    speed: 1200,
 }
 
 const navigationOptions = {
@@ -37,6 +38,7 @@ const navigationOptions = {
     isNavigation: true,
     updateOnMove: true,
     easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    speed: 1200,
 }
 
 const navSplide = computed(() => navigationRef.value.splide)
