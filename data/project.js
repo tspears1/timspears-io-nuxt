@@ -2,6 +2,7 @@ const useProjectData = (slug) => {
     const { data } = useSanityQuery(groq`
         *[_type == 'project' && slug.current == "${slug}"]{
             title,
+            heroSize,
             slug,
             client,
             year,

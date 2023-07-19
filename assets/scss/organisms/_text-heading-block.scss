@@ -6,15 +6,16 @@
     &__content {
         --text-font-size: #{fluid( 1.25, 1.625, false)};
         --text-line-height: 1.6;
-        --text-inline-size: var(--size-content-3);
+        --text-inline-size: var(--size-content-4);
         color: var(--section-color-text);
+        text-align: justify;
 
         @include breakpoint( xxl ) {
-            --text-inline-size: var(--size-content-4);
+            --text-inline-size: var(--size-content-3);
         }
 
         @include breakpoint( xxxl ) {
-            --text-inline-size: var(--size-content-5);
+            --text-inline-size: var(--size-content-2);
         }
     }
 
@@ -73,6 +74,15 @@
                 'CONTENT XXXXXXX'
                 'CONTENT EYEBROW'
                 'CONTENT HEADING';
+
+            #{$b}__content {
+                justify-self: start;
+            }
+        }
+
+        &:where([section-alignment='end']) {
+            align-items: end;
+            align-content: end;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 .hero {
     --hero-bg-color: var(--c-theme-bg);
-    --hero-title-size: #{fluid(4.6875, 11.25, false)};
+    --hero-title-size: calc(#{fluid(4.6875, 11.25, false)} * var(--hero-title-scale, 1));
     --hero-padding-bottom: #{fluid(1.875rem, 2.5rem)};
     --hero-height: var(--_hero-height, #{frame(65vh)});
     --hero-translate-y: var(--_hero-translate-y, #{frame(35vh)});
@@ -23,6 +23,14 @@
     @include dvh-fallback() {
         --_hero-height: #{frame(65svh)};
         --_hero-translate-y: #{frame(35svh)};
+    }
+
+    &[hero-size='md'] {
+        --hero-title-scale: 0.8; // 60px on mobile
+    }
+
+    &[hero-size='sm'] {
+        --hero-title-scale: 0.6; // 45px on mobile
     }
 
     &.-project {

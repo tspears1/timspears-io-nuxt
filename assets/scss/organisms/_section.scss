@@ -16,7 +16,7 @@
     &[section-layout='columns'],
     &[section-layout='columns-reverse'] {
         display: grid;
-        row-gap: calc(var(--section-padding-y) / 2);
+        row-gap: calc(var(--section-padding-y) / 1.5);
 
         @include breakpoint(lg) {
             column-gap: fluid(2, 4, false);
@@ -36,6 +36,7 @@
     &[section-layout='stacked'] {
         display: grid;
         justify-content: center;
+        justify-items: center;
         row-gap: calc(var(--section-padding-y) / 2);
 
         @include breakpoint(lg) {

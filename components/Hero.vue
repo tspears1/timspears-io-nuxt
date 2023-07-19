@@ -41,7 +41,10 @@
 </script>
 
 <template>
-    <section ref="heroRef" :class="['hero', { '-billboard': billboard, '-compressed' : compressed }]">
+    <section
+        ref="heroRef"
+        :class="['hero', { '-billboard': billboard, '-compressed' : compressed }]"
+    >
         <div class="hero__screen"></div>
         <div class="hero__grid">
             <Eyebrow
