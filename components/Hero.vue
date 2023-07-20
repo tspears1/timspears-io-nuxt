@@ -52,7 +52,7 @@
             <div class="hero__screen"></div>
             <div class="hero__grid">
                 <Eyebrow
-                    v-if="eyebrow"
+                    v-if="!eyebrow"
                     :text="eyebrow"
                     block="hero"
                     ref="eyebrowRef"

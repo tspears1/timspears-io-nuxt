@@ -95,6 +95,7 @@
     &-eyebrow {
         @include eyebrow();
         margin-left: 1vw;
+        max-inline-size: 100%;
     }
 
     &__title {
