@@ -33,10 +33,10 @@
 
     watch(transitionCompleted, (value) => {
         if ( value == true ) {
-            let tl = timeline(sequence.value)
-            // setTimeout(() => {
-            //     tl.pause()
-            // }, 1000);
+            timeline(sequence.value)
+            setTimeout(() => {
+                tl.pause()
+            }, 1000);
         }
     })
 

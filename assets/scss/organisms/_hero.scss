@@ -73,6 +73,7 @@
         inline-size: var(--content-x);
         max-inline-size: var(--content-x);
         overflow: hidden;
+        position: relative;
         transform: translateY(var(--hero-translate));
     }
 
@@ -87,6 +88,8 @@
     &__grid {
         display: grid;
         gap: fluid(2, 3.75);
+        max-inline-size: 100%;
+        place-items: start;
     }
 
     &-eyebrow {
