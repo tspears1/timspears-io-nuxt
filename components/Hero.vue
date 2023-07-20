@@ -33,7 +33,10 @@
 
     watch(transitionCompleted, (value) => {
         if ( value == true ) {
-            timeline(sequence.value)
+            let tl = timeline(sequence.value)
+            setTimeout(() => {
+                tl.pause()
+            }, 1000);
         }
     })
 
@@ -44,6 +47,7 @@
     <section
         ref="heroRef"
         :class="['hero', { '-billboard': billboard, '-compressed' : compressed }]"
+        class="-project"
     >
         <div class="hero__screen"></div>
         <div class="hero__grid">
@@ -66,3 +70,16 @@
         </div>
     </section>
 </template>
+
+<style>
+.debug {
+    aspect-ratio: 1;
+    background: hsl(var(--c-neutral-0-hsl) / 0.5);
+    border: 2px solid var(--c-neutral-0);
+    height: 20vmin;
+    inset: 0 auto auto calc(50% - 10vmin);
+    padding: 5vmin;
+    position: fixed;
+    z-index: 9999;
+}
+</style>
