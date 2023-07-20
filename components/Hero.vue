@@ -25,9 +25,9 @@
             [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
             [heroRef.value, { y: [ heroY.value, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
         ]
-        if (props.eyebrow) {
-            seq = [...seq, ...eyebrowRef.value.enterSequence]
-        }
+        // if (props.eyebrow) {
+        //     seq = [...seq, ...eyebrowRef.value.enterSequence]
+        // }
         return seq
     })
 
