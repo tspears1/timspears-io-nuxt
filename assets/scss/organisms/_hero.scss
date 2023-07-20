@@ -7,17 +7,12 @@
     --hero-height: var(--_hero-height, #{frame(65vh)});
     --hero-translate-y: var(--_hero-translate-y, #{frame(35vh)});
     --hero-translate: calc(var(--hero-translate-y) - var(--hero-padding-bottom));
-    @include grid-items( end x );
-    @include padding( x var(--hero-padding-bottom) 2.5rem);
     @include splitting($gap: 0.12em, $parent: 'title');
     background: var(--hero-bg-color);
     color: var(--c-theme-text);
-    display: grid;
-    block-size: var(--hero-height);
+    inline-size: var(--content-x);
     max-inline-size: var(--content-x);
     position: relative;
-    transform: translateY(var(--hero-translate));
-    inline-size: var(--content-x);
     z-index: var(--z-hero);
 
     @include dvh-fallback() {
@@ -66,6 +61,19 @@
             --_hero-height: #{frame(75svh)};
             --_hero-translate-y: #{frame(25svh)};
         }
+    }
+
+    &__wrapper {
+        //@include absolute(0);
+        @include grid-items( end x );
+        @include padding( x var(--hero-padding-bottom) 2.5rem);
+        background: var(--hero-bg-color);
+        block-size: var(--hero-height);
+        display: grid;
+        inline-size: var(--content-x);
+        max-inline-size: var(--content-x);
+        overflow: hidden;
+        transform: translateY(var(--hero-translate));
     }
 
     &__screen {

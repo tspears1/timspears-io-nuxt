@@ -7,10 +7,40 @@ const getPlaybackPos = (time, duration) => ((time * 100) / duration) * 0.01
  * @param {HTMLElement} element
  * @returns {Object}
  */
-const getTranslateValues = element => {
+const getTranslateValues = (element, individualProp) => {
     const style = window.getComputedStyle(element)
     // eslint-disable-next-line dot-notation
     const matrix = style['transform'] || style.webkitTransform || style.mozTransform
+    const indies = {
+        translate: style['translate'] || style.webkitTranslate || style.mozTranslate,
+        rotate: style['rotate'] || style.webkitRotate || style.mozRotate,
+        scale: style['scale'] || style.webkitScale || style.mozScale,
+    }
+
+    if (individualProp) {
+        const values = Array.from(indies[individualProp].split(' ')).map(x => parseFloat(x))
+        if (individualProp === 'translate' || individualProp === 'scale') {
+            return {
+                x: values[0],
+                y: values[1],
+                z: values[2],
+            }
+        }
+
+        if (individualProp === 'rotate') {
+            if (values.length == 1) {
+                return {
+                    z: values[0],
+                }
+            }
+
+            if (values.legth == 2) {
+                return {
+                    [values[0]]: values[1]
+                }
+            }
+        }
+    }
 
     // No transform property. Simply return 0 values.
     if (matrix === 'none' || typeof matrix === 'undefined') {
@@ -23,7 +53,7 @@ const getTranslateValues = element => {
 
     // Can either be 2d or 3d transform
     const matrixType = matrix.includes('3d') ? '3d' : '2d'
-    const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
+    const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ').map(x => parseFloat(x))
 
     // 2d matrices have 6 values
     // Last 2 values are X and Y.

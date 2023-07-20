@@ -17,8 +17,8 @@
     const splitRef = ref()
     const eyebrowRef = ref()
     const words = computed(() => splitRef.value.wordWraps)
-    const wordsY = computed(() => Number(getTranslateValues(words.value[0]).y))
-    const heroY = computed(() => Number(getTranslateValues(heroRef.value).y))
+    const wordsY = computed(() => getTranslateValues(words.value[0]).y)
+    const heroY = computed(() => getTranslateValues(heroRef.value).y)
 
     const sequence = computed(() => {
         let seq = [
@@ -34,9 +34,9 @@
     watch(transitionCompleted, (value) => {
         if ( value == true ) {
             let tl = timeline(sequence.value)
-            setTimeout(() => {
-                tl.pause()
-            }, 1000);
+            // setTimeout(() => {
+            //     tl.pause()
+            // }, 1000);
         }
     })
 
@@ -45,28 +45,29 @@
 
 <template>
     <section
-        ref="heroRef"
         :class="['hero', { '-billboard': billboard, '-compressed' : compressed }]"
         class="-project"
     >
-        <div class="hero__screen"></div>
-        <div class="hero__grid">
-            <Eyebrow
-                v-if="eyebrow"
-                :text="eyebrow"
-                block="hero"
-                ref="eyebrowRef"
-                offset="-1.5"
-                :autoplay="false"
-            />
-            <h1 class="hero__title" v-if="title">
-                <TextSplitting
-                    :content="title"
-                    :word-wrapper="true"
-                    ref="splitRef"
+        <div class="hero__wrapper" ref="heroRef">
+            <div class="hero__screen"></div>
+            <div class="hero__grid">
+                <Eyebrow
+                    v-if="eyebrow"
+                    :text="eyebrow"
                     block="hero"
+                    ref="eyebrowRef"
+                    offset="-1.5"
+                    :autoplay="false"
                 />
-            </h1>
+                <h1 class="hero__title" v-if="title">
+                    <TextSplitting
+                        :content="title"
+                        :word-wrapper="true"
+                        ref="splitRef"
+                        block="hero"
+                    />
+                </h1>
+            </div>
         </div>
     </section>
 </template>
