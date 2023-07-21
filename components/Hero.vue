@@ -25,9 +25,9 @@
             // [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
             [heroRef.value, { y: [ heroY.value, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
         ]
-        if (props.eyebrow) {
-            seq = [...seq, ...eyebrowRef.value.enterSequence]
-        }
+        // if (props.eyebrow) {
+        //     seq = [...seq, ...eyebrowRef.value.enterSequence]
+        // }
         return seq
     })
 
@@ -36,7 +36,7 @@
             let tl = timeline(sequence.value)
             setTimeout(() => {
                 tl.pause()
-            }, 2000);
+            }, 500);
         }
     })
 
@@ -51,8 +51,9 @@
         <div class="hero__wrapper" ref="heroRef">
             <div class="hero__screen"></div>
             <div class="hero__grid">
+                <div class="box"></div>
                 <Eyebrow
-                    v-if="eyebrow"
+                    v-if="!eyebrow"
                     :text="eyebrow"
                     block="hero"
                     ref="eyebrowRef"
@@ -82,5 +83,10 @@
     padding: 5vmin;
     position: fixed;
     z-index: 9999;
+}
+.box {
+    aspect-ratio: 1;
+    background: pink;
+    height: 3rem;
 }
 </style>
