@@ -22,12 +22,12 @@
 
     const sequence = computed(() => {
         let seq = [
-            [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
+            // [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
             [heroRef.value, { y: [ heroY.value, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
         ]
-        // if (props.eyebrow) {
-        //     seq = [...seq, ...eyebrowRef.value.enterSequence]
-        // }
+        if (props.eyebrow) {
+            seq = [...seq, ...eyebrowRef.value.enterSequence]
+        }
         return seq
     })
 
@@ -36,7 +36,7 @@
             let tl = timeline(sequence.value)
             setTimeout(() => {
                 tl.pause()
-            }, 1000);
+            }, 2000);
         }
     })
 
@@ -52,14 +52,14 @@
             <div class="hero__screen"></div>
             <div class="hero__grid">
                 <Eyebrow
-                    v-if="!eyebrow"
+                    v-if="eyebrow"
                     :text="eyebrow"
                     block="hero"
                     ref="eyebrowRef"
                     offset="-1.5"
                     :autoplay="false"
                 />
-                <h1 class="hero__title" v-if="title">
+                <h1 class="hero__title" v-if="!title">
                     <TextSplitting
                         :content="title"
                         :word-wrapper="true"
