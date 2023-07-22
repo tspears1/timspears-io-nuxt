@@ -1,12 +1,13 @@
 @use '@/assets/scss/abstracts/' as *;
 
 :root {
-    --frame-border: 0.625rem;
+    --frame-border: 10px;
+    //--frame-border: 0rem;
     --frame-color: var(--c-neutral-0);
 
-    @include breakpoint( sm ) {
-        --frame-border: 1.25rem;
-    }
+    // @include breakpoint( sm ) {
+    //     --frame-border: 1.25rem;
+    // }
 }
 
 html {
@@ -93,7 +94,7 @@ body {
     @include grid-items( start center);
     display: grid;
     min-block-size: 100vh;
-    inline-size: 100%;
+    max-inline-size: 100%;
 
     @include dvh-fallback() {
         min-block-size: 100dvh;

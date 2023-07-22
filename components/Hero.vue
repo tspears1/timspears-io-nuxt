@@ -23,7 +23,7 @@
     const sequence = computed(() => {
         let seq = [
             // [words.value, { y: [ wordsY.value, 0 ] }, { duration: 0.5, delay: stagger(0.1) }],
-            [heroRef.value, { y: [ heroY.value, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
+            [heroRef.value, { y: [ heroY.value, 0], x: [0, 0] }, { duration: 2.5, easing: cubicBezier.easeOutQuint, at: "+0.25" }],
         ]
         // if (props.eyebrow) {
         //     seq = [...seq, ...eyebrowRef.value.enterSequence]
@@ -33,6 +33,7 @@
 
     watch(transitionCompleted, (value) => {
         if ( value == true ) {
+            // let seq = sequence.value
             let tl = timeline(sequence.value)
             setTimeout(() => {
                 tl.pause()
@@ -86,7 +87,7 @@
 }
 .box {
     aspect-ratio: 1;
-    background: pink;
+    background: purple;
     height: 3rem;
 }
 </style>

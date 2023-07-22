@@ -64,17 +64,18 @@
     }
 
     &__wrapper {
-        //@include absolute(0);
-        @include grid-items( end x );
-        @include padding( x var(--hero-padding-bottom) 2.5rem);
+        @include grid-items( end start );
+        @include padding( x x 2.5rem);
         background: var(--hero-bg-color);
+        background: orange;
         block-size: var(--hero-height);
         display: grid;
         inline-size: var(--content-x);
-        max-inline-size: var(--content-x);
+        max-inline-size: 100%;
         overflow: hidden;
         position: relative;
         transform: translateY(var(--hero-translate));
+        will-change: transform;
     }
 
     &__screen {
@@ -86,6 +87,7 @@
     }
 
     &__grid {
+        @include margin( x var(--hero-padding-bottom));
         display: grid;
         gap: fluid(2, 3.75);
         max-inline-size: 100%;
