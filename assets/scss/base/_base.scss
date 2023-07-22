@@ -2,12 +2,11 @@
 
 :root {
     --frame-border: 10px;
-    //--frame-border: 0rem;
     --frame-color: var(--c-neutral-0);
 
-    // @include breakpoint( sm ) {
-    //     --frame-border: 1.25rem;
-    // }
+    @include breakpoint( sm ) {
+        --frame-border: 20px;
+    }
 }
 
 html {

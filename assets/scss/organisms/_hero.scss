@@ -67,7 +67,6 @@
         @include grid-items( end start );
         @include padding( x x 2.5rem);
         background: var(--hero-bg-color);
-        background: orange;
         block-size: var(--hero-height);
         display: grid;
         inline-size: var(--content-x);

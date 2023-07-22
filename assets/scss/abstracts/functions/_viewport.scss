@@ -2,6 +2,6 @@
     @if $header {
         @return calc(#{$value} - var(--header-height) - (var(--frame-border) * #{$sides}));
     } @else {
-        @return calc(#{$value} - (10px * #{$sides}));
+        @return calc(#{$value} - (var(--frame-border) * #{$sides}));
     }
 }
