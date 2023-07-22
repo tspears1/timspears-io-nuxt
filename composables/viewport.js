@@ -1,3 +1,4 @@
+
 const useRoot = () => {
     let root
     let body
@@ -24,7 +25,7 @@ const useFrame = () => {
 
     const _getFrameBorder = () => {
         const size = useCssVar('--frame-border', root)
-        return parseFloat(size.value) * 16
+        return remToPx(size.value)
     }
 
     frameBorder.value = _getFrameBorder()
