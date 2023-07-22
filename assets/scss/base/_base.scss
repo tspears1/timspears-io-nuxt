@@ -94,6 +94,7 @@ body {
     @include grid-items( start center);
     display: grid;
     min-block-size: 100vh;
+    inline-size: 100%;
     max-inline-size: 100%;
 
     @include dvh-fallback() {
