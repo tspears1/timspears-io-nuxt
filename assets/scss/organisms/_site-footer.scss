@@ -1,11 +1,85 @@
+@use '@/assets/scss/abstracts/' as *;
+
+$palette:
+    var(--c-theme-950),
+    var(--c-theme-900),
+    var(--c-theme-800),
+    var(--c-theme-700),
+    var(--c-theme-600),
+    var(--c-theme-500),
+    var(--c-theme-400),
+    var(--c-theme-300),
+    var(--c-theme-200),
+    var(--c-theme-300),
+    var(--c-theme-400),
+    var(--c-theme-500),
+    var(--c-theme-600),
+    var(--c-theme-700),
+    var(--c-theme-800),
+    var(--c-theme-900),
+    var(--c-theme-950);
+
 .site-footer {
-    background: var(--c-theme-text);
+
+    border-block-start: 2px var(--c-neutral-0) solid;
     color: var(--c-theme-bg);
     display: none;
-    block-size: 60vh;
     inline-size: var(--content-x);
 
     [data-loaded] & {
         display: grid;
+    }
+
+    &__gradient {
+        @include step-gradient($palette, 1, 90deg, true);
+        background-position: 0% 0%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        block-size: 5vh;
+        inline-size: var(--content-x);
+    }
+
+    &__grid {
+        --section-padding-x: #{fluid(1.25, 2.5)};
+        align-items: center;
+        background: var(--c-theme-text);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--section-padding-x);
+        justify-content: space-between;
+        padding-block-start: calc(var(--section-padding-x) * 2);
+        padding-block-end: calc(var(--section-padding-x) / 2);
+        padding-inline: var(--section-padding-x);
+
+        > * {
+            flex: none;
+        }
+    }
+
+    &__meta {
+        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-family: var(--font-modern);
+        font-size: fluid(0.6875, 0.875, false);
+        font-weight: var(--font-weight-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+
+        > * {
+            flex: none;
+        }
+    }
+
+    &__icon {
+        aspect-ratio: 1;
+        color: var(--c-theme-950);
+        display: block;
+        inline-size: 1rem;
+    }
+
+    &__tagline {
+        text-transform: none;
     }
 }

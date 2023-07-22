@@ -13,6 +13,14 @@
         padding: 0;
     }
 
+    &--flush-y {
+        padding-block: 0;
+    }
+
+    &--flush-x {
+        padding-inline: 0;
+    }
+
     &[section-layout='columns'],
     &[section-layout='columns-reverse'] {
         display: grid;
