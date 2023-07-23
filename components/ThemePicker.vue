@@ -9,23 +9,27 @@ const { themes, activeTheme } = useThemes()
 const _themePicker = useThemePickerStore()
 const { themePickerOpen } = storeToRefs(_themePicker)
 
-const reorderedThemes = computed(() => themes.value.sort((a, b) => a.slug === activeTheme.value.slug ? -1 : a.slug.localeCompare(b.slug)))
+// const reorderedThemes = computed(() => themes.value.sort((a, b) => a.slug === activeTheme.value.slug ? -1 : a.slug.localeCompare(b.slug)))
+const reorderedThemes = computed(() => themes.value.sort((a, b) => a.slug.localeCompare(b.slug)))
 
 const themePickerRef = ref()
 const { activate, deactivate } = useFocusTrap(themePickerRef)
 
-// watch(themePickerOpen, (value) => {
-//     if (value == true) {
-//         waitForEl('.theme-picker__menuWrapper').then(() =>{
-//             activate()
-//         })
-//     } else {
-//         deactivate()
-//     }
-// })
+watch(themePickerOpen, (value) => {
+    if (value == true) {
+        waitForEl('.theme-picker__menuWrapper').then(() =>{
+            activate()
+        })
+    } else {
+        deactivate()
+    }
+})
 
 const onInputChange = (theme) => {
-    _themePicker.updateTheme(theme.slug)
+    _themePicker.closeThemePicker()
+    setTimeout(() => {
+        _themePicker.updateTheme(theme.slug)
+    }, 100)
 }
 
 </script>
@@ -55,15 +59,32 @@ const onInputChange = (theme) => {
             <Presence>
                 <Motion
                     v-if="themePickerOpen"
+                    class="theme-picker__screen"
+                    :initial="{ opacity: 0 }"
+                    :animate="{
+                        opacity: 1,
+                        transition: { easing: cubicBezier.easeOutCirc, duration: 0.75 }
+                    }"
+                    :exit="{
+                        opacity: 0,
+                        transition: { easing: cubicBezier.easeOutCirc, duration: 0.75 }
+                    }"
+                    @click="_themePicker.closeThemePicker"
+                />
+            </Presence>
+            <Presence>
+                <Motion
+                    v-if="themePickerOpen"
                     class="theme-picker__menuWrapper"
+                    data-lenis-prevent
                     :initial="{ opacity: 0, y: 30 }"
                     :animate="{
                         opacity: 1, y: 0,
-                        transition: { easing: spring({ velocity: 300, stiffness: 500 }) },
+                        transition: { easing: cubicBezier.easeOutExpo, duration: 0.75 },
                     }"
                     :exit="{
                         opacity: 0, y: 30,
-                        transition: { easing: spring({ velocity: 100, stiffness: 200 }) },
+                        transition: { easing: cubicBezier.easeOutExpo, duration: 0.75 },
                     }"
                 >
                     <ul class="theme-picker__list">
@@ -72,6 +93,7 @@ const onInputChange = (theme) => {
                             :key="theme.name"
                             class="theme-picker__theme"
                             :class="{'theme-picker__theme--active': theme.name === activeTheme.name}"
+                            :style="`--theme-bg: var(--c-theme-${theme.slug}-50);`"
                         >
                             <div class="theme-picker__themeIcon">
                                 <PaletteIcon

@@ -3,7 +3,7 @@ import { usePageContextStore } from '~~/stores/portal'
 
 const useThemePickerStore = defineStore('themePicker', () => {
     const { lockScreen, unlockScreen } = useScreenLock()
-    const { themes, activeTheme, setActiveTheme } = useThemes()
+    const { setActiveTheme } = useThemes()
     const { updateContext } = usePageContextStore()
 
     const updateTheme = (slug) => {
@@ -13,22 +13,27 @@ const useThemePickerStore = defineStore('themePicker', () => {
         setActiveTheme(slug)
     }
 
-    // Reorder themes so that the active theme is first and the rest are alphabetical based on their slug
-    const reorderedThemes = computedEager(() => {
-        const rest = themes.value.filter(theme => theme.slug != activeTheme.value).sort((a, b) => a.slug.localeCompare(b.slug))
-        return [activeTheme.value, ...rest]
-    })
-
     // THEME PICKER MENU =============================================
     const themePickerOpen = ref(false)
 
+    const scrollToActive = () => {
+        const active = document.querySelector('.theme-picker__theme--active')
+        if (active) {
+            active.scrollIntoView({
+                block: 'center',
+                inline: 'center',
+            })
+        }
+    }
+
     const openThemePicker = () => {
-        console.log('openThemePicker')
         lockScreen()
         themePickerOpen.value = true
+        waitForEl('.theme-picker__theme--active').then(() => {
+            scrollToActive()
+        })
     }
     const closeThemePicker = () => {
-        console.log('closeThemePicker')
         unlockScreen()
         themePickerOpen.value = false
     }
@@ -39,12 +44,9 @@ const useThemePickerStore = defineStore('themePicker', () => {
         document.documentElement.dataset.modalOpen = value
     })
 
-
-
     return {
         closeThemePicker,
         openThemePicker,
-        reorderedThemes,
         themePickerOpen,
         toggleThemePicker,
         updateTheme,

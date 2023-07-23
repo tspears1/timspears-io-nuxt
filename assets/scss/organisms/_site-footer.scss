@@ -20,14 +20,20 @@ $palette:
     var(--c-theme-950);
 
 .site-footer {
-
+    block-size: calc(var(--content-y-svh) + 2px);
     border-block-start: 2px var(--c-neutral-0) solid;
     color: var(--c-theme-bg);
     display: none;
+    grid-template-rows: 1fr max-content;
     inline-size: var(--content-x);
 
     [data-loaded] & {
         display: grid;
+    }
+
+    &__accent {
+        display: grid;
+        grid-auto-rows: 1fr;
     }
 
     &__gradient {
@@ -35,7 +41,6 @@ $palette:
         background-position: 0% 0%;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        block-size: 5vh;
         inline-size: var(--content-x);
     }
 

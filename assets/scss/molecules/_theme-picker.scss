@@ -12,6 +12,30 @@
         gap: 0.75rem;
         grid-template-columns: max-content auto;
         padding: 0.75rem 1.25rem;
+        position: relative;
+
+        @include hover-style(mouse) {
+            cursor: pointer;
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &::before {
+            @include absolute(0);
+            background: transparent;
+            border-radius: inherit;
+            box-shadow: var(--shadow-3);
+            content: '';
+            opacity: 0;
+            transition: opacity var(--duration-moderate) var(--ease-out-expo);
+            z-index: 0;
+        }
+
+        [data-modal-open='true'] & {
+            z-index: var(--z-modal);
+        }
     }
 
     &__triggerText {
@@ -41,20 +65,39 @@
         aspect-ratio: 1;
     }
 
+    &__screen {
+        @include fixed(0);
+        background: hsl(var(--c-theme-950-hsl) / 0.4);
+        z-index: var(--z-overlay);
+    }
+
     &__menuWrapper {
         @include absolute(x 0 calc(100% + 0.5rem) x);
+        @include hide-scrollbars();
         background: var(--c-neutral-0);
         border-radius: 0.25rem;
         box-shadow: var(--shadow-1);
-        //clip-path: circle(0% at 100% 100%);
         display: grid;
         gap: 0.75rem;
-        max-block-size: 50vh;
+        block-size: 50vh;
         min-inline-size: min(20rem, 60vw);
         overflow: auto;
+        overscroll-behavior: none;
         padding: 1.5rem 1.25rem;
-        //pointer-events: none;
-        z-index: var(--z-menu);
+        z-index: var(--z-modal);
+    }
+
+    &__menuScreen {
+        @include absolute(0);
+        z-index: 1;
+
+        &::after {
+            @include absolute( x 0 0 );
+            background: linear-gradient(to top, var(--c-neutral-0), transparent);
+            block-size: 2rem;
+            content: '';
+            inline-size: 100%;
+        }
     }
 
     &__list {
@@ -73,10 +116,16 @@
         grid-template-columns: max-content auto;
         padding: 0.5rem 0.5rem;
         position: relative;
+        transition: background var(--duration-moderate) var(--ease-out-expo);
+
+        @include hover-style(mouse) {
+            cursor: pointer;
+            background: var(--theme-bg);
+        }
 
         &--active {
             --icon-color-border: var(--c-theme-800);
-            background: var(--c-theme-50);
+            background: var(--theme-bg);
         }
 
         input {
