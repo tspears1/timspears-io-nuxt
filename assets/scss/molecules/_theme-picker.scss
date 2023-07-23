@@ -48,31 +48,33 @@
         box-shadow: var(--shadow-1);
         display: grid;
         gap: 0.75rem;
-        grid-template-columns: max-content auto;
-        inline-size: min(24rem, 50vw);
-        overflow: auto;
-        padding: 1.5rem 1.75rem;
         max-block-size: 50vh;
+        min-inline-size: min(20rem, 60vw);
+        overflow: auto;
+        padding: 1.5rem 1.25rem;
         z-index: var(--z-menu);
     }
 
     &__list {
-        @include grid-content(start center);
+        @include grid-content(start x);
         block-size: 100%;
         display: grid;
-        gap: 3rem 2rem;
-        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        inline-size: 100%;
     }
 
     &__theme {
         align-items: center;
+        border-radius: 0.25rem;
         display: grid;
         gap: 0.875rem;
         grid-template-columns: max-content auto;
+        padding: 0.5rem 0.5rem;
         position: relative;
 
         &--active {
             --icon-color-border: var(--c-theme-800);
+            background: var(--c-theme-50);
         }
 
         input {
