@@ -1,0 +1,96 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.theme-picker {
+    position: relative;
+
+    &__trigger {
+        align-items: center;
+        background: var(--c-neutral-0);
+        border-radius: 0.25rem;
+        box-shadow: var(--shadow-1);
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: max-content auto;
+        padding: 0.75rem 1.25rem;
+    }
+
+    &__triggerText {
+        font-size: 0.875rem;
+        line-height: 1;
+    }
+
+    &__triggerTitle {
+        color: var(--c-theme-500);
+        font-size: 0.8em;
+        font-weight: var(--font-weight-black);
+        letter-spacing: 0.125em;
+        text-transform: uppercase;
+    }
+
+    &__triggerCurrent {
+        border-block-end: 1px dotted var(--c-theme-200);
+        font-weight: var(--font-weight-regular);
+        letter-spacing: 0.1em;
+        padding-inline: 0.25rem;
+    }
+
+    &__activeIcon {
+        --icon-color-start: var(--c-theme-800);
+        --icon-color-end: var(--c-theme-200);
+        @include svg-contain(1.5rem, 1.5rem);
+        aspect-ratio: 1;
+    }
+
+    &__menu {
+        @include absolute(x 0 calc(100% + 0.5rem) x);
+        background: var(--c-neutral-0);
+        border-radius: 0.25rem;
+        box-shadow: var(--shadow-1);
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: max-content auto;
+        inline-size: min(24rem, 50vw);
+        overflow: auto;
+        padding: 1.5rem 1.75rem;
+        max-block-size: 50vh;
+        z-index: var(--z-menu);
+    }
+
+    &__list {
+        @include grid-content(start center);
+        block-size: 100%;
+        display: grid;
+        gap: 3rem 2rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__theme {
+        align-items: center;
+        display: grid;
+        gap: 0.875rem;
+        grid-template-columns: max-content auto;
+        position: relative;
+
+        &--active {
+            --icon-color-border: var(--c-theme-800);
+        }
+
+        input {
+            @include absolute(0);
+            appearance: none;
+        }
+    }
+
+    &__themeIcon {
+        @include svg-contain(2.5rem, 2.5rem);
+        aspect-ratio: 1;
+
+        svg {
+            transition: stroke var(--duration-moderate) var(--ease-out-expo);
+        }
+    }
+
+    &__themeLabel {
+
+    }
+}
