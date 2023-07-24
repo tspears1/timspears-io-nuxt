@@ -5,7 +5,7 @@
     &__grid {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, calc(var(--content-y-svh) / 2));
+        grid-template-rows: repeat(2, calc(var(--content-y-lvh) / 2));
         grid-template-areas: 'MEDIA' 'CONTENT';
 
         @include breakpoint(md) {
