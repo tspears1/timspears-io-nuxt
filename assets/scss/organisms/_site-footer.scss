@@ -20,7 +20,7 @@ $palette:
     var(--c-theme-950);
 
 .site-footer {
-    block-size: calc(var(--content-y-svh) + 2px);
+    block-size: calc(var(--content-y-lvh) + 2px);
     border-block-start: 2px var(--c-neutral-0) solid;
     color: var(--c-theme-bg);
     display: none;

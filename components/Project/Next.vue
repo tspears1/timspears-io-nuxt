@@ -8,21 +8,22 @@ const { cards } = storeToRefs(projects)
 
 const nextProject = computed(() => {
     const index = cards.value.findIndex(card => card.url.includes(route.params.slug))
-    return cards.value[index + 1]
+    return index == cards.value.length - 1 ? cards.value[0] : cards.value[index + 1]
 })
 
-const resolveUrl = (url) => url.replace(/(?:\/?work\/)/gm, '')
+const resolveUrl = (url) => url?.replace(/(?:\/?work\/)/gm, '')
 
 </script>
 
 <template>
-    <section class="section project-next section--flush" section-theme="light">
+    <section v-if="nextProject" class="section project-next section--flush" section-theme="light">
         <div class="project-next__grid">
             <div class="project-next__content">
                 <h2 class="project-next__label">Next Project</h2>
                 <div class="project-next__eyebrow">{{ nextProject.eyebrow }}</div>
                 <h3 class="project-next__title">{{ nextProject.title }}</h3>
                 <Button
+                    v-if="nextProject.url"
                     text="View Project"
                     :url="resolveUrl(nextProject.url)"
                     class="section__button project-next__button"
@@ -40,7 +41,7 @@ const resolveUrl = (url) => url.replace(/(?:\/?work\/)/gm, '')
                     </NuxtLink>
                 </div>
             </div>
-            <div class="project-next__media">
+            <div class="project-next__media" v-if="nextProject.image">
                 <SanityImage
                     block="project-next"
                     :src="nextProject.image"
