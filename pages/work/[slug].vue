@@ -27,5 +27,6 @@ const { data } = useProjectData(route.params.slug)
             :content="data?.content ?? []"
             v-if="data"
         />
+        <ProjectNext />
     </main>
 </template>

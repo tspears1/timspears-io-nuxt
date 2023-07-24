@@ -16,11 +16,11 @@
             <div class="site-footer__gradient" style="opacity: 0.1;" />
         </div>
         <div class="site-footer__grid">
+            <ThemePicker />
             <div class="site-footer__meta">
                 <span>&copy; {{ new Date().getFullYear() }} Tim Spears.</span>
                 <span class="site-footer__tagline">Made with curiosity & love.</span>
             </div>
-            <ThemePicker />
         </div>
     </footer>
 </template>

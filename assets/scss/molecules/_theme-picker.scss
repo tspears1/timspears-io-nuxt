@@ -72,7 +72,7 @@
     }
 
     &__menuWrapper {
-        @include absolute(x 0 calc(100% + 0.5rem) x);
+        @include absolute(x calc(50% - (min(20rem, 80vw) / 2)) calc(100% + 0.5rem) x);
         @include hide-scrollbars();
         background: var(--c-neutral-0);
         border-radius: 0.25rem;
@@ -80,11 +80,15 @@
         display: grid;
         gap: 0.75rem;
         block-size: 50vh;
-        min-inline-size: min(20rem, 60vw);
+        min-inline-size: min(20rem, 80vw);
         overflow: auto;
         overscroll-behavior: none;
         padding: 1.5rem 1.25rem;
         z-index: var(--z-modal);
+
+        @include breakpoint(sm) {
+            inset: auto 0 calc(100% + 0.5rem) auto;
+        }
     }
 
     &__menuScreen {
@@ -144,6 +148,9 @@
     }
 
     &__themeLabel {
-
+        font-size: 0.875rem;
+        font-weight: var(--font-weight-regular);
+        letter-spacing: 0.1em;
+        line-height: 1;
     }
 }

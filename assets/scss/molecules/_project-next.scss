@@ -1,0 +1,31 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.project-next {
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, calc(var(--content-y-svh) / 2));
+        grid-template-areas: 'MEDIA' 'CONTENT';
+
+        @include breakpoint(md) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: var(--content-y-svh);
+            grid-template-areas: 'MEDIA CONTENT';
+        }
+    }
+
+    &__content {
+        grid-area: CONTENT;
+        padding-block: var(--section-padding-y);
+        padding-inline: var(--section-padding-x);
+    }
+
+    &__media {
+        grid-area: MEDIA;
+    }
+
+    &__img {
+        @include image-fit(cover);
+    }
+}

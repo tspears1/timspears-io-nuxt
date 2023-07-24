@@ -1,5 +1,4 @@
 <script setup>
-
 import { camel, list } from 'radash'
 
 const { icons } = useButton()
@@ -10,6 +9,10 @@ const props = defineProps({
         required: true,
     },
     url: {
+        type: String,
+        required: false,
+    },
+    to: {
         type: String,
         required: false,
     },
@@ -75,6 +78,8 @@ const setActive = (value) => buttonActive.value = value
 const activate = () => buttonActive.value = true
 const deactivate = () => buttonActive.value = false
 
+const nuxtLink = resolveComponent('NuxtLink')
+
 // allow active hover? add dynamic icon lol
 
 defineExpose({
@@ -90,7 +95,7 @@ defineExpose({
 
 <template>
     <component
-        :is="url ? 'a' : 'button'"
+        :is="props.url ? nuxtLink : 'button'"
         :class="['button', { 'button--swap' : swapOrder, 'button--naked': naked }]"
         :style="`--button-panel-count: ${panels};`"
         :data-theme="theme"
