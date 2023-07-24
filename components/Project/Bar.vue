@@ -14,10 +14,10 @@ const { serviceIconLabels } = useIcons()
 const getLabel = (slug) => serviceIconLabels.filter((item) => item.slug === slug)[0].label
 
 onMounted(() => {
-    inView(counter.value.$el, () => {
-        counter.value.toggle()
+    inView(counter.value?.$el, () => {
+        counter.value?.toggle()
 
-        return () => counter.value.toggle()
+        return () => counter.value?.toggle()
 
     }, { amount: 0.4 })
 })

@@ -9,7 +9,6 @@ const { themes, activeTheme } = useThemes()
 const _themePicker = useThemePickerStore()
 const { themePickerOpen } = storeToRefs(_themePicker)
 
-// const reorderedThemes = computed(() => themes.value.sort((a, b) => a.slug === activeTheme.value.slug ? -1 : a.slug.localeCompare(b.slug)))
 const reorderedThemes = computed(() => themes.value.sort((a, b) => a.slug.localeCompare(b.slug)))
 
 const themePickerRef = ref()

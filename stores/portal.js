@@ -40,7 +40,7 @@ const usePageContextStore = defineStore('pageContext', () => {
     })
 
     const updateContext = (key, entry) => {
-        pageContext[key] = entry
+        pageContext[key] = { ...entry }
     }
 
     const updateNextContext = (entry) => {

@@ -4,12 +4,13 @@ import { usePageContextStore } from '~~/stores/portal'
 const useThemePickerStore = defineStore('themePicker', () => {
     const { lockScreen, unlockScreen } = useScreenLock()
     const { setActiveTheme } = useThemes()
-    const { updateContext } = usePageContextStore()
+    const { updateContext, pageContext } = usePageContextStore()
 
     const updateTheme = (slug) => {
-        updateContext('current', {
+        updateContext('next', {
             theme: slug
         })
+        console.log('new context', { pageContext })
         setActiveTheme(slug)
     }
 
