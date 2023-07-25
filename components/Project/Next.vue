@@ -24,8 +24,8 @@ const screenRef = ref()
 
 const sequence = computed(() => {
     const mobileSeq = [
-        [contentRef.value, { x: [0, 0], y: ['-50%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
-        [screenRef.value, { x: [0, 0], y: ['-75%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
+        [contentRef.value, { x: [0, 0], y: ['-50%', 0] }, { at: 0 }],
+        [screenRef.value, { x: [0, 0], y: ['-75%', 0] }, { at: 0 }]
     ]
 
     const desktopSeq = [
