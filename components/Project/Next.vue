@@ -2,10 +2,12 @@
 import { useFilterStore } from '~/stores/filters'
 import { storeToRefs } from 'pinia'
 import ArrowRightIcon from '~/assets/svgs/button/arrow-right.svg'
-import { animate, scroll, stagger } from 'motion'
+import { animate, scroll, stagger, timeline } from 'motion'
+import { useViewportStore } from '~/stores/viewport'
 
 const route = useRoute()
 const projects = useFilterStore()
+const viewport = useViewportStore()
 const { cards } = storeToRefs(projects)
 
 const nextProject = computed(() => {
@@ -16,8 +18,26 @@ const nextProject = computed(() => {
 const resolveUrl = (url) => url?.replace(/(?:\/?work\/)/gm, '')
 
 const blockRef = ref()
-const viewProgress = ref(0)
-const viewPercent = computed(() => (viewProgress.value).toFixed(4))
+const contentRef = ref()
+const mediaRef = ref()
+const screenRef = ref()
+
+const sequence = computed(() => {
+    const mobileSeq = [
+        [contentRef.value, { x: [0, 0], y: ['calc(var(--content-y-lvh) / 4 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
+        [screenRef.value, { x: [0, 0], y: ['calc(var(--content-y-lvh) / 2 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
+    ]
+
+    const desktopSeq = [
+        [contentRef.value, { y: [0, 0], x: ['calc(var(--content-x) / 4 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
+        [screenRef.value, { y: [0, 0], x: ['calc(var(--content-x) / 2 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
+    ]
+
+    const img = mediaRef.value.querySelector('img')
+    const mediaSeq = [[img, { opacity: [0, 1], scale: [1.3, 1] }, { easing: cubicBezier.easeOutQuart, at: 0.05 }]]
+
+    return viewport.breakpoints.smaller('md').value ? [...mobileSeq, ...mediaSeq] : [...desktopSeq, ...mediaSeq]
+})
 
 const backRef = ref()
 const backArrowRef = ref()
@@ -28,9 +48,7 @@ const onBackHover = () => {
 }
 
 onMounted(() => {
-    scroll(({ y }) => {
-        viewProgress.value = y.progress
-    }, { target: blockRef.value, offset: ['start end', 'end end'] })
+    scroll(timeline(sequence.value), { target: blockRef.value, offset: ['0.25 1', 'end end'] })
 })
 
 </script>
@@ -41,10 +59,10 @@ onMounted(() => {
         class="section project-next section--flush"
         section-theme="light"
         ref="blockRef"
-        :style="`--view-progress: ${viewPercent}`"
     >
         <div class="project-next__grid">
-            <div class="project-next__content">
+            <div class="project-next__content" ref="contentRef">
+                <div class="project-next__screen" ref="screenRef" />
                 <div class="project-next__text">
                     <Eyebrow
                         text="Next Project"
@@ -91,7 +109,7 @@ onMounted(() => {
                     </NuxtLink>
                 </div>
             </div>
-            <div class="project-next__media" v-if="nextProject.image">
+            <div class="project-next__media" v-if="nextProject.image" ref="mediaRef">
                 <SanityImage
                     block="project-next"
                     :src="nextProject.image"
