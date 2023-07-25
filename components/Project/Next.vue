@@ -36,7 +36,7 @@ const sequence = computed(() => {
     const img = mediaRef.value.querySelector('img')
     const mediaSeq = [[img, { opacity: [0, 1], scale: [1.3, 1] }, { easing: cubicBezier.easeOutQuart, at: 0.05 }]]
 
-    return viewport.breakpoints.smaller('md').value ? [...mobileSeq, ...mediaSeq] : [...desktopSeq, ...mediaSeq]
+    return viewport.breakpoints.smaller('md').value ? [...mediaSeq] : [...desktopSeq, ...mediaSeq]
 })
 
 const backRef = ref()
