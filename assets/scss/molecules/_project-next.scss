@@ -9,6 +9,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, minmax(calc(var(--content-y-lvh) / 2), 1fr));
         grid-template-areas: 'MEDIA' 'CONTENT';
+        overflow: hidden;
 
         @include breakpoint(md) {
             grid-template-columns: repeat(2, 1fr);

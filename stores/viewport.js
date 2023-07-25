@@ -31,6 +31,7 @@ const useViewportStore = defineStore('viewport', () => {
 
     return {
         breakpoints,
+        content,
         windowWidth,
         windowHeight,
         vh,

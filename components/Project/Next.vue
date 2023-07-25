@@ -24,13 +24,13 @@ const screenRef = ref()
 
 const sequence = computed(() => {
     const mobileSeq = [
-        [contentRef.value, { x: [0, 0], y: ['calc(var(--content-y) / 4 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
-        [screenRef.value, { x: [0, 0], y: ['calc(var(--content-y) / 2 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
+        [contentRef.value, { x: [0, 0], y: ['-50%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
+        [screenRef.value, { x: [0, 0], y: ['-75%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
     ]
 
     const desktopSeq = [
-        [contentRef.value, { y: [0, 0], x: ['calc(var(--content-x) / 4 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
-        [screenRef.value, { y: [0, 0], x: ['calc(var(--content-x) / 2 * -1)', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
+        [contentRef.value, { y: [0, 0], x: ['-50%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }],
+        [screenRef.value, { y: [0, 0], x: ['-75%', 0] }, { easing: cubicBezier.easeOutCubic, at: 0 }]
     ]
 
     const img = mediaRef.value.querySelector('img')
