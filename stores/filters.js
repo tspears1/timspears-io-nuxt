@@ -20,6 +20,7 @@ const useFilterStore = defineStore('filters', () => {
             image: card.image ?? card.featuredImage,
             services: card.services,
             title: card.cardTitle ?? card.title,
+            realTitle: card.title,
             eyebrow: card.cardEyebrow ?? card.eyebrow,
             awarded: card.awarded,
         }))

@@ -94,7 +94,8 @@ const SplitRender = () => h(
     props.tag,
     {
         class: generateClass('splitting'),
-        style: `--word-count: ${splitContent.value.length};`
+        style: `--word-count: ${splitContent.value.length};`,
+        'aria-hidden': true,
     },
     splitContent.value.map((word, index) => renderBlock(word, index))
 )
