@@ -26,7 +26,7 @@
         grid-template-rows: 1fr max-content;
         padding-block: var(--section-padding-y);
         padding-inline: var(--section-padding-x);
-        will-change: translate;
+        will-change: transform;
         z-index: 1;
 
         @include breakpoint(md) {
@@ -37,6 +37,7 @@
     &__screen {
         @include absolute(0);
         background: var(--section-color-background);
+        will-change: transform;
         z-index: -1;
     }
 
