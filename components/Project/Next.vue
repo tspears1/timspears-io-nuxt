@@ -75,8 +75,7 @@ onMounted(() => {
                         heading-style="poster"
                         heading-size="h3"
                     >
-                    {{  nextProject.realTitle }}
-                        <!-- <TextMotion
+                        <TextMotion
                             :text="nextProject.realTitle"
                             exit
                             :stagger="0.035"
@@ -84,7 +83,7 @@ onMounted(() => {
                             :inview="0.95"
                             transition-type="letter"
                             :transition-name="['slide-up', 'slide-down']"
-                        /> -->
+                        />
                     </h3>
                     <Button
                         v-if="nextProject.url"
