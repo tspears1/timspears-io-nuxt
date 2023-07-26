@@ -75,10 +75,19 @@ const useProjectData = (slug) => {
                     layout,
                     'media': mediaGroup[] {
                         _type,
-                        'caption': media.caption,
-                        'attribution': media.attribution,
+                        'type': mediaType,
+                        'caption': select(
+                            mediaType == 'image' => media.caption,
+                            mediaType == 'video' => video.caption,
+                        ),
+                        'attribution': select(
+                            mediaType == 'image' => media.attribution,
+                            mediaType == 'video' => video.attribution,
+                        ),
+                        'poster': video.poster,
                         'hotspot': media.hotspot,
                         'image' : media.asset->,
+                        'video' : video.asset->,
                         spacing,
                         'ratio': select(
                             ratio == 'null' => null,

@@ -99,6 +99,7 @@ const gridLayoutMotion = () => {
                 :style="`--media-hotspot-x: ${ media[0]?.hotspot?.x ? (media[0].hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ media[0]?.hotspot?.y ? (media[0].hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
+                    v-if="media[0].type == 'image'"
                     block="media-block"
                     :src="media[0].image"
                 />
@@ -109,17 +110,29 @@ const gridLayoutMotion = () => {
             <div
                 class="media-block__media"
                 v-for="(item, index) in media"
-                :key="item.image._id"
+                :key="item.type == 'image' ? item?.image?._id : item?.video?._id ?? index"
                 :ratio-gradient="item.ratio || '16:9'"
                 :style="`--media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
+                    v-if="item.type == 'image'"
                     block="media-block"
                     :src="item.image"
                 />
                 <div class="media-block__overlay"></div>
                 <div class="media-block__gradient"></div>
             </div>
+        </div>
+        <div v-else-if="layout == 'video'" class="section__content media-block__content--video">
+            <!-- <SanityImage
+                block="media-block"
+                class="media-block__video-placeholder"
+                :src="media[0].placeholder"
+            />
+            <SanityVideo
+                block="media-block"
+                :src="media[0].video"
+            /> -->
         </div>
         <div class="media-block__caption">{{ sectionCaption.join('  ')}}</div>
     </section>

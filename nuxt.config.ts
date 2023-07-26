@@ -48,7 +48,6 @@ export default defineNuxtConfig({
     },
 })
 
-// swiper
 // formkit
 // lazy-sizes
 
