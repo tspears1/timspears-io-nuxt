@@ -84,7 +84,7 @@ const useProjectData = (slug) => {
                             mediaType == 'image' => media.attribution,
                             mediaType == 'video' => video.attribution,
                         ),
-                        'poster': video.poster,
+                        'poster': video.poster.asset->,
                         'hotspot': media.hotspot,
                         'image' : media.asset->,
                         'video' : video.asset->,

@@ -12,24 +12,6 @@
         object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
     }
 
-    &__video-wrapper {
-        background: var(--c-theme-100);
-        display: grid;
-        place-items: center;
-
-        --_video-fit: cover;
-
-        &[video-fit='contain'] {
-            --_video-fit: contain;
-        }
-    }
-
-    &__video {
-        @include image-fit(var(--_video-fit));
-        aspect-ratio: var(--media-ratio);
-        object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
-    }
-
     &__overlay {
         @include absolute(0);
         background: hsl(var(--image-bg, var(--c-theme-950-hsl)));
@@ -55,7 +37,9 @@
         grid-template-columns: repeat(6, 1fr);
 
         #{$b}__media {
+            --_media-fit: cover;
             aspect-ratio: var(--media-ratio);
+            background: var(--c-theme-100);
             clip-path: inset(0);
             grid-column: span 6;
             inline-size: 100%;
@@ -66,6 +50,17 @@
             @include breakpoint(sm) {
                 grid-column: span calc( 6 / var(--media-spacing));
             }
+
+            &[media-fit='contain'] {
+                --_media-fit: contain;
+                display: grid;
+                place-content: center;
+
+                #{$b}__video-wrapper {
+                    block-size: calc(var(--content-y-svh) * 0.85);
+                }
+
+            }
         }
 
         #{$b}__gradient {
@@ -75,7 +70,6 @@
             background-repeat: var(--ratio-gradient-background-repeat);
             background-size: var(--ratio-gradient-background-size);
             content: '';
-            //filter: blur(1px);
             mix-blend-mode: luminosity;
             pointer-events: none;
             will-change: transform;
@@ -84,6 +78,18 @@
         #{$b}__picture {
             @include size(100%, 100%);
             display: block;
+        }
+
+        #{$b}__video-wrapper {
+            @include size(100%, 100%);
+            aspect-ratio: var(--media-ratio);
+            display: block;
+        }
+
+        #{$b}__video {
+            @include image-fit(var(--_media-fit));
+            aspect-ratio: var(--media-ratio);
+            object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
         }
     }
 

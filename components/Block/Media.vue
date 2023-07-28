@@ -42,7 +42,7 @@ const fullLayoutMotion = () => {
 const gridLayoutMotion = () => {
     const gridMedia = sectionRef.value.querySelectorAll('.media-block__media')
     gridMedia.forEach((m, i) => {
-        const image = m.querySelector('.media-block__picture')
+        const image = m.querySelector('.media-block__picture') || m.querySelector('.media-block__video')
         const overlay = m.querySelector('.media-block__overlay')
         const gradient = m.querySelector('.media-block__gradient')
         scroll(
@@ -118,8 +118,9 @@ const getImageBackgroundVariable = (image) => {
                 v-for="(item, index) in media"
                 :key="item.type == 'image' ? item.image._id : item.video._id ?? index"
                 :ratio-gradient="item.ratio || '16:9'"
-                :style="`${getImageBackgroundVariable(item?.image)} --media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
-                :type="item.type"
+                :media-fit="item.ratio == 'contain' ? 'contain' : 'cover'"
+                :media-type="item.type"
+                :style="`${getImageBackgroundVariable(item?.image) ?? ''} --media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
                     v-if="item.type == 'image'"
@@ -130,23 +131,19 @@ const getImageBackgroundVariable = (image) => {
                     v-if="item.type == 'video'"
                     block="media-block"
                     :src="item.video.url"
-                    :video-fit="item.ratio == 'contain' ? 'contain' : 'cover'"
                 />
                 <div class="media-block__overlay"></div>
                 <div class="media-block__gradient"></div>
             </div>
         </div>
         <div v-else-if="layout == 'video'" class="section__content media-block__content--video">
-            <!-- <SanityImage
-                block="media-block"
-                class="media-block__video-placeholder"
-                :src="media[0].placeholder"
+            <VideoPlayer
+                v-if="media[0].type == 'video'"
+                :video="media[0].video.url"
+                :poster="media[0].poster"
+                :ratio="ratioStringToNumber(media[0].ratio)"
             />
-            <SanityVideo
-                block="media-block"
-                :src="media[0].video"
-            /> -->
         </div>
-        <div class="media-block__caption">{{ sectionCaption.join('  ')}}</div>
+        <div class="media-block__caption">{{ sectionCaption?.join('  ')}}</div>
     </section>
 </template>
