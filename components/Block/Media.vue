@@ -1,5 +1,5 @@
 <script setup>
-import { scroll, timeline, ScrollOffset } from 'motion'
+import { scroll, timeline } from 'motion'
 const props = defineProps({
     content: {
         type: Object,
@@ -55,8 +55,8 @@ const gridLayoutMotion = () => {
                         filter: { easing: cubicBezier.easeInCubic }
                     }
                 ],
-                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInQuad }],
-                [gradient, { opacity: [0, 1, 1, 1, 0], scale: [1.3, 1] }, {
+                [overlay, { opacity: [1, 0] }, { at: 0, easing: cubicBezier.easeInOutQuad }],
+                [gradient, { opacity: [0.2, 1, 0], scale: [1.4, 1] }, {
                     at: 0,
                     easing: cubicBezier.easeInQuint,
                     scale: { easing: cubicBezier.easeInCubic },
@@ -65,6 +65,12 @@ const gridLayoutMotion = () => {
             { target: m, offset: ['0.0 0.9', '0.4 0.5']}
         )
     })
+}
+
+const getImageBackgroundVariable = (image) => {
+    if (!image) return null
+    const dominantColor = computed(() => convertHSL(image?.metadata?.palette?.dominant?.background ) ?? null )
+    return dominantColor.value ? `--image-bg: ${dominantColor.value};` : null
 }
 
 </script>
@@ -110,14 +116,21 @@ const gridLayoutMotion = () => {
             <div
                 class="media-block__media"
                 v-for="(item, index) in media"
-                :key="item.type == 'image' ? item?.image?._id : item?.video?._id ?? index"
+                :key="item.type == 'image' ? item.image._id : item.video._id ?? index"
                 :ratio-gradient="item.ratio || '16:9'"
-                :style="`--media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
+                :style="`${getImageBackgroundVariable(item?.image)} --media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
+                :type="item.type"
             >
                 <SanityImage
                     v-if="item.type == 'image'"
                     block="media-block"
                     :src="item.image"
+                />
+                <SanityVideo
+                    v-if="item.type == 'video'"
+                    block="media-block"
+                    :src="item.video.url"
+                    :video-fit="item.ratio == 'contain' ? 'contain' : 'cover'"
                 />
                 <div class="media-block__overlay"></div>
                 <div class="media-block__gradient"></div>

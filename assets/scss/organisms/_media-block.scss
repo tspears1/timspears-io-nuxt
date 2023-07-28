@@ -12,9 +12,27 @@
         object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
     }
 
+    &__video-wrapper {
+        background: var(--c-theme-100);
+        display: grid;
+        place-items: center;
+
+        --_video-fit: cover;
+
+        &[video-fit='contain'] {
+            --_video-fit: contain;
+        }
+    }
+
+    &__video {
+        @include image-fit(var(--_video-fit));
+        aspect-ratio: var(--media-ratio);
+        object-position: var(--media-hotspot-x, 50%) var(--media-hotspot-y, 50%);
+    }
+
     &__overlay {
         @include absolute(0);
-        background: var(--c-theme-950);
+        background: hsl(var(--image-bg, var(--c-theme-950-hsl)));
         pointer-events: none;
     }
 
@@ -41,6 +59,7 @@
             clip-path: inset(0);
             grid-column: span 6;
             inline-size: 100%;
+            max-block-size: var(--content-y-svh);
             overflow: hidden;
             position: relative;
 

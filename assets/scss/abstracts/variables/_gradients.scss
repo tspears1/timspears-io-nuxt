@@ -2,7 +2,7 @@
 @use 'sass:map';
 
 :where(html) {
-    --ratio-gradient-hsl: var(--c-theme-950-hsl);
+    --ratio-gradient-hsl: var(--c-neutral-950-hsl);
     @each $ratio in map-keys($aspect-ratios) {
         $slug: map-get(map-get($aspect-ratios, $ratio), slug);
         @include step-gradient-columns($ratio);

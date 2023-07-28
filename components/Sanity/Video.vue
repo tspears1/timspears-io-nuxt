@@ -39,7 +39,7 @@ const videoRef = ref()
 
 <template>
     <div
-        :class="`${block}`"
+        :class="`${block}__video-wrapper`"
         ref="videoRef"
     >
         <video
@@ -47,7 +47,7 @@ const videoRef = ref()
             :poster="poster"
             :autoplay="autoplay"
             :src="src"
-            :options="options"
+            v-bind="options"
             :alt="alt"
         />
     </div>
