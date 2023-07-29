@@ -43,6 +43,18 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         }
     }
 
+
+    &:focus-visible {
+        outline: 0.25rem solid var(--c-theme-500);
+        outline-offset: 0.25rem;
+
+        #{$b}__panel {
+            background-position-y: 100%;
+            transform: scaleY(1);
+            transition: background-position var(--button-timing-in) var(--button-panel-easing-enter) var(--button-panel-delay);
+        }
+    }
+
     &[data-active="true"] {
         #{$b}__panel {
             background-position-y: 100%;
@@ -56,7 +68,8 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         --button-stroke: var(--c-theme-50);
 
         &[data-active="true"],
-        &:hover {
+        &:hover,
+        &:focus-visible {
             --button-color: var(--c-theme-950);
             --icon-center: var(--c-theme-950);
         }
@@ -67,7 +80,8 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
         --button-stroke: var(--c-theme-950);
 
         &[data-active="true"],
-        &:hover {
+        &:hover,
+        &:focus-visible {
             --button-color: var(--c-theme-50);
             --icon-center: var(--c-theme-50);
         }

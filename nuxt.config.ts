@@ -8,8 +8,15 @@ export default defineNuxtConfig({
         '@nuxtjs/sanity',
         '@pinia/nuxt',
         '@vueuse/nuxt',
+        '@formkit/nuxt',
     ],
-
+    runtimeConfig: {
+        public: {
+            EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
+            EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
+        }
+    },
     sanity: {
         projectId: 'z0o6cgrz',
     },
@@ -47,9 +54,6 @@ export default defineNuxtConfig({
         },
     },
 })
-
-// formkit
-// lazy-sizes
 
 // <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 // <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

@@ -1,6 +1,12 @@
 <template>
     <main class="page-wrapper">
-        <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
+        <Hero
+            v-if="data"
+            :title="data.pageTitle ?? null"
+            :eyebrow="data.eyebrow"
+            :hero-size="data?.heroSize || 'lg'"
+        />
+        <BlockContactForm />
     </main>
 </template>
 
@@ -8,7 +14,8 @@
 const { data } = useSanityQuery(groq`
     *[_type == "page" && slug.current == 'contact']{
         "pageTitle": title,
-        eyebrow
+        eyebrow,
+        heroSize,
     }[0]
 `)
 

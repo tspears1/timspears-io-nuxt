@@ -10,6 +10,7 @@ const { data } = useSanityQuery(groq`
     *[_type == "page" && pageTemplate == 'works-template']{
         "pageTitle": title,
         eyebrow,
+        heroSize,
     }[0]
 `)
 
@@ -49,7 +50,12 @@ const onAfterLeave = (el) => {
 
 <template>
     <main class="page-wrapper">
-        <Hero v-if="data" :title="data.pageTitle ?? null" :eyebrow="data.eyebrow"/>
+        <Hero
+            v-if="data"
+            :title="data.pageTitle ?? null"
+            :eyebrow="data.eyebrow"
+            :hero-size="data?.heroSize || 'lg'"
+        />
         <FilterBar ref="bar"/>
         <section id="filter-grid" class="section" section-theme="dark-matrix">
             <TransitionGroup

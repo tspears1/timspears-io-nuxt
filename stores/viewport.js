@@ -6,6 +6,8 @@ const useViewportStore = defineStore('viewport', () => {
     const headerHeight = useHeaderHeight()
     const { width: windowWidth, height: windowHeight } = useWindowSize()
 
+    const scrollTopPadding = computed(() => frameBorder.value + headerHeight.value)
+
     const vh = {
         dvh: h => CSS.supports('height: 100dvh') ? `${h}dvh` : `${h}vh`,
         lvh: h => CSS.supports('height: 100lvh') ? `${h}lvh` : `${h}vh`,
@@ -32,6 +34,7 @@ const useViewportStore = defineStore('viewport', () => {
     return {
         breakpoints,
         content,
+        scrollTopPadding,
         windowWidth,
         windowHeight,
         vh,
