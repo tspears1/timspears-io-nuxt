@@ -31,6 +31,12 @@
         }
     }
 
+    :where(#{$b}__content--video) {
+        block-size: var(--content-y-lvh);
+        inline-size: var(--content-x);
+        overflow: hidden;
+    }
+
     :where(#{$b}__content--grid) {
         display: grid;
         gap: fluid(1, 2, false);

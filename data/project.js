@@ -88,6 +88,7 @@ const useProjectData = (slug) => {
                         'hotspot': media.hotspot,
                         'image' : media.asset->,
                         'video' : video.asset->,
+                        'background': video.background,
                         spacing,
                         'ratio': select(
                             ratio == 'null' => null,

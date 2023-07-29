@@ -77,7 +77,7 @@ const getImageBackgroundVariable = (image) => {
 <template>
     <section
         class="section media-block"
-        :class="{ 'section--flush': layout == 'full' }"
+        :class="{ 'section--flush': layout == 'full' || layout == 'video' }"
         section-theme="light"
         :media-layout="layout"
         ref="sectionRef"
@@ -141,6 +141,7 @@ const getImageBackgroundVariable = (image) => {
                 v-if="media[0].type == 'video'"
                 :video="media[0].video.url"
                 :poster="media[0].poster"
+                :background="media[0].background"
                 :ratio="ratioStringToNumber(media[0].ratio)"
             />
         </div>
