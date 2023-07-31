@@ -27,6 +27,20 @@ const { data } = useSanityQuery(groq`
                 }
             },
 
+            // Featured Project Block ====================================
+            _type == 'featuredBlock' => {
+                _type,
+                'project': project -> {
+                    title,
+                    'slug': slug.current,
+                    'media': {
+                        'image': featuredImage.image.asset->,
+                        'fit': featuredImage.fit,
+                        'background': featuredImage.background,
+                    },
+                }
+            },
+
             // Gallery Block ====================================
             _type == 'galleryBlock' => {
                 _type,
@@ -83,6 +97,13 @@ const { data } = useSanityQuery(groq`
                         ratio != 'null' => ratio
                     ),
                 }
+            },
+
+            // Services Block ====================================
+            _type == 'servicesBlock' => {
+                _type,
+                'heading': sectionHeading,
+                text,
             },
 
             // Text Block ====================================

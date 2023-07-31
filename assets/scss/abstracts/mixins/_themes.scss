@@ -38,8 +38,8 @@
     }
 
     &:where(
-        [section-theme='dark']:where(:not(.section--flush)) + [section-theme='dark']:where(:not(.section--flush)),
-        [section-theme='light']:where(:not(.section--flush)) + [section-theme='light']:where(:not(.section--flush))
+        [section-theme='dark']:where(:not(.section--flush)) + [section-theme='dark']:where(:not(.section--flush, .section--tight)),
+        [section-theme='light']:where(:not(.section--flush)) + [section-theme='light']:where(:not(.section--flush, .section--tight))
     ) {
         margin-block-start: calc(var(--section-padding-y) / 2);
     }

@@ -14,10 +14,10 @@ const router = useRouter()
             <div class="section__content text-block__content rich-text" style="display: grid; gap: 2rem;">
                 <p>Sorry, the page you are looking for does not exist.</p>
                 <Button
-                    text="Head Back"
-                    @click="router.back()"
-                    theme="dark"
+                    text="Head Back Home"
+                    class="section-button"
                     icon="arrow-right"
+                    url="/"
                 />
             </div>
         </section>

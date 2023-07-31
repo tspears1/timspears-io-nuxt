@@ -85,6 +85,13 @@ const { data } = useSanityQuery(groq`
                 }
             },
 
+            // Services Block ====================================
+            _type == 'servicesBlock' => {
+                _type,
+                'heading': sectionHeading,
+                text,
+            },
+
             // Text Block ====================================
             _type == 'textBlock' => {
                 _type,
@@ -133,6 +140,10 @@ useHead({
             :title="data.pageTitle ?? null"
             :eyebrow="data.eyebrow"
             :hero-size="data?.heroSize || 'lg'"
+        />
+        <BlockDesigner
+            v-if="data"
+            :content="data.content"
         />
     </main>
 </template>

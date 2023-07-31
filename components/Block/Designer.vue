@@ -13,6 +13,7 @@ const componentsList = {
     galleryBlock: resolveComponent('BlockSlider'),
     mediaBlock: resolveComponent('BlockMedia'),
     projectIntro: resolveComponent('BlockProjectIntro'),
+    servicesBlock: resolveComponent('BlockServices'),
     textBlock: resolveComponent('BlockText'),
     textHeadingBlock: resolveComponent('BlockTextHeading'),
 }

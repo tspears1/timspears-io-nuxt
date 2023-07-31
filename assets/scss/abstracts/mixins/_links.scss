@@ -1,7 +1,7 @@
 
 // Extend link to fit container of parent.
-@mixin pseudo-link( $z: 0, $inset: 0 ) {
-    &::after {
+@mixin pseudo-link( $z: 0, $inset: 0, $pseudo: 'after' ) {
+    &::#{ $pseudo } {
         content: '';
         inset: $inset;
         position: absolute;

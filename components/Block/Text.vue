@@ -22,7 +22,7 @@ const {
         section-layout="stacked"
     >
         <h3
-            v-if="heading"
+            v-if="heading?.text"
             class="section__heading text-block__heading"
             :heading-size="heading.size"
             :heading-style="heading.style"
