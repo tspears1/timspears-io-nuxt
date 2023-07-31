@@ -33,7 +33,7 @@ const onEnter = () => {
         portalActive.value = true
         document.documentElement.dataset.loaded = true
         setTimeout(() => {
-            setActiveTheme(pageContext.value.next.theme)
+            setActiveTheme(pageContext.value.next?.theme || 'base')
         }, 1500);
     })
 }

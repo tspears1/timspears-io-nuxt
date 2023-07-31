@@ -7,7 +7,7 @@
     --_video-inline-size:                   var(--video-inline-size, var(--content-x));
 
     background: hsl(var(--video-bg-hsl, var(--c-theme-200-hsl)));
-    block-size: var(--_video-block-size);
+    max-block-size: var(--_video-block-size);
     display: grid;
     grid-template-columns: var(--_video-padding) 1fr var(--_video-padding);
     grid-template-rows: var(--_video-padding) 1fr var(--_video-padding);
@@ -24,6 +24,7 @@
         aspect-ratio: var(--video-ratio, 16 / 9);
         block-size: 100%;
         display: grid;
+        max-inline-size: 100%;
         translate: -50%;
 
         > * {

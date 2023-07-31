@@ -14,6 +14,10 @@ const { data } = useSanityQuery(groq`
     }[0]
 `)
 
+useHead({
+    title: 'Work',
+})
+
 const bar = ref()
 
 onMounted(() => {

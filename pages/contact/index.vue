@@ -1,3 +1,18 @@
+<script setup>
+const { data } = useSanityQuery(groq`
+    *[_type == "page" && slug.current == 'contact']{
+        "pageTitle": title,
+        eyebrow,
+        heroSize,
+    }[0]
+`)
+
+useHead({
+    title: 'Contact',
+})
+
+</script>
+
 <template>
     <main class="page-wrapper">
         <Hero
@@ -9,14 +24,3 @@
         <BlockContactForm />
     </main>
 </template>
-
-<script setup>
-const { data } = useSanityQuery(groq`
-    *[_type == "page" && slug.current == 'contact']{
-        "pageTitle": title,
-        eyebrow,
-        heroSize,
-    }[0]
-`)
-
-</script>

@@ -14,7 +14,7 @@
 
     &__form {
         display: grid;
-        gap: fluid(1, 2, false);
+        gap: fluid(1.5, 2, false);
         position: relative;
     }
 
@@ -83,22 +83,32 @@
     &-input {
         color: var(--c-theme-800);
         font-family: var(--font-modern);
-        font-size: fluid(2.25, 5, false);
+        font-size: fluid(1.75, 5, false);
         font-weight: 200;
 
+        &:focus {
+            &::placeholder {
+                filter: blur(3px);
+            }
+        }
+
         &::placeholder {
-            opacity: 0.2;
+            font-size: 0.8em;
+            font-weight: 300;
+            opacity: 0.3;
+            transition: filter var(--duration-moderate) var(--ease-out-expo);
         }
     }
 
     &-messages {
-        @include absolute(x x -1rem var(--input-padding-x));
+        @include absolute(x x -2em var(--input-padding-x));
         background: var(--c-theme-800);
         border-radius: 0.25rem;
         color: var(--c-theme-100);
-        font-size: 0.75rem;
+        font-size: fluid(0.5, 0.75, false);
         font-weight: 600;
         letter-spacing: 0.1em;
+        line-height: 1;
         padding: 1.5ch 2ch;
         text-transform: uppercase;
         z-index: 3;

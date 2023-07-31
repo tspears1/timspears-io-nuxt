@@ -39,7 +39,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
         },
 
         onAfterLeave: (el) => {
-            setActiveTheme(pageContext.value.next.theme)
+            setActiveTheme(pageContext.value.next.theme || 'base')
 
             if ( menuOpen.value ) { closeMenu() }
         },

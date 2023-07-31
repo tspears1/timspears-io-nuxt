@@ -43,7 +43,44 @@ const placeholdersOptions = [
     {
         name: 'Bobbie Draper',
         email: 'draper@rocinante.io',
-    }
+    },
+    {
+        name: 'Hober Mallow',
+        email: 'hober@smyrno.io',
+    },
+    {
+        name: 'Salvor Hardin',
+        email: 'warden@terminus.org',
+    },
+    {
+        name: 'Gaal Dornick',
+        email: 'gaal@synnax.io',
+    },
+    {
+        name: 'Hari Seldon',
+        email: 'psychohistory@foundation.org',
+    },
+    {
+        name: 'Cleon XIII',
+        email: 'empire@empire.empire',
+    },
+    {
+        name: 'Liet Kynes',
+        email: 'judgeofchange@arrakis.gov',
+    },
+    {
+        name: 'Paul Atreides',
+        email: 'mauddib@houseatredies.io',
+    },
+    {
+        name: 'Duncan Idaho',
+        email: 'idaho@houseatredies.io',
+    },
+    {
+        name: 'Gurney Halleck',
+        email: 'warmaster@houseatredies.io',
+    },
+
 ]
 
 const placeholder = computed(() => {
@@ -54,10 +91,8 @@ const onSubmit = (data) => {
     isSubmmitted.value = true
     emailjs.sendForm(serviceID, templateID, formEl.value, publicKey)
         .then((result) => {
-            console.log('Email sent...', { result })
             isSuccess.value = true
         }, (error) => {
-            console.log('Email failed...', { error })
             isFailure.value = true
         }
     )
@@ -84,10 +119,9 @@ watch(formSubmitted, (value) => {
             v-if="!formSubmitted"
             class="section__heading form-block__heading"
             heading-size="h4"
-            heading-style="poster"
         >
             <TextMotion
-                text="Tell us what you think!"
+                text="We'd love to hear from you."
                 exit
                 :stagger="0.035"
                 :duration="0.5"

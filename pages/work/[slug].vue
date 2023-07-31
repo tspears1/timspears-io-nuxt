@@ -3,6 +3,15 @@ import { useProjectData } from '../../data/project';
 const route = useRoute()
 const { data } = useProjectData(route.params.slug)
 
+const title = route.path
+    .replace('/work/', '')
+    .replace(/-/g, ' ')
+    .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+
+useHead({
+    title: title,
+})
+
 </script>
 <template>
     <main class="page-wrapper">

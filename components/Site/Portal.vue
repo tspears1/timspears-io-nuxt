@@ -21,8 +21,8 @@ const portalBook    = ref()
 
 const currentRef    = ref()
 const nextRef       = ref()
-const currentTheme  = computed(() => pageContext.value.current.theme ?? 'base' )
-const nextTheme     = computed(() => pageContext.value.next.theme ?? 'base')
+const currentTheme  = computed(() => pageContext.value.current?.theme ?? 'base' )
+const nextTheme     = computed(() => pageContext.value.next?.theme ?? 'base')
 const currentPanels = computed(() => list(1, 11, i => colorScale[i - 1]).reverse() )
 const nextPanels    = computed(() => list(1, 11, i => colorScale[i - 1]) )
 

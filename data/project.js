@@ -1,3 +1,4 @@
+// Desc: Project data
 const useProjectData = (slug) => {
     const { data } = useSanityQuery(groq`
         *[_type == 'project' && slug.current == "${slug}"]{
