@@ -40,7 +40,7 @@ const useThemes = () => {
 
     const setActiveTheme = (theme) => {
         activeTheme.value = themes.value.filter(t => t.slug == theme)[0]
-        console.log('new active theme', activeTheme.value)
+        //console.log('new active theme', activeTheme.value)
     }
 
     // THEMES / STYLESHEET =======================================================
