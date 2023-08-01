@@ -11,7 +11,8 @@ const viewport = useViewportStore()
 const { cards } = storeToRefs(projects)
 
 const nextProject = computed(() => {
-    const index = cards.value.findIndex(card => card.url.includes(route.params.slug))
+    if (!cards.value) return null
+    const index = cards.value.findIndex(card => card.url.includes(route.params.slug)) ?? 0
     return index == cards.value.length - 1 ? cards.value[0] : cards.value[index + 1]
 })
 

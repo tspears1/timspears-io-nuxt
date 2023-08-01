@@ -1,6 +1,7 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .project-next {
+    $b: &;
     @include splitting($gap: 0.45em, $parent: 'link-text');
 
     &__grid {
@@ -88,6 +89,17 @@
         grid-template-columns: 2.25rem auto;
         letter-spacing: 0.1em;
         text-transform: uppercase;
+
+        &--reversed {
+            grid-template-columns: auto 2.25rem;
+
+            #{$b}__link-icon {
+                svg {
+                    scale: 1;
+                }
+            }
+
+        }
     }
 
     &__link-icon {

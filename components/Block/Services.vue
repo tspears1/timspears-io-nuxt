@@ -1,4 +1,5 @@
 <script setup>
+import { scroll, animate, stagger } from 'motion'
 const props = defineProps({
     content: {
         type: Object,
@@ -7,13 +8,25 @@ const props = defineProps({
 })
 
 const { heading, text } = props.content
-
 const { serviceIcons } = useIcons()
+
+const iconFrameRef = ref(null)
+const blockRef = ref(null)
+
+onMounted(() => {
+    scroll(animate(iconFrameRef.value, { rotate: [-45, 25] }, { delay: stagger(0.025)}),
+    { target: blockRef.value, offset: ['0.25 1', 'end end']})
+})
 
 </script>
 
 <template>
-    <section class="section services-block" section-theme="dark" section-layout="columns-reverse">
+    <section
+        class="section services-block"
+        section-theme="dark"
+        section-layout="columns-reverse"
+        ref="blockRef"
+    >
         <div class="services-block__header">
             <h3
                 v-if="heading.text"
@@ -45,6 +58,7 @@ const { serviceIcons } = useIcons()
                     {{  service.label }}
                 </div>
                 <div class="services-block__icon">
+                    <div class="services-block__icon-frame" ref="iconFrameRef"/>
                     <component :is="service.icon" />
                 </div>
             </li>

@@ -10,6 +10,7 @@ const props = defineProps({
 
 const componentsList = {
     awardsBlock: resolveComponent('BlockAwards'),
+    featuredBlock: resolveComponent('BlockFeatured'),
     galleryBlock: resolveComponent('BlockSlider'),
     mediaBlock: resolveComponent('BlockMedia'),
     projectIntro: resolveComponent('BlockProjectIntro'),

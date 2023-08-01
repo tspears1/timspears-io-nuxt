@@ -20,6 +20,7 @@ const background = computed(() => {
             block="featured-image"
             :src="src.image"
             :amount-in-view="0.5"
+            :quality="100"
         />
     </section>
 </template>

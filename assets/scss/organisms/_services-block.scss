@@ -2,6 +2,17 @@
 
 .services-block {
     align-items: center;
+    overflow: hidden;
+
+    @include breakpoint(md) {
+        column-gap: fluid(2, 4, false);
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: fluid(1.5, 2.5, false);
+
+        > *:first-child {
+            grid-column: 2;
+        }
+    }
 
     &__header {
         display: grid;
@@ -29,24 +40,39 @@
     }
 
     &__grid {
+        --_grid-min: 12rem;
+        align-content: start;
         display: grid;
         gap: fluid(3, 4, false) fluid(1.5, 2.5, false);
-        place-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(var(--_grid-min), 1fr));
+        justify-content: start;
 
         @include breakpoint(md) {
-            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            align-content: center;
             grid-row: 1 / span 1;
-            place-content: start;
+            justify-content: center;
+        }
+
+        @include breakpoint(xl) {
+            --_grid-min: 15rem;
         }
     }
 
     &__item {
         @include icon-shades();
         align-items: center;
-        display: flex;
-        flex-direction: column-reverse;
-        gap: fluid(1, 1.5, false);
-        justify-content: center;
+        display: grid;
+        grid-template-areas: 'ICON TEXT';
+        grid-template-columns: max-content auto;
+        gap: fluid(1.25, 1.75, false);
+        justify-content: start;
+
+        @include breakpoint(md) {
+            align-items: end;
+            grid-template-areas: 'ICON' 'TEXT';
+            grid-template-columns: auto;
+            justify-content: center;
+        }
     }
 
     &__icon {
@@ -54,23 +80,11 @@
         --icon-size: #{fluid(2, 3, false)};
         aspect-ratio: 1;
         display: grid;
+        grid-area: ICON;
         grid-template-columns: var(--icon-padding) var(--icon-size) var(--icon-padding);
         grid-template-rows: var(--icon-padding) var(--icon-size) var(--icon-padding);
         place-content: center;
         place-items: center;
-
-        &::before {
-            background: var(--c-neutral-0);
-            block-size: 100%;
-            border: 1px solid var(--c-theme-200);
-            border-radius: 0.5rem;
-            content: '';
-            grid-column: 1 / -1;
-            grid-row: 1 / -1;
-            inline-size: 100%;
-            rotate: 25deg;
-            z-index: 0;
-        }
 
         svg {
             @include image-fit('contain');
@@ -80,12 +94,29 @@
         }
     }
 
+    &__icon-frame {
+        background: var(--c-neutral-0);
+        block-size: 100%;
+        border: 1px solid var(--c-theme-200);
+        border-radius: 0.5rem;
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+        inline-size: 100%;
+        //rotate: 25deg;
+        z-index: 0;
+    }
+
     &__label {
         color: var(--section-color-accent);
-        font-size: fluid(0.5, 0.875, false);
+        font-size: fluid(0.75, 1, false);
         font-weight: var(--font-weight-medium);
+        grid-area: TEXT;
         letter-spacing: 0.1em;
-        text-align: center;
+        text-align: left;
         text-transform: uppercase;
+
+        @include breakpoint(md) {
+            text-align: center;
+        }
     }
 }

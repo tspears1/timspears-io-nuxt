@@ -32,7 +32,7 @@ const assetWidth = computed(() => props.width ?? props.src.metadata.dimensions.w
 
 const defaultSizes = computed(() => [ 375, 600, 768, 992, 1200, 1600, 1840 ].filter(s => s < assetWidth.value ))
 const srcset = computed(() => {
-    const set = defaultSizes.value.map(size => `${urlFor(props.src).width(size).fit('max').auto('format').quality(props.quality)} ${size}w`)
+    const set = defaultSizes.value.map(size => `${urlFor(props.src).width(size).fit('max').dpr(2).auto('format').quality(props.quality)} ${size}w`)
     return set.join(', ')
 })
 

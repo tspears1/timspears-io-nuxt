@@ -9,7 +9,7 @@ const props = defineProps({
     }
 })
 
-const { heading, awards } = props.content
+const { heading, awards, theme } = props.content
 
 const awardRef = ref([])
 
@@ -26,7 +26,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <section class="section awards-block" section-theme="light">
+    <section class="section awards-block" :section-theme="theme ?? 'light'">
         <h3
             v-if="heading"
             class="section__heading awards-block__heading"

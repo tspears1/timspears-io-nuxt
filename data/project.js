@@ -22,6 +22,7 @@ const useProjectData = (slug) => {
                 _type == 'awardsBlock' => {
                     _type,
                     'heading': sectionHeading,
+                    'theme': sectionTheme,
                     'awards': awardsList[] {
                         _type,
                         'id': _key,
