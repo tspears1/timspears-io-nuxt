@@ -101,10 +101,6 @@ body {
     }
 }
 
-:root {
-    --test-type-h1: #{fluid(2, 4)};
-}
-
 input,
 textarea {
     width: 100%;

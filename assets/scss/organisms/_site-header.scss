@@ -11,7 +11,7 @@
     --header-border-color: var(--c-theme-text);
     --header-padding-x: #{fluid(1.5, 2.5, true, sm, lg)};
 
-    @include sticky(var(--frame-border) auto auto);
+    @include sticky(var(--frame-border) var(--frame-border) auto);
     align-items: stretch;
     background: hsl(var(--c-theme-bg-hsl) / var(--header-bg-alpha));
     backdrop-filter: blur(1.25rem);

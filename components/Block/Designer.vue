@@ -17,6 +17,7 @@ const componentsList = {
     servicesBlock: resolveComponent('BlockServices'),
     textBlock: resolveComponent('BlockText'),
     textHeadingBlock: resolveComponent('BlockTextHeading'),
+    toolBlock: resolveComponent('BlockTool'),
 }
 
 const activeComponents = computed(() => props?.content?.filter((component) => componentsList[component._type]) )

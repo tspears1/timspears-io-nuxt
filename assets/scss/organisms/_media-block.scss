@@ -63,7 +63,9 @@
                 place-content: center;
 
                 #{$b}__video-wrapper {
-                    block-size: calc(var(--content-y-svh) * 0.85);
+                    //block-size: calc(var(--content-y-svh) * 0.85);
+                    block-size: 100%;
+                    min-block-size: 180px;
                 }
 
             }

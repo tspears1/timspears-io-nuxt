@@ -118,9 +118,9 @@ const getImageBackgroundVariable = (image) => {
                 v-for="(item, index) in media"
                 :key="item.type == 'image' ? item.image._id : item.video._id ?? index"
                 :ratio-gradient="item.ratio || '16:9'"
-                :media-fit="item.ratio == 'contain' ? 'contain' : 'cover'"
+                :media-fit="!item.ratio ? 'contain' : 'cover'"
                 :media-type="item.type"
-                :style="`${getImageBackgroundVariable(item?.image) ?? ''} --media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item.ratio || '16:9')}; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
+                :style="`${getImageBackgroundVariable(item?.image) ?? ''} --media-index: ${index}; --media-group-length: ${media.length}; --media-spacing: ${spacing[item.spacing]}; --media-ratio: ${ratioStringToNumber(item?.ratio) || 'auto' }; --media-hotspot-x: ${ item?.hotspot?.x ? (item.hotspot.x * 100).toFixed(2) : 50}%; --media-hotspot-y: ${ item?.hotspot?.y ? (item.hotspot.y * 100).toFixed(2) : 50}%;`"
             >
                 <SanityImage
                     v-if="item.type == 'image'"

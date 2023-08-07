@@ -1,0 +1,42 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.tool-icon {
+    @include icon-shades();
+    --_icon-size: var(--icon-size, 2.5rem);
+    --_icon-coin-border: var(--icon-coin-border, 1px);
+    --_icon-coin-size: var(--icon-coin-size, 2);
+    --_icon-border-color: var(--icon-border-color, var(--c-theme-400-hsl));
+
+    display: grid;
+    place-items: center;
+    transition:
+        background var(--duration-moderate) var(--ease-out-cubic),
+        border var(--duration-moderate) var(--ease-out-cubic);
+
+    &.-invert-icon {
+        @include icon-invert-shades();
+    }
+
+    &.-coin-icon {
+        @include size(calc(var(--_icon-size) * var(--_icon-coin-size)));
+        background: transparent;
+        border: 1px solid hsl(var(--_icon-border-color) / 0.5);
+        border-radius: 1e5px;
+
+        &.-invert-icon {
+            background: var(--icon-background, hsl( var(--_icon-invert-border-color) / 1));
+            border-color: hsl(var(--_icon-invert-border-color) / 1);
+        }
+    }
+
+    &__wrapper {
+        @include size(var(--icon-inline-size, var(--_icon-size)), var(--icon-block-size, var(--_icon-size)));
+        display: grid;
+        place-items: center;
+    }
+
+    svg {
+        @include size(100%, 100%);
+        object-fit: contain;
+    }
+}

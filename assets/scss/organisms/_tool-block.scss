@@ -1,0 +1,71 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.tool-block {
+    display: grid;
+
+    > * {
+        @include breakpoint( md ) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__eyebrow {
+        @include breakpoint(md) {
+            justify-self: center;
+        }
+
+        margin-block-end: calc(var(--section-padding-y) / 4 );
+    }
+
+    &__heading {
+        @include breakpoint(md) {
+            --text-align: center;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        gap: fluid(2, 4, false) fluid(1, 2, false);
+        grid-template-columns: repeat(auto-fit, minmax(fluid(8, 20, false), 1fr));
+        margin-block-start: calc(var(--section-padding-y) / 1 );
+    }
+
+    &__item {
+        align-items: center;
+        display: grid;
+        gap: fluid(0.5, 1, false);
+        grid-template-columns: max-content auto;
+        grid-template-areas: 'MEDIA CONTENT';
+    }
+
+    &__item-content {
+        grid-area: CONTENT;
+        display: grid;
+        gap: fluid(0.25, 0.75, false);
+    }
+
+    &__item-label {
+        color: var(--section-color-heading);
+        font-size: fluid(0.75, 1.5, false);
+        font-weight: var(--font-weight-bold);
+        line-height: 1;
+    }
+
+    &__item-description {
+        color: var(--section-color-accent);
+        font-size: fluid(0.5, 1, false);
+        font-weight: var(--font-weight-regular);
+        letter-spacing: 0.01em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__item-media {
+        display: grid;
+        grid-area: MEDIA;
+        place-items: center;
+
+        --icon-size: #{fluid(2.5, 4.5, false)};
+        --icon-coin-size: 1.75;
+    }
+}

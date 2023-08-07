@@ -25,6 +25,7 @@ const is = {
 }
 
 const ratioStringToNumber = (ratio, seperator = ':') => {
+    if (!ratio) return null
     const ratioArray = ratio.split(seperator).map(Number)
     return (ratioArray[0] / ratioArray[1]).toFixed(2)
 }

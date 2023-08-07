@@ -138,6 +138,21 @@ const { data } = useSanityQuery(groq`
                     !invertTheme => 'light'
                 ),
             },
+
+            // Tool Block ====================================
+            _type == 'toolBlock' => {
+                _type,
+                'theme': sectionTheme,
+                eyebrow,
+                'heading': sectionHeading,
+                'tools': tools[] {
+                    _type,
+                    'id': _key,
+                    library,
+                    label,
+                    description,
+                }
+            },
         },
     }[0]
 `)
