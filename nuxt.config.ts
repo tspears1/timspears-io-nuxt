@@ -9,7 +9,11 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@vueuse/nuxt',
         '@formkit/nuxt',
+        'nuxt-gtag'
     ],
+    gtag: {
+        id: 'G-4SKS6C33B3',
+    },
     runtimeConfig: {
         public: {
             EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
