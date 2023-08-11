@@ -7,6 +7,7 @@ import webDesign from '@/assets/svgs/services/web-design.svg'
 import awardedIcon from '@/assets/svgs/services/awarded.svg'
 
 import icon_animeJs from '@/assets/svgs/tools/anime-js.svg'
+import icon_atipo from '@/assets/svgs/tools/atipo.svg'
 import icon_formKit from '@/assets/svgs/tools/form-kit.svg'
 import icon_framerMotion from '@/assets/svgs/tools/framer-motion.svg'
 import icon_gatsby from '@/assets/svgs/tools/gatsby.svg'
@@ -82,6 +83,11 @@ const useIcons = () => {
             label: 'Anime.js',
             slug: 'anime-js',
             icon: icon_animeJs,
+        },
+        {
+            label: 'Atipo Foundry',
+            slug: 'atipo',
+            icon: icon_atipo,
         },
         {
             label: 'Form Kit',
