@@ -8,6 +8,7 @@ import awardedIcon from '@/assets/svgs/services/awarded.svg'
 
 import icon_animeJs from '@/assets/svgs/tools/anime-js.svg'
 import icon_atipo from '@/assets/svgs/tools/atipo.svg'
+import icon_craft from '@/assets/svgs/tools/craft.svg'
 import icon_formKit from '@/assets/svgs/tools/form-kit.svg'
 import icon_framerMotion from '@/assets/svgs/tools/framer-motion.svg'
 import icon_gatsby from '@/assets/svgs/tools/gatsby.svg'
@@ -89,6 +90,11 @@ const useIcons = () => {
             label: 'Atipo Foundry',
             slug: 'atipo',
             icon: icon_atipo,
+        },
+        {
+            label: 'Craft CMS',
+            slug: 'craft',
+            icon: icon_craft,
         },
         {
             label: 'Form Kit',
