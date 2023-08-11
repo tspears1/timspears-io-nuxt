@@ -22,6 +22,7 @@ import icon_recoil from '@/assets/svgs/tools/recoil.svg'
 import icon_sanity from '@/assets/svgs/tools/sanity.svg'
 import icon_sass from '@/assets/svgs/tools/sass.svg'
 import icon_splide from '@/assets/svgs/tools/splide.svg'
+import icon_strapi from '@/assets/svgs/tools/strapi.svg'
 import icon_vite from '@/assets/svgs/tools/vite.svg'
 import icon_vueUse from '@/assets/svgs/tools/vue-use.svg'
 import icon_vue from '@/assets/svgs/tools/vue.svg'
@@ -158,6 +159,11 @@ const useIcons = () => {
             label: 'Splide',
             slug: 'splide',
             icon: icon_splide,
+        },
+        {
+            label: 'Strapi',
+            slug: 'strapi',
+            icon: icon_strapi,
         },
         {
             label: 'Vite',
