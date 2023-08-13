@@ -22,6 +22,14 @@
             }
         }
 
+        &:focus-visible {
+            @include focus-style($offset: 0.5rem);
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
         &::before {
             @include absolute(0);
             background: transparent;
@@ -124,6 +132,11 @@
 
         @include hover-style(mouse) {
             cursor: pointer;
+            background: var(--theme-bg);
+        }
+
+        &:focus-within {
+            @include focus-style($offset: 0.5rem);
             background: var(--theme-bg);
         }
 

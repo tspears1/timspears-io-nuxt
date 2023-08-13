@@ -111,6 +111,11 @@
         transition: none;
     }
 
+    &:focus-visible {
+        outline: 2px dotted var(--c-theme-text);
+        outline-offset: -0.5rem;
+    }
+
     &__svg {
         block-size: auto;
         overflow: visible;
@@ -197,6 +202,9 @@
 .site-menu__trigger {
     --trigger-bg-alpha: 0;
     --trigger-bg-hsl: var(--c-theme-text-hsl);
+    --menu-icon-dots-color: var(--c-theme-text);
+    --menu-icon-closed-bars-color: var(--c-theme-text);
+    --menu-icon-opened-bars-color: var(--c-theme-text);
     $b: &;
     @include grid-items(center);
     @include grid-self( x end );
@@ -214,8 +222,16 @@
         cursor: pointer;
     }
 
+    &:focus-visible {
+        outline: 2px dotted var(--menu-icon-dots-color);
+        outline-offset: -0.5rem;
+    }
+
     [data-menu-open="true"] & {
         --trigger-bg-hsl: var(--c-theme-bg-hsl);
+        --menu-icon-dots-color: var(--c-theme-bg);
+        --menu-icon-closed-bars-color: var(--c-theme-bg);
+        --menu-icon-opened-bars-color: var(--c-theme-bg);
     }
 
     [data-portal-open="true"] & {
@@ -223,19 +239,10 @@
     }
 
     &-grid {
-        --menu-icon-dots-color: var(--c-theme-text);
-        --menu-icon-closed-bars-color: var(--c-theme-text);
-        --menu-icon-opened-bars-color: var(--c-theme-text);
         @include button-reset();
         @include size(fluid(1.5, 1.875, true, sm, lg));
         position: relative;
         z-index: 1;
-
-        [data-menu-open="true"] & {
-            --menu-icon-dots-color: var(--c-theme-bg);
-            --menu-icon-closed-bars-color: var(--c-theme-bg);
-            --menu-icon-opened-bars-color: var(--c-theme-bg);
-        }
     }
 
     &-bar {

@@ -109,6 +109,10 @@
         font-weight: var(--font-weight-medium);
         line-height: 1.2;
 
+        &:is(a:focus-visible) {
+            @include focus-style();
+        }
+
     }
 
     &__subtext {

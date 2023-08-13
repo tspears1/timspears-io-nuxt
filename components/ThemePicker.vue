@@ -3,7 +3,6 @@ import { useThemePickerStore } from '~~/stores/themePicker'
 import { storeToRefs } from 'pinia'
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap.mjs'
 import PaletteIcon from '~/assets/svgs/theme/palette.svg'
-import { animate, spring } from 'motion'
 
 const { themes, activeTheme } = useThemes()
 const _themePicker = useThemePickerStore()

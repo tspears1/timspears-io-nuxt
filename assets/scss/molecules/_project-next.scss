@@ -98,7 +98,10 @@
                     scale: 1;
                 }
             }
+        }
 
+        &:focus-visible {
+            @include focus-style();
         }
     }
 

@@ -64,6 +64,9 @@ watch(isHovering, (value) => {
         @click="onClick"
         @mouseover="isHovering = true"
         @mouseleave="isHovering = false"
+        @focus="isHovering = true"
+        @blur="isHovering = false"
+        @keydown.esc="menuOpen ? onClick() : null"
     >
         <span class="sr-only">{{ menuOpen ? 'Close Menu' : 'Open Menu' }}</span>
         <svg class="site-menu__trigger-grid" width="30" height="29" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,12 +1,20 @@
 @use "sass:list";
 
 @mixin focus-style( $offset: 3px, $color: currentColor ) {
-    outline: 3px solid $color;
+    outline: 2px dotted $color;
     outline-offset: $offset;
 
     [data-whatintent='mouse'] &,
     [data-whatintent='touch'] & {
         outline: none;
+    }
+}
+
+@mixin focus-visible() {
+    &:focus-visible {
+        [data-whatintent='keyboard'] & {
+            @content;
+        }
     }
 }
 

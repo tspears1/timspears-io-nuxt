@@ -100,6 +100,7 @@ onMounted(() => {
                         to="/work"
                         class="project-next__link"
                         @mouseenter="onBackHover"
+                        @focus="onBackHover"
                     >
                         <span class="project-next__link-icon" ref="backArrowRef">
                             <ArrowRightIcon />

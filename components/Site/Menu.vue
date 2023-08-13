@@ -1,6 +1,8 @@
 <script setup>
 import { random } from 'radash'
 import { useGlobalData } from '@/data/global'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap.mjs'
+
 const { data } = useGlobalData()
 
 const { menuOpen } = useMenu()
@@ -18,6 +20,7 @@ const {
 
 const gridRef = ref()
 const countRef = ref()
+const navRef = ref()
 const loadGrid = ref(false)
 const activeItem = ref(0)
 const isAnimating = ref(false)
@@ -36,8 +39,19 @@ onMounted(() =>{
     })
 })
 
+const focusRef = computed(() => [document.querySelector('.site-menu__trigger'), navRef.value])
+const { activate, deactivate } = useFocusTrap(focusRef)
+
 watch(menuOpen, (value) => {
-    value == true ? isAnimating.value = true : isAnimating.value = false
+    if (value == true) {
+        isAnimating.value = true
+        nextTick(() => {
+            activate()
+        })
+    } else {
+        isAnimating.value = false
+        deactivate()
+    }
 })
 
 const TileGrid = (props, context) => {
@@ -82,6 +96,7 @@ const updateActiveItem = (id) => activeItem.value = id
         `"
         :data-active-item="activeItem"
         v-cloak
+        ref="navRef"
     >
         <TileGrid v-if="loadGrid" />
         <ul class="site-menu__list">
@@ -89,6 +104,7 @@ const updateActiveItem = (id) => activeItem.value = id
                 v-for="(item, index) in data.navigation"
                 :key="item.slug"
                 class="site-menu__item"
+                :class="{ '-is-active' : activeItem == index + 1 }"
                 :style="`--menu-item-index: ${index};`"
             >
                 <div class="site-menu__count" ref="countRef">
@@ -101,6 +117,8 @@ const updateActiveItem = (id) => activeItem.value = id
                     :tabindex="menuOpen ? 0 : -1"
                     @mouseover="updateActiveItem(index + 1)"
                     @mouseleave="updateActiveItem(0)"
+                    @focus="updateActiveItem(index + 1)"
+                    @blur="updateActiveItem(0)"
                 >
                     <SiteMenuTitle :title="item.slug" />
                 </NuxtLink>
