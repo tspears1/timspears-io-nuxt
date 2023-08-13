@@ -1,6 +1,9 @@
 @use '@/assets/scss/abstracts/' as *;
 
 .filter-radio {
+    &:focus-within {
+        @include focus-style($color: var(--button-stroke));
+    }
 
     &__input {
         @include absolute(0);

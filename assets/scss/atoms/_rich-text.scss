@@ -1,3 +1,5 @@
+@use '@/assets/scss/abstracts/' as *;
+
 .rich-text {
     --text-font-size: 1.1rem;
     --text-line-height: 1.6;
@@ -49,7 +51,14 @@
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
 
-        &:hover {
+        @include hover-style(mouse) {
+            background-position: 0 100%;
+            color: var(--section-color-background);
+            text-decoration: none;
+        }
+
+        &:focus-visible {
+            @include focus-style($offset: 0.5rem, $color: var(--section-color-accent));
             background-position: 0 100%;
             color: var(--section-color-background);
             text-decoration: none;

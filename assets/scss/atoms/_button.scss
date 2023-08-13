@@ -45,8 +45,7 @@ $light-list: var(--c-theme-50), var(--c-theme-100), var(--c-theme-300), var(--c-
 
 
     &:focus-visible {
-        outline: 2px dotted var(--c-theme-500);
-        outline-offset: 0.25rem;
+        @include focus-style($color: var(--button-stroke), $offset: 0.25rem);
 
         #{$b}__panel {
             background-position-y: 100%;

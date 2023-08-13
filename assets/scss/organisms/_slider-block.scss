@@ -235,5 +235,9 @@
                 scale: 1;
             }
         }
+
+        &:focus-visible {
+            @include focus-style($offset: -0.5rem, $color: var(--c-theme-300));
+        }
     }
 }
