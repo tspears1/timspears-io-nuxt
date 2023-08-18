@@ -26,6 +26,7 @@
     }
 
     &__media {
+        clip-path: inset(0 100%);
         max-block-size: frame(80vh);
 
         img {
