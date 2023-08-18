@@ -29,6 +29,7 @@
         @include breakpoint(lg) {
             column-gap: fluid(2, 4, false);
             grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
             row-gap: fluid(1.5, 2.5, false);
         }
     }
@@ -37,6 +38,7 @@
         @include breakpoint(lg) {
             > *:first-child {
                 grid-column: 2;
+                grid-row: 1 / span 1;
             }
         }
     }

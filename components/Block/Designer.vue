@@ -12,6 +12,7 @@ const componentsList = {
     awardsBlock: resolveComponent('BlockAwards'),
     featuredBlock: resolveComponent('BlockFeatured'),
     galleryBlock: resolveComponent('BlockSlider'),
+    headshotBlock: resolveComponent('BlockHeadshot'),
     mediaBlock: resolveComponent('BlockMedia'),
     projectIntro: resolveComponent('BlockProjectIntro'),
     servicesBlock: resolveComponent('BlockServices'),

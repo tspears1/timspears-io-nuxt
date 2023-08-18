@@ -1,0 +1,36 @@
+@use '@/assets/scss/abstracts/' as *;
+
+.headshot-block {
+    $b: &;
+
+    &__content {
+        align-content: center;
+        display: grid;
+        gap: fluid( 1.5, 2, false);
+    }
+
+    &__text {
+        --text-font-size: #{fluid( 1.25, 1.625, false)};
+        --text-line-height: 1.6;
+        --text-inline-size: var(--size-content-4);
+        color: var(--section-color-text);
+        text-align: justify;
+
+        @include breakpoint( xxl ) {
+            --text-inline-size: var(--size-content-3);
+        }
+
+        @include breakpoint( xxxl ) {
+            --text-inline-size: var(--size-content-2);
+        }
+    }
+
+    &__media {
+        max-block-size: frame(80vh);
+
+        img {
+            @include image-fit(contain);
+        }
+
+    }
+}

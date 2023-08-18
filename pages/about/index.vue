@@ -40,6 +40,23 @@ const { data } = useSanityQuery(groq`
                 },
             },
 
+            // Headshot Block ====================================
+            _type == 'headshotBlock' => {
+                _type,
+                'eyebrow': sectionEyebrow,
+                'heading': sectionHeading,
+                'content': contentFull,
+                'headshot': headshot.asset->,
+                'layout' : select(
+                    alignmentX  => 'columns-reverse',
+                    !alignmentX => 'columns'
+                ),
+                'theme': select(
+                    invertTheme  => 'dark',
+                    !invertTheme => 'light'
+                ),
+            },
+
             // Intro Block ====================================
             _type == 'projectIntro' => {
                 _type,
