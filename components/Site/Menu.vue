@@ -23,6 +23,7 @@ const countRef = ref()
 const navRef = ref()
 const loadGrid = ref(false)
 const activeItem = ref(0)
+const activeEvent = ref(null)
 const isAnimating = ref(false)
 
 const lastCounter = computed(() => countRef.value[data.value.navigation.length - 1])
@@ -80,7 +81,10 @@ const TileGrid = (props, context) => {
     )
 }
 
-const updateActiveItem = (id) => activeItem.value = id
+const updateActiveItem = (id, event) => {
+    activeItem.value = id
+    activeEvent.value = event
+}
 
 </script>
 
@@ -95,6 +99,7 @@ const updateActiveItem = (id) => activeItem.value = id
             --menu-enter-time: ${transitionTime};
         `"
         :data-active-item="activeItem"
+        :data-active-event="activeEvent"
         v-cloak
         ref="navRef"
     >
@@ -115,9 +120,9 @@ const updateActiveItem = (id) => activeItem.value = id
                     class="site-menu__link"
                     :data-title="item.title"
                     :tabindex="menuOpen ? 0 : -1"
-                    @mouseover="updateActiveItem(index + 1)"
+                    @mouseover="updateActiveItem(index + 1, 'hover')"
                     @mouseleave="updateActiveItem(0)"
-                    @focus="updateActiveItem(index + 1)"
+                    @focus="updateActiveItem(index + 1, 'focus')"
                     @blur="updateActiveItem(0)"
                 >
                     <SiteMenuTitle :title="item.slug" />

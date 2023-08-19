@@ -2,15 +2,31 @@
 
 @mixin build-active-rows($list) {
     @each $i in $list {
-        &[data-active-item="#{$i}"] {
-            [data-row="#{$i}"] {
-                &::before {
-                    opacity: 0.1;
-                    transform: scale(1);
-                    transition:
+        &[data-active-item="#{$i}"][data-active-event='focus'] {
+            [data-whatintent="keyboard"] & {
+                [data-row="#{$i}"] {
+                    &::before {
+                        opacity: 0.1;
+                        transform: scale(1);
+                        transition:
                         background var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
                         opacity var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
                         transform var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1));
+                    }
+                }
+            }
+        }
+        &[data-active-item="#{$i}"][data-active-event='hover'] {
+            [data-whatintent="mouse"] & {
+                [data-row="#{$i}"] {
+                    &::before {
+                        opacity: 0.1;
+                        transform: scale(1);
+                        transition:
+                        background var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
+                        opacity var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1)),
+                        transform var(--duration-quick) var(--ease-out-expo) calc(5ms * var(--tile-delay-index, 1));
+                    }
                 }
             }
         }
@@ -160,11 +176,14 @@
         line-height: 1;
 
         .-is-active & {
-            --menu-link-delay: 300ms;
+            &:hover,
+            &:focus-visible {
+                --menu-link-delay: 300ms;
 
-            .site-menu__fill-wrapper {
-                opacity: 1;
-                transform: translateX( 0.045em ) translateY( 0.045em );
+                .site-menu__fill-wrapper {
+                    opacity: 1;
+                    transform: translateX( 0.045em ) translateY( 0.045em );
+                }
             }
         }
 
