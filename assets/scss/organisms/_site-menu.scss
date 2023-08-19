@@ -176,8 +176,8 @@
         line-height: 1;
 
         .-is-active & {
-            &:hover,
-            &:focus-visible {
+            [data-whatintent='mouse'] [data-active-event='hover'] &,
+            [data-whatintent='keyboard'] [data-active-event='focus'] & {
                 --menu-link-delay: 300ms;
 
                 .site-menu__fill-wrapper {

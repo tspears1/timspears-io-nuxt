@@ -172,6 +172,11 @@ useHead({
             :eyebrow="data.eyebrow"
             :hero-size="data?.heroSize || 'lg'"
         />
+        <section class="section philosophy-block" section-theme="dark">
+            <div class="section__content philosophy-block__content">
+
+            </div>
+        </section>
         <BlockDesigner
             :content="data?.content ?? []"
             v-if="data"
