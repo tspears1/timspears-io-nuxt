@@ -3,6 +3,10 @@
 .text-heading-block {
     $b: &;
 
+    align-items: start;
+    align-content: start;
+
+
     &__content {
         --text-font-size: #{fluid( 1.25, 1.625, false)};
         --text-line-height: 1.6;
