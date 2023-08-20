@@ -14,6 +14,7 @@ const componentsList = {
     galleryBlock: resolveComponent('BlockSlider'),
     headshotBlock: resolveComponent('BlockHeadshot'),
     mediaBlock: resolveComponent('BlockMedia'),
+    philosophyBlock: resolveComponent('BlockPhilosophy'),
     projectIntro: resolveComponent('BlockProjectIntro'),
     servicesBlock: resolveComponent('BlockServices'),
     textBlock: resolveComponent('BlockText'),

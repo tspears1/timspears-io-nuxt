@@ -100,6 +100,27 @@ const { data } = useSanityQuery(groq`
                 }
             },
 
+            // Philosphy Block ====================================
+            _type == 'philosophyBlock' => {
+                _type,
+                'heading': title,
+                'eyebrow': sectionEyebrow,
+                'values' : values[] {
+                    _type,
+                    'id': _key,
+                    title,
+                    'content': contentSimple,
+                },
+                'layout' : select(
+                    alignmentX  => 'columns-reverse',
+                    !alignmentX => 'columns'
+                ),
+                'theme': select(
+                    invertTheme  => 'dark',
+                    !invertTheme => 'light'
+                ),
+            },
+
             // Services Block ====================================
             _type == 'servicesBlock' => {
                 _type,
@@ -176,6 +197,5 @@ useHead({
             :content="data?.content ?? []"
             v-if="data"
         />
-        <BlockPhilosophy />
     </main>
 </template>
