@@ -26,7 +26,7 @@
         border-radius: 0.0625em;
         color: var(--section-color-heading);
         display: grid;
-        font-size: fluid(6, 8, false);
+        font-size: fluid(5.5, 8, false);
         font-weight: var(--font-weight-black);
         gap: var(--_border);
         grid-template-areas:
@@ -106,7 +106,7 @@
     &__value {
         color: var(--section-color-text);
         font-family: var(--font-classic);
-        font-size: fluid(3, 4, false);
+        font-size: fluid(2.5, 4, false);
         font-weight: var(--font-weight-regular);
     }
 }
