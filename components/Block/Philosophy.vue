@@ -65,6 +65,7 @@ onMounted(() => {
                 <li
                     v-for="(value, index) in values"
                     class="philosophy-block__item"
+                    :style="`--index: ${index + 1}`"
                 >
                     <div class="philosophy-block__value">
                         {{  value.title }}

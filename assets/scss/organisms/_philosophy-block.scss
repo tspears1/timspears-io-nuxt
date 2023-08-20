@@ -101,7 +101,13 @@
         font-style: italic;
         font-weight: var(--font-weight-regular);
         line-height: 1.25;
+        opacity: 0.2;
         padding-inline-start: 0.25em;
+        transition: opacity var(--duration-moderate) var(--ease-out-expo) calc(150ms * var(--index));
+
+        .in-view & {
+            opacity: 1;
+        }
 
         &::marker {
             color: var(--section-color-heading);
